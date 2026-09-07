@@ -17,7 +17,7 @@ Genera una clave AES de 32 bytes y cifra `b"El cifrado hibrido funciona"`. Luego
 
 ## 2. Firma alterada
 
-Firma digitalmente el mensaje `b"Transferencia de 500€"`. Modifica UN byte de la firma y comprueba que la verificación falla con `pkcs1_15.new(...).verify(...)`.
+Firma digitalmente el mensaje `"Transferencia de 500€".encode()`. Modifica UN byte de la firma y comprueba que la verificación falla con `pkcs1_15.new(...).verify(...)`.
 
 **Pista:** para modificar un byte de la firma, conviértela a `bytearray`, cambia un índice (`firma_mutada[0] ^= 0xFF`) y vuelve a bytes. La verificación debe lanzar `ValueError` o `TypeError`.
 

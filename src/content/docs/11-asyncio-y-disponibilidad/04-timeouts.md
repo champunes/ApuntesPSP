@@ -31,7 +31,7 @@ async def atender_con_timeout(reader, writer):
         writer.write(b"OK: " + datos)
         await writer.drain()
     except asyncio.TimeoutError:
-        writer.write(b"⏱ Timeout: conexión cerrada por inactividad\n")
+        writer.write("⏱ Timeout: conexión cerrada por inactividad\n".encode())
         await writer.drain()
     finally:
         writer.close()

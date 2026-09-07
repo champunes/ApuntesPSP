@@ -44,7 +44,7 @@ from Crypto.Hash import SHA256
 from Crypto.PublicKey import RSA
 
 clave = RSA.generate(2048)
-mensaje = b"Transferencia de 500€"
+mensaje = "Transferencia de 500€".encode()
 
 h = SHA256.new(mensaje)
 firma = pkcs1_15.new(clave).sign(h)

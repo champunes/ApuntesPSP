@@ -76,7 +76,7 @@ Fíjate en el esqueleto que se repite en toda la unidad: clave del `.env` → `r
 
 > "Sé el programa que pregunta por el tiempo, desde que escribes 'python clima.py' hasta que ves el resultado."
 
-```python
+```bash
 $ python clima.py Barcelona
 ```
 

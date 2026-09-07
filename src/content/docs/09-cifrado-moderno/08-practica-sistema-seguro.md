@@ -31,7 +31,7 @@ clave_ana = RSA.generate(2048)
 clave_bob = RSA.generate(2048)
 
 # ── 2. Ana prepara el mensaje
-mensaje = b"Plan de ataque para el proyecto: mañana a las 8"
+mensaje = "Plan de ataque para el proyecto: mañana a las 8".encode()
 
 # ── 3. Cifrado híbrido: AES cifra, RSA protege la clave AES
 clave_aes = get_random_bytes(32)
@@ -166,7 +166,7 @@ from Crypto.Random import get_random_bytes
 clave_bob = RSA.generate(2048)
 
 clave_aes = get_random_bytes(32)
-mensaje = b"Hola Bob, ¿quedamos mañana?"
+mensaje = "Hola Bob, ¿quedamos mañana?".encode()
 
 cifrador_aes = AES.new(clave_aes, AES.MODE_EAX)
 cifrado, tag = cifrador_aes.encrypt_and_digest(mensaje)

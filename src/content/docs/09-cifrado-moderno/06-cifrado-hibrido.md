@@ -52,7 +52,7 @@ clave_bob = RSA.generate(2048)
 
 # Ana cifra
 clave_aes = get_random_bytes(32)
-mensaje = b"Hola Bob, ¿quedamos mañana?"
+mensaje = "Hola Bob, ¿quedamos mañana?".encode()
 
 cifrador_aes = AES.new(clave_aes, AES.MODE_EAX)
 cifrado, tag = cifrador_aes.encrypt_and_digest(mensaje)
