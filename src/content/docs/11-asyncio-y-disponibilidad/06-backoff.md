@@ -39,7 +39,7 @@ async def conectar_con_backoff(host, port, max_intentos=5):
     raise Exception("No se pudo conectar")
 ```
 
-La espera sigue la secuencia **2⁰, 2¹, 2², 2³, 2⁴ = 1, 2, 4, 8, 16 segundos**. Un fallo puntual se resuelve en el intento 2 con solo 1s de espera; un servidor caído de verdad no recibe 5 peticiones seguidas: recibe 5 con descanso creciente. El `wait_for(..., timeout=3)` añade además un tope por intento (el [punto 4](/ApuntesPSP/11-asyncio-y-disponibilidad/04-timeouts)).
+La espera sigue la secuencia **2⁰, 2¹, 2², 2³, 2⁴ = 1, 2, 4, 8, 16 segundos**. Un fallo puntual se resuelve en el segundo intento con solo 1s de espera; un servidor caído de verdad no recibe 5 peticiones seguidas: recibe 5 con descanso creciente. El `wait_for(..., timeout=3)` añade además un tope por intento (el [punto 4](/ApuntesPSP/11-asyncio-y-disponibilidad/04-timeouts)).
 
 ---
 

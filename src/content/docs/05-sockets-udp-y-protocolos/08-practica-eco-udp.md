@@ -162,6 +162,8 @@ print(f"UDP: {test_udp():.3f}s")
 
 UDP suele ser más rápido porque no tiene handshake ni confirmaciones por cada mensaje.
 
+> ⚠️ Para que el benchmark funcione necesitas tener en marcha un servidor **TCP en el 9000** y un servidor **UDP en el 9001** (por ejemplo, los servidores eco de los ejercicios 1 y 2 del boletín avanzado). Sin ellos, TCP lanzará `ConnectionRefusedError` y UDP se quedará esperando una respuesta que nadie envía.
+
 </details>
 
 ---

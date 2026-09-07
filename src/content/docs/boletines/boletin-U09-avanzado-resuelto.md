@@ -104,6 +104,10 @@ from Crypto.Random import get_random_bytes
 
 clave = get_random_bytes(32)
 
+# 0. Creamos el archivo a cifrar (si no existe)
+with open("mensaje.txt", "w") as f:
+    f.write("Contenido secreto del proyecto")
+
 # Cifrar el archivo
 with open("mensaje.txt", "rb") as f:
     contenido = f.read()

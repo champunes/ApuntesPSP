@@ -20,19 +20,16 @@ El sistema operativo gestiona decenas o cientos de procesos a la vez con una sol
 ## 🔄 El ciclo de vida de un proceso
 
 ```
-  ┌──────────┐
-  │  NUEVO   │  ← El sistema crea el proceso
-  └────┬─────┘
-       ↓
-  ┌──────────┐    ┌────────────┐
-  │  LISTO   │←──→│ EJECUCIÓN  │
-  └────┬─────┘    └──────┬─────┘
-       │                  │
-       ↓                  ↓
-  ┌──────────┐    ┌──────────────┐
-  │ BLOQUEADO│    │  TERMINADO   │
-  └──────────┘    └──────────────┘
+              NUEVO ──→ LISTO ──→ EJECUCIÓN ──→ TERMINADO
+                          ↑          │
+                          │          │ (E/S, sleep)
+                          │          ↓
+                          └──────── BLOQUEADO
 ```
+
+- De **LISTO** solo se puede ir a **EJECUCIÓN** (la CPU toca) y volver.
+- De **EJECUCIÓN** se va a **LISTO** (time slice), a **BLOQUEADO** (E/S) o a **TERMINADO**.
+- De **BLOQUEADO** se vuelve siempre a **LISTO** cuando la E/S termina.
 
 | Estado | Qué significa |
 |--------|---------------|

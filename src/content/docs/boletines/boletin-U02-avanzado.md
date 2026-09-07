@@ -55,7 +55,7 @@ Usa una variable compartida para que un hilo devuelva un resultado al principal.
 
 El Timer normal solo se dispara una vez. Crea un timer que se repita cada 2 segundos usando recursividad.
 
-**Pista:** dentro de la función que ejecuta el Timer, crea otro `threading.Timer(2.0, funcion).start()` al final. Así la función se programa a sí misma de nuevo.
+**Pista:** dentro de la función que ejecuta el Timer, crea otro `threading.Timer(2.0, funcion).start()` al final. Así la función se programa a sí misma de nuevo. Ojo: si el programa no termina, pon el Timer como daemon (`t.daemon = True` **antes** de `t.start()`) para que muera con el principal.
 
 ## 9. 🏗️ Pool de hilos manual
 

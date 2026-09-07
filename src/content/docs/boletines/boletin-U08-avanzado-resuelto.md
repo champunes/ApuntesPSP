@@ -153,7 +153,8 @@ import hashlib, time
 texto = b"clave123"
 iteraciones = 1_000_000
 
-for nombre, func in (("MD5", hashlib.md5), ("SHA1", hashlib.sha1), ("SHA256", hashlib.sha256)):
+for nombre, func in (("MD5", hashlib.md5), ("SHA1", hashlib.sha1),
+                     ("SHA256", hashlib.sha256), ("SHA512", hashlib.sha512)):
     inicio = time.time()
     for _ in range(iteraciones):
         func(texto).hexdigest()
@@ -161,7 +162,7 @@ for nombre, func in (("MD5", hashlib.md5), ("SHA1", hashlib.sha1), ("SHA256", ha
     print(f"{nombre}: {fin - inicio:.2f} segundos")
 ```
 
-MD5 suele ser el más rápido, SHA1 intermedio y **SHA256 el más lento**: más bits que procesar. Ahora bien, "más lento" es justo lo que quieres en una contraseña: al atacante le cuesta más adivinar por fuerza bruta. Nunca elijas el algoritmo por velocidad, sino por seguridad ([punto 3](/ApuntesPSP/08-hash-y-cifrado-clasico/03-md5-sha1-sha256)).
+MD5 suele ser el más rápido, SHA1 intermedio y **SHA256/SHA512 los más lentos**: más bits que procesar. Ahora bien, "más lento" es justo lo que quieres en una contraseña: al atacante le cuesta más adivinar por fuerza bruta. Nunca elijas el algoritmo por velocidad, sino por seguridad ([punto 3](/ApuntesPSP/08-hash-y-cifrado-clasico/03-md5-sha1-sha256)). El orden exacto varía según la CPU.
 
 ## 9. Mini gestor de contraseñas
 

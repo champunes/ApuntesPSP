@@ -42,11 +42,13 @@ En Python, el módulo `multiprocessing` crea procesos reales que el sistema oper
 ```python
 # Paralela con multiprocessing (varios CPUs)
 from multiprocessing import Pool
+
 def cuadrado(n):
     return n * n
 
-with Pool(4) as p:  # 4 procesos en paralelo
-    print(p.map(cuadrado, [1, 2, 3, 4]))
+if __name__ == "__main__":  # obligatorio en Windows: protege el spawn
+    with Pool(4) as p:  # 4 procesos en paralelo
+        print(p.map(cuadrado, [1, 2, 3, 4]))
 ```
 
 **Salida:**
@@ -82,7 +84,7 @@ Cada máquina ejecuta uno o varios procesos independientes. La distribución int
 | Pregunta | Paralela | Distribuida |
 |---|---|---|
 | ¿Dónde se ejecuta? | Múltiples CPUs/núcleos de **una** máquina | Múltiples **máquinas** conectadas por red |
-| ¿Comparten memoria? | Sí (misma máquina, memoria compartida) | No (cada máquina tiene la suya) |
+| ¿Comparten memoria? | No por defecto: cada **proceso** vive en su burbuja aislada (los **hilos** de una misma máquina sí comparten, [U02](/ApuntesPSP/02-hilos-fundamentos)) | No (cada máquina tiene la suya) |
 | ¿Comunicación? | Pipes, memoria compartida, locks | Sockets, HTTP, mensajería |
 | ¿Escala? | Hasta los núcleos de tu CPU | Hasta cientos de máquinas |
 | Ejemplo en Python | `multiprocessing.Pool` | `socket`, APIs REST |

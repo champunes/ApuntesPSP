@@ -51,11 +51,13 @@ Cliente manda "PING", servidor responde "PONG". Mide cuánto tarda.
 
 **Pista:** Necesitas dos funciones (servidor y cliente) ejecutándose en paralelo. Usa `threading.Thread` con `daemon=True` para lanzar el servidor. Mide el tiempo con `time.time()` antes y después del intercambio de mensajes.
 
-## 8. Broadcast UDP
+## 8. Servidor en todas las interfaces
 
 El servidor escucha en todas las interfaces y responde a cualquiera.
 
 **Pista:** El servidor debe escuchar en `"0.0.0.0"` para aceptar conexiones de cualquier interfaz. Usa un bucle infinito con `recvfrom()` y responde con `sendto()` a la dirección de cada cliente.
+
+> Nota: no es *broadcast* (eso exigiría `SO_BROADCAST` y enviar a `255.255.255.255`); es un servidor que escucha en todas las interfaces.
 
 ## 9. HTTP desde cero con parseo
 

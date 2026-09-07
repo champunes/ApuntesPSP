@@ -56,6 +56,8 @@ Al terminar, serás capaz de:
 
 ## 📝 Boletines de la unidad
 
+> 💡 **Entorno de ejecución (Windows):** los ejemplos imprimen emojis (💓, ⏱, 🚀). En la consola clásica `cmd` de Windows (codepage cp1252) un `print()` con emoji lanza `UnicodeEncodeError`. Ejecuta con UTF-8: `python -X utf8 archivo.py`, o usa Windows Terminal / VS Code (que ya son UTF-8).
+
 > Practica con los pares del curso: empezar siempre el resuelto para ver el estilo y luego intentar el por-resolver.
 
 <div class="ejercicio-links">

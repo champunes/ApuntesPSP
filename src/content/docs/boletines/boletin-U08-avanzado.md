@@ -43,7 +43,7 @@ Dado un texto cifrado con César (desplazamiento desconocido), prueba los 25 des
 
 Añade un salt aleatorio al hash de una contraseña para evitar tablas rainbow.
 
-**Pista:** genera un salt de 16 bytes con `os.urandom(16)`. El hash final es `salt + sha256(salt + password.encode()).digest()`. Para verificar, extrae los primeros 16 bytes (el salt) y repite el cálculo. Si dos usuarios tienen la misma contraseña, sus hashes serán distintos gracias al salt.
+**Pista:** genera un salt de 16 bytes con `os.urandom(16)` y calcula `hashlib.sha256(salt + password.encode()).hexdigest()`. Guarda el resultado como `salt.hex() + hash` (string hex). Para verificar, extrae los primeros 32 caracteres (la sal en hex, 16 bytes) con `bytes.fromhex()` y repite el cálculo. Si dos usuarios tienen la misma contraseña, sus hashes serán distintos gracias al salt.
 
 ## 7. Comparación gráfica de avalancha
 
@@ -53,9 +53,9 @@ Muestra cómo un bit de diferencia en la entrada cambia completamente el hash.
 
 ## 8. Velocidad de hashes
 
-Compara cuánto tarda MD5 vs SHA1 vs SHA256 en hashear 1 millón de veces.
+Compara cuánto tarda MD5 vs SHA1 vs SHA256 vs SHA512 en hashear 1 millón de veces.
 
-**Pista:** usa un bucle de 1 millón de iteraciones llamando a cada función de hash (`hashlib.md5`, `hashlib.sha1`, `hashlib.sha256`). Mide el tiempo total con `time.time()` antes y después. MD5 es el más rápido; SHA256 el más lento pero más seguro.
+**Pista:** usa un bucle de 1 millón de iteraciones llamando a cada función de hash (`hashlib.md5`, `hashlib.sha1`, `hashlib.sha256`, `hashlib.sha512`). Mide el tiempo total con `time.time()` antes y después. MD5 suele ser el más rápido; SHA512 algo más lento que SHA256, pero más seguro.
 
 ## 9. Mini gestor de contraseñas
 

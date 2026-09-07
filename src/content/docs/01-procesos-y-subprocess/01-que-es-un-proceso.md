@@ -48,7 +48,7 @@ Cada proceso vive en su propia **burbuja de memoria**: un espacio de direcciones
 - **Código**: las instrucciones del programa.
 - **Estado**: los valores actuales de las variables.
 - **Contador de programa**: qué instrucción toca ejecutar ahora.
-- **PID**: el carnet de identidad del proceso.
+- **PID**: el carnet de identidad del proceso (técnicamente lo guarda el sistema operativo en su tabla de procesos, no dentro de la memoria del proceso; aquí lo dibujamos junto por claridad).
 
 > "Si un proceso se cuelga, los demás no se enteran. Cada uno vive en su burbuja de memoria."
 

@@ -50,7 +50,7 @@ Ana terminó: lavar platos
 Bob terminó: fregar suelo
 ```
 
-> ⚠️ **Truco de la coma:** una tupla de un solo elemento necesita coma final: `args=("Ana",)`. Sin la coma, `("Ana")` es solo un string, no una tupla, y `trabajar` recibiría un solo argumento.
+> ⚠️ **Truco de la coma:** una tupla de un solo elemento necesita coma final: `args=("Ana",)`. Sin la coma, `args="Ana"` no es una tupla: Python **itera el string** y pasa un argumento por carácter (`'A'`, `'n'`, `'a'`), así que `trabajar` recibiría 3 argumentos en lugar de 1 → `TypeError`.
 
 ---
 

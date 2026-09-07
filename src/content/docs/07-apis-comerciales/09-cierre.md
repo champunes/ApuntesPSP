@@ -22,7 +22,7 @@ Has terminado la teoría: API keys, variables de entorno, OpenWeatherMap, OpenAI
 1. `requests` te construye: `https://api.openweathermap.org/data/2.5/weather?q=Sevilla&appid=TU_API_KEY&units=metric&lang=es`. Llevas el **carnet de identidad** (la API key) en la query string.
 2. Abres la conexión: primero el **DNS lookup** (`api.openweathermap.org` → una IP), luego el **three-way handshake TCP** y el **handshake TLS** que te cifra para el viaje.
 3. Atraviesas Internet hasta el servidor de OpenWeatherMap y te entrega el proceso que te espera en el puerto 443.
-4. El servidor **te lee la carnet**: comprueba tu `appid` contra su base de claves y tu plan (¿cuánto puedes pedir por minuto?).
+4. El servidor **te lee el carnet**: comprueba tu `appid` contra su base de claves y tu plan (¿cuánto puedes pedir por minuto?).
 5. Te responde **200 OK** con un JSON: `{"name":"Sevilla","main":{"temp":18.5},...}`.
 6. De vuelta en Python, `requests` parsea el JSON y te convierte en un **dict** (`datos["main"]["temp"]` → `18.5`).
 7. El estudiante imprime `🌤️  Sevilla: 18.5°C`. Misión cumplida.
@@ -104,7 +104,7 @@ Has terminado la teoría: API keys, variables de entorno, OpenWeatherMap, OpenAI
 1. **Crea el `.env`** con tus dos claves reales: `OPENWEATHER_API_KEY=...` y `OPENAI_API_KEY=sk-...`. Añade `.env` al `.gitignore` antes de hacer nada más.
 2. **Clima de tu ciudad**: escribe `clima.py` que cargue la clave con `load_dotenv()`, haga GET a OpenWeatherMap y muestre temperatura, sensación, humedad y descripción.
 3. **Compara dos ciudades**: llama a la misma función con dos ciudades y muestra cuál está más caliente.
-4. **GPT responde**: escribe `gpt.py` que pregunte a GPT-3.5 qué es un Lock en Python con `max_tokens=100` y `temperature=0.7`.
+4. **GPT responde**: escribe `gpt.py` que pregunte a GPT-4o-mini qué es un Lock en Python con `max_tokens=100` y `temperature=0.7`.
 5. **Gestiona el 401**: cambia la `appid` a una clave falsa y haz que el programa detecte el error sin reventar (comprueba `status_code`).
 6. **Simula un 429**: haz un bucle de 70 peticiones seguidas a OpenWeatherMap (el plan gratis permite 60/min). ¿Qué código recibes a partir de la 61?
 
@@ -199,7 +199,7 @@ HTTP 429 (Too Many Requests). Algunas APIs bloquean tu IP por un tiempo.
 
 > ❓ **¿OpenAI es caro?**
 
-GPT-3.5-turbo cuesta ~$0.0015 por 1000 tokens. Una pregunta normal son ~100 tokens = $0.00015. Muy barato para pruebas.
+gpt-4o-mini cuesta ~$0,15 por 1M tokens de entrada y ~$0,60 por 1M de salida. Una pregunta normal son ~100 tokens = centésimas de céntimo. Muy barato para pruebas.
 
 > ❓ **¿Puedo guardar la API key en el código para pruebas?**
 

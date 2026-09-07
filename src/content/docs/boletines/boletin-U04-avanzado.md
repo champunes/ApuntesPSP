@@ -41,7 +41,7 @@ Cliente que intenta conectar, y si falla, reintenta hasta 3 veces con 2s de espe
 
 ## 6. Servidor que gestiona múltiples conexiones (sin hilos)
 
-Usa `select.select()` para atender hasta 3 clientes en un solo hilo.
+Usa `select.select()` para atender a varios clientes en un solo hilo.
 
 **Pista:** configura el socket servidor como no bloqueante con `setblocking(False)`. `select.select()` te devuelve los sockets que tienen datos listos para leer. Si el socket listo es el servidor, acepta una nueva conexión; si es un cliente, recibe datos.
 

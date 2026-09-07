@@ -183,7 +183,9 @@ import threading, time
 
 def tic():
     print(f"⏰ {time.strftime('%H:%M:%S')}")
-    threading.Timer(2.0, tic).start()   # se reprograma a sí misma
+    t = threading.Timer(2.0, tic)   # se reprograma a sí misma
+    t.daemon = True                 # daemon: muere con el principal
+    t.start()
 
 tic()
 
@@ -200,7 +202,7 @@ Salida parecida a:
 Programa principal terminando...
 ```
 
-El `Timer` normal solo dispara **una vez** ([punto 5](/ApuntesPSP/02-hilos-fundamentos/05-timer)). Para repetirlo, la propia función crea y lanza otro `Timer` al final: recursividad. Así cada tick programa el siguiente. El principal decide cuándo parar: al terminar, el Timer pendiente (daemon por defecto) muere con él.
+El `Timer` normal solo dispara **una vez** ([punto 5](/ApuntesPSP/02-hilos-fundamentos/05-timer)). Para repetirlo, la propia función crea y lanza otro `Timer` al final: recursividad. Así cada tick programa el siguiente. El principal decide cuándo parar: ponemos cada Timer como **daemon** (`t.daemon = True`) para que, al terminar el principal, los ticks pendientes mueran con él y el programa no se quede esperando.
 
 ## 9. 🏗️ Pool de hilos manual
 

@@ -102,11 +102,11 @@ Has terminado la teoría: la burbuja de memoria y el PID, los cinco estados, par
 5. Tras cada `terminate()`, recoge el código de retorno con `proceso.wait()` e imprímelo.
 6. Envuelve la llamada en `if __name__ == "__main__":`.
 
-**Fallo intencionado:** en el paso 5, en lugar de `wait()` tras `terminate()`, **borra esa línea** y deja el programa así. ¿Qué pasa? El padre lanza las apps, las mata, pero **nunca recoge su código de retorno**: los tres procesos terminados quedan como **zombies**, ocupando una entrada en la tabla de procesos hasta que el padre muere (o los recoge).
+**Fallo intencionado:** en el paso 5, en lugar de `wait()` tras `terminate()`, **borra esa línea** y deja el programa así. ¿Qué pasa? El padre lanza las apps, las mata, pero **nunca recoge su código de retorno**: en Linux/macOS, los procesos terminados quedan como **zombies** ocupando una entrada en la tabla de procesos hasta que el padre muere o los recoge. En **Windows** no hay zombies como tal: el manejador del proceso queda abierto y consultable, pero el código de retorno tampoco se limpia hasta que lo recoges con `wait()`.
 
 > **Pista 1:** un proceso no desaparece al terminar: su código de retorno queda guardado hasta que el padre lo **recoge** con `wait()` o `poll()`. Sin esa llamada, la entrada en la tabla de procesos sigue ocupada: es el zombie de las [preguntas tontas](#-no-hay-preguntas-tontas).
 >
-> **Pista 2:** si no ves el zombie a simple vista, añade `print(f"{nombre} → poll(): {proceso.poll()}")` justo después del `terminate()`. Con `wait()` devolverá el código de retorno y se limpia; sin él, el `poll()` te seguirá devolviendo un código "pendiente" en un proceso que ya murió.
+> **Pista 2:** si no ves el zombie a simple vista, añade `print(f"{nombre} → poll(): {proceso.poll()}")` justo después del `terminate()`. La diferencia está en **recoger** el código: `wait()` (o `poll()`) lo devuelve y limpia la entrada; sin esa llamada, `poll()` te seguirá devolviendo el código de un proceso que ya murió y no ha sido recogido.
 
 ---
 

@@ -84,7 +84,7 @@ def conectar_con_backoff(url, params, max_intentos=5):
             resp = requests.get(url, params=params, timeout=5)
             resp.raise_for_status()
             return resp.json()
-        except:
+        except requests.exceptions.RequestException:
             espera = 2 ** intento  # 1, 2, 4, 8, 16 segundos
             print(f"⚠️ Intento {intento+1} fallido. Esperando {espera}s...")
             time.sleep(espera)
@@ -116,7 +116,7 @@ Intento 5 fallido → espera 16s → se rinde
 
 1. **429 Too Many Requests**.
 2. Porque machacas un servidor ya saturado y puede acabar **bloqueando tu IP**. Lo correcto es esperar (con backoff) antes de reintentar.
-3. `2 ** (intento-1)` → antes del intento 4 espera **8 segundos** (1, 2, 4, 8).
+3. El código usa `espera = 2 ** intento` con `intento` empezando en 0: 1, 2, 4, 8… así que antes del intento 4 espera **8 segundos**.
 </details>
 
 ---

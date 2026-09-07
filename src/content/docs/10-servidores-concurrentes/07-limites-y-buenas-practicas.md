@@ -77,6 +77,21 @@ Sí, con `loop.run_in_executor()`. Pero como principiante, la recomendación es 
 - **Limita los hilos**: usa `ThreadPoolExecutor(max_workers=N)` en producción, nunca hilos ilimitados.
 - **Cierra siempre la conexión**: `with conn:` libera el socket aunque haya errores.
 - **Protege el estado compartido** con `Lock` (punto 6); mejor aún, evita compartir estado.
+- **Aguanta clientes que se caen**: un cliente puede morir a mitad de conversación y matar el hilo con un `ConnectionResetError` o `BrokenPipeError`. Envuelve el `recv`/`sendall` del `atender()` en un `try/except`:
+
+```python
+def atender(conn, addr):
+    with conn:
+        try:
+            datos = conn.recv(1024)
+            conn.sendall(b"OK: " + datos)
+        except (ConnectionResetError, BrokenPipeError):
+            print(f"Cliente {addr} se desconectó a mitad")
+        except OSError:
+            print(f"Error de red con {addr}")
+```
+
+Sin ese `try/except`, el hilo de ese cliente muere con un traceback (el servidor sobrevive, pero pierde el hilo y ensucia la consola).
 - **Usa timeouts** en `recv()` para que un cliente mudo no cuelgue un hilo para siempre.
 - **Mide con el benchmark** (punto 5) antes de tocar `max_workers`: los datos mandan, no las corazonadas.
 - **El pool se crea una vez**, fuera del bucle `accept()` (punto 4).
@@ -112,7 +127,7 @@ Sí, con `loop.run_in_executor()`. Pero como principiante, la recomendación es 
 |---|---|
 | Context switch | Cambio de hilo de la CPU: necesario, pero caro |
 | Fuga de recursos | Socket o memoria que nunca se libera |
-| setimeout() | Límite de tiempo para `recv()`: evita hilos colgados |
+| settimeout() | Límite de tiempo para `recv()`: evita hilos colgados |
 | max_workers | Límite de hilos del pool (tu freno de mano) |
 | asyncio | Modelo de concurrencia ligera para miles de conexiones (U11) |
 

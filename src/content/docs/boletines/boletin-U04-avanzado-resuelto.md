@@ -172,7 +172,7 @@ with socket.socket() as srv:
             print(f"Recibido: {datos.decode()}")
         except socket.timeout:
             conn.sendall(b"Hasta luego")
-            print("Cliente inactivo, cerrando conexion")
+            print("Cliente inactivo, cerrando conexión")
 ```
 
 `conn.settimeout(10)` da al cliente 10 segundos para enviar datos. Si no lo hace, `recv()` lanza `socket.timeout` y el servidor se despide antes de cerrar.

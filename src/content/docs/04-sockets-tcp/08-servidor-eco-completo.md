@@ -177,7 +177,7 @@ with socket.socket() as cli:
         cli.connect(("127.0.0.1", 9000))
         cli.sendall(b"hola")
         print(cli.recv(1024).decode())
-    except socket.timeout:
+    except (socket.timeout, ConnectionRefusedError):
         print("Servidor no disponible")
 ```
 

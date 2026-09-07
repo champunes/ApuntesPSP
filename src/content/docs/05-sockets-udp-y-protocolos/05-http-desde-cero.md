@@ -115,7 +115,7 @@ print(respuesta.decode()[:500])
 
 Dos detalles importantes:
 
-- **`Connection: close`** → le pide al servidor que cierre la conexión al terminar: así el bucle del paso 6 sabe cuándo parar (`recv()` devuelve `b""`).
+- **`Connection: close`** → HTTP/1.1 mantiene la conexión abierta por defecto (*keep-alive*: se reutiliza para varias peticiones). Pedir `Connection: close` fuerza al servidor a cerrarla al terminar, y así el bucle del paso 6 sabe cuándo parar (`recv()` devuelve `b""`).
 - **Los bytes se acumulan** con `respuesta += datos`: la respuesta de una web no llega de una pieza, sino en trozos. El bucle los junta todos.
 
 Este ejercicio lo convertirás en una herramienta de verdad en la [U06](/ApuntesPSP/06-apis-rest-y-http): parsear el JSON, los códigos de estado y las cabeceras de forma sistemática. De momento, ya has hablado HTTP como un navegador de verdad.

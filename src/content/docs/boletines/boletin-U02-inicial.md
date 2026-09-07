@@ -21,7 +21,7 @@ Crea 3 hilos que impriman su número (1, 2, 3) y luego duerman 1 segundo con `ti
 
 Crea una función que reciba un nombre como argumento e imprima "Hola, {nombre}". Lanza un hilo pasándole el argumento con `args=("Ana",)`.
 
-**Pista:** recuerda la coma final de la tupla: `args=("Ana",)`. Sin la coma, `("Ana")` es solo un string y la función recibe un argumento de más.
+**Pista:** recuerda la coma final de la tupla: `args=("Ana",)`. Sin la coma, `args="Ana"` no es una tupla: Python itera el string y pasa un argumento por carácter (3 en `'Ana'`), así que la función recibe demasiados argumentos → `TypeError`.
 
 ## 4. Hilo que saluda
 

@@ -35,7 +35,7 @@ Carga el `.env` y comprueba que `OPENWEATHER_API_KEY` existe. Si no existe, lanz
 
 ## 5. Chat con GPT y rol system
 
-Pregunta a GPT-3.5 "¿Qué es Python?" usando un mensaje `system` que diga "Eres un profesor de Python divertido" antes del mensaje `user`.
+Pregunta a GPT-4o-mini "¿Qué es Python?" usando un mensaje `system` que diga "Eres un profesor de Python divertido" antes del mensaje `user`.
 
 ## 6. Timeout
 
@@ -57,7 +57,7 @@ Obtén el clima de 5 ciudades a la vez usando un solo bucle.
 
 ## 9. 🧩 GPT: explicador automático
 
-Pregunta a GPT-3.5 que explique 3 conceptos de Python: Lock, Semaphore, Barrier.
+Pregunta a GPT-4o-mini que explique 3 conceptos de Python: Lock, Semaphore, Barrier.
 
 **Pista**: La API de chat de OpenAI recibe una lista de mensajes. Puedes iterar sobre una lista de conceptos y pedir una explicación corta para cada uno, limitando la respuesta con `max_tokens`.
 

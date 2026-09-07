@@ -64,7 +64,7 @@ semaforo = threading.Semaphore(2)
 def entrar(id):
     if semaforo.acquire(timeout=1):
         print(f"Hilo-{id}: DENTRO")
-        time.sleep(1)
+        time.sleep(2)   # ocupa el semáforo más tiempo que el timeout
         semaforo.release()
     else:
         print(f"Hilo-{id}: timeout")
@@ -79,21 +79,28 @@ Solo 2 hilos entran a la vez; los que no consiguen entrar en 1 segundo muestran 
 ## 4. Carrera sin Lock
 
 ```python
-import threading
+import threading, sys
+
 contador = 0
+sys.setswitchinterval(1e-6)   # fuerza cambios de hilo frecuentes
+
+def sumar(c):
+    return c + 1
+
 def inc():
     global contador
-    for _ in range(1000):
-        contador += 1
+    for _ in range(5000):
+        contador = sumar(contador)   # leer-sumar-escribir vía función
+
 hilos = [threading.Thread(target=inc) for _ in range(2)]
 for h in hilos:
     h.start()
 for h in hilos:
     h.join()
-print(contador)  # ❌ No será 2000
+print(contador)  # ❌ Casi nunca será 10000
 ```
 
-Sin Lock, hay condición de carrera. El valor será **< 2000** y variará en cada ejecución ([punto 1](/ApuntesPSP/03-sincronizacion-entre-hilos/01-condicion-de-carrera)).
+Sin Lock, hay condición de carrera. El valor casi siempre será **< 10000** y variará en cada ejecución ([punto 1](/ApuntesPSP/03-sincronizacion-entre-hilos/01-condicion-de-carrera)). En Python 3.13+ el `+=` en una línea casi nunca se interrumpe; pasando la suma por una función y forzando el cambio de hilo con `setswitchinterval`, la carrera se vuelve visible.
 
 ## 5. Contador protegido con Lock
 

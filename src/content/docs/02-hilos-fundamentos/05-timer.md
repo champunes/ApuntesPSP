@@ -107,7 +107,15 @@ Recordatorio programado en 3 segundos...
 | Cierre de sesión | Desconectar a un usuario tras N segundos de inactividad |
 | Limpieza diferida | Borrar un archivo temporal después de un tiempo |
 
-Un detalle a recordar: el `Timer` dispara desde un **hilo aparte**. Si tu programa principal termina antes de que dispare y el Timer es **daemon por defecto** (`Timer(..., daemon=True)`), el aviso puede morir con el programa. Si lo necesitas sí o sí, haz `daemon=False` o añade un `time.sleep()` en el principal.
+Un detalle a recordar: el `Timer` dispara desde un **hilo aparte** que **hereda el valor de `daemon` del hilo que lo crea** (en el hilo principal, `daemon=False`). Eso significa que, por defecto, el intérprete **espera** al Timer antes de salir: si no quieres que el programa se alargue esperando el aviso, hazlo daemon a mano, y siempre **antes** de `start()`:
+
+```python
+import threading
+
+t = threading.Timer(5, lambda: print("¡Despierta!"))
+t.daemon = True   # daemon: si el principal termina, el aviso se cancela
+t.start()
+```
 
 ---
 

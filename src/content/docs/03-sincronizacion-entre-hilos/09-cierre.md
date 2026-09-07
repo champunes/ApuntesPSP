@@ -93,11 +93,11 @@ Has terminado la teoría: condición de carrera, Lock, RLock, Semaphore, Barrier
 > **Duración:** 45 minutos
 > **Herramienta:** Python 3 (`threading` y `time`, sin instalar nada)
 
-**Escenario:** 4 hilos representan a 4 socios de una cooperativa que comparten una caja común (el `contador`). Cada socio debe aportar 100.000 monedas (`contador += 1`). Al final de la jornada, la caja debe contener **400.000**.
+**Escenario:** 4 hilos representan a 4 socios de una cooperativa que comparten una caja común (el `contador`). Cada socio debe aportar 100.000 monedas. Al final de la jornada, la caja debe contener **400.000**.
 
 **Tareas paso a paso:**
 
-1. Escribe la versión **sin sincronizar** del contador y ejecútala varias veces: anota que el total nunca es 400.000 (condición de carrera del [punto 1](/ApuntesPSP/03-sincronizacion-entre-hilos/01-condicion-de-carrera)).
+1. Escribe la versión **sin sincronizar** del contador y ejecútala varias veces: anota que el total casi nunca es 400.000. Para que la carrera sea visible, pasa la suma por una función (`contador = sumar(contador)`) y añade `sys.setswitchinterval(1e-6)` (condición de carrera del [punto 1](/ApuntesPSP/03-sincronizacion-entre-hilos/01-condicion-de-carrera)).
 2. Protege el incremento con `lock = threading.Lock()` y `with lock:` (el [punto 2](/ApuntesPSP/03-sincronizacion-entre-hilos/02-lock)). Ejecútala 3 veces: ahora siempre da **400.000**.
 3. Sustituye el `Lock` por un `Semaphore(1)` y verifica que también funciona (el [punto 4](/ApuntesPSP/03-sincronizacion-entre-hilos/04-semaphore)).
 4. Añade una **segunda caja** (otro contador de operaciones) que se incremente desde una función auxiliar llamada dentro de otra: protégelas con un `RLock` para que el mismo hilo pueda adquirirlo dos veces ([punto 3](/ApuntesPSP/03-sincronizacion-entre-hilos/03-rlock)).
@@ -126,7 +126,7 @@ Has terminado la teoría: condición de carrera, Lock, RLock, Semaphore, Barrier
 
 ## 🧠 Atrévete a pensar
 
-1. ¿Por qué `contador += 1` con 4 hilos y sin lock casi nunca da 400.000, pero a veces sí?
+1. ¿Por qué `contador += 1` con 4 hilos y sin lock casi nunca da el valor esperado, pero a veces sí?
 2. ¿Qué pasaría si usaras `Semaphore(3)` para proteger una sección crítica que debe ser exclusiva?
 3. ¿Por qué `notify()` puede dejar a un consumidor esperando para siempre con varios consumidores?
 4. ¿Cuál es la diferencia práctica entre `Lock` y `RLock` para una función que llama a otra?
@@ -135,7 +135,7 @@ Has terminado la teoría: condición de carrera, Lock, RLock, Semaphore, Barrier
 <details>
 <summary>💡 Soluciones</summary>
 
-1. Porque la condición de carrera es **probabilística**: depende de si el planificador interrumpe a un hilo justo entre el "leer" y el "escribir". Cuanto más grande el número de iteraciones, más probable perder incrementos… pero nunca es 100% predecible.
+1. Porque la condición de carrera es **probabilística**: depende de si el planificador interrumpe a un hilo justo entre el "leer" y el "escribir". Cuanto más grande el número de iteraciones (y más frecuentes los cambios de hilo, como con `setswitchinterval`), más probable perder incrementos… pero nunca es 100% predecible.
 2. Permitirías que **3 hilos** tocaran a la vez una zona que necesita exclusividad: reintroducirías condiciones de carrera. Para exclusión mutua solo vale `Lock` (o `Semaphore(1)`).
 3. `notify()` despierta a **un solo** hilo. Si hay 3 consumidores esperando y solo uno se despierta (y consume todo), los otros 2 siguen dormidos aunque haya habido trabajo. Por eso con varios consumidores se usa `notify_all()`.
 4. Con `Lock`, la segunda adquisición del mismo hilo produce un **deadlock** (se espera a sí mismo). Con `RLock`, el contador interno permite re-entrar. La función que llama a otra necesita `RLock`.
@@ -157,14 +157,14 @@ Vertical:
 2. Aforo máximo: hasta N hilos dentro a la vez (9 letras)
 4. Sincroniza fases: nadie avanza hasta que llegan todos (7 letras)
 5. Operación que no se puede interrumpir a mitad (7 letras)
-7. Bug cuando dos hilos se pisan una variable compartida (5 letras)
+7. Bug cuando dos hilos se pisan una variable compartida (7 letras)
 ```
 
 <details>
 <summary>📝 Soluciones</summary>
 
 **Horizontal:** 1. LOCK, 3. RLOCK, 6. DEADLOCK, 8. CONDITION
-**Vertical:** 2. SEMAPHORE, 4. BARRIER, 5. ATOMICA, 7. RACE (en español: carrera)
+**Vertical:** 2. SEMAPHORE, 4. BARRIER, 5. ATOMICA, 7. CARRERA
 
 </details>
 

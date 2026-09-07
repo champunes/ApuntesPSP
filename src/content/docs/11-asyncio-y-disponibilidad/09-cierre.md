@@ -22,7 +22,7 @@ Has terminado la teoría: el event loop, las corrutinas, gather y create_task, l
 1. El event loop te ejecuta. Llegas a `await asyncio.wait_for(open_connection(...), timeout=2)`: **te pausas** y el event loop pasa a otras corrutinas.
 2. El servicio responde. El event loop te reanuda: imprimes `💚 disponible`.
 3. Llegas a `await asyncio.sleep(5)`: **te vuelves a pausar**. Durante esos 5 segundos, el event loop atiende a las otras 1.999 corrutinas.
-4. Un día el servicio no responde: `TimeoutError`. Imprimes `💔 caído` y esperas `2 ** fallos` segundos (**backoff**), pausada, mientras el event loop sigue con las demás.
+4. Un día el servicio no responde: `TimeoutError`. Imprimes `💔 caído` y esperas `2 ** min(fallos, 4)` segundos (**backoff** con tope: 1, 2, 4, 8, 16, 16…), pausada, mientras el event loop sigue con las demás.
 5. Así, con una corrutina, vigilas un servicio **sin bloquear a nadie**: las otras 2.000 corrutinas nunca se enteran de tu espera.
 
 > 💡 **Ahora tú:** ¿y si fueran 2.000 monitores vigilando 2.000 servicios? Con asyncio no pasa nada: 2.000 corrutinas en un hilo. Con hilos, 2.000 hilos hundirían el sistema ([punto 7](/ApuntesPSP/11-asyncio-y-disponibilidad/07-threads-vs-asyncio)).

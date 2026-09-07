@@ -47,11 +47,11 @@ Dos preguntas que te ayudan a decidir:
 | Transferencia de archivos (FTP) | **TCP** | Un byte perdido corrompe el archivo |
 | **DNS** | **UDP** | La consulta es diminuta; si se pierde, se repite |
 | **VoIP / videollamadas** (Zoom, Skype) | **UDP** | La conversación debe ir fluida; un frame perdido se tolera |
-| **Streaming** (Twitch, TV online) | **UDP** | Prefieres el directo fluido a un reenvío que lo congele |
+| **Streaming en vivo no-HTTP** (RTP, retransmisión) | **UDP** | Prefieres el directo fluido a un reenvío que lo congele |
 | **Juegos online** (Fortnite, Minecraft) | **UDP** | Cientos de paquetes por segundo; la latencia manda |
 | NTP (hora) | **UDP** | Manda muchas peticiones y promedia (viste el [punto 6](/ApuntesPSP/05-sockets-udp-y-protocolos/06-ntp-y-servidores-de-tiempo)) |
 
-Fíjate en el patrón: **cuando el dato es valioso y debe quedar intacto, TCP; cuando lo valioso es el momento, UDP**. En el streaming de vídeo, por ejemplo, UDP es la opción clásica porque un frame roto se ve un instante y se olvida, pero un reenvío congelaría la emisión para todos.
+Fíjate en el patrón: **cuando el dato es valioso y debe quedar intacto, TCP; cuando lo valioso es el momento, UDP**. En el streaming de vídeo por RTP (retransmisión en vivo), UDP es la opción clásica porque un frame roto se ve un instante y se olvida, pero un reenvío congelaría la emisión para todos. Ojo: el *streaming web* moderno (Twitch, YouTube) no usa UDP, sino HTTP sobre TCP (segmentación HLS/DASH) porque busca llegar a todo el mundo por infraestructura web.
 
 ---
 

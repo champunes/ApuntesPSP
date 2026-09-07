@@ -104,7 +104,9 @@ l)     srv.listen()
 <details>
 <summary>🔓 Solución</summary>
 
-**Orden correcto:** d → a → e → i → f → h → k → l → g → j → c → b
+**Orden correcto:** d → a → e → i → f → h → k → l → c → g → j → b
+
+> Nota: las líneas `with conn:` (dentro de `atender`) y `srv.setsockopt(...)` son añadidas para que el código sea completo; no forman parte de los fragmentos a ordenar.
 
 ```python
 import socket                                             # d) import

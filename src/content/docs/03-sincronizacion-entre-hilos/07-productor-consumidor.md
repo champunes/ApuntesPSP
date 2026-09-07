@@ -98,7 +98,7 @@ cola = []
 condition = threading.Condition()
 
 def productor():
-    for _ in range(3):
+    for _ in range(6):   # 6 items: 2 consumidores × 3 = 6 consumos
         with condition:
             item = random.randint(1, 10)
             cola.append(item)
@@ -124,7 +124,7 @@ for h in hilos: h.start()
 for h in hilos: h.join()
 ```
 
-> 💡 Y si quieres limitar el tamaño de la cola (buffer con tope), el semáforo del [punto 4](/ApuntesPSP/03-sincronizacion-entre-hilos/04-semaphore) o la clase `queue.Queue(maxsize=N)` (thread-safe, sin locks a mano) te dan el control: los productores llaman a `put()` y los consumidores a `get()`.
+> 💡 Y si quieres limitar el tamaño de la cola (buffer con tope), el semáforo del [punto 4](/ApuntesPSP/03-sincronizacion-entre-hilos/04-semaphore) o la clase `queue.Queue(maxsize=N)` (thread-safe, sin locks a mano) te dan el control: los productores llaman a `put()` y los consumidores a `get()`. El ejemplo produce exactamente lo que los consumidores van a consumir (2 × 3 = 6); si produjera menos, los consumidores se quedarían esperando en `wait()` para siempre.
 
 ---
 

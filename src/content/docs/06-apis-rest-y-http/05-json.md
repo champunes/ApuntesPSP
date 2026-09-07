@@ -80,7 +80,7 @@ resp = requests.get("https://api.github.com/users/python")
 datos = resp.json()
 
 print(datos["login"])          # "python"
-print(datos["public_repos"])   # 42
+print(datos["public_repos"])   # el número real del usuario (cambia con el tiempo)
 print(datos["avatar_url"])     # "https://..."
 ```
 

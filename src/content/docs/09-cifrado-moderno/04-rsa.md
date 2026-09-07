@@ -102,7 +102,7 @@ RSA no cifra cualquier cosa:
 
 ```
 Intentar cifrar un mensaje de 300 bytes:
-ValueError: Ciphertext with incorrect length.   ← RSA no puede con tanto
+ValueError: Plaintext is too long.   ← RSA no puede con tanto
 ```
 
 > 💡 Para mensajes largos, RSA cifra la **clave AES** (32 bytes) y AES cifra el mensaje completo. Ese es el **cifrado híbrido** del [punto 6](/ApuntesPSP/09-cifrado-moderno/06-cifrado-hibrido).

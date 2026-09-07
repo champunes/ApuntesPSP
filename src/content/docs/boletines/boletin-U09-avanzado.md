@@ -29,9 +29,9 @@ Crea un sistema RBAC con 3 roles: `admin` (cifrar, descifrar, firmar), `usuario`
 
 ## 4. Cifrar archivo completo
 
-Cifra un archivo de texto con AES y guarda el resultado. Luego descifralo.
+Crea un archivo de texto `mensaje.txt` con algún contenido y cifra el archivo completo con AES, guardando el resultado. Luego descifralo y comprueba que coincide.
 
-**Pista:** abre el archivo en modo binario `"rb"` / `"wb"`. Usa `AES.MODE_EAX`, cifra con `encrypt_and_digest` y guarda `nonce + tag + cifrado`. Para descifrar, separa los tres componentes y usa `decrypt_and_verify`.
+**Pista:** primero crea `mensaje.txt` (p. ej. `open("mensaje.txt", "w").write("Contenido secreto")`). Abre el archivo en modo binario `"rb"` / `"wb"`. Usa `AES.MODE_EAX`, cifra con `encrypt_and_digest` y guarda `nonce + tag + cifrado`. Para descifrar, separa los tres componentes y usa `decrypt_and_verify`.
 
 ## 5. RSA: cifrar mensajes largos
 

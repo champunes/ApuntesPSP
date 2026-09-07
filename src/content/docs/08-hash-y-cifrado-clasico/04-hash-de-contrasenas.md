@@ -48,7 +48,7 @@ login("Ana", "OtraClave", hash_ana)           # ❌
 **Salida**:
 ```
   Usuario 'Ana' registrado
-  Hash: 33b1f04c2e6e5d3c...
+  Hash: 0f2adb0aee3de894...
   ✅ Ana: login correcto
   ❌ Ana: contraseña incorrecta
 ```
@@ -64,10 +64,10 @@ La máquina nunca ve la contraseña: ve su hash. El registro calcula el hash y l
 2. Python codifica a bytes → b"MiClaveSecreta123"
 3. hashlib.sha256() procesa → 256 bits de hash
 4. hexdigest() devuelve 64 caracteres hexadecimales
-5. Guardamos en BD: "33b1f04c2e6e5d3c..." (solo el hash)
+5. Guardamos en BD: "0f2adb0aee3de894..." (solo el hash)
 
 6. Ana hace login con "MiClaveSecreta123"
-7. Calculamos hash del intento → "33b1f04c2e6e5d3c..."
+7. Calculamos hash del intento → "0f2adb0aee3de894..."
 8. Comparamos con el almacenado → ¡COINCIDEN!
 9. ✅ Login correcto
 

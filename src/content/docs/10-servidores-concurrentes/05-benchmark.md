@@ -33,7 +33,6 @@ def cliente(id):
 
 def prueba(tipo_servidor, n=10):
     """Lanza n clientes en paralelo y cronometra"""
-    inicios = []
     with concurrent.futures.ThreadPoolExecutor(max_workers=n) as pool:
         futuros = [pool.submit(cliente, i) for i in range(n)]
         concurrent.futures.wait(futuros)

@@ -62,7 +62,7 @@ def clima(ciudad):
 
     resp = requests.get(url, params=params)
     if resp.status_code != 200:
-        print(f"❌ Error: {resp.json().get('message', 'desconocido')}")
+        print(f"❌ Error {resp.status_code}: {resp.text}")
         return
 
     datos = resp.json()

@@ -55,6 +55,8 @@ async def tarea():
 print(tarea())          # ❌ No imprime 42: imprime <coroutine object ...>
 ```
 
+Si ejecutas el programa, al salir verás además un `RuntimeWarning: coroutine 'tarea' was never awaited`: es la señal del intérprete de que creaste la corrutina pero nunca la ejecutaste. Es el mismo mensaje que "se te olvidó el `await`".
+
 Llamar a una corrutina **no ejecuta su cuerpo**: crea un objeto corrutina. Solo se ejecuta cuando el event loop la programa, de una de estas formas:
 
 ```python

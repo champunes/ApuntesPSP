@@ -16,24 +16,30 @@ description: Cuando dos hilos se pisan la memoria compartida 🏃💥
 Dos hilos que incrementan una variable compartida sin sincronización:
 
 ```python
-import threading
+import threading, sys
 
 contador = 0
+sys.setswitchinterval(1e-6)   # ⚠️ fuerza cambios de hilo muy frecuentes
+
+def sumar(c):
+    return c + 1
 
 def incrementar():
     global contador
-    for _ in range(100_000):
-        contador += 1  # ⚠️ Esto NO es atómico
+    for _ in range(200_000):
+        contador = sumar(contador)   # leer-sumar-escribir vía función
 
 hilos = [threading.Thread(target=incrementar) for _ in range(4)]
 for h in hilos: h.start()
 for h in hilos: h.join()
 
-print(f"Esperado: 400.000 | Obtenido: {contador}")
-# → 287.341, 312.045, 198.723... ¡nunca 400.000!
+print(f"Esperado: 800.000 | Obtenido: {contador}")
+# → 346.564, 375.671, 340.593... ¡nunca 800.000!
 ```
 
-Lanzamos 4 hilos, cada uno suma 100.000 veces. El resultado esperado es 400.000… y jamás lo vemos. Cada ejecución da un número distinto, siempre menor. Esa es la cara visible de la condición de carrera.
+Con `sys.setswitchinterval(1e-6)` el planificador cambia de hilo muchísimas veces por segundo: es la forma de **hacer visible** la interrupción entre el "leer" y el "escribir". En Python 3.13+ el `+=` en una línea suele completarse sin interrupciones y el ejemplo "clásico" casi nunca falla; por eso pasamos la suma por una función, que da al planificador puntos donde cortar.
+
+Lanzamos 4 hilos, cada uno suma 200.000 veces. El resultado esperado es 800.000… y jamás lo vemos. Cada ejecución da un número distinto, siempre menor. Esa es la cara visible de la condición de carrera.
 
 ---
 
@@ -61,7 +67,7 @@ Hilo-B: lee contador = 1          ← ¡leyó valor viejo!
 
 Entre la "lectura" del hilo A y su "escritura", el hilo B cuela otra lectura y otra escritura. Al final, dos incrementos solo han subido el contador en 1.
 
-> ⚠️ En Python, el **GIL** evita que dos hilos ejecuten Python puro a la vez, pero **no** protege esta secuencia: el planificador puede interrumpir a un hilo entre el paso 1 y el paso 3 (en operaciones con `sys.settrace`, `sleep`, o cuando la operación se interrumpe). La condición de carrera es real.
+> ⚠️ En Python, el **GIL** evita que dos hilos ejecuten Python puro a la vez, pero **no** protege esta secuencia: el planificador puede interrumpir a un hilo entre el "leer" y el "escribir". Con `contador += 1` en una sola línea, el intérprete moderno (3.13+) casi nunca corta justo ahí, por eso usamos `setswitchinterval` y pasos separados: la condición de carrera es real, solo hay que saber exponerla.
 
 ---
 
@@ -124,7 +130,7 @@ El remedio es la **exclusión mutua**: mientras un cajero toca la caja, el otro 
 | Sección crítica | Zona de código que toca un recurso compartido |
 | Operación atómica | Operación que no se puede interrumpir a mitad |
 | Exclusión mutua | Solo un hilo accede al recurso compartido a la vez |
-| GIL | Bloqueo global de Python: no protege la secuencia leer-sum-escribir |
+| GIL | Bloqueo global de Python: no protege la secuencia leer-sumar-escribir |
 
 ---
 

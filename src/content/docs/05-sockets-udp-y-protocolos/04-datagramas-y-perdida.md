@@ -34,6 +34,8 @@ with socket.socket(socket.AF_INET, socket.SOCK_DGRAM) as cliente:
 
 El servidor podría recibirlos en **cualquier orden** (o no recibir alguno). La red no promete nada: cada datagrama viaja por su cuenta, como aviones de papel lanzados desde el mismo balcón pero que el viento puede separar.
 
+> 💡 **Ojo con localhost:** en `127.0.0.1` (loopback) esto casi nunca se manifiesta: los datagramas van de un socket a otro en la misma máquina y llegan en orden y sin pérdidas. El desorden y la pérdida se ven en **redes reales** (con routers, congestión y caminos distintos), que es donde UDP muestra su cara auténtica.
+
 ---
 
 ## 🧯 Los tres males de UDP
@@ -58,6 +60,19 @@ Recepción: 1 ──► 2 ──► 4 ──► 5        ← el 3 jamás llega
 Otro caso: 1 ──► 2 ──► 2 ──► 3        ← el 2 duplicado
 ```
 
+### 4. El datagrama tiene un tamaño máximo 📏
+
+Un datagrama UDP no puede ser gigante: el campo de longitud de la cabecera limita la carga útil a **65.535 bytes − 8 (UDP) − 20 (IPv4) ≈ 65.507 bytes**. Si intentas enviar más, `sendto()` lanza un error (`OSError: [Errno 10040]` en Windows):
+
+```python
+import socket
+with socket.socket(socket.AF_INET, socket.SOCK_DGRAM) as s:
+    s.sendto(b"x" * 65_507, ("127.0.0.1", 5001))  # ✅ cabe (aunque se pierda: no hay receptor)
+    # s.sendto(b"x" * 65_508, ("127.0.0.1", 5001))  # 💥 OSError: mensaje demasiado largo
+```
+
+Para mensajes grandes, UDP no vale: o se trocea en la aplicación (y se pierde la garantía de orden) o se usa TCP, que no tiene ese límite por datagrama.
+
 ---
 
 ## 🤔 ¿Por qué alguien elegiría esto?
@@ -77,6 +92,7 @@ La regla de decisión completa, con sus casos reales, la tienes en el [punto 7](
 1. ¿Qué tres cosas pueden pasarle a un datagrama en la red?
 2. ¿Qué pasa si un paquete UDP se pierde? ¿Se reenvía?
 3. ¿Por qué una videollamada prefiere UDP aunque pierda paquetes?
+4. ¿Qué pasa si intentas enviar un datagrama de más de ~65.507 bytes?
 
 <details>
 <summary>🔄 Respuestas</summary>
@@ -84,6 +100,7 @@ La regla de decisión completa, con sus casos reales, la tienes en el [punto 7](
 1. **Perderse** (sin confirmación, no se reenvía), **llegar desordenado** (no hay números de secuencia) y **duplicarse** (UDP no lo detecta).
 2. **Se pierde para siempre**: UDP no tiene confirmación de recepción ni reenvío. Si no llega, nadie se entera.
 3. Porque perder un frame puntual es mejor que **esperar** a que se reenvíe el anterior: la conversación se vería congelada. Prefiere estar al día antes que completo.
+4. `sendto()` lanza un error: el datagrama tiene un límite de ~65.507 bytes. Para mensajes grandes se usa TCP (o se trocea en la aplicación).
 
 </details>
 
@@ -99,7 +116,7 @@ La regla de decisión completa, con sus casos reales, la tienes en el [punto 7](
 
 | Término | Idea general |
 |---|---|
-| Datagrama | Paquete independiente de UDP |
+| Datagrama | Paquete independiente de UDP (máx. ~65.507 bytes) |
 | Pérdida | Un datagrama que no llega y no se reenvía |
 | Orden no garantizado | Los datagramas pueden llegar en distinto orden |
 | Duplicado | El mismo datagrama llegando dos veces |

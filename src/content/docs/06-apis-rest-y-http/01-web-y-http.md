@@ -79,7 +79,7 @@ User-Agent: python-requests/2.31.0
 Accept: */*
 ```
 
-**Respuesta** (lo que devuelve el servidor):
+**Respuesta** (lo que devuelve el servidor, ejemplo ilustrativo):
 ```
 HTTP/1.1 200 OK
 Content-Type: application/json

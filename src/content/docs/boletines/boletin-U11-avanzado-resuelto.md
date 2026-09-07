@@ -77,7 +77,7 @@ async def main():
 asyncio.run(main())
 ```
 
-Los dos latidos se ejecutan en segundo plano; `main()` espera 12s (A late 4 veces, B unas 2). Sin ese `await`, las tareas se cancelarían al acabar `main()`.
+Los dos latidos se ejecutan en segundo plano; `main()` espera 12s (A late 4 veces, B unas 3). Sin ese `await`, las tareas se cancelarían al acabar `main()`.
 
 ## 4. 🎯 Web scraper asíncrono
 

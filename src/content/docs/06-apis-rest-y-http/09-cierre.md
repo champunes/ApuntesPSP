@@ -101,7 +101,9 @@ Has terminado la teoría: API, URL, métodos HTTP, principios REST, códigos de 
 5. **DELETE**: borra el post 1 y muestra el código de estado.
 6. **Errores**: pide un usuario inexistente (`/users/usuarioquenoexiste123`) y muestra un mensaje "no encontrado" sin que el programa reviente.
 
-**Fallo intencionado:** en el paso 3, en lugar de `requests.post`, usa **`requests.get`** con `json=`. ¿Qué pasa? La API no te deja crear nada con GET: te responde un 404 (o "Not Found") y, como tu código llama a `resp.json()` sin comprobar `status_code`, intenta parsear un cuerpo que no es JSON y **revienta**.
+**Fallo intencionado:** en el paso 3, sustituye el POST de JSONPlaceholder por un **GET a un endpoint de escritura** de GitHub, `https://api.github.com/user/repos` (sin token). ¿Qué pasa? La API responde **404 "Not Found"** y, como tu código llama a `resp.json()` sin comprobar `status_code`, intenta parsear un cuerpo que no es el esperado y el programa revienta.
+
+> 💡 **Nota didáctica:** JSONPlaceholder no valida métodos, así que un `GET /posts` devuelve **200** con los datos (la petición se ignora, no se crea nada). Por eso el fallo intencionado usa GitHub, que sí rechaza el método de escritura con un 404.
 
 > **Pista 1:** los métodos no son intercambiables. Crear es siempre **POST** (lo viste en el [punto 2](/ApuntesPSP/06-apis-rest-y-http/02-metodos-http)). Si usas GET para escribir, la API te lo devuelve con un 4xx.
 >
@@ -228,4 +230,4 @@ Hoy en día, JSON gana por goleada. XML solo se usa en entornos legacy (bancos, 
 
 ---
 
-📚 [Volver al índice de la unidad](/ApuntesPSP/06-apis-rest-y-http) · **Anterior:** [08 · Práctica API](/ApuntesPSP/06-apis-rest-y-http/08-practica-api) · **Siguiente:** **[U07 · APIs Comerciales](/ApuntesPSP/07-apis-comerciales)**
+📚 [Volver al índice de la unidad](/ApuntesPSP/06-apis-rest-y-http) · **Anterior:** [08 · Práctica: mini cliente de API](/ApuntesPSP/06-apis-rest-y-http/08-practica-api) · **Siguiente:** **[U07 · APIs Comerciales](/ApuntesPSP/07-apis-comerciales)**

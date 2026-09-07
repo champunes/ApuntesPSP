@@ -41,11 +41,11 @@ try:
         s.connect(("127.0.0.1", 9999))
         s.sendall(b"ping")
         print(s.recv(1024))
-except socket.timeout:
+except (socket.timeout, ConnectionRefusedError):
     print("Servidor no disponible")
 ```
 
-Al conectar a un puerto en el que nada escucha, o al no recibir respuesta, `socket.timeout` se captura y se muestra "Servidor no disponible" en lugar de un fallo sin control.
+Al conectar a un puerto en el que nada escucha, o al no recibir respuesta, se captura `socket.timeout` (Windows) o `ConnectionRefusedError` (Linux) y se muestra "Servidor no disponible" en lugar de un fallo sin control.
 
 ## 3. Contador de bytes totales
 
@@ -100,7 +100,11 @@ with socket.socket() as srv:
         conn, addr = srv.accept()
         with lock:
             if clientes_activos >= MAX_CLIENTES:
-                conn.sendall(b"Servidor completo")
+                try:
+                    conn.sendall(b"Servidor completo")
+                    conn.shutdown(socket.SHUT_WR)   # asegura que el mensaje llega
+                except (ConnectionResetError, BrokenPipeError):
+                    pass
                 conn.close()
                 print(f"  ❌ {addr} rechazado: servidor completo")
                 continue
@@ -109,6 +113,8 @@ with socket.socket() as srv:
 ```
 
 Al aceptar se comprueba el máximo bajo `with lock:`. El cuarto cliente recibe `"Servidor completo"` y se cierra **sin incrementar** el contador; los que entran lo decrementan al terminar.
+
+> ⚠️ La garantía de "máximo 3" es real mientras los clientes **mantienen la conexión abierta** (el contador no baja). Si los clientes conectan, envían y cierran muy rápido, el cuarto puede colarse porque los primeros ya decrementaron antes de que llegue; para un aforo estricto, el contador debe reflejar conexiones activas sostenidas.
 
 ## 5. Prueba de carga
 

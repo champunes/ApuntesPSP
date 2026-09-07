@@ -60,7 +60,7 @@ print(f"Hora NTP oficial: {time.ctime(hora)}")
 
 Desglose de cada pieza:
 
-- **`paquete = b'\x1b' + 47 * b'\0'`** → el primer byte `\x1b` fija la **versión** (NTPv4, bits 3-5) y el **modo cliente** (bits 0-2: valor 3). Los 47 bytes restantes van a cero: es el relleno del formato de 48 bytes.
+- **`paquete = b'\x1b' + 47 * b'\0'`** → el primer byte `\x1b` = `00011011`: el **modo cliente** (bits 0-2: valor 3) y la **versión NTP v3** (bits 3-5: valor 3). Funciona porque los servidores responden a v3; para pedir NTPv4 se usaría `\x23` (`00100011`). Los 47 bytes restantes van a cero: es el relleno del formato de 48 bytes.
 - **`s.settimeout(5)`** → muy importante en UDP: si la respuesta no llega en 5 segundos, la petición lanza una excepción en lugar de bloquearse para siempre (el fantasma del [punto 2](/ApuntesPSP/05-sockets-udp-y-protocolos/02-cliente-udp)).
 - **`s.sendto(paquete, ("pool.ntp.org", 123))`** → el cliente UDP del [punto 2](/ApuntesPSP/05-sockets-udp-y-protocolos/02-cliente-udp) en acción, esta vez contra un servidor real en el puerto **123**.
 - **`struct.unpack('!I', datos[40:44])[0]`** → el servidor escribe su hora como un entero sin signo de 4 bytes (`!I`) en las posiciones **40-43** del datagrama. `struct` lo desempaqueta a un número.

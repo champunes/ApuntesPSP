@@ -61,7 +61,7 @@ Cuando ejecutas `python programa.py`, tu código se ejecuta dentro de un hilo: e
    └─────────────────────────────────┘
 ```
 
-El hilo principal **no espera** a los secundarios por arte de magia: hay que decírselo con `join()`. Sin `join()`, el principal puede llegar al final de su código y el programa terminará cuando termine… pero sin garantías sobre los secundarios.
+El hilo principal **no espera** a los secundarios por arte de magia: hay que decírselo con `join()`. Sin `join()`, el principal puede llegar al final de su código y su último `print` puede salir **antes** que el de los secundarios. Ojo: el intérprete **sí espera** a que terminen todos los hilos **no-daemon** antes de salir del programa; lo que pierdes sin `join()` es el **orden** de la salida, no la espera.
 
 ---
 

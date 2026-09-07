@@ -44,7 +44,7 @@ load_dotenv()
 cliente = OpenAI(api_key=os.getenv("OPENAI_API_KEY"))
 
 resp = cliente.chat.completions.create(
-    model="gpt-3.5-turbo",
+    model="gpt-4o-mini",
     messages=[{"role": "user", "content": "Cuenta una historia corta sobre Python."}],
     temperature=0.9,   # más creativo
     max_tokens=200
@@ -96,7 +96,7 @@ load_dotenv()
 cliente = OpenAI(api_key=os.getenv("OPENAI_API_KEY"))
 
 resp = cliente.chat.completions.create(
-    model="gpt-3.5-turbo",
+    model="gpt-4o-mini",
     messages=[
         {"role": "system", "content": "Eres un profesor de Python divertido."},
         {"role": "user", "content": "¿Qué es Python?"}
@@ -186,7 +186,7 @@ conceptos = ["Lock", "Semaphore", "Barrier"]
 
 for concepto in conceptos:
     resp = cliente.chat.completions.create(
-        model="gpt-3.5-turbo",
+        model="gpt-4o-mini",
         messages=[{"role": "user",
                    "content": f"Explica qué es {concepto} en 2 frases."}],
         max_tokens=60
@@ -216,7 +216,7 @@ while True:
     mensajes.append({"role": "user", "content": pregunta})
 
     resp = cliente.chat.completions.create(
-        model="gpt-3.5-turbo",
+        model="gpt-4o-mini",
         messages=mensajes,
         max_tokens=150
     )

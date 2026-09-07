@@ -21,13 +21,13 @@ Crea una función que adquiera un `RLock` dos veces desde el mismo hilo (llamand
 
 Crea un `Semaphore(2)` y lanza 4 hilos que intenten entrar. Cada hilo espera como máximo 1 segundo con `acquire(timeout=1)`. Los que no consigan entrar deben mostrar "timeout".
 
-**Pista:** `acquire(timeout=1)` devuelve `True` si consiguió el recurso y `False` si pasó el segundo. Usa ese `True`/`False` para decidir si el hilo entra o muestra "timeout".
+**Pista:** `acquire(timeout=1)` devuelve `True` si consiguió el recurso y `False` si pasó el segundo. Usa ese `True`/`False` para decidir si el hilo entra o muestra "timeout". Ojo: el trabajo dentro del semáforo (el `sleep`) debe durar **más** que el timeout; si dura exactamente 1 segundo, el margen desaparece y todos entran.
 
 ## 4. Carrera sin Lock
 
-Crea 2 hilos que incrementen un contador compartido 1000 veces cada uno **sin** usar Lock. Ejecuta el programa varias veces y anota los resultados.
+Crea 2 hilos que incrementen un contador compartido 5000 veces cada uno **sin** usar Lock. Ejecuta el programa varias veces y anota los resultados.
 
-**Pista:** el contador casi nunca será 2000: esa es la condición de carrera. `contador += 1` no es atómico (leer → sumar → escribir).
+**Pista:** para que la condición de carrera sea visible, pasa la suma por una función (`contador = sumar(contador)`) y añade `sys.setswitchinterval(1e-6)` al principio. Así el contador casi nunca será 10000: `contador += 1` no es atómico (leer → sumar → escribir) y el planificador puede cortar entre pasos.
 
 ## 5. Contador protegido con Lock
 

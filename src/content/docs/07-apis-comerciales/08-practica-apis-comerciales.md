@@ -39,7 +39,7 @@ def clima(ciudad):
     params = {"q": ciudad, "appid": OPENWEATHER_KEY, "units": "metric", "lang": "es"}
     resp = requests.get(url, params=params)
     if resp.status_code != 200:
-        print(f"❌ {ciudad}: {resp.json().get('message', 'error desconocido')}")
+        print(f"❌ {ciudad}: {resp.text}")
         return
     datos = resp.json()
     print(f"🌤️  {datos['name']}: {datos['main']['temp']}°C "
@@ -50,7 +50,7 @@ def preguntar_a_gpt(pregunta):
     """Envía una pregunta a OpenAI y devuelve la respuesta."""
     cliente = OpenAI(api_key=OPENAI_KEY)
     respuesta = cliente.chat.completions.create(
-        model="gpt-3.5-turbo",
+        model="gpt-4o-mini",
         messages=[
             {"role": "system", "content": "Eres un profesor de Python divertido."},
             {"role": "user", "content": pregunta}
@@ -128,7 +128,7 @@ Antes de escribir Python, puedes probar una API a mano con estas herramientas:
 ## ✏️ Aprieta el lápiz
 
 1. **Clima en 3 ciudades**: Usa OpenWeatherMap para mostrar el clima de Madrid, Barcelona y Sevilla a la vez.
-2. **Chat con GPT**: Pregúntale a GPT-3.5 qué es un semáforo en Python y que te ponga un ejemplo.
+2. **Chat con GPT**: Pregúntale a GPT-4o-mini qué es un semáforo en Python y que te ponga un ejemplo.
 3. **API con errores**: Conéctate a una URL que no existe y captura el error. Luego a una con API key falsa (401).
 4. **Backoff test**: Crea una función que intente conectarse a un servidor que no existe y muestre el tiempo de espera entre intentos.
 
@@ -164,7 +164,7 @@ load_dotenv()
 cliente = OpenAI(api_key=os.getenv("OPENAI_API_KEY"))
 
 resp = cliente.chat.completions.create(
-    model="gpt-3.5-turbo",
+    model="gpt-4o-mini",
     messages=[{"role": "user",
                "content": "¿Qué es un semáforo en Python? Pon un ejemplo."}],
     max_tokens=150

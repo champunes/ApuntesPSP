@@ -24,10 +24,10 @@ El culpable se llama **TIME_WAIT** (lo viste al hablar del cierre en el [punto 4
 srv.bind(("127.0.0.1", 5000))     # ✅ OK
 
 # Matas el servidor con Ctrl+C y lo relanzas al instante...
-srv.bind(("127.0.0.1", 5000))     # 💥 OSError: [Errno 98] Address already in use
+srv.bind(("127.0.0.1", 5000))     # 💥 OSError: Address already in use (Errno 98 en Linux, WinError 10048 en Windows)
 ```
 
-¿Por qué? Tras el cierre, la conexión entra en estado **TIME_WAIT** unos segundos: el SO mantiene reservado el par (IP, puerto) para asegurarse de que los últimos mensajes de la despedida (los FIN/ACK del [punto 4](/ApuntesPSP/04-sockets-tcp/04-ciclo-de-vida-de-la-conexion)) no queden huérfanos. Mientras tanto, nadie más puede hacer `bind()` a ese puerto.
+¿Por qué? Tras el cierre, la conexión entra en estado **TIME_WAIT** durante un tiempo breve (típicamente 1-2 minutos, 2×MSL): el SO mantiene reservado el par (IP, puerto) para asegurarse de que los últimos mensajes de la despedida (los FIN/ACK del [punto 4](/ApuntesPSP/04-sockets-tcp/04-ciclo-de-vida-de-la-conexion)) no queden huérfanos. Mientras tanto, nadie más puede hacer `bind()` a ese puerto.
 
 ---
 
@@ -90,7 +90,7 @@ No es un capricho: la despedida TCP necesita tiempo para garantizar que los mens
 | Término | Idea general |
 |---|---|
 | Address already in use | Error al hacer bind() a un puerto aún reservado |
-| TIME_WAIT | Estado del SO que mantiene el puerto reservado unos segundos |
+| TIME_WAIT | Estado del SO que mantiene el puerto reservado un tiempo breve (1-2 min) |
 | SOL_SOCKET | Nivel de opciones del socket |
 | SO_REUSEADDR | Permite reutilizar la dirección y el puerto |
 | setsockopt() | Método para configurar opciones del socket |

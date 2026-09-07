@@ -110,6 +110,8 @@ print(f"UDP: {test_udp():.3f}s")
 
 UDP suele ser más rápido porque no tiene handshake: cada intercambio TCP paga un `connect()` (three-way handshake) que UDP se ahorra.
 
+> ⚠️ Necesitas un servidor **TCP en el 9000** y un servidor **UDP en el 9001** en marcha (p. ej. los de los ejercicios 1 y 2). Sin ellos, TCP lanza `ConnectionRefusedError` y UDP se queda esperando una respuesta que nadie envía.
+
 ## 6. Mini servidor web
 
 ```python
@@ -151,7 +153,7 @@ print(f"PONG recibido en {fin - inicio:.4f} segundos")
 
 El servidor se ejecuta en un hilo `daemon` mientras el cliente mide el tiempo de ida y vuelta. Ese tiempo es el **RTT** (round-trip time), la métrica de latencia de las redes.
 
-## 8. Broadcast UDP
+## 8. Servidor en todas las interfaces
 
 ```python
 import socket
@@ -165,7 +167,7 @@ with socket.socket(socket.AF_INET, socket.SOCK_DGRAM) as servidor:
         servidor.sendto(b"Recibido!", direccion)
 ```
 
-`"0.0.0.0"` significa "cualquier interfaz": el servidor acepta datagramas de cualquier cliente. El bucle infinito atiende a todos los que lleguen, uno tras otro, respondiendo con la dirección de cada uno.
+`"0.0.0.0"` significa "cualquier interfaz": el servidor acepta datagramas de cualquier cliente. El bucle infinito atiende a todos los que lleguen, uno tras otro, respondiendo con la dirección de cada uno. No es *broadcast* (eso exigiría `SO_BROADCAST` + envío a `255.255.255.255`), sino un servidor en todas las interfaces.
 
 ## 9. HTTP desde cero con parseo
 

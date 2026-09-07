@@ -58,10 +58,12 @@ Repasemos qué hace cada pieza:
 | `socket.timeout` | La operación excede el tiempo límite |
 | `ConnectionRefusedError` | No hay nadie escuchando en ese puerto |
 | `ConnectionResetError` | El otro lado cerró de golpe |
+| `ConnectionAbortedError` | El sistema operativo local aborta la conexión (subtipo de `ConnectionError`) |
 | `BrokenPipeError` | Escribes en un socket que ya se cerró |
 | `OSError` | Red caída, DNS no resuelve, etc. |
 
 - **`ConnectionResetError`**: típico del servidor que muere mientras el cliente aún habla. Es un subtipo de `ConnectionError`.
+- **`ConnectionAbortedError`**: también de la familia `ConnectionError`; lo lanza el SO cuando aborta él mismo la conexión establecida.
 - **`BrokenPipeError`**: el otro lado ya cerró y tú intentas `sendall()`. El SO "rompe la tubería".
 - **`OSError`** es la red de seguridad final: todo error de red cae aquí si no lo capturaste antes (también es la base de `ConnectionRefusedError`).
 

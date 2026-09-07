@@ -90,7 +90,7 @@ Por ahora nos quedamos con la primera columna: el secuencial. El límite se ve s
 <summary>🔄 Respuestas</summary>
 
 1. Porque la conexión TCP la acepta el **sistema operativo** (la cola del socket), no nuestro código. El `accept()` del bucle no se ejecuta hasta que termina el cliente actual, así que los demás quedan en la cola del SO sin ser atendidos.
-2. El quinto tarda **10 segundos** (5 clientes × 2s cada uno). El tiempo total del secuencial es `n × tiempo_por_cliente`.
+2. El quinto empieza a ser atendido a los **8 segundos** (los 4 anteriores) y termina a los **10 segundos** (5 clientes × 2s). El tiempo total del secuencial es `n × tiempo_por_cliente`.
 3. El `time.sleep(3)` (y la atención al cliente en general) bloquea el bucle: el `accept()` de la siguiente iteración no llega a ejecutarse hasta que se cierra `conn`.
 
 </details>

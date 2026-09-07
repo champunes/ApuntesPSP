@@ -52,7 +52,7 @@ hilos = [threading.Thread(target=contar) for _ in range(4)]
 for h in hilos: h.start()
 for h in hilos: h.join()
 print(f"4 hilos CPU: {time.time() - inicio:.2f}s")
-# → ~5 segundos (igual que 1 hilo)
+# → varios segundos (mismo tiempo que con 1 hilo)
 ```
 
 Cuatro hilos contando 50 millones cada uno… y el tiempo es prácticamente el mismo que con uno solo. Peor aún: a veces es **ligeramente más lento** por el coste de turnarse el candado.

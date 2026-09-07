@@ -72,14 +72,14 @@ print(f"Cerrado con código {proceso.poll()}")
 
 ### `terminate()` vs `kill()`
 
-- `terminate()` envía una señal de cierre **suave**: el proceso tiene oportunidad de guardar y salir.
-- `kill()` lo mata **forzosamente**, sin darle opción. Úsalo solo cuando `terminate()` no baste.
+- `terminate()` en Linux/macOS envía **SIGTERM**: un cierre *suave*, el proceso tiene oportunidad de guardar y salir. En **Windows** ambos son equivalentes: `terminate()` llama a `TerminateProcess`, una terminación **forzosa** igual que `kill()`.
+- `kill()` mata **forzosamente**, sin dar opción. Úsalo solo cuando `terminate()` no baste.
 
 ```python
 proceso = subprocess.Popen(["calc.exe"])
 print(f"Calculadora lanzada con PID {proceso.pid}")
 
-proceso.terminate()   # cierre suave
+proceso.terminate()   # cierre forzoso (Windows) o suave (Linux/macOS)
 proceso.kill()        # solo si el anterior no funcionó
 ```
 

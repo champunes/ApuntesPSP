@@ -26,6 +26,7 @@ import socket, threading
 
 contador = 0
 lock = threading.Lock()
+num_hilo = 0   # contador monótono para nombrar hilos de forma única
 
 def atender(conn, addr):
     global contador
@@ -33,14 +34,18 @@ def atender(conn, addr):
         contador += 1
         print(f"[+] Cliente {addr} conectado — total: {contador}")
     with conn:
-        datos = conn.recv(1024)
-        print(f"    Recibido: {datos.decode()}")
-        conn.sendall(b"OK: " + datos)
+        try:
+            datos = conn.recv(1024)
+            print(f"    Recibido: {datos.decode().strip()}")
+            conn.sendall(b"OK: " + datos)
+        except (ConnectionResetError, BrokenPipeError, OSError):
+            print(f"    Cliente {addr} se desconectó a mitad")
     with lock:
         contador -= 1
         print(f"[-] Cliente {addr} desconectado — total: {contador}")
 
 def servidor_concurrente():
+    global num_hilo
     with socket.socket() as srv:
         srv.setsockopt(socket.SOL_SOCKET, socket.SO_REUSEADDR, 1)
         srv.bind(("127.0.0.1", 5000))
@@ -49,7 +54,8 @@ def servidor_concurrente():
         while True:
             conn, addr = srv.accept()
             hilo = threading.Thread(target=atender, args=(conn, addr))
-            hilo.name = "hilo-" + str(contador)
+            hilo.name = "hilo-" + str(num_hilo)
+            num_hilo += 1
             hilo.start()
 
 if __name__ == "__main__":

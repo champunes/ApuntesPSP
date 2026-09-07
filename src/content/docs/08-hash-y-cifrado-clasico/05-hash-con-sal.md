@@ -52,7 +52,7 @@ def registrar_con_salt(usuario, contraseña):
     return almacenado
 
 def login_con_salt(usuario, contraseña, almacenado):
-    # Del string guardado extraemos el salt (primera mitad) y el hash (resto)
+    # Del string guardado extraemos el salt (los 32 primeros caracteres) y el hash (resto)
     salt = bytes.fromhex(almacenado[:32])           # 🧂 RECUPERAMOS el mismo salt
     hash_original = almacenado[32:]                  # Hash que se guardó al registrar
     hash_intento = hashlib.sha256(salt + contraseña.encode()).hexdigest()
@@ -100,7 +100,7 @@ Una **tabla rainbow** es un diccionario precomputado que mapea contraseñas comu
 ```
 "123456"  → 8d969eef6ecad3c29a3a629280e686cf0c3f5d5a86aff3ca12020c923adc6c92
 "password"→ 5e884898da28047151d0e56f8dc6292773603d0d6aabbdd62a11ef721d1542d8
-"clave123"→ 3584f4ef4e3b2e5b5c6f2a…
+"clave123"→ 5ac0852e770506dc…
 ```
 
 Con esa tabla, buscar un hash de "clave123" es instantáneo. Pero si a cada usuario se le mezcló **su propia sal** con la contraseña, el hash guardado ya no es el de "clave123": es el de "salt_A + clave123", que es único e impredecible. La tabla rainbow deja de servir: para que funcionara, el atacante tendría que precomputar hashes para **todas las salas posibles**, lo cual es inviable.
@@ -166,7 +166,7 @@ def verificar(password, hash_guardado):                     # g) función login
 <summary>🔄 Respuestas</summary>
 
 1. Resuelve los **hashes idénticos** cuando dos usuarios usan la misma contraseña, y neutraliza las **tablas rainbow** (y la fuerza bruta precomputada) porque cada hash incluye una sal aleatoria distinta.
-2. Porque `os.urandom(16)` genera 16 bytes y `salt.hex()` los representa como **32 caracteres hex** (2 por byte). Al guardar `salt.hex() + hash`, la sal ocupa siempre la primera mitad del string.
+2. Porque `os.urandom(16)` genera 16 bytes y `salt.hex()` los representa como **32 caracteres hex** (2 por byte). Al guardar `salt.hex() + hash`, la sal ocupa siempre los **32 primeros caracteres** del string (32 de 96, una tercera parte, no la mitad).
 3. Del propio string almacenado: `bytes.fromhex(almacenado[:32])` recupera la sal original. Por eso es determinista: recalcular con la misma sal y la misma contraseña da el mismo hash.
 </details>
 

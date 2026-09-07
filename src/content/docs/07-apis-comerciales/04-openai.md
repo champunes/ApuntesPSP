@@ -41,7 +41,7 @@ load_dotenv()
 cliente = OpenAI(api_key=os.getenv("OPENAI_API_KEY"))
 
 respuesta = cliente.chat.completions.create(
-    model="gpt-3.5-turbo",
+    model="gpt-4o-mini",
     messages=[
         {"role": "system", "content": "Eres un profesor de Python divertido."},
         {"role": "user", "content": "Explica qué es un Lock en 2 frases."}
@@ -58,10 +58,10 @@ Desglose:
 | Pieza | Qué hace |
 |---|---|
 | `OpenAI(api_key=...)` | Crea el cliente con tu clave del `.env` |
-| `model` | Qué modelo usar (`gpt-3.5-turbo`, barato y suficiente para clase) |
+| `model` | Qué modelo usar (`gpt-4o-mini`, barato y suficiente para clase) |
 | `messages` | La conversación como lista de mensajes con rol |
 | `max_tokens` | Longitud máxima de la respuesta (aquí 100) |
-| `temperature` | Creatividad: 0 = literal, 1 = desatado |
+| `temperature` | Creatividad: 0 = literal, 2 = desatado (en la práctica se usa 0-1) |
 | `respuesta.choices[0].message.content` | El texto de la respuesta |
 
 ---
@@ -95,7 +95,7 @@ resp = httpx.post(
     "https://api.openai.com/v1/chat/completions",
     headers={"Authorization": f"Bearer {API_KEY}"},
     json={
-        "model": "gpt-3.5-turbo",
+        "model": "gpt-4o-mini",
         "messages": [{"role": "user", "content": "Hola!"}]
     }
 )
@@ -112,13 +112,13 @@ OpenAI **no es gratis**, pero para uso educativo es casi simbólico:
 
 | Dato | Valor |
 |---|---|
-| Precio de GPT-3.5-turbo | ~$0.0015 por 1.000 tokens |
+| Precio de gpt-4o-mini | ~$0,15 por 1M tokens de entrada + ~$0,60 por 1M de salida |
 | Tokens de una pregunta normal | ~100 tokens |
-| Coste de esa pregunta | ~$0.00015 (¡menos de un céntimo!) |
+| Coste de esa pregunta | ~$0.00002 (¡menos de un céntimo!) |
 
 Un token es, aproximadamente, una pieza de palabra. Con `max_tokens` controlas cuánto gastas por llamada.
 
-> 🧾 Las preguntas tontas del curso te lo recuerdan en el cierre: "¿OpenAI es caro? GPT-3.5-turbo cuesta ~$0.0015 por 1000 tokens. Muy barato para pruebas."
+> 🧾 Las preguntas tontas del curso te lo recuerdan en el cierre: "¿OpenAI es caro? gpt-4o-mini cuesta centésimas de céntimo por pregunta. Muy barato para pruebas."
 
 ---
 
@@ -151,7 +151,7 @@ Un token es, aproximadamente, una pieza de palabra. Con `max_tokens` controlas c
 | Chat completions | El endpoint que genera texto de conversación |
 | messages | La lista de mensajes que define la conversación |
 | `system` | Rol que fija las reglas del asistente |
-| `temperature` | Parámetro de creatividad (0-1) |
+| `temperature` | Parámetro de creatividad (0-2, en la práctica 0-1) |
 | `max_tokens` | Tope de longitud (y de coste) de la respuesta |
 | Bearer | Esquema de autorización en la cabecera |
 
