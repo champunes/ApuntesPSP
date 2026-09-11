@@ -78,6 +78,52 @@ python3 --version
 
 ---
 
+## 📦 Sugerencia: entorno virtual (venv)
+
+Antes de instalar paquetes con `pip`, merece la pena crear un **entorno virtual**. Un entorno virtual es una carpeta aislada con su propia instalación de Python y sus propios paquetes, separada del sistema. Así evitas conflictos entre proyectos.
+
+### Windows
+
+```bash
+# Crear el entorno (una sola vez por proyecto)
+python -m venv venv
+
+# Activarlo
+venv\Scripts\activate
+
+# Verificar que funciona (deberías ver "(venv)" al inicio del prompt)
+python --version
+
+# Desactivar cuando acabes
+deactivate
+```
+
+### Linux / macOS
+
+```bash
+# Crear el entorno
+python3 -m venv venv
+
+# Activarlo
+source venv/bin/activate
+
+# Verificar
+python --version
+
+# Desactivar
+deactivate
+```
+
+### ¿Por qué usar venv?
+
+- **Aislamiento:** los paquetes que instales solo están en ese entorno, no en todo el sistema.
+- **Reproducibilidad:** puedes exportar la lista de paquetes con `pip freeze > requirements.txt` y recrear el entorno en otro ordenador.
+- **No rompes nada:** si un paquete actualizado te rompe un proyecto, los demás proyectos no se ven afectados.
+
+> 💡 **Consejo:** crea siempre un entorno virtual antes de empezar un proyecto. La carpeta `venv/` se añade al `.gitignore` porque no se sube al repositorio: cada quien instala sus paquetes localmente.
+
+---
+
 ## 💻 Tu primer programa
 
 Abre un editor de texto (VS Code, PyCharm o incluso el Bloc de notas) y escribe:
@@ -159,6 +205,7 @@ La consola interactiva es perfecta para probar cosas rápido antes de meterlas e
 | **PATH** | Variable del sistema que dice dónde buscar ejecutables |
 | **Consola interactiva** | Modo de Python para probar código línea a línea |
 | **Módulo** | Archivo `.py` con funciones y clases reutilizables |
+| **venv** | Entorno virtual: carpeta aislada con su propio Python y paquetes |
 
 ---
 
