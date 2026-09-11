@@ -35,6 +35,16 @@ description: Apuntes de Programación de Servicios y Procesos — Python. CC BY-
 
 <div class="unit-card">
   <div class="unit-card-header">
+    <span class="num">Unidad 0</span>
+    <span class="ra">Prerequisito</span>
+  </div>
+  <a href="/ApuntesPSP/00-python-basico" class="title-link">Python 3 básico</a>
+  <p class="desc">Variables, tipos, colecciones, control de flujo, funciones, clases, módulos, generadores y decoradores.</p>
+  <a href="/ApuntesPSP/00-python-basico" class="unit-link">👉 Ver unidad 👈</a>
+</div>
+
+<div class="unit-card">
+  <div class="unit-card-header">
     <span class="num">Unidad 1</span>
     <span class="ra">RA1</span>
   </div>
