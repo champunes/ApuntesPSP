@@ -105,7 +105,7 @@ const boletinItems = (index) => {
 };
 
 const unitsSidebar = [
-  { link: 'https://sergarb1.github.io/ApuntesProgramacion/00-pensamiento-computacional/', label: '🧠 0. Pensamiento Computacional (previo)' },
+  { link: 'https://sergarb1.github.io/ApuntesProgramacion/01-pensamiento-computacional/', label: '🧠 0. Pensamiento Computacional (previo)' },
   ...unitSlugs.map((slug, i) => {
     const label = `${emojis[i]} ${i + 1}. ${unitLabels[i]}`;
     if (unidadesExpandidas[slug]) {
