@@ -6,8 +6,6 @@ nav_order: 03
 
 <p><small>Cuando los hilos se pisan: locks, semáforos y barreras 🔒</small></p>
 
-> 🗺️ **Ruta del viaje:** 🚀 Proceso → 🔀 Hilo → 🔒 **Sincronización entre Hilos** → 🔌 TCP → 📡 UDP → 🌐 API REST → 🧪 APIs comerciales → 🔐 Hash → 🧬 Cifrado → 🏗️ Servidores → ⏱️ asyncio
-
 ---
 
 En la U02 lanzaste hilos por todas partes y comprobaste que los hilos de un mismo proceso **comparten memoria**. Eso es fantástico… y peligroso: si dos hilos tocan la misma variable a la vez, los resultados se descontrolan. Esta unidad pone orden en el caos: aprenderás qué es una **condición de carrera**, por qué `contador += 1` esconde una trampa de 3 pasos, y cómo los **locks**, **semáforos**, **barreras** y **condiciones** del módulo `threading` convierten el desorden en coordinación.

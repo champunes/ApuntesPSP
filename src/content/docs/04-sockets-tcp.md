@@ -6,8 +6,6 @@ nav_order: 04
 
 <p><small>Cliente y servidor que hablan por el puerto 🔌</small></p>
 
-> 🗺️ **Ruta del viaje:** 🚀 Proceso → 🔀 Hilo → 🔒 Sincronización → 🔌 **Sockets TCP** → 📡 UDP → 🌐 API REST → 🧪 APIs comerciales → 🔐 Hash → 🧬 Cifrado → 🏗️ Servidores → ⏱️ asyncio
-
 ---
 
 > "Un socket TCP es como una llamada telefónica: marcas, esperas a que contesten, habláis y colgáis."

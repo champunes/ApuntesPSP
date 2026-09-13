@@ -6,8 +6,6 @@ nav_order: 10
 
 <p><small>Servidores que atienden a muchos clientes a la vez 🏗️</small></p>
 
-> 🗺️ **Ruta del viaje:** 🚀 Proceso → 🔀 Hilo → 🔒 Sincronización → 🔌 TCP → 📡 UDP → 🌐 API REST → 🧪 APIs comerciales → 🔐 Hash → 🧬 Cifrado → 🏗️ **Servidores Concurrentes** → ⏱️ asyncio
-
 ---
 
 > "Un servidor secuencial atiende a un cliente cada vez. Los demás esperan. Un servidor concurrente atiende a todos a la vez. Como un camarero con 10 mesas."

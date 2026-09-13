@@ -6,8 +6,6 @@ nav_order: 07
 
 <p><small>Consumir OpenWeatherMap y OpenAI con claves y cuidado 🧪</small></p>
 
-> 🗺️ **Ruta del viaje:** 🚀 Proceso → 🔀 Hilo → 🔒 Sincronización → 🔌 TCP → 📡 UDP → 🌐 API REST → 🧪 **APIs Comerciales** → 🔐 Hash → 🧬 Cifrado → 🏗️ Servidores → ⏱️ asyncio
-
 ---
 
 *En la U06 consumiste APIs públicas y gratuitas: sin clave, sin límites, sin miedo. Ahora toca el mundo real: las APIs comerciales te dan una **API key**, te limitan las peticiones, se caen y tienes que gestionar sus errores como un adulto.*

@@ -6,8 +6,6 @@ nav_order: 09
 
 <p><small>AES, RSA y firmas digitales para proteger el mensaje 🧬</small></p>
 
-> 🗺️ **Ruta del viaje:** 🚀 Proceso → 🔀 Hilo → 🔒 Sincronización → 🔌 TCP → 📡 UDP → 🌐 API REST → 🧪 APIs comerciales → 🔐 Hash → 🧬 **Cifrado Moderno** → 🏗️ Servidores → ⏱️ asyncio
-
 ---
 
 En la U08 aprendiste a hashear: a convertir una contraseña en una huella digital irrepetible. Pero el hash no se puede deshacer: es unidireccional. ¿Y si quieres enviar un mensaje secreto que el destinatario sí pueda leer? Ahí entra el **cifrado moderno**: con **AES** (rápido y simétrico) y **RSA** (lento y elegante) podrás cifrar, descifrar, firmar y verificar mensajes, tal y como lo hacen HTTPS, WhatsApp o Signal cada segundo.

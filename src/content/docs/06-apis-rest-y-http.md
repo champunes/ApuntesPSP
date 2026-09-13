@@ -6,8 +6,6 @@ nav_order: 06
 
 <p><small>Hablar con la web: REST, métodos HTTP y JSON 🌐</small></p>
 
-> 🗺️ **Ruta del viaje:** 🚀 Proceso → 🔀 Hilo → 🔒 Sincronización → 🔌 TCP → 📡 UDP → 🌐 **APIs REST y HTTP** → 🧪 APIs comerciales → 🔐 Hash → 🧬 Cifrado → 🏗️ Servidores → ⏱️ asyncio
-
 ---
 
 *En la U04 y la U05 montaste sockets y hablaste con procesos en la misma máquina. Ahora toca hablar con el mundo: la web entera se apoya en HTTP, y las APIs REST son la manera moderna de pedirle datos a cualquier servicio.*

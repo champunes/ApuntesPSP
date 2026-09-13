@@ -6,8 +6,6 @@ nav_order: 08
 
 <p><small>La huella digital que protege tus contraseñas 🔐</small></p>
 
-> 🗺️ **Ruta del viaje:** 🚀 Proceso → 🔀 Hilo → 🔒 Sincronización → 🔌 TCP → 📡 UDP → 🌐 API REST → 🧪 APIs comerciales → 🔐 **Hash y Cifrado Clásico** → 🧬 Cifrado → 🏗️ Servidores → ⏱️ asyncio
-
 ---
 
 Cada vez que escribes una contraseña en un formulario, un servidor decide si es la correcta sin saber cuál es. ¿Cómo es posible? Gracias al **hash**: una función que convierte cualquier texto en una huella digital imposible de revertir. En esta unidad aprenderás a usar MD5, SHA-1 y SHA-256 para guardar contraseñas sin riesgo, a protegerlas con **sal** frente a tablas rainbow, y conocerás al abuelo de todos los cifrados: el **César**.

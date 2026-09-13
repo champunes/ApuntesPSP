@@ -6,8 +6,6 @@ nav_order: 05
 
 <p><small>Datagramas sin conexión: UDP, HTTP y NTP 📡</small></p>
 
-> 🗺️ **Ruta del viaje:** 🚀 Proceso → 🔀 Hilo → 🔒 Sincronización → 🔌 TCP → 📡 **Sockets UDP y Protocolos** → 🌐 API REST → 🧪 APIs comerciales → 🔐 Hash → 🧬 Cifrado → 🏗️ Servidores → ⏱️ asyncio
-
 ---
 
 > "UDP es como lanzar un avión de papel. TCP es como enviar una carta certificada. Cada uno tiene su momento."

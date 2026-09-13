@@ -6,8 +6,6 @@ nav_order: 01
 
 <p><small>Los programas en marcha: procesos y subprocess 🚀</small></p>
 
-> 🗺️ **Ruta del viaje:** 🚀 **Procesos y Subprocess** → 🔀 Hilo → 🔒 Sincronización → 🔌 TCP → 📡 UDP → 🌐 API REST → 🧪 APIs comerciales → 🔐 Hash → 🧬 Cifrado → 🏗️ Servidores → ⏱️ asyncio
-
 ---
 
 Un programa en el disco duro es un **muerto viviente**: no ocupa memoria, no consume CPU, no hace nada. Un **proceso** es ese mismo programa **vivo**, ejecutándose, ocupando memoria y consumiendo CPU. En esta primera unidad aprenderás a crear procesos con el módulo `subprocess`, a conocer sus estados, a diferenciar computación paralela de distribuida y a comunicar procesos entre sí con pipes y `communicate()`.

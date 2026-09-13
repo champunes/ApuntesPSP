@@ -6,8 +6,6 @@ nav_order: 11
 
 <p><small>Cerrar el viaje: asincronía, latidos y servicios siempre disponibles ⏱️</small></p>
 
-> 🗺️ **Ruta del viaje:** 🚀 Proceso → 🔀 Hilo → 🔒 Sincronización → 🔌 TCP → 📡 UDP → 🌐 API REST → 🧪 APIs comerciales → 🔐 Hash → 🧬 Cifrado → 🏗️ Servidores → ⏱️ **asyncio y Disponibilidad**
-
 ---
 
 > "Asyncio es como un cocinero que, mientras espera a que hierva el agua, corta verduras. En vez de quedarse mirando la olla, hace otras cosas."

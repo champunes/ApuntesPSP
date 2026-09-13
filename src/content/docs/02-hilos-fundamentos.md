@@ -6,8 +6,6 @@ nav_order: 02
 
 <p><small>Multitarea dentro de un proceso: hilos en Python 🔀</small></p>
 
-> 🗺️ **Ruta del viaje:** 🚀 Proceso → 🔀 **Hilos Fundamentos** → 🔒 Sincronización → 🔌 TCP → 📡 UDP → 🌐 API REST → 🧪 APIs comerciales → 🔐 Hash → 🧬 Cifrado → 🏗️ Servidores → ⏱️ asyncio
-
 ---
 
 En la U01 lanzaste procesos completos con `subprocess`: cada uno con su propia memoria, su propio `PID` y su propio mundo. Ahora toca bajar un nivel y entrar *dentro* del proceso: un proceso puede tener varias tareas ejecutándose a la vez, compartiendo su memoria. Esas tareas son los **hilos** (threads): se crean en milisegundos, se comunican con variables compartidas y son la base de los servidores que atienden a muchos clientes a la vez.
