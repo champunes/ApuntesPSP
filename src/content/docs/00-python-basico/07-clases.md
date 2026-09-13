@@ -1,11 +1,11 @@
----
+﻿---
 title: 07 — Clases
 description: class, __init__, métodos, classmethod y staticmethod 🏗️
 ---
 
 <p><small>class, __init__, métodos, classmethod y staticmethod 🏗️</small></p>
 
-> 🗺️ **Estás en:** 🐍 **U00 · Python 3 básico** → 07 · Clases
+> 🗺️ **Estás en:** 🐍 **U01 · Python 3 básico** → 07 · Clases
 
 ---
 

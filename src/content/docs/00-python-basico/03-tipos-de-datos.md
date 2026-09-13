@@ -1,11 +1,11 @@
----
+﻿---
 title: 03 — Tipos de datos y operadores
 description: Enteros, floats, booleans, strings, None y sus operadores 🔢
 ---
 
 <p><small>Enteros, floats, booleans, strings, None y sus operadores 🔢</small></p>
 
-> 🗺️ **Estás en:** 🐍 **U00 · Python 3 básico** → 03 · Tipos de datos y operadores
+> 🗺️ **Estás en:** 🐍 **U01 · Python 3 básico** → 03 · Tipos de datos y operadores
 
 ---
 

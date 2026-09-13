@@ -1,5 +1,5 @@
 ---
-title: U00 — Python 3 básico
+title: U01 — Python 3 básico
 description: "La base de todo: variables, funciones, clases y módulos en Python 🐍"
 nav_order: 00
 ---

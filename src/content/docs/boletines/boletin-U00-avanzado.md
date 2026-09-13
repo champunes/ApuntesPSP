@@ -1,9 +1,9 @@
----
-title: Boletín U00 — Avanzado
+﻿---
+title: Boletín U01 — Avanzado
 description: Ejercicios avanzados de Python 3
 ---
 
-# 💪 Boletín U00 — Avanzado
+# 💪 Boletín U01 — Avanzado
 
 > Ejercicios que requieren aplicar los conceptos de Python 3 de forma más profunda, con programas completos y casos reales.
 

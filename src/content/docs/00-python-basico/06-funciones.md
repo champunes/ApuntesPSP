@@ -1,11 +1,11 @@
----
+﻿---
 title: 06 — Funciones
 description: def, argumentos, lambda, map, filter y comprensiones ⚡
 ---
 
 <p><small>def, argumentos, lambda, map, filter y comprensiones ⚡</small></p>
 
-> 🗺️ **Estás en:** 🐍 **U00 · Python 3 básico** → 06 · Funciones
+> 🗺️ **Estás en:** 🐍 **U01 · Python 3 básico** → 06 · Funciones
 
 ---
 

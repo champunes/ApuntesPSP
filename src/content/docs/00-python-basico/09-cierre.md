@@ -1,11 +1,11 @@
----
+﻿---
 title: "09 — Cierre: consolida lo aprendido"
 description: Sé el código, el ring final y el laboratorio de la unidad 🧠
 ---
 
 <p><small>Sé el código, el ring final y el laboratorio de la unidad 🧠</small></p>
 
-> 🗺️ **Estás en:** 🐍 **U00 · Python 3 básico** → 09 · Cierre
+> 🗺️ **Estás en:** 🐍 **U01 · Python 3 básico** → 09 · Cierre
 
 ---
 

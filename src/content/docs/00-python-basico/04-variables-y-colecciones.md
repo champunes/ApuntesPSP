@@ -1,11 +1,11 @@
----
+﻿---
 title: 04 — Variables y colecciones
 description: Variables, listas, tuplas, diccionarios, conjuntos y slicing 📦
 ---
 
 <p><small>Variables, listas, tuplas, diccionarios, conjuntos y slicing 📦</small></p>
 
-> 🗺️ **Estás en:** 🐍 **U00 · Python 3 básico** → 04 · Variables y colecciones
+> 🗺️ **Estás en:** 🐍 **U01 · Python 3 básico** → 04 · Variables y colecciones
 
 ---
 

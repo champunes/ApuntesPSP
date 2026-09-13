@@ -1,11 +1,11 @@
----
+﻿---
 title: 01 — Introducción a Python
 description: Qué es Python, por qué aprenderlo y cómo empezar 🐍
 ---
 
 <p><small>Qué es Python, por qué aprenderlo y cómo empezar 🐍</small></p>
 
-> 🗺️ **Estás en:** 🐍 **U00 · Python 3 básico** → 01 · Introducción a Python
+> 🗺️ **Estás en:** 🐍 **U01 · Python 3 básico** → 01 · Introducción a Python
 
 ---
 

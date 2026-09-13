@@ -1,9 +1,9 @@
----
-title: Boletín U00 — Inicial (Resuelto)
+﻿---
+title: Boletín U01 — Inicial (Resuelto)
 description: Soluciones de los ejercicios básicos de Python 3
 ---
 
-# ✅ Boletín U00 — Inicial (Resuelto)
+# ✅ Boletín U01 — Inicial (Resuelto)
 
 ---
 

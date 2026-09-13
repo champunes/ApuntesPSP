@@ -1,11 +1,11 @@
----
+﻿---
 title: 08 — Módulos y avanzado
 description: import, pip, generadores y decoradores 📦
 ---
 
 <p><small>import, pip, generadores y decoradores 📦</small></p>
 
-> 🗺️ **Estás en:** 🐍 **U00 · Python 3 básico** → 08 · Módulos y avanzado
+> 🗺️ **Estás en:** 🐍 **U01 · Python 3 básico** → 08 · Módulos y avanzado
 
 ---
 

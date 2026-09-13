@@ -105,7 +105,7 @@ const boletinItems = (index) => {
 };
 
 const unitsSidebar = [
-  { slug: '00-python-basico', label: '🐍 0. Python 3 básico' },
+  { slug: '00-python-basico', label: '🐍 1. Python 3 básico' },
   ...unitSlugs.map((slug, i) => {
     const label = `${emojis[i]} ${i + 1}. ${unitLabels[i]}`;
     if (unidadesExpandidas[slug]) {
