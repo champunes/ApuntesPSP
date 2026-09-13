@@ -80,6 +80,8 @@ Esta unidad es **prerequisito** del módulo PSP. No corresponde a ningún RA dir
 
 ## 🚪 ¿Por dónde empiezo?
 
+¿Nunca has tocado un ordenador o un lenguaje de programación? No empieces por aquí: primero repasa los fundamentos en el curso de [Pensamiento Computacional](https://sergarb1.github.io/ApuntesProgramacion/01-pensamiento-computacional/) (variables, bucles, condicionales). Una vez lo domines, vuelve a esta unidad para afianzar Python.
+
 ¿Nunca has programado en Python? Perfecto, esta unidad es para ti. Empieza por el [punto 1](/ApuntesPSP/00-python-basico/01-introduccion) y avanza despacio: cada capítulo tiene ejemplos que puedes copiar y ejecutar en tu terminal. No te saltes los boletines: la práctica es la clave.
 
 ¿Ya sabes algo de Python pero no estás seguro? Haz el [mini-chequeo](/ApuntesPSP/00-python-basico/03-tipos-de-datos) del punto 3. Si lo sacas sin problemas, puedes saltar a los puntos que menos domines y dedicar más tiempo al [punto 8](/ApuntesPSP/00-python-basico/08-modulos-y-avanzado) (generadores y decoradores), que suelen ser los que más cuestan.
