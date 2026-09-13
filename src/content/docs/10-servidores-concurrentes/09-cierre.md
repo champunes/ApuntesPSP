@@ -1,11 +1,11 @@
----
+﻿---
 title: "09 — Cierre: consolida lo aprendido"
 description: Sé el servidor, el ring final y el Laboratorio de tortura 🏗️
 ---
 
 <p><small>Sé el servidor, el ring final y el Laboratorio de tortura 🏗️</small></p>
 
-> 🗺️ **Estás en:** 🏗️ **U10 · Servidores Concurrentes** → 09 · Cierre
+> 🗺️ **Estás en:** 🏗️ **U11 · Servidores Concurrentes** → 09 · Cierre
 
 ---
 
@@ -28,7 +28,7 @@ Has terminado la teoría: el servidor secuencial y su límite, el cliente lento 
 
 **Nunca se crea un hilo nuevo.** El servidor tiene exactamente 5 hilos y una cola: el sistema no se ahoga.
 
-> 💡 **Ahora tú:** ¿y si llegaran 10.000 conexiones? El pool las iría encolando y sirviendo de a 5. Tardarían más, pero el servidor **sobreviviría**. Y para 10.000 conexiones, la solución de la [U11 · asyncio](/ApuntesPSP/11-asyncio-y-disponibilidad) sería todavía más ligera.
+> 💡 **Ahora tú:** ¿y si llegaran 10.000 conexiones? El pool las iría encolando y sirviendo de a 5. Tardarían más, pero el servidor **sobreviviría**. Y para 10.000 conexiones, la solución de la [U12 · asyncio](/ApuntesPSP/11-asyncio-y-disponibilidad) sería todavía más ligera.
 
 ---
 
@@ -204,7 +204,7 @@ Sí, con `loop.run_in_executor()`. Pero empieza con uno u otro.
 
 > ❓ **¿Y si el servidor recibe 10.000 conexiones?**
 
-ThreadPool con 100 hilos + cola de espera. O usa **asyncio** ([U11](/ApuntesPSP/11-asyncio-y-disponibilidad)) que escala mejor.
+ThreadPool con 100 hilos + cola de espera. O usa **asyncio** ([U12](/ApuntesPSP/11-asyncio-y-disponibilidad)) que escala mejor.
 
 ---
 
@@ -220,7 +220,7 @@ ThreadPool con 100 hilos + cola de espera. O usa **asyncio** ([U11](/ApuntesPSP/
 >
 > *El servidor ya atiende a muchos. Pero 10.000 conexiones siguen esperando algo más ligero…*
 
-**PRÓXIMAMENTE EN U11:** *asyncio y disponibilidad. Sin un hilo por conexión, un solo bucle de eventos atenderá miles de clientes a la vez. El servidor concurrente se vuelve esbelto.*
+**PRÓXIMAMENTE EN U12:** *asyncio y disponibilidad. Sin un hilo por conexión, un solo bucle de eventos atenderá miles de clientes a la vez. El servidor concurrente se vuelve esbelto.*
 
 ---
 
@@ -233,8 +233,8 @@ ThreadPool con 100 hilos + cola de espera. O usa **asyncio** ([U11](/ApuntesPSP/
 | c) | Implementa servidores concurrentes con hilos | ✅ Hilo por cliente (puntos 3 y 8) + ⚡ Laboratorio |
 | d) | Gestiona pools de hilos (ThreadPoolExecutor) | ✅ ThreadPool y benchmark (puntos 4-5) + ⚡ Laboratorio |
 
-> RA4a-b (APIs REST y comerciales) se cubren en las **U06 y U07**. RA4e-g (asyncio, disponibilidad, comparativa de modelos) se cubren en la **U11 · asyncio y Disponibilidad**.
+> RA4a-b (APIs REST y comerciales) se cubren en las **U07 y U08**. RA4e-g (asyncio, disponibilidad, comparativa de modelos) se cubren en la **U12 · asyncio y Disponibilidad**.
 
 ---
 
-📚 [Volver al índice de la unidad](/ApuntesPSP/10-servidores-concurrentes) · **Anterior:** [08 · Servidor concurrente completo](/ApuntesPSP/10-servidores-concurrentes/08-servidor-concurrente-completo) · **Siguiente:** **[U11 · asyncio y Disponibilidad](/ApuntesPSP/11-asyncio-y-disponibilidad)**
+📚 [Volver al índice de la unidad](/ApuntesPSP/10-servidores-concurrentes) · **Anterior:** [08 · Servidor concurrente completo](/ApuntesPSP/10-servidores-concurrentes/08-servidor-concurrente-completo) · **Siguiente:** **[U12 · asyncio y Disponibilidad](/ApuntesPSP/11-asyncio-y-disponibilidad)**

@@ -1,11 +1,11 @@
----
+﻿---
 title: 05 — Errores y gestión
 description: "Timeouts, reinicios y conexiones rechazadas bajo control 🛡️"
 ---
 
 <p><small>Timeouts, reinicios y conexiones rechazadas bajo control 🛡️</small></p>
 
-> 🗺️ **Estás en:** 🔌 **U04 · Sockets TCP** → 05 · Errores y gestión
+> 🗺️ **Estás en:** 🔌 **U05 · Sockets TCP** → 05 · Errores y gestión
 
 ---
 

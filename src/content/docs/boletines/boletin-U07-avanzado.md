@@ -1,9 +1,9 @@
----
-title: Boletín U07 — Avanzado
+﻿---
+title: Boletín U08 — Avanzado
 description: Ejercicios avanzados de APIs Comerciales
 ---
 
-# 💪 Boletín U07 — Avanzado
+# 💪 Boletín U08 — Avanzado
 
 > Ejercicios que requieren aplicar los conceptos de APIs comerciales, variables de entorno, rate limits y OpenAI de forma más profunda, con programas completos contra APIs reales.
 

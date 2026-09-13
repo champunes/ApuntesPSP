@@ -1,11 +1,11 @@
----
+﻿---
 title: 02 — Estados de un proceso
 description: "El ciclo de vida: de NUEVO a TERMINADO 🔄"
 ---
 
 <p><small>El ciclo de vida: de NUEVO a TERMINADO 🔄</small></p>
 
-> 🗺️ **Estás en:** 🚀 **U01 · Procesos y Subprocess** → 02 · Estados de un proceso
+> 🗺️ **Estás en:** 🚀 **U02 · Procesos y Subprocess** → 02 · Estados de un proceso
 
 ---
 

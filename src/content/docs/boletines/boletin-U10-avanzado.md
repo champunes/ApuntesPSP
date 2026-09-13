@@ -1,9 +1,9 @@
----
-title: Boletín U10 — Avanzado
+﻿---
+title: Boletín U11 — Avanzado
 description: Ejercicios avanzados de Servidores Concurrentes
 ---
 
-# 💪 Boletín U10 — Avanzado
+# 💪 Boletín U11 — Avanzado
 
 > Ejercicios que requieren aplicar la concurrencia de forma más profunda: timeouts, contadores sincronizados, límites de clientes, colas de espera, heartbeats y hasta un balanceador de carga.
 

@@ -1,11 +1,11 @@
----
+﻿---
 title: 02 — Lock
 description: El cerrojo que protege la sección crítica 🔒
 ---
 
 <p><small>El cerrojo que protege la sección crítica 🔒</small></p>
 
-> 🗺️ **Estás en:** 🔒 **U03 · Sincronización entre Hilos** → 02 · Lock
+> 🗺️ **Estás en:** 🔒 **U04 · Sincronización entre Hilos** → 02 · Lock
 
 ---
 

@@ -1,11 +1,11 @@
----
+﻿---
 title: 07 — Cuándo usar cada protocolo
 description: "Criterios de decisión y casos reales: DNS, VoIP, streaming 🧭"
 ---
 
 <p><small>Criterios de decisión y casos reales: DNS, VoIP, streaming 🧭</small></p>
 
-> 🗺️ **Estás en:** 📡 **U05 · Sockets UDP y Protocolos** → 07 · Cuándo usar cada protocolo
+> 🗺️ **Estás en:** 📡 **U06 · Sockets UDP y Protocolos** → 07 · Cuándo usar cada protocolo
 
 ---
 

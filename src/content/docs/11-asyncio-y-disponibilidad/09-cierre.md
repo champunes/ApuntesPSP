@@ -1,11 +1,11 @@
----
+﻿---
 title: "09 — Cierre: consolida lo aprendido"
 description: Sé la corrutina, el ring final y el último Laboratorio de tortura 🏁
 ---
 
 <p><small>Sé la corrutina, el ring final y el último Laboratorio de tortura 🏁</small></p>
 
-> 🗺️ **Estás en:** ⏱️ **U11 · asyncio y Disponibilidad** → 09 · Cierre
+> 🗺️ **Estás en:** ⏱️ **U12 · asyncio y Disponibilidad** → 09 · Cierre
 
 ---
 
@@ -243,7 +243,7 @@ La operación no se espera (ni a veces se ejecuta): la corrutina no hace lo que 
 | f) | Desarrolla servidores con asyncio | ✅ Corrutinas, gather y start_server (puntos 1-3 y 8) + ⚡ Laboratorio |
 | g) | Compara modelos de concurrencia (hilos vs asyncio) | ✅ Comparativa (punto 7) + 🔥 Fireside Chat |
 
-> RA4c (servidores concurrentes con hilos) y RA4d (ThreadPool) se cubrieron en la **U10 · Servidores Concurrentes**.
+> RA4c (servidores concurrentes con hilos) y RA4d (ThreadPool) se cubrieron en la **U11 · Servidores Concurrentes**.
 
 ---
 

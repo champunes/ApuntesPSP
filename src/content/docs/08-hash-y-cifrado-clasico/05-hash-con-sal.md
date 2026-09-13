@@ -1,11 +1,11 @@
----
+﻿---
 title: 05 — Hash con sal
 description: La sal que arruina las tablas rainbow 🧂
 ---
 
 <p><small>La sal que arruina las tablas rainbow 🧂</small></p>
 
-> 🗺️ **Estás en:** 🔐 **U08 · Hash y Cifrado Clásico** → 05 · Hash con sal
+> 🗺️ **Estás en:** 🔐 **U09 · Hash y Cifrado Clásico** → 05 · Hash con sal
 
 ---
 

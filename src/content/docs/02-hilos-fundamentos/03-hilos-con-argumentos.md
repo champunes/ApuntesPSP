@@ -1,11 +1,11 @@
----
+﻿---
 title: 03 — Hilos con argumentos
 description: Pasa datos al hilo con args y kwargs, y ponle nombre a cada hilo 📇
 ---
 
 <p><small>Pasa datos al hilo con args y kwargs, y ponle nombre a cada hilo 📇</small></p>
 
-> 🗺️ **Estás en:** 🔀 **U02 · Hilos Fundamentos** → 03 · Hilos con argumentos
+> 🗺️ **Estás en:** 🔀 **U03 · Hilos Fundamentos** → 03 · Hilos con argumentos
 
 ---
 
@@ -127,7 +127,7 @@ Fíjate en los detalles:
 
 ## 👨‍👩‍👧 Varios hilos a la vez
 
-Con una **lista por comprensión** puedes crear y lanzar N hilos en tres líneas. Es el patrón que usarás toda la unidad (y en los servidores concurrentes de la U10):
+Con una **lista por comprensión** puedes crear y lanzar N hilos en tres líneas. Es el patrón que usarás toda la unidad (y en los servidores concurrentes de la U11):
 
 ```python
 import threading

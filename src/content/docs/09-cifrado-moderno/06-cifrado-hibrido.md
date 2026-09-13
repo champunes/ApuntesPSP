@@ -1,11 +1,11 @@
----
+﻿---
 title: 06 — Cifrado híbrido
 description: AES + RSA, el método que usa HTTPS 🤝
 ---
 
 <p><small>AES + RSA, el método que usa HTTPS 🤝</small></p>
 
-> 🗺️ **Estás en:** 🧬 **U09 · Cifrado Moderno** → 06 · Cifrado híbrido
+> 🗺️ **Estás en:** 🧬 **U10 · Cifrado Moderno** → 06 · Cifrado híbrido
 
 ---
 

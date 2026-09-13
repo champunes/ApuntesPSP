@@ -1,11 +1,11 @@
----
+﻿---
 title: "08 — Práctica: sistema seguro"
 description: Cifrar, firmar y verificar un sistema completo 🏗️
 ---
 
 <p><small>Cifrar, firmar y verificar un sistema completo 🏗️</small></p>
 
-> 🗺️ **Estás en:** 🧬 **U09 · Cifrado Moderno** → 08 · Práctica: sistema seguro
+> 🗺️ **Estás en:** 🧬 **U10 · Cifrado Moderno** → 08 · Práctica: sistema seguro
 
 ---
 

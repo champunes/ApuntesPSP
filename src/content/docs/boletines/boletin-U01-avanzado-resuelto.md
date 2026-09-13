@@ -1,9 +1,9 @@
----
-title: Boletín U01 — Avanzado (Resuelto)
+﻿---
+title: Boletín U02 — Avanzado (Resuelto)
 description: Soluciones de los ejercicios avanzados de Procesos y Subprocess
 ---
 
-# 💪 Boletín U01 — Avanzado (Resuelto)
+# 💪 Boletín U02 — Avanzado (Resuelto)
 
 ---
 

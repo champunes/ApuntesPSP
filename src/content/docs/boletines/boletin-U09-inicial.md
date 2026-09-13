@@ -1,11 +1,11 @@
----
-title: Boletín U09 — Inicial
+﻿---
+title: Boletín U10 — Inicial
 description: Ejercicios básicos de Cifrado Moderno
 ---
 
-# 📝 Boletín U09 — Inicial
+# 📝 Boletín U10 — Inicial
 
-> Ejercicios básicos para afianzar los conceptos de AES, RSA y la diferencia simétrico/asimétrico de la unidad U09.
+> Ejercicios básicos para afianzar los conceptos de AES, RSA y la diferencia simétrico/asimétrico de la unidad U10.
 
 ---
 

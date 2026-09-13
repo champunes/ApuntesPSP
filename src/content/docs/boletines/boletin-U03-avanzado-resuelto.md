@@ -1,9 +1,9 @@
----
-title: Boletín U03 — Avanzado (Resuelto)
+﻿---
+title: Boletín U04 — Avanzado (Resuelto)
 description: Soluciones de los ejercicios avanzados de Sincronización entre Hilos
 ---
 
-# 💪 Boletín U03 — Avanzado (Resuelto)
+# 💪 Boletín U04 — Avanzado (Resuelto)
 
 ---
 

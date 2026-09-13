@@ -1,9 +1,9 @@
----
-title: Boletín U10 — Inicial (Resuelto)
+﻿---
+title: Boletín U11 — Inicial (Resuelto)
 description: Soluciones de los ejercicios básicos de Servidores Concurrentes
 ---
 
-# ✅ Boletín U10 — Inicial (Resuelto)
+# ✅ Boletín U11 — Inicial (Resuelto)
 
 ---
 

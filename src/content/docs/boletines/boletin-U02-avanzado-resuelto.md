@@ -1,9 +1,9 @@
----
-title: Boletín U02 — Avanzado (Resuelto)
+﻿---
+title: Boletín U03 — Avanzado (Resuelto)
 description: Soluciones de los ejercicios avanzados de Hilos Fundamentos
 ---
 
-# 💪 Boletín U02 — Avanzado (Resuelto)
+# 💪 Boletín U03 — Avanzado (Resuelto)
 
 ---
 

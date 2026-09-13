@@ -1,11 +1,11 @@
----
+﻿---
 title: "09 — Cierre: consolida lo aprendido"
 description: Sé el hilo, el ring final y el laboratorio de la unidad 🧠
 ---
 
 <p><small>Sé el hilo, el ring final y el laboratorio de la unidad 🧠</small></p>
 
-> 🗺️ **Estás en:** 🔀 **U02 · Hilos Fundamentos** → 09 · Cierre
+> 🗺️ **Estás en:** 🔀 **U03 · Hilos Fundamentos** → 09 · Cierre
 
 ---
 
@@ -217,7 +217,7 @@ En Python, no hay prioridades nativas. El scheduler del SO decide. Puedes simula
 
 *Los hilos comparten memoria, y compartir sin ponerse de acuerdo es peligroso.*
 
-**PRÓXIMAMENTE EN U03:** *Dos hilos tocando la misma variable a la vez es una carrera. Si no se ponen de acuerdo, los datos se corrompen. Necesitan locks, semáforos y barreras: sincronización entre hilos.*
+**PRÓXIMAMENTE EN U04:** *Dos hilos tocando la misma variable a la vez es una carrera. Si no se ponen de acuerdo, los datos se corrompen. Necesitan locks, semáforos y barreras: sincronización entre hilos.*
 
 ---
 
@@ -237,4 +237,4 @@ En Python, no hay prioridades nativas. El scheduler del SO decide. Puedes simula
 
 ---
 
-📚 [Volver al índice de la unidad](/ApuntesPSP/02-hilos-fundamentos) · **Anterior:** [08 · Hilos en la práctica](/ApuntesPSP/02-hilos-fundamentos/08-hilos-en-la-practica) · **Siguiente:** **[U03 · Sincronización entre Hilos](/ApuntesPSP/03-sincronizacion-entre-hilos)**
+📚 [Volver al índice de la unidad](/ApuntesPSP/02-hilos-fundamentos) · **Anterior:** [08 · Hilos en la práctica](/ApuntesPSP/02-hilos-fundamentos/08-hilos-en-la-practica) · **Siguiente:** **[U04 · Sincronización entre Hilos](/ApuntesPSP/03-sincronizacion-entre-hilos)**

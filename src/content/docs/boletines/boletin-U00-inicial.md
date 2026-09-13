@@ -1,11 +1,11 @@
 ﻿---
-title: Boletín U01 — Inicial
+title: Boletín U02 — Inicial
 description: Ejercicios básicos de Python 3
 ---
 
-# 📝 Boletín U01 — Inicial
+# 📝 Boletín U02 — Inicial
 
-> Ejercicios básicos para afianzar los conceptos de comentarios, tipos de datos, variables, colecciones, control de flujo, funciones y clases de la unidad U01.
+> Ejercicios básicos para afianzar los conceptos de comentarios, tipos de datos, variables, colecciones, control de flujo, funciones y clases de la unidad U02.
 
 ---
 

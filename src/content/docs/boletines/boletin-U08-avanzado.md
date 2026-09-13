@@ -1,9 +1,9 @@
----
-title: Boletín U08 — Avanzado
+﻿---
+title: Boletín U09 — Avanzado
 description: Ejercicios avanzados de Hash y Cifrado Clásico
 ---
 
-# 💪 Boletín U08 — Avanzado
+# 💪 Boletín U09 — Avanzado
 
 > Ejercicios que requieren aplicar los conceptos de hash, sal y cifrado César de forma más profunda, con programas completos.
 

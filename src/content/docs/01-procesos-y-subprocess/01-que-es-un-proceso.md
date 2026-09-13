@@ -1,11 +1,11 @@
----
+﻿---
 title: 01 — Qué es un proceso
 description: La burbuja de memoria que vive en tu sistema 🫧
 ---
 
 <p><small>La burbuja de memoria que vive en tu sistema 🫧</small></p>
 
-> 🗺️ **Estás en:** 🚀 **U01 · Procesos y Subprocess** → 01 · Qué es un proceso
+> 🗺️ **Estás en:** 🚀 **U02 · Procesos y Subprocess** → 01 · Qué es un proceso
 
 ---
 

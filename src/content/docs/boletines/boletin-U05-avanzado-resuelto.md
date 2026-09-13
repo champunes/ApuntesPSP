@@ -1,9 +1,9 @@
----
-title: Boletín U05 — Avanzado (Resuelto)
+﻿---
+title: Boletín U06 — Avanzado (Resuelto)
 description: Soluciones de los ejercicios avanzados de Sockets UDP y Protocolos
 ---
 
-# 💪 Boletín U05 — Avanzado (Resuelto)
+# 💪 Boletín U06 — Avanzado (Resuelto)
 
 ---
 

@@ -1,11 +1,11 @@
----
+﻿---
 title: 04 — ThreadPoolExecutor
 description: Un equipo fijo de hilos que se reutiliza ⚡
 ---
 
 <p><small>Un equipo fijo de hilos que se reutiliza ⚡</small></p>
 
-> 🗺️ **Estás en:** 🏗️ **U10 · Servidores Concurrentes** → 04 · ThreadPoolExecutor
+> 🗺️ **Estás en:** 🏗️ **U11 · Servidores Concurrentes** → 04 · ThreadPoolExecutor
 
 ---
 
@@ -78,7 +78,7 @@ No hay una fórmula mágica, pero estas reglas de oro ayudan:
 | CPU intensivo (cálculo puro) | Nº de núcleos de la CPU |
 | I/O intensivo (red, discos, APIs) | Más hilos que núcleos (los hilos esperan mucho en I/O) |
 
-> 💡 En [U11 · asyncio](/ApuntesPSP/11-asyncio-y-disponibilidad) verás que la concurrencia por I/O se puede hacer aún más ligera, sin hilos. De momento, el pool es la opción sensata.
+> 💡 En [U12 · asyncio](/ApuntesPSP/11-asyncio-y-disponibilidad) verás que la concurrencia por I/O se puede hacer aún más ligera, sin hilos. De momento, el pool es la opción sensata.
 
 ---
 

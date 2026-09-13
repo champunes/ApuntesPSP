@@ -1,17 +1,17 @@
----
+﻿---
 title: 07 — RBAC y roles
 description: Control de acceso basado en roles 👥
 ---
 
 <p><small>Control de acceso basado en roles 👥</small></p>
 
-> 🗺️ **Estás en:** 🧬 **U09 · Cifrado Moderno** → 07 · RBAC y roles
+> 🗺️ **Estás en:** 🧬 **U10 · Cifrado Moderno** → 07 · RBAC y roles
 
 ---
 
 ## 📬 La idea en una frase
 
-> **RBAC** (*Role-Based Access Control*) es la forma de decidir **quién puede hacer qué**: los permisos no se asignan a cada persona, sino a su **rol**, y cada usuario hereda los permisos de su rol. Es el principio de **mínimo privilegio** de la U08 llevado a la práctica.
+> **RBAC** (*Role-Based Access Control*) es la forma de decidir **quién puede hacer qué**: los permisos no se asignan a cada persona, sino a su **rol**, y cada usuario hereda los permisos de su rol. Es el principio de **mínimo privilegio** de la U09 llevado a la práctica.
 
 Un becario no necesita borrar la tabla de usuarios. Un editor no necesita compartir documentos con el mundo. Con roles, esa regla se escribe **una sola vez** y se aplica a todos: cambias el rol y cambian los permisos, sin tocar al usuario.
 
@@ -113,7 +113,7 @@ La combinación de cifrado + RBAC es la que usan los sistemas de archivos cifrad
 
 - RBAC asigna permisos a **roles**, no a personas, y cada usuario hereda los de su rol.
 - La **matriz rol × acción** es la regla del sistema; se implementa con un diccionario y una función `puede`.
-- Es la puesta en práctica del **mínimo privilegio** de la U08, y controla también quién puede cifrar, descifrar o firmar.
+- Es la puesta en práctica del **mínimo privilegio** de la U09, y controla también quién puede cifrar, descifrar o firmar.
 
 ## 🐛 Vocabulario rápido
 

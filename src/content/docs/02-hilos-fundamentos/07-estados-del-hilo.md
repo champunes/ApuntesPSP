@@ -1,11 +1,11 @@
----
+﻿---
 title: 07 — Estados del hilo
 description: El ciclo de vida de un hilo, de nuevo a terminado 🔄
 ---
 
 <p><small>El ciclo de vida de un hilo, de nuevo a terminado 🔄</small></p>
 
-> 🗺️ **Estás en:** 🔀 **U02 · Hilos Fundamentos** → 07 · Estados del hilo
+> 🗺️ **Estás en:** 🔀 **U03 · Hilos Fundamentos** → 07 · Estados del hilo
 
 ---
 

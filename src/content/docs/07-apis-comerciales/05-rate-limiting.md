@@ -1,11 +1,11 @@
----
+﻿---
 title: 05 — Rate limiting
 description: Límites, cuotas y el temido 429 🐢
 ---
 
 <p><small>Límites, cuotas y el temido 429 🐢</small></p>
 
-> 🗺️ **Estás en:** 🧪 **U07 · APIs Comerciales** → 05 · Rate limiting
+> 🗺️ **Estás en:** 🧪 **U08 · APIs Comerciales** → 05 · Rate limiting
 
 ---
 
@@ -101,7 +101,7 @@ Intento 4 fallido → espera 8s
 Intento 5 fallido → espera 16s → se rinde
 ```
 
-> El **backoff exponencial** evita saturar un servidor que ya está tocado. Es la técnica que usan los clientes profesionales y la retomarás en la [U11 · asyncio](/ApuntesPSP/11-asyncio-y-disponibilidad) para verla de otra forma.
+> El **backoff exponencial** evita saturar un servidor que ya está tocado. Es la técnica que usan los clientes profesionales y la retomarás en la [U12 · asyncio](/ApuntesPSP/11-asyncio-y-disponibilidad) para verla de otra forma.
 
 ---
 

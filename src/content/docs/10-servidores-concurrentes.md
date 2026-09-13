@@ -1,5 +1,5 @@
 ﻿---
-title: U10 — Servidores Concurrentes
+title: U11 — Servidores Concurrentes
 description: Servidores que atienden a muchos clientes a la vez 🏗️
 nav_order: 10
 ---
@@ -12,7 +12,7 @@ nav_order: 10
 
 Hasta ahora has construido servidores TCP que atienden **de uno en uno**: si un cliente tarda 3 segundos en procesarse, los que llegan detrás esperan su turno en una cola invisible. Esos servidores funcionan, pero se quedan cortos en cuanto el tráfico crece. En esta unidad darás el salto a la **concurrencia**: primero lanzando un **hilo por cada cliente** y después con un **ThreadPoolExecutor**, el equipo de hilos reutilizables que usa la industria.
 
-También medirás cuánto ganas con cada enfoque mediante un **benchmark**, aprenderás a proteger con **Lock** el estado compartido del servidor (esos contadores globales que varios hilos tocan a la vez) y cerrarás montando un servidor concurrente completo con su lanzador de clientes. El siguiente tema, [U11 · asyncio y Disponibilidad](/ApuntesPSP/11-asyncio-y-disponibilidad), tomará el relevo con un modelo aún más ligero para miles de conexiones.
+También medirás cuánto ganas con cada enfoque mediante un **benchmark**, aprenderás a proteger con **Lock** el estado compartido del servidor (esos contadores globales que varios hilos tocan a la vez) y cerrarás montando un servidor concurrente completo con su lanzador de clientes. El siguiente tema, [U12 · asyncio y Disponibilidad](/ApuntesPSP/11-asyncio-y-disponibilidad), tomará el relevo con un modelo aún más ligero para miles de conexiones.
 
 Esta unidad se lee como un **libro de 9 capítulos**: los 8 primeros son teoría en progresión y el 9º aterriza todo en la práctica.
 
@@ -74,15 +74,15 @@ Al terminar, serás capaz de:
 | c) | Implementa servidores concurrentes con hilos | ✅ Puntos 1-3 y 8 + ⚡ Laboratorio (punto 9) |
 | d) | Gestiona pools de hilos (ThreadPoolExecutor) | ✅ Puntos 4-5 y 8 + ⚡ Laboratorio (punto 9) |
 
-> RA4a-b (APIs REST y comerciales) se cubren en las **U06 y U07**. RA4e-g (asyncio, disponibilidad, comparativa de modelos) se cubren en la **U11 · asyncio y Disponibilidad**.
+> RA4a-b (APIs REST y comerciales) se cubren en las **U07 y U08**. RA4e-g (asyncio, disponibilidad, comparativa de modelos) se cubren en la **U12 · asyncio y Disponibilidad**.
 
 ---
 
 ## 🚪 ¿Por dónde empiezo?
 
-¿Vienes de la U09 y dominas el cifrado moderno? Ese no es el trampolín que necesitas: lo que traes fresco de las [U04](/ApuntesPSP/04-sockets-tcp) y [U05](/ApuntesPSP/05-sockets-udp-y-protocolos) son los sockets TCP cliente-servidor. Repasa el `accept()`, el `recv()` y el `sendall()` de la U04 y arranca en el [punto 1](/ApuntesPSP/10-servidores-concurrentes/01-servidor-secuencial), que parte justo de un servidor TCP normal y corriente.
+¿Vienes de la U10 y dominas el cifrado moderno? Ese no es el trampolín que necesitas: lo que traes fresco de las [U05](/ApuntesPSP/04-sockets-tcp) y [U06](/ApuntesPSP/05-sockets-udp-y-protocolos) son los sockets TCP cliente-servidor. Repasa el `accept()`, el `recv()` y el `sendall()` de la U05 y arranca en el [punto 1](/ApuntesPSP/10-servidores-concurrentes/01-servidor-secuencial), que parte justo de un servidor TCP normal y corriente.
 
 ¿Ya sabes escribir servidores y solo quieres el salto a la concurrencia? Ve directo al [punto 3](/ApuntesPSP/10-servidores-concurrentes/03-hilo-por-cliente) o, si tienes prisa por el material "de producción", al [punto 4](/ApuntesPSP/10-servidores-concurrentes/04-threadpoolexecutor). Pero si vienes de cero, no te saltes los puntos 1 y 2: entender el problema del servidor secuencial es la base para valorar todo lo demás.
 
 **📍 Primer punto:** [01 · Servidor secuencial](/ApuntesPSP/10-servidores-concurrentes/01-servidor-secuencial)  
-**⏭️ Al acabar la unidad, continúa en [U11 · asyncio y Disponibilidad](/ApuntesPSP/11-asyncio-y-disponibilidad).**
+**⏭️ Al acabar la unidad, continúa en [U12 · asyncio y Disponibilidad](/ApuntesPSP/11-asyncio-y-disponibilidad).**

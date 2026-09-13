@@ -1,11 +1,11 @@
----
+﻿---
 title: 04 — subprocess.run()
 description: Lanza un programa y espera a que termine ⏳
 ---
 
 <p><small>Lanza un programa y espera a que termine ⏳</small></p>
 
-> 🗺️ **Estás en:** 🚀 **U01 · Procesos y Subprocess** → 04 · subprocess.run()
+> 🗺️ **Estás en:** 🚀 **U02 · Procesos y Subprocess** → 04 · subprocess.run()
 
 ---
 

@@ -1,11 +1,11 @@
----
+﻿---
 title: 01 — TCP vs UDP
 description: "La carta certificada contra el avión de papel 🚀"
 ---
 
 <p><small>La carta certificada contra el avión de papel 🚀</small></p>
 
-> 🗺️ **Estás en:** 📡 **U05 · Sockets UDP y Protocolos** → 01 · TCP vs UDP
+> 🗺️ **Estás en:** 📡 **U06 · Sockets UDP y Protocolos** → 01 · TCP vs UDP
 
 ---
 
@@ -13,7 +13,7 @@ description: "La carta certificada contra el avión de papel 🚀"
 
 > UDP **no establece conexión**: mandas el mensaje y rezas porque llegue. No hay garantía de entrega ni de orden. TCP, en cambio, es el mensajero certificado: entrega cada carta, en orden, y si se pierde, la reenvía. Cada uno tiene su momento.
 
-En la U04 conociste a TCP a fondo: handshake, retransmisiones, orden garantizado. Aquí llega su antagonista: **UDP** (User Datagram Protocol), el lanzador de aviones de papel. Más simple, más rápido, y sin ninguna promesa. La gracia está en saber cuándo usar cada uno.
+En la U05 conociste a TCP a fondo: handshake, retransmisiones, orden garantizado. Aquí llega su antagonista: **UDP** (User Datagram Protocol), el lanzador de aviones de papel. Más simple, más rápido, y sin ninguna promesa. La gracia está en saber cuándo usar cada uno.
 
 ---
 
@@ -63,7 +63,7 @@ import socket
 # Socket UDP: datagramas sin conexión
 s_udp = socket.socket(socket.AF_INET, socket.SOCK_DGRAM)
 
-# Socket TCP: flujo fiable con conexión (lo viste en la U04)
+# Socket TCP: flujo fiable con conexión (lo viste en la U05)
 s_tcp = socket.socket(socket.AF_INET, socket.SOCK_STREAM)
 ```
 

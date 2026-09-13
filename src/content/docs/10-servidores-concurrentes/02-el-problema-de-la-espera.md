@@ -1,11 +1,11 @@
----
+﻿---
 title: 02 — El problema de la espera
 description: El cliente lento que bloquea a todos los demás 🥶
 ---
 
 <p><small>El cliente lento que bloquea a todos los demás 🥶</small></p>
 
-> 🗺️ **Estás en:** 🏗️ **U10 · Servidores Concurrentes** → 02 · El problema de la espera
+> 🗺️ **Estás en:** 🏗️ **U11 · Servidores Concurrentes** → 02 · El problema de la espera
 
 ---
 

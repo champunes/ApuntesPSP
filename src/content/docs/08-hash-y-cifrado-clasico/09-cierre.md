@@ -1,11 +1,11 @@
----
+﻿---
 title: "09 — Cierre: consolida lo aprendido"
 description: Sé el hash, laboratorio con sal y el ring final de la unidad 🧠
 ---
 
 <p><small>Sé el hash, laboratorio con sal y el ring final de la unidad 🧠</small></p>
 
-> 🗺️ **Estás en:** 🔐 **U08 · Hash y Cifrado Clásico** → 09 · Cierre
+> 🗺️ **Estás en:** 🔐 **U09 · Hash y Cifrado Clásico** → 09 · Cierre
 
 ---
 
@@ -207,7 +207,7 @@ Para verificar **integridad**. Descargas Ubuntu, verificas su SHA256, y si coinc
 
 *Las cerraduras se apilan. La casa sigue en pie.*
 
-**PRÓXIMAMENTE EN U09:** *Cifrado moderno. El hash verifica, pero ¿cómo se envía un mensaje secreto que solo el destinatario pueda leer? AES y RSA.*
+**PRÓXIMAMENTE EN U10:** *Cifrado moderno. El hash verifica, pero ¿cómo se envía un mensaje secreto que solo el destinatario pueda leer? AES y RSA.*
 
 ---
 
@@ -221,8 +221,8 @@ Para verificar **integridad**. Descargas Ubuntu, verificas su SHA256, y si coinc
 | c) | Implementa funciones hash (MD5, SHA) | ✅ Puntos 2-5 + ⚡ Laboratorio de tortura |
 | h) | Conoce sistemas de roles y RBAC | ✅ Mínimo privilegio (punto 1) |
 
-> RA5b (tipos de cifrado), RA5d (AES), RA5e (RSA), RA5f (firmas digitales) y RA5g (cifrado híbrido) se cubren en la **U09 · Cifrado Moderno**.
+> RA5b (tipos de cifrado), RA5d (AES), RA5e (RSA), RA5f (firmas digitales) y RA5g (cifrado híbrido) se cubren en la **U10 · Cifrado Moderno**.
 
 ---
 
-📚 [Volver al índice de la unidad](/ApuntesPSP/08-hash-y-cifrado-clasico) · **Anterior:** [08 · Buenas prácticas y verificación](/ApuntesPSP/08-hash-y-cifrado-clasico/08-buenas-practicas-y-verificacion) · **Siguiente:** **[U09 · Cifrado Moderno](/ApuntesPSP/09-cifrado-moderno)**
+📚 [Volver al índice de la unidad](/ApuntesPSP/08-hash-y-cifrado-clasico) · **Anterior:** [08 · Buenas prácticas y verificación](/ApuntesPSP/08-hash-y-cifrado-clasico/08-buenas-practicas-y-verificacion) · **Siguiente:** **[U10 · Cifrado Moderno](/ApuntesPSP/09-cifrado-moderno)**

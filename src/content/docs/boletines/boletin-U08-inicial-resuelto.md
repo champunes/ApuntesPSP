@@ -1,9 +1,9 @@
----
-title: Boletín U08 — Inicial (Resuelto)
+﻿---
+title: Boletín U09 — Inicial (Resuelto)
 description: Soluciones de los ejercicios básicos de Hash y Cifrado Clásico
 ---
 
-# ✅ Boletín U08 — Inicial (Resuelto)
+# ✅ Boletín U09 — Inicial (Resuelto)
 
 ---
 

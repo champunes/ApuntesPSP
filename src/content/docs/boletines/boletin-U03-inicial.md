@@ -1,9 +1,9 @@
----
-title: Boletín U03 — Inicial
+﻿---
+title: Boletín U04 — Inicial
 description: Ejercicios básicos de Sincronización entre Hilos
 ---
 
-# 📝 Boletín U03 — Inicial
+# 📝 Boletín U04 — Inicial
 
 > Ejercicios básicos para afianzar los conceptos de sincronización: condición de carrera, Lock, RLock, semáforo y barrera.
 

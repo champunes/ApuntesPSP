@@ -1,11 +1,11 @@
----
+﻿---
 title: 04 — RSA
 description: Generar el par de claves y cifrar con la pública 🔑
 ---
 
 <p><small>Generar el par de claves y cifrar con la pública 🔑</small></p>
 
-> 🗺️ **Estás en:** 🧬 **U09 · Cifrado Moderno** → 04 · RSA
+> 🗺️ **Estás en:** 🧬 **U10 · Cifrado Moderno** → 04 · RSA
 
 ---
 

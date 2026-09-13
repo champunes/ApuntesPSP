@@ -1,11 +1,11 @@
----
+﻿---
 title: 06 — Condition
 description: Cuando un hilo necesita que otro le avise 📢
 ---
 
 <p><small>Cuando un hilo necesita que otro le avise 📢</small></p>
 
-> 🗺️ **Estás en:** 🔒 **U03 · Sincronización entre Hilos** → 06 · Condition
+> 🗺️ **Estás en:** 🔒 **U04 · Sincronización entre Hilos** → 06 · Condition
 
 ---
 

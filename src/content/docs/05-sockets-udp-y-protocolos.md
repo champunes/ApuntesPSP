@@ -1,5 +1,5 @@
 ﻿---
-title: U05 — Sockets UDP y Protocolos
+title: U06 — Sockets UDP y Protocolos
 description: "Datagramas sin conexión: UDP, HTTP y NTP 📡"
 nav_order: 05
 ---
@@ -10,9 +10,9 @@ nav_order: 05
 
 > "UDP es como lanzar un avión de papel. TCP es como enviar una carta certificada. Cada uno tiene su momento."
 
-En la U04 los sockets TCP te enseñaron a ser un mensajero certificado: conectas, verificas entrega y mantienes orden. Aquí llega el otro extremo: **UDP**, el lanzador de aviones de papel. No hay conexión, no hay confirmación, no hay orden: mandas tu datagrama y rezas por que llegue. Y, sin embargo, es el protocolo que mueve las videollamadas, los juegos online, el DNS y hasta la hora exacta de Internet.
+En la U05 los sockets TCP te enseñaron a ser un mensajero certificado: conectas, verificas entrega y mantienes orden. Aquí llega el otro extremo: **UDP**, el lanzador de aviones de papel. No hay conexión, no hay confirmación, no hay orden: mandas tu datagrama y rezas por que llegue. Y, sin embargo, es el protocolo que mueve las videollamadas, los juegos online, el DNS y hasta la hora exacta de Internet.
 
-Esta unidad cierra el bloque de red con la otra cara de la moneda y sus dos grandes protocolos de aplicación sobre sockets: **HTTP** (el que mueve la web) y **NTP** (el que sincroniza los relojes). Entenderás cuándo la velocidad importa más que la fiabilidad, cómo se construye una petición HTTP a mano con un socket, y por qué tu ordenador sabe qué hora es sin tener un reloj atómico. El siguiente tema, [U06 · APIs REST y HTTP](/ApuntesPSP/06-apis-rest-y-http), tomará el relevo para automatizar todo esto con la librería `requests`.
+Esta unidad cierra el bloque de red con la otra cara de la moneda y sus dos grandes protocolos de aplicación sobre sockets: **HTTP** (el que mueve la web) y **NTP** (el que sincroniza los relojes). Entenderás cuándo la velocidad importa más que la fiabilidad, cómo se construye una petición HTTP a mano con un socket, y por qué tu ordenador sabe qué hora es sin tener un reloj atómico. El siguiente tema, [U07 · APIs REST y HTTP](/ApuntesPSP/06-apis-rest-y-http), tomará el relevo para automatizar todo esto con la librería `requests`.
 
 Esta unidad se lee como un **libro de 9 capítulos**: los 8 primeros son teoría en progresión y el 9º aterriza todo en la práctica.
 
@@ -76,15 +76,15 @@ Al terminar, serás capaz de:
 | e) | Implementa servidores y clientes UDP | ✅ Puntos 2, 3 y 8 + ⚡ Laboratorio (punto 9) |
 | h) | Implementa protocolos de aplicación (HTTP, NTP) | ✅ Puntos 5 y 6 |
 
-> RA3c (servidor TCP), RA3d (cliente TCP), RA3f (errores) y RA3g (opciones) se cubren en la **U04 · Sockets TCP**.
+> RA3c (servidor TCP), RA3d (cliente TCP), RA3f (errores) y RA3g (opciones) se cubren en la **U05 · Sockets TCP**.
 
 ---
 
 ## 🚪 ¿Por dónde empiezo?
 
-¿Vienes de la U04 y dominas los sockets TCP? Perfecto, ese es el trampolín ideal: repasa la [U04 · Sockets TCP](/ApuntesPSP/04-sockets-tcp) para tener frescos `accept()`, `listen()`, `connect()` y el three-way handshake, y arranca en el [punto 1](/ApuntesPSP/05-sockets-udp-y-protocolos/01-tcp-vs-udp), que parte justo de ahí: TCP contra UDP.
+¿Vienes de la U05 y dominas los sockets TCP? Perfecto, ese es el trampolín ideal: repasa la [U05 · Sockets TCP](/ApuntesPSP/04-sockets-tcp) para tener frescos `accept()`, `listen()`, `connect()` y el three-way handshake, y arranca en el [punto 1](/ApuntesPSP/05-sockets-udp-y-protocolos/01-tcp-vs-udp), que parte justo de ahí: TCP contra UDP.
 
 ¿Ya sabes qué es UDP y solo necesitas NTP, el HTTP manual o la práctica final? Ve directo a los [puntos 5](/ApuntesPSP/05-sockets-udp-y-protocolos/05-http-desde-cero), [6](/ApuntesPSP/05-sockets-udp-y-protocolos/06-ntp-y-servidores-de-tiempo) y [8](/ApuntesPSP/05-sockets-udp-y-protocolos/08-practica-eco-udp). Si vienes de cero en sockets, no te saltes los puntos 1 a 4: los conceptos de datagrama y conexión son la base de todo lo demás.
 
 **📍 Primer punto:** [01 · TCP vs UDP](/ApuntesPSP/05-sockets-udp-y-protocolos/01-tcp-vs-udp)  
-**⏭️ Al acabar la unidad, continúa en [U06 · APIs REST y HTTP](/ApuntesPSP/06-apis-rest-y-http).**
+**⏭️ Al acabar la unidad, continúa en [U07 · APIs REST y HTTP](/ApuntesPSP/06-apis-rest-y-http).**

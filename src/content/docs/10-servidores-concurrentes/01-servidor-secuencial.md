@@ -1,11 +1,11 @@
----
+﻿---
 title: 01 — Servidor secuencial
 description: El servidor que atiende a un cliente cada vez 🐢
 ---
 
 <p><small>El servidor que atiende a un cliente cada vez 🐢</small></p>
 
-> 🗺️ **Estás en:** 🏗️ **U10 · Servidores Concurrentes** → 01 · Servidor secuencial
+> 🗺️ **Estás en:** 🏗️ **U11 · Servidores Concurrentes** → 01 · Servidor secuencial
 
 ---
 
@@ -13,7 +13,7 @@ description: El servidor que atiende a un cliente cada vez 🐢
 
 > Un servidor **secuencial** atiende a un cliente cada vez: `accept()` recibe una conexión, la procesa hasta el final y solo entonces vuelve a aceptar. Los demás clientes esperan en una cola invisible, aunque ya estén conectados.
 
-Es el servidor que construiste en la [U04 · Sockets TCP](/ApuntesPSP/04-sockets-tcp): un bucle `while True` con `accept()`. Funciona, pero tiene un límite muy claro que vamos a medir.
+Es el servidor que construiste en la [U05 · Sockets TCP](/ApuntesPSP/04-sockets-tcp): un bucle `while True` con `accept()`. Funciona, pero tiene un límite muy claro que vamos a medir.
 
 ---
 

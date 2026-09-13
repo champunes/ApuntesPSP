@@ -1,9 +1,9 @@
----
-title: Boletín U09 — Inicial (Resuelto)
+﻿---
+title: Boletín U10 — Inicial (Resuelto)
 description: Soluciones de los ejercicios básicos de Cifrado Moderno
 ---
 
-# ✅ Boletín U09 — Inicial (Resuelto)
+# ✅ Boletín U10 — Inicial (Resuelto)
 
 > `pycryptodome` debe estar instalado: `pip install pycryptodome`.
 

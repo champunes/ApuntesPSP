@@ -1,11 +1,11 @@
----
+﻿---
 title: 02 — Cliente UDP
 description: "Enviar y recibir sin conexión: sendto() y recvfrom() 📤"
 ---
 
 <p><small>Enviar y recibir sin conexión: sendto() y recvfrom() 📤</small></p>
 
-> 🗺️ **Estás en:** 📡 **U05 · Sockets UDP y Protocolos** → 02 · Cliente UDP
+> 🗺️ **Estás en:** 📡 **U06 · Sockets UDP y Protocolos** → 02 · Cliente UDP
 
 ---
 
@@ -13,7 +13,7 @@ description: "Enviar y recibir sin conexión: sendto() y recvfrom() 📤"
 
 > Un cliente UDP **no se conecta**: crea el socket, manda un datagrama con `sendto()` a una dirección y espera la respuesta con `recvfrom()`. Nada de `connect()`, nada de handshake.
 
-En la U04, el cliente TCP pasaba por `connect()` para estrechar la mano antes de hablar. UDP no tiene mano que estrechar: tu mensaje y la dirección del destinatario se envían **juntos**, en el mismo `sendto()`. Es el primer protocolo de esta unidad en el que comprobarás que "sin conexión" se nota hasta en la API.
+En la U05, el cliente TCP pasaba por `connect()` para estrechar la mano antes de hablar. UDP no tiene mano que estrechar: tu mensaje y la dirección del destinatario se envían **juntos**, en el mismo `sendto()`. Es el primer protocolo de esta unidad en el que comprobarás que "sin conexión" se nota hasta en la API.
 
 ---
 
@@ -44,7 +44,7 @@ Desglose de cada línea:
 
 ## 🆚 Sendto contra send: la diferencia visual
 
-| Cliente TCP (U04) | Cliente UDP (aquí) |
+| Cliente TCP (U05) | Cliente UDP (aquí) |
 |---|---|
 | `s.connect((HOST, PORT))` | — (no existe) |
 | `s.send(datos)` | `s.sendto(datos, (HOST, PORT))` |

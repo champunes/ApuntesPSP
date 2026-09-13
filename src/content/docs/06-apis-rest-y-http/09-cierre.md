@@ -1,11 +1,11 @@
----
+﻿---
 title: "09 — Cierre: consolida lo aprendido"
 description: Sé la petición HTTP, laboratorio real y el ring final de la unidad 🧠
 ---
 
 <p><small>Sé la petición HTTP, laboratorio real y el ring final de la unidad 🧠</small></p>
 
-> 🗺️ **Estás en:** 🌐 **U06 · APIs REST y HTTP** → 09 · Cierre
+> 🗺️ **Estás en:** 🌐 **U07 · APIs REST y HTTP** → 09 · Cierre
 
 ---
 
@@ -185,7 +185,7 @@ Vertical:
 
 > ❓ **¿Necesito siempre una API key?**
 
-No, hay APIs públicas sin key (como la de GitHub para datos públicos). Pero la mayoría requiere autenticación. Y cuando la necesites, la mandas en la cabecera `Authorization` (nunca en la URL ni en el código): lo verás en la [U07](/ApuntesPSP/07-apis-comerciales).
+No, hay APIs públicas sin key (como la de GitHub para datos públicos). Pero la mayoría requiere autenticación. Y cuando la necesites, la mandas en la cabecera `Authorization` (nunca en la URL ni en el código): lo verás en la [U08](/ApuntesPSP/07-apis-comerciales).
 
 > ❓ **¿Puedo modificar datos con GET?**
 
@@ -213,7 +213,7 @@ Hoy en día, JSON gana por goleada. XML solo se usa en entornos legacy (bancos, 
 >
 > *Y ahora que sabes hablar con la web, toca llamar a las APIs de verdad: las comerciales.*
 
-**PRÓXIMAMENTE EN U07:** *APIs comerciales. OpenWeatherMap, OpenAI y las API keys que nunca, jamás, se suben a GitHub.*
+**PRÓXIMAMENTE EN U08:** *APIs comerciales. OpenWeatherMap, OpenAI y las API keys que nunca, jamás, se suben a GitHub.*
 
 ---
 
@@ -226,8 +226,8 @@ Hoy en día, JSON gana por goleada. XML solo se usa en entornos legacy (bancos, 
 | a) | Utiliza APIs REST para obtener datos externos | ✅ Puntos 3, 6-8 + ⚡ Laboratorio de tortura |
 | b) | Gestiona peticiones HTTP y procesa respuestas JSON | ✅ Puntos 1-5 y 7 + ⚡ Laboratorio de tortura |
 
-> RA4c (servidores concurrentes) y RA4d (ThreadPool) se cubren en la **U10 · Servidores Concurrentes**. RA4e-g (asyncio, disponibilidad, comparativa) se cubren en la **U11 · asyncio y disponibilidad**.
+> RA4c (servidores concurrentes) y RA4d (ThreadPool) se cubren en la **U11 · Servidores Concurrentes**. RA4e-g (asyncio, disponibilidad, comparativa) se cubren en la **U12 · asyncio y disponibilidad**.
 
 ---
 
-📚 [Volver al índice de la unidad](/ApuntesPSP/06-apis-rest-y-http) · **Anterior:** [08 · Práctica: mini cliente de API](/ApuntesPSP/06-apis-rest-y-http/08-practica-api) · **Siguiente:** **[U07 · APIs Comerciales](/ApuntesPSP/07-apis-comerciales)**
+📚 [Volver al índice de la unidad](/ApuntesPSP/06-apis-rest-y-http) · **Anterior:** [08 · Práctica: mini cliente de API](/ApuntesPSP/06-apis-rest-y-http/08-practica-api) · **Siguiente:** **[U08 · APIs Comerciales](/ApuntesPSP/07-apis-comerciales)**

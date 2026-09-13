@@ -1,11 +1,11 @@
----
+﻿---
 title: "09 — Cierre: consolida lo aprendido"
 description: "Sé el datagrama, laboratorio eco UDP y el cierre de la unidad 🧠"
 ---
 
 <p><small>Sé el datagrama, laboratorio eco UDP y el cierre de la unidad 🧠</small></p>
 
-> 🗺️ **Estás en:** 📡 **U05 · Sockets UDP y Protocolos** → 09 · Cierre
+> 🗺️ **Estás en:** 📡 **U06 · Sockets UDP y Protocolos** → 09 · Cierre
 
 ---
 
@@ -211,7 +211,7 @@ Sí, NTP usa UDP. Pero manda muchas peticiones y calcula estadísticamente la ho
 
 *Y en algún lugar del mundo, un reloj sin átomos pregunta la hora exacta en el puerto 123.*
 
-**PRÓXIMAMENTE EN U06:** *APIs REST. Hasta ahora hablabas HTTP a mano, petición a petición. Ahora toca automatizarlo: la librería `requests`, los verbos GET y POST, y el JSON viajando por la red.*
+**PRÓXIMAMENTE EN U07:** *APIs REST. Hasta ahora hablabas HTTP a mano, petición a petición. Ahora toca automatizarlo: la librería `requests`, los verbos GET y POST, y el JSON viajando por la red.*
 
 ---
 
@@ -226,8 +226,8 @@ Sí, NTP usa UDP. Pero manda muchas peticiones y calcula estadísticamente la ho
 | e) | Implementa servidores y clientes UDP | ✅ Puntos 2, 3 y 8 + ⚡ Laboratorio de tortura |
 | h) | Implementa protocolos de aplicación (HTTP, NTP) | ✅ Puntos 5 y 6 + Cliente HTTP manual |
 
-> RA3c (servidor TCP), RA3d (cliente TCP), RA3f (errores) y RA3g (opciones) se cubren en la **U04 · Sockets TCP**.
+> RA3c (servidor TCP), RA3d (cliente TCP), RA3f (errores) y RA3g (opciones) se cubren en la **U05 · Sockets TCP**.
 
 ---
 
-📚 [Volver al índice de la unidad](/ApuntesPSP/05-sockets-udp-y-protocolos) · **Anterior:** [08 · Práctica eco UDP](/ApuntesPSP/05-sockets-udp-y-protocolos/08-practica-eco-udp) · **Siguiente:** **[U06 · APIs REST y HTTP](/ApuntesPSP/06-apis-rest-y-http)**
+📚 [Volver al índice de la unidad](/ApuntesPSP/05-sockets-udp-y-protocolos) · **Anterior:** [08 · Práctica eco UDP](/ApuntesPSP/05-sockets-udp-y-protocolos/08-practica-eco-udp) · **Siguiente:** **[U07 · APIs REST y HTTP](/ApuntesPSP/06-apis-rest-y-http)**

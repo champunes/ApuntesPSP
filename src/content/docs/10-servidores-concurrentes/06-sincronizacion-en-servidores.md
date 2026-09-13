@@ -1,17 +1,17 @@
----
+﻿---
 title: 06 — Sincronización en servidores
 description: El Lock para el estado compartido entre hilos 🔒
 ---
 
 <p><small>El Lock para el estado compartido entre hilos 🔒</small></p>
 
-> 🗺️ **Estás en:** 🏗️ **U10 · Servidores Concurrentes** → 06 · Sincronización en servidores
+> 🗺️ **Estás en:** 🏗️ **U11 · Servidores Concurrentes** → 06 · Sincronización en servidores
 
 ---
 
 ## 📬 La idea en una frase
 
-> Cuando varios hilos del servidor tocan la **misma variable global** (un contador de conexiones, un total de bytes), hay **condición de carrera**: dos hilos pueden leer y escribir a la vez y perder actualizaciones. La solución es el **Lock** de la [U03](/ApuntesPSP/03-sincronizacion-entre-hilos).
+> Cuando varios hilos del servidor tocan la **misma variable global** (un contador de conexiones, un total de bytes), hay **condición de carrera**: dos hilos pueden leer y escribir a la vez y perder actualizaciones. La solución es el **Lock** de la [U04](/ApuntesPSP/03-sincronizacion-entre-hilos).
 
 En el [punto 3](/ApuntesPSP/10-servidores-concurrentes/03-hilo-por-cliente) y el [punto 4](/ApuntesPSP/10-servidores-concurrentes/04-threadpoolexecutor) los hilos eran independientes. Pero un servidor real suele llevar **estado**: "¿cuántos clientes he atendido?", "¿cuántos bytes he recibido?". Ese estado es compartido… y eso es un problema.
 
@@ -79,7 +79,7 @@ def servidor_multihilo():
 
 `with lock:` adquiere el lock al entrar y lo libera al salir (aunque haya una excepción). Entre esas líneas, **un solo hilo a la vez**: los demás esperan su turno. La lectura, suma y guardado del contador ya son indivisibles.
 
-> 💡 El `with lock:` del servidor es exactamente el patrón que ya conoces de la [U03 · Sincronización entre hilos](/ApuntesPSP/03-sincronizacion-entre-hilos): misma herramienta, distinto escenario.
+> 💡 El `with lock:` del servidor es exactamente el patrón que ya conoces de la [U04 · Sincronización entre hilos](/ApuntesPSP/03-sincronizacion-entre-hilos): misma herramienta, distinto escenario.
 
 ---
 

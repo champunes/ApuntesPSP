@@ -1,11 +1,11 @@
----
+﻿---
 title: 03 — Principios REST
 description: Recursos, URLs semánticas y sin estado 🏛️
 ---
 
 <p><small>Recursos, URLs semánticas y sin estado 🏛️</small></p>
 
-> 🗺️ **Estás en:** 🌐 **U06 · APIs REST y HTTP** → 03 · Principios REST
+> 🗺️ **Estás en:** 🌐 **U07 · APIs REST y HTTP** → 03 · Principios REST
 
 ---
 

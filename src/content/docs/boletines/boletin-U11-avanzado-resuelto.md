@@ -1,9 +1,9 @@
----
-title: Boletín U11 — Avanzado (Resuelto)
+﻿---
+title: Boletín U12 — Avanzado (Resuelto)
 description: Soluciones de los ejercicios avanzados de asyncio y Disponibilidad
 ---
 
-# 💪 Boletín U11 — Avanzado (Resuelto)
+# 💪 Boletín U12 — Avanzado (Resuelto)
 
 ---
 

@@ -1,11 +1,11 @@
----
+﻿---
 title: 06 — SO_REUSEADDR
 description: "Adiós al 'Address already in use' 🔁"
 ---
 
 <p><small>Adiós al 'Address already in use' 🔁</small></p>
 
-> 🗺️ **Estás en:** 🔌 **U04 · Sockets TCP** → 06 · SO_REUSEADDR
+> 🗺️ **Estás en:** 🔌 **U05 · Sockets TCP** → 06 · SO_REUSEADDR
 
 ---
 

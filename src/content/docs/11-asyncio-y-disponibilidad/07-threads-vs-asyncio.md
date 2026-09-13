@@ -1,11 +1,11 @@
----
+﻿---
 title: 07 — Threads vs asyncio
 description: La comparativa definitiva de modelos de concurrencia 🥊
 ---
 
 <p><small>La comparativa definitiva de modelos de concurrencia 🥊</small></p>
 
-> 🗺️ **Estás en:** ⏱️ **U11 · asyncio y Disponibilidad** → 07 · Threads vs asyncio
+> 🗺️ **Estás en:** ⏱️ **U12 · asyncio y Disponibilidad** → 07 · Threads vs asyncio
 
 ---
 

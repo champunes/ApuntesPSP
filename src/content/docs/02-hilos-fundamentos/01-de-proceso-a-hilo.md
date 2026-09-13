@@ -1,11 +1,11 @@
----
+﻿---
 title: 01 — De proceso a hilo
 description: Qué es un hilo y en qué se diferencia de un proceso 🧵
 ---
 
 <p><small>Qué es un hilo y en qué se diferencia de un proceso 🧵</small></p>
 
-> 🗺️ **Estás en:** 🔀 **U02 · Hilos Fundamentos** → 01 · De proceso a hilo
+> 🗺️ **Estás en:** 🔀 **U03 · Hilos Fundamentos** → 01 · De proceso a hilo
 
 ---
 
@@ -13,7 +13,7 @@ description: Qué es un hilo y en qué se diferencia de un proceso 🧵
 
 > Un **hilo** es la unidad más pequeña de ejecución: una tarea que vive *dentro* de un proceso y comparte su memoria con los demás hilos de ese proceso.
 
-En la U01 lanzaste procesos: programas completos con su propia memoria, su propio PID y su propio estado. Ahora entramos a un nivel más fino: un solo proceso puede tener **varios hilos ejecutándose a la vez**, todos trabajando con la misma memoria. Es como pasar de abrir varias casas (procesos) a repartir habitaciones dentro de una sola (hilos).
+En la U02 lanzaste procesos: programas completos con su propia memoria, su propio PID y su propio estado. Ahora entramos a un nivel más fino: un solo proceso puede tener **varios hilos ejecutándose a la vez**, todos trabajando con la misma memoria. Es como pasar de abrir varias casas (procesos) a repartir habitaciones dentro de una sola (hilos).
 
 ---
 

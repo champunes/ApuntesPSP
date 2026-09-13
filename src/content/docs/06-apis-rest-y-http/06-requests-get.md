@@ -1,11 +1,11 @@
----
+﻿---
 title: "06 — requests: el GET"
 description: "La librería estándar de facto para hablar HTTP 📥"
 ---
 
 <p><small>La librería estándar de facto para hablar HTTP 📥</small></p>
 
-> 🗺️ **Estás en:** 🌐 **U06 · APIs REST y HTTP** → 06 · requests: el GET
+> 🗺️ **Estás en:** 🌐 **U07 · APIs REST y HTTP** → 06 · requests: el GET
 
 ---
 
@@ -29,7 +29,7 @@ print(resp.headers)         # Cabeceras de respuesta
 print(resp.elapsed)         # Tiempo que tardó
 ```
 
-`requests.get` se encarga de todo lo que en la U04 hacías a mano con sockets: resolver el DNS, abrir la conexión TCP, el handshake TLS en HTTPS, construir la petición HTTP y leer la respuesta.
+`requests.get` se encarga de todo lo que en la U05 hacías a mano con sockets: resolver el DNS, abrir la conexión TCP, el handshake TLS en HTTPS, construir la petición HTTP y leer la respuesta.
 
 ---
 
@@ -81,7 +81,7 @@ cabeceras = {
 resp = requests.get("https://api.github.com/user", headers=cabeceras)
 ```
 
-> ⚠️ **Seguridad**: un token en la cabecera `Authorization` nunca debe ir "en claro" en el código ni subirse a GitHub. En la [U07](/ApuntesPSP/07-apis-comerciales) verás cómo guardarlo en variables de entorno con `python-dotenv`.
+> ⚠️ **Seguridad**: un token en la cabecera `Authorization` nunca debe ir "en claro" en el código ni subirse a GitHub. En la [U08](/ApuntesPSP/07-apis-comerciales) verás cómo guardarlo en variables de entorno con `python-dotenv`.
 
 ---
 

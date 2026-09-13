@@ -1,9 +1,9 @@
----
-title: Boletín U06 — Inicial (Resuelto)
+﻿---
+title: Boletín U07 — Inicial (Resuelto)
 description: Soluciones de los ejercicios básicos de APIs REST y HTTP
 ---
 
-# ✅ Boletín U06 — Inicial (Resuelto)
+# ✅ Boletín U07 — Inicial (Resuelto)
 
 ---
 

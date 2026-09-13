@@ -1,9 +1,9 @@
----
-title: Boletín U03 — Avanzado
+﻿---
+title: Boletín U04 — Avanzado
 description: Ejercicios avanzados de Sincronización entre Hilos
 ---
 
-# 💪 Boletín U03 — Avanzado
+# 💪 Boletín U04 — Avanzado
 
 > Ejercicios que requieren aplicar los conceptos de sincronización de forma más profunda, con programas completos y varios mecanismos a la vez.
 

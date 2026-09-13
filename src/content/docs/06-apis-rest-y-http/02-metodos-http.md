@@ -1,11 +1,11 @@
----
+﻿---
 title: 02 — Métodos HTTP
 description: "Los verbos de la web: leer, crear, actualizar y borrar 🚦"
 ---
 
 <p><small>Los verbos de la web: leer, crear, actualizar y borrar 🚦</small></p>
 
-> 🗺️ **Estás en:** 🌐 **U06 · APIs REST y HTTP** → 02 · Métodos HTTP
+> 🗺️ **Estás en:** 🌐 **U07 · APIs REST y HTTP** → 02 · Métodos HTTP
 
 ---
 

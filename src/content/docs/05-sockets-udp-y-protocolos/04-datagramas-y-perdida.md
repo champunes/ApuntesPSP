@@ -1,11 +1,11 @@
----
+﻿---
 title: 04 — Datagramas y pérdida
 description: "Paquetes perdidos, duplicados y sin orden: la vida real de UDP 💨"
 ---
 
 <p><small>Paquetes perdidos, duplicados y sin orden: la vida real de UDP 💨</small></p>
 
-> 🗺️ **Estás en:** 📡 **U05 · Sockets UDP y Protocolos** → 04 · Datagramas y pérdida
+> 🗺️ **Estás en:** 📡 **U06 · Sockets UDP y Protocolos** → 04 · Datagramas y pérdida
 
 ---
 

@@ -1,11 +1,11 @@
----
+﻿---
 title: 03 — MD5, SHA-1 y SHA-256
 description: Cuál elegir y por qué algunos ya no sirven 🧮
 ---
 
 <p><small>Cuál elegir y por qué algunos ya no sirven 🧮</small></p>
 
-> 🗺️ **Estás en:** 🔐 **U08 · Hash y Cifrado Clásico** → 03 · MD5, SHA-1 y SHA-256
+> 🗺️ **Estás en:** 🔐 **U09 · Hash y Cifrado Clásico** → 03 · MD5, SHA-1 y SHA-256
 
 ---
 

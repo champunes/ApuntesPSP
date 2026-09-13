@@ -1,5 +1,5 @@
 ﻿---
-title: U02 — Hilos Fundamentos
+title: U03 — Hilos Fundamentos
 description: "Multitarea dentro de un proceso: hilos en Python 🔀"
 nav_order: 02
 ---
@@ -8,9 +8,9 @@ nav_order: 02
 
 ---
 
-En la U01 lanzaste procesos completos con `subprocess`: cada uno con su propia memoria, su propio `PID` y su propio mundo. Ahora toca bajar un nivel y entrar *dentro* del proceso: un proceso puede tener varias tareas ejecutándose a la vez, compartiendo su memoria. Esas tareas son los **hilos** (threads): se crean en milisegundos, se comunican con variables compartidas y son la base de los servidores que atienden a muchos clientes a la vez.
+En la U02 lanzaste procesos completos con `subprocess`: cada uno con su propia memoria, su propio `PID` y su propio mundo. Ahora toca bajar un nivel y entrar *dentro* del proceso: un proceso puede tener varias tareas ejecutándose a la vez, compartiendo su memoria. Esas tareas son los **hilos** (threads): se crean en milisegundos, se comunican con variables compartidas y son la base de los servidores que atienden a muchos clientes a la vez.
 
-Esta unidad es el primer contacto serio con los hilos en Python: los crearás con `threading.Thread`, los lanzarás con `start()`, los esperarás con `join()`, los convertirás en servidores de fondo con `daemon=True` y programarás avisos diferidos con `Timer`. También entenderás el famoso **GIL**, el candado que limita a los hilos de Python, y seguirás su ciclo de vida de punta a punta. Es la puerta de entrada a la sincronización del [TEMA 03 · Sincronización entre Hilos](/ApuntesPSP/03-sincronizacion-entre-hilos) y a los servidores concurrentes de la U10.
+Esta unidad es el primer contacto serio con los hilos en Python: los crearás con `threading.Thread`, los lanzarás con `start()`, los esperarás con `join()`, los convertirás en servidores de fondo con `daemon=True` y programarás avisos diferidos con `Timer`. También entenderás el famoso **GIL**, el candado que limita a los hilos de Python, y seguirás su ciclo de vida de punta a punta. Es la puerta de entrada a la sincronización del [TEMA 03 · Sincronización entre Hilos](/ApuntesPSP/03-sincronizacion-entre-hilos) y a los servidores concurrentes de la U11.
 
 Esta unidad se lee como un **libro de 9 capítulos**: los 8 primeros son teoría en progresión y el 9º aterriza todo en la práctica.
 
@@ -81,9 +81,9 @@ Al terminar, serás capaz de:
 
 ## 🚪 ¿Por dónde empiezo?
 
-¿Vienes de la U01 y dominas procesos y `subprocess`? Perfecto, ese es el trampolín ideal: repasa la [U01 · Procesos y subprocess](/ApuntesPSP/01-procesos-y-subprocess) para tener fresca la diferencia entre lanzar un programa entero y ejecutar una tarea dentro de él, y arranca en el [punto 1](/ApuntesPSP/02-hilos-fundamentos/01-de-proceso-a-hilo), que parte justo de ahí: de proceso a hilo.
+¿Vienes de la U02 y dominas procesos y `subprocess`? Perfecto, ese es el trampolín ideal: repasa la [U02 · Procesos y subprocess](/ApuntesPSP/01-procesos-y-subprocess) para tener fresca la diferencia entre lanzar un programa entero y ejecutar una tarea dentro de él, y arranca en el [punto 1](/ApuntesPSP/02-hilos-fundamentos/01-de-proceso-a-hilo), que parte justo de ahí: de proceso a hilo.
 
 ¿Ya sabes lanzar hilos con `start()` y `join()` y solo necesitas el GIL o los estados? Puedes saltar a los [puntos 6](/ApuntesPSP/02-hilos-fundamentos/06-gil) y [7](/ApuntesPSP/02-hilos-fundamentos/07-estados-del-hilo). Pero si vienes de cero en multitarea, no te saltes los puntos 1 a 3: entender qué es un hilo y cómo se lanza es la base de todo el módulo.
 
 **📍 Primer punto:** [01 · De proceso a hilo](/ApuntesPSP/02-hilos-fundamentos/01-de-proceso-a-hilo)  
-**⏭️ Al acabar la unidad, continúa en [U03 · Sincronización entre Hilos](/ApuntesPSP/03-sincronizacion-entre-hilos).**
+**⏭️ Al acabar la unidad, continúa en [U04 · Sincronización entre Hilos](/ApuntesPSP/03-sincronizacion-entre-hilos).**

@@ -1,11 +1,11 @@
----
+﻿---
 title: 06 — NTP y servidores de tiempo
 description: "¿Qué hora es en Internet? Sincronizar relojes con UDP ⏰"
 ---
 
 <p><small>¿Qué hora es en Internet? Sincronizar relojes con UDP ⏰</small></p>
 
-> 🗺️ **Estás en:** 📡 **U05 · Sockets UDP y Protocolos** → 06 · NTP y servidores de tiempo
+> 🗺️ **Estás en:** 📡 **U06 · Sockets UDP y Protocolos** → 06 · NTP y servidores de tiempo
 
 ---
 

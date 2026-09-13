@@ -1,9 +1,9 @@
----
-title: Boletín U08 — Avanzado (Resuelto)
+﻿---
+title: Boletín U09 — Avanzado (Resuelto)
 description: Soluciones de los ejercicios avanzados de Hash y Cifrado Clásico
 ---
 
-# 💪 Boletín U08 — Avanzado (Resuelto)
+# 💪 Boletín U09 — Avanzado (Resuelto)
 
 ---
 

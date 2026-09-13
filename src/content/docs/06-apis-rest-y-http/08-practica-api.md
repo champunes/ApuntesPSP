@@ -1,11 +1,11 @@
----
+﻿---
 title: "08 — Práctica: mini cliente de API"
 description: "Sé el código, un cliente completo y los ejercicios del lápiz 🛠️"
 ---
 
 <p><small>Sé el código, un cliente completo y los ejercicios del lápiz 🛠️</small></p>
 
-> 🗺️ **Estás en:** 🌐 **U06 · APIs REST y HTTP** → 08 · Práctica: mini cliente de API
+> 🗺️ **Estás en:** 🌐 **U07 · APIs REST y HTTP** → 08 · Práctica: mini cliente de API
 
 ---
 
@@ -103,7 +103,7 @@ print(f"Repos: {datos['public_repos']}")
 8. Extraemos datos['login'] → "python"
 ```
 
-Todo lo que en la U04 hacías a mano —DNS, TCP, TLS, construir la petición— lo hace `requests` en una línea. Tu única tarea es leer la respuesta.
+Todo lo que en la U05 hacías a mano —DNS, TCP, TLS, construir la petición— lo hace `requests` en una línea. Tu única tarea es leer la respuesta.
 
 ---
 
@@ -194,7 +194,7 @@ pedir("https://httpbin.org/status/500")                    # 500
 ## ✅ Resumen en 3 frases
 
 - Un cliente de API se reduce a tres bloques: petición, comprobación de estado y procesamiento de datos.
-- `requests` hace por ti todo el trabajo de red (DNS, TCP, TLS) que en la U04 hacías a mano con sockets.
+- `requests` hace por ti todo el trabajo de red (DNS, TCP, TLS) que en la U05 hacías a mano con sockets.
 - El patrón `status_code` → `json()` es la clave para que tu código no reviente ante respuestas de error.
 
 ## 🐛 Vocabulario rápido

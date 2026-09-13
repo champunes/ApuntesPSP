@@ -1,9 +1,9 @@
----
-title: Boletín U09 — Avanzado (Resuelto)
+﻿---
+title: Boletín U10 — Avanzado (Resuelto)
 description: Soluciones de los ejercicios avanzados de Cifrado Moderno
 ---
 
-# 💪 Boletín U09 — Avanzado (Resuelto)
+# 💪 Boletín U10 — Avanzado (Resuelto)
 
 ---
 

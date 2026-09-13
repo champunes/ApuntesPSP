@@ -1,11 +1,11 @@
----
+﻿---
 title: 01 — Cifrado simétrico vs asimétrico
 description: "Una clave o un par: cuándo usar cada uno 🗝️"
 ---
 
 <p><small>Una clave o un par: cuándo usar cada uno 🗝️</small></p>
 
-> 🗺️ **Estás en:** 🧬 **U09 · Cifrado Moderno** → 01 · Cifrado simétrico vs asimétrico
+> 🗺️ **Estás en:** 🧬 **U10 · Cifrado Moderno** → 01 · Cifrado simétrico vs asimétrico
 
 ---
 
@@ -13,7 +13,7 @@ description: "Una clave o un par: cuándo usar cada uno 🗝️"
 
 > El cifrado **simétrico** usa **una sola clave** para cifrar y descifrar; el **asimétrico** usa un **par de claves** (pública + privada). La primera es rapidísima pero hay que compartir la clave; la segunda resuelve el reparto a costa de velocidad.
 
-Recuerda el principio de la U08: *no inventes tu cripto*. Aquí no inventamos nada: usamos los dos grandes bloques del cifrado moderno y aprendemos cuándo toca cada uno.
+Recuerda el principio de la U09: *no inventes tu cripto*. Aquí no inventamos nada: usamos los dos grandes bloques del cifrado moderno y aprendemos cuándo toca cada uno.
 
 ---
 

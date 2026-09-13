@@ -1,11 +1,11 @@
----
+﻿---
 title: "09 — Cierre: consolida lo aprendido"
 description: Sé el lock, laboratorio con carrera y el duelo final de la unidad 🧠
 ---
 
 <p><small>Sé el lock, laboratorio con carrera y el duelo final de la unidad 🧠</small></p>
 
-> 🗺️ **Estás en:** 🔒 **U03 · Sincronización entre Hilos** → 09 · Cierre
+> 🗺️ **Estás en:** 🔒 **U04 · Sincronización entre Hilos** → 09 · Cierre
 
 ---
 
@@ -218,7 +218,7 @@ Usa `multiprocessing.Lock`, `multiprocessing.Semaphore`, etc. Son equivalentes p
 
 *La sincronización ha ganado la batalla contra el caos.*
 
-**PRÓXIMAMENTE EN U04:** *Sockets TCP. Los hilos comparten memoria y ahora saben coordinarse… pero ¿y si los procesos ni siquiera comparten memoria? Tocará hablar por la red.*
+**PRÓXIMAMENTE EN U05:** *Sockets TCP. Los hilos comparten memoria y ahora saben coordinarse… pero ¿y si los procesos ni siquiera comparten memoria? Tocará hablar por la red.*
 
 ---
 
@@ -232,8 +232,8 @@ Usa `multiprocessing.Lock`, `multiprocessing.Semaphore`, etc. Son equivalentes p
 | RA2d | Usa semáforos para acceso controlado | ✅ Punto 4 + ⚡ Laboratorio de tortura |
 | RA2g | Evita condiciones de carrera | ✅ Puntos 1, 2 y 8 + ⚡ Laboratorio con fallo intencionado |
 
-> RA2a, RA2b, RA2e, RA2f y RA2h se cubren en la **U02 · Hilos Fundamentos**.
+> RA2a, RA2b, RA2e, RA2f y RA2h se cubren en la **U03 · Hilos Fundamentos**.
 
 ---
 
-📚 [Volver al índice de la unidad](/ApuntesPSP/03-sincronizacion-entre-hilos) · **Anterior:** [08 · Buenas prácticas](/ApuntesPSP/03-sincronizacion-entre-hilos/08-buenas-practicas) · **Siguiente:** **[U04 · Sockets TCP](/ApuntesPSP/04-sockets-tcp)**
+📚 [Volver al índice de la unidad](/ApuntesPSP/03-sincronizacion-entre-hilos) · **Anterior:** [08 · Buenas prácticas](/ApuntesPSP/03-sincronizacion-entre-hilos/08-buenas-practicas) · **Siguiente:** **[U05 · Sockets TCP](/ApuntesPSP/04-sockets-tcp)**

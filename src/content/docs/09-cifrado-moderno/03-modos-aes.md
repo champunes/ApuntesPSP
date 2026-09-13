@@ -1,11 +1,11 @@
----
+﻿---
 title: 03 — Modos de AES
 description: "ECB, CBC y GCM: cómo se aplica el bloque, IV y padding 🧱"
 ---
 
 <p><small>ECB, CBC y GCM: cómo se aplica el bloque, IV y padding 🧱</small></p>
 
-> 🗺️ **Estás en:** 🧬 **U09 · Cifrado Moderno** → 03 · Modos de AES
+> 🗺️ **Estás en:** 🧬 **U10 · Cifrado Moderno** → 03 · Modos de AES
 
 ---
 

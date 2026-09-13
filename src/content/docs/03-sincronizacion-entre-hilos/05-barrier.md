@@ -1,11 +1,11 @@
----
+﻿---
 title: 05 — Barrier
 description: Ningún hilo avanza hasta que llegan todos 🏁
 ---
 
 <p><small>Ningún hilo avanza hasta que llegan todos 🏁</small></p>
 
-> 🗺️ **Estás en:** 🔒 **U03 · Sincronización entre Hilos** → 05 · Barrier
+> 🗺️ **Estás en:** 🔒 **U04 · Sincronización entre Hilos** → 05 · Barrier
 
 ---
 

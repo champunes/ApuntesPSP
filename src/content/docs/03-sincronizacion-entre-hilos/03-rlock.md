@@ -1,11 +1,11 @@
----
+﻿---
 title: 03 — RLock
 description: Cuando el mismo hilo quiere entrar dos veces 🔁
 ---
 
 <p><small>Cuando el mismo hilo quiere entrar dos veces 🔁</small></p>
 
-> 🗺️ **Estás en:** 🔒 **U03 · Sincronización entre Hilos** → 03 · RLock
+> 🗺️ **Estás en:** 🔒 **U04 · Sincronización entre Hilos** → 03 · RLock
 
 ---
 

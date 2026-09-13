@@ -1,9 +1,9 @@
----
-title: Boletín U11 — Inicial (Resuelto)
+﻿---
+title: Boletín U12 — Inicial (Resuelto)
 description: Soluciones de los ejercicios básicos de asyncio y Disponibilidad
 ---
 
-# ✅ Boletín U11 — Inicial (Resuelto)
+# ✅ Boletín U12 — Inicial (Resuelto)
 
 ---
 

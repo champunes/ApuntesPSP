@@ -1,11 +1,11 @@
----
+﻿---
 title: 06 — Backoff
 description: Reintentos con espera exponencial (1, 2, 4, 8…) 📈
 ---
 
 <p><small>Reintentos con espera exponencial (1, 2, 4, 8…) 📈</small></p>
 
-> 🗺️ **Estás en:** ⏱️ **U11 · asyncio y Disponibilidad** → 06 · Backoff
+> 🗺️ **Estás en:** ⏱️ **U12 · asyncio y Disponibilidad** → 06 · Backoff
 
 ---
 

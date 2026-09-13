@@ -1,11 +1,11 @@
----
+﻿---
 title: "09 — Cierre: consolida lo aprendido"
 description: Sé el proceso, laboratorio con subprocess y el ring final de la unidad 🧠
 ---
 
 <p><small>Sé el proceso, laboratorio con subprocess y el ring final de la unidad 🧠</small></p>
 
-> 🗺️ **Estás en:** 🚀 **U01 · Procesos y Subprocess** → 09 · Cierre
+> 🗺️ **Estás en:** 🚀 **U02 · Procesos y Subprocess** → 09 · Cierre
 
 ---
 
@@ -47,9 +47,9 @@ Has terminado la teoría: la burbuja de memoria y el PID, los cinco estados, par
 
 **Hilo:** — Vale, vale. Tú para aislamiento y paralelismo real; yo para tareas ligeras que comparten memoria. ¿Empate?
 
-**Proceso:** — *sonríe* Empate... hasta la U02.
+**Proceso:** — *sonríe* Empate... hasta la U03.
 
-> **Moraleja**: el proceso aísla y paraleliza de verdad; el hilo es ligero y comparte memoria. Los hilos son el plato principal de la [U02 · Hilos Fundamentos](/ApuntesPSP/02-hilos-fundamentos).
+> **Moraleja**: el proceso aísla y paraleliza de verdad; el hilo es ligero y comparte memoria. Los hilos son el plato principal de la [U03 · Hilos Fundamentos](/ApuntesPSP/02-hilos-fundamentos).
 
 ---
 
@@ -216,7 +216,7 @@ Sí, cualquier ejecutable. Pero el **PATH** debe incluirlo o debes dar la ruta c
 
 *Los procesos se comunican sin compartir memoria. Cada uno en su burbuja.*
 
-**PRÓXIMAMENTE EN U02:** *Los procesos son pesados: cada uno su memoria, su burbuja, su PID. Pero ¿y si quieres que varias tareas compartan memoria y se turnen la CPU? Necesitas algo más ligero: los hilos.*
+**PRÓXIMAMENTE EN U03:** *Los procesos son pesados: cada uno su memoria, su burbuja, su PID. Pero ¿y si quieres que varias tareas compartan memoria y se turnen la CPU? Necesitas algo más ligero: los hilos.*
 
 ---
 
@@ -229,12 +229,12 @@ Sí, cualquier ejecutable. Pero el **PATH** debe incluirlo o debes dar la ruta c
 | a) | Reconoce las características de los procesos | ✅ Burbuja de memoria y PID (punto 1) + ⭐ Sé el proceso |
 | b) | Distingue entre computación paralela y distribuida | ✅ Punto 3 + 🔥 Fireside (punto 9) |
 | c) | Conoce los estados de un proceso | ✅ Punto 2 + ⭐ Sé el proceso |
-| d) | Identifica las diferencias clave entre proceso e hilo | → U02 (🔥 Fireside lo anticipa) |
+| d) | Identifica las diferencias clave entre proceso e hilo | → U03 (🔥 Fireside lo anticipa) |
 | e) | Crea programas con procesos (subprocess) | ✅ Puntos 4-5-8 + ⚡ Laboratorio de tortura |
 | f) | Establece comunicación entre procesos | ✅ Punto 6 + ⚡ Laboratorio de tortura |
 
-> RA1d (proceso vs hilo) se cubre en la **U02 · Hilos Fundamentos**. RA1g (análisis de ventajas de procesos frente a hilos) también en **U02**. RA1h (documentación) es transversal a todo el curso.
+> RA1d (proceso vs hilo) se cubre en la **U03 · Hilos Fundamentos**. RA1g (análisis de ventajas de procesos frente a hilos) también en **U03**. RA1h (documentación) es transversal a todo el curso.
 
 ---
 
-📚 [Volver al índice de la unidad](/ApuntesPSP/01-procesos-y-subprocess) · **Anterior:** [08 · Procesos en la práctica](/ApuntesPSP/01-procesos-y-subprocess/08-procesos-en-la-practica) · **Siguiente:** **[U02 · Hilos Fundamentos](/ApuntesPSP/02-hilos-fundamentos)**
+📚 [Volver al índice de la unidad](/ApuntesPSP/01-procesos-y-subprocess) · **Anterior:** [08 · Procesos en la práctica](/ApuntesPSP/01-procesos-y-subprocess/08-procesos-en-la-practica) · **Siguiente:** **[U03 · Hilos Fundamentos](/ApuntesPSP/02-hilos-fundamentos)**

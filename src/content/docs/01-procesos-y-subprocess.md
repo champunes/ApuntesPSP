@@ -1,5 +1,5 @@
 ﻿---
-title: U01 — Procesos y Subprocess
+title: U02 — Procesos y Subprocess
 description: "Los programas en marcha: procesos y subprocess 🚀"
 nav_order: 01
 ---
@@ -10,7 +10,7 @@ nav_order: 01
 
 Un programa en el disco duro es un **muerto viviente**: no ocupa memoria, no consume CPU, no hace nada. Un **proceso** es ese mismo programa **vivo**, ejecutándose, ocupando memoria y consumiendo CPU. En esta primera unidad aprenderás a crear procesos con el módulo `subprocess`, a conocer sus estados, a diferenciar computación paralela de distribuida y a comunicar procesos entre sí con pipes y `communicate()`.
 
-Todo el módulo PSP cuelga de esta unidad: los hilos de la [U02](/ApuntesPSP/02-hilos-fundamentos) son procesos ligeros, y los servidores y las APIs de las unidades siguientes serán procesos o hilos ejecutándose de fondo. Si no entiendes bien qué es un proceso, el resto del viaje se hace cuesta arriba. Empieza por aquí con calma.
+Todo el módulo PSP cuelga de esta unidad: los hilos de la [U03](/ApuntesPSP/02-hilos-fundamentos) son procesos ligeros, y los servidores y las APIs de las unidades siguientes serán procesos o hilos ejecutándose de fondo. Si no entiendes bien qué es un proceso, el resto del viaje se hace cuesta arriba. Empieza por aquí con calma.
 
 Esta unidad se lee como un **libro de 9 capítulos**: los 8 primeros son teoría en progresión y el 9º aterriza todo en la práctica.
 
@@ -71,11 +71,11 @@ Al terminar, serás capaz de:
 | a) | Reconoce las características de los procesos | ✅ Punto 1 |
 | b) | Distingue entre computación paralela y distribuida | ✅ Punto 3 |
 | c) | Conoce los estados de un proceso | ✅ Punto 2 |
-| d) | Identifica las diferencias clave entre proceso e hilo | → U02 |
+| d) | Identifica las diferencias clave entre proceso e hilo | → U03 |
 | e) | Crea programas con procesos (subprocess) | ✅ Puntos 4 y 5 + ⚡ Laboratorio (punto 9) |
 | f) | Establece comunicación entre procesos | ✅ Punto 6 |
 
-> RA1d (proceso vs hilo) se cubre en la **U02 · Hilos Fundamentos**. RA1g (análisis de ventajas de procesos frente a hilos) también en **U02**. RA1h (documentación) es transversal a todo el curso.
+> RA1d (proceso vs hilo) se cubre en la **U03 · Hilos Fundamentos**. RA1g (análisis de ventajas de procesos frente a hilos) también en **U03**. RA1h (documentación) es transversal a todo el curso.
 
 ---
 
@@ -86,4 +86,4 @@ Al terminar, serás capaz de:
 ¿Ya sabes qué es un proceso y has jugado con la terminal? Puedes saltar a los [puntos 4](/ApuntesPSP/01-procesos-y-subprocess/04-subprocess-run) y [5](/ApuntesPSP/01-procesos-y-subprocess/05-subprocess-popen), que son el corazón práctico de la unidad, y hacer el resto a ritmo ligero. Pero si dudas de qué diferencia hay entre `run()` y `Popen()`, vuelve al [punto 5](/ApuntesPSP/01-procesos-y-subprocess/05-subprocess-popen).
 
 **📍 Primer punto:** [01 · Qué es un proceso](/ApuntesPSP/01-procesos-y-subprocess/01-que-es-un-proceso)  
-**⏭️ Al acabar la unidad, continúa en [U02 · Hilos Fundamentos](/ApuntesPSP/02-hilos-fundamentos).**
+**⏭️ Al acabar la unidad, continúa en [U03 · Hilos Fundamentos](/ApuntesPSP/02-hilos-fundamentos).**

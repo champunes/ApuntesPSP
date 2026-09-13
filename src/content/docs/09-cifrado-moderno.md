@@ -1,5 +1,5 @@
 ﻿---
-title: U09 — Cifrado Moderno
+title: U10 — Cifrado Moderno
 description: AES, RSA y firmas digitales para proteger el mensaje 🧬
 nav_order: 09
 ---
@@ -8,9 +8,9 @@ nav_order: 09
 
 ---
 
-En la U08 aprendiste a hashear: a convertir una contraseña en una huella digital irrepetible. Pero el hash no se puede deshacer: es unidireccional. ¿Y si quieres enviar un mensaje secreto que el destinatario sí pueda leer? Ahí entra el **cifrado moderno**: con **AES** (rápido y simétrico) y **RSA** (lento y elegante) podrás cifrar, descifrar, firmar y verificar mensajes, tal y como lo hacen HTTPS, WhatsApp o Signal cada segundo.
+En la U09 aprendiste a hashear: a convertir una contraseña en una huella digital irrepetible. Pero el hash no se puede deshacer: es unidireccional. ¿Y si quieres enviar un mensaje secreto que el destinatario sí pueda leer? Ahí entra el **cifrado moderno**: con **AES** (rápido y simétrico) y **RSA** (lento y elegante) podrás cifrar, descifrar, firmar y verificar mensajes, tal y como lo hacen HTTPS, WhatsApp o Signal cada segundo.
 
-Aprenderás también el **cifrado híbrido** (lo mejor de ambos mundos: RSA reparte la clave, AES cifra el tráfico), las **firmas digitales** para demostrar quién creó un mensaje y el **control de acceso RBAC** para decidir quién puede hacer qué. Es la otra mitad de la seguridad que empezaste en la [U08 · Hash y Cifrado Clásico](/ApuntesPSP/08-hash-y-cifrado-clasico).
+Aprenderás también el **cifrado híbrido** (lo mejor de ambos mundos: RSA reparte la clave, AES cifra el tráfico), las **firmas digitales** para demostrar quién creó un mensaje y el **control de acceso RBAC** para decidir quién puede hacer qué. Es la otra mitad de la seguridad que empezaste en la [U09 · Hash y Cifrado Clásico](/ApuntesPSP/08-hash-y-cifrado-clasico).
 
 Esta unidad se lee como un **libro de 9 capítulos**: los 8 primeros son teoría en progresión y el 9º aterriza todo en la práctica.
 
@@ -70,7 +70,7 @@ Al terminar, serás capaz de:
 |---|---|---|
 | a) | Principios básicos de seguridad | ✅ Puntos 1 y 7 (mínimo privilegio) |
 | b) | Tipos de cifrado (simétrico, asimétrico) | ✅ Puntos 1, 2 y 4 |
-| c) | Implementa funciones hash (MD5, SHA) | ✅ Cubierto en la U08 |
+| c) | Implementa funciones hash (MD5, SHA) | ✅ Cubierto en la U09 |
 | d) | AES | ✅ Puntos 2-3 + ⚡ Laboratorio (punto 9) |
 | e) | RSA | ✅ Puntos 4-5 + ⚡ Laboratorio (punto 9) |
 | f) | Firmas digitales | ✅ Punto 5 + ⚡ Laboratorio (punto 9) |
@@ -81,9 +81,9 @@ Al terminar, serás capaz de:
 
 ## 🚪 ¿Por dónde empiezo?
 
-¿Vienes de la U08 y dominas el hash y el cifrado César? Perfecto, este tema es la evolución natural: ya sabes verificar integridad con SHA-256 y distinguir cuándo toca hash y cuándo cifrar. Repasa la [U08 · Hash y Cifrado Clásico](/ApuntesPSP/08-hash-y-cifrado-clasico) para tener fresco el principio de *mínimo privilegio* y el de *no inventes tu cripto*, y arranca en el [punto 1](/ApuntesPSP/09-cifrado-moderno/01-cifrado-simetrico-vs-asimetrico), que parte justo de la pregunta: ¿una clave o dos?
+¿Vienes de la U09 y dominas el hash y el cifrado César? Perfecto, este tema es la evolución natural: ya sabes verificar integridad con SHA-256 y distinguir cuándo toca hash y cuándo cifrar. Repasa la [U09 · Hash y Cifrado Clásico](/ApuntesPSP/08-hash-y-cifrado-clasico) para tener fresco el principio de *mínimo privilegio* y el de *no inventes tu cripto*, y arranca en el [punto 1](/ApuntesPSP/09-cifrado-moderno/01-cifrado-simetrico-vs-asimetrico), que parte justo de la pregunta: ¿una clave o dos?
 
 ¿Ya sabes qué es AES y RSA y solo necesitas las firmas o el híbrido? Puedes saltar a los [puntos 5](/ApuntesPSP/09-cifrado-moderno/05-firmas-digitales) y [6](/ApuntesPSP/09-cifrado-moderno/06-cifrado-hibrido). Pero si vienes de cero en criptografía moderna, no te saltes los puntos 1 a 4: entender la diferencia simétrico/asimétrico y cómo se cifra con cada uno es la base de todo lo demás.
 
 **📍 Primer punto:** [01 · Cifrado simétrico vs asimétrico](/ApuntesPSP/09-cifrado-moderno/01-cifrado-simetrico-vs-asimetrico)  
-**⏭️ Al acabar la unidad, continúa en [U10 · Servidores Concurrentes](/ApuntesPSP/10-servidores-concurrentes).**
+**⏭️ Al acabar la unidad, continúa en [U11 · Servidores Concurrentes](/ApuntesPSP/10-servidores-concurrentes).**

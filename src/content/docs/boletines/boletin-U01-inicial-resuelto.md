@@ -1,9 +1,9 @@
----
-title: Boletín U01 — Inicial (Resuelto)
+﻿---
+title: Boletín U02 — Inicial (Resuelto)
 description: Soluciones de los ejercicios básicos de Procesos y Subprocess
 ---
 
-# ✅ Boletín U01 — Inicial (Resuelto)
+# ✅ Boletín U02 — Inicial (Resuelto)
 
 ---
 

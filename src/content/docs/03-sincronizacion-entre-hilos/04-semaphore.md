@@ -1,11 +1,11 @@
----
+﻿---
 title: 04 — Semaphore
 description: El aforo máximo de la sección crítica 🎟️
 ---
 
 <p><small>El aforo máximo de la sección crítica 🎟️</small></p>
 
-> 🗺️ **Estás en:** 🔒 **U03 · Sincronización entre Hilos** → 04 · Semaphore
+> 🗺️ **Estás en:** 🔒 **U04 · Sincronización entre Hilos** → 04 · Semaphore
 
 ---
 

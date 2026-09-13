@@ -1,11 +1,11 @@
----
+﻿---
 title: 04 — Hash de contraseñas
 description: Guarda la huella, nunca la original 🔐
 ---
 
 <p><small>Guarda la huella, nunca la original 🔐</small></p>
 
-> 🗺️ **Estás en:** 🔐 **U08 · Hash y Cifrado Clásico** → 04 · Hash de contraseñas
+> 🗺️ **Estás en:** 🔐 **U09 · Hash y Cifrado Clásico** → 04 · Hash de contraseñas
 
 ---
 

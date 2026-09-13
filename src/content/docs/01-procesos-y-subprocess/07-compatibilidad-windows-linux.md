@@ -1,11 +1,11 @@
----
+﻿---
 title: 07 — Compatibilidad Windows / Linux
 description: "Un mismo código, dos mundos: la tabla de trucos 🪟🐧"
 ---
 
 <p><small>Un mismo código, dos mundos: la tabla de trucos 🪟🐧</small></p>
 
-> 🗺️ **Estás en:** 🚀 **U01 · Procesos y Subprocess** → 07 · Compatibilidad Windows / Linux
+> 🗺️ **Estás en:** 🚀 **U02 · Procesos y Subprocess** → 07 · Compatibilidad Windows / Linux
 
 ---
 

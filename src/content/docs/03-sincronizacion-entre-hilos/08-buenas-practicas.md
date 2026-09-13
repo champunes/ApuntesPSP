@@ -1,11 +1,11 @@
----
+﻿---
 title: 08 — Buenas prácticas
 description: Deadlocks, orden de locks, el ring final y a practicar 🛡️
 ---
 
 <p><small>Deadlocks, orden de locks, el ring final y a practicar 🛡️</small></p>
 
-> 🗺️ **Estás en:** 🔒 **U03 · Sincronización entre Hilos** → 08 · Buenas prácticas
+> 🗺️ **Estás en:** 🔒 **U04 · Sincronización entre Hilos** → 08 · Buenas prácticas
 
 ---
 

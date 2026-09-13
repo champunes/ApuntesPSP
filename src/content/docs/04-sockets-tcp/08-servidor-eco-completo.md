@@ -1,11 +1,11 @@
----
+﻿---
 title: 08 — Servidor eco completo
 description: "Servidor + cliente eco, mano a mano y ejercicios resueltos 🛠️"
 ---
 
 <p><small>Servidor + cliente eco, mano a mano y ejercicios resueltos 🛠️</small></p>
 
-> 🗺️ **Estás en:** 🔌 **U04 · Sockets TCP** → 08 · Servidor eco completo
+> 🗺️ **Estás en:** 🔌 **U05 · Sockets TCP** → 08 · Servidor eco completo
 
 ---
 

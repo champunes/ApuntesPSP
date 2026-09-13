@@ -1,9 +1,9 @@
----
-title: Boletín U11 — Inicial
+﻿---
+title: Boletín U12 — Inicial
 description: Ejercicios básicos de asyncio y Disponibilidad
 ---
 
-# 📝 Boletín U11 — Inicial
+# 📝 Boletín U12 — Inicial
 
 > Ejercicios básicos para afianzar los conceptos de asyncio: corrutinas, el event loop, gather, las tareas en segundo plano y los primeros mecanismos de disponibilidad.
 

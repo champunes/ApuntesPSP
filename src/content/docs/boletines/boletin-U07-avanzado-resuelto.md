@@ -1,9 +1,9 @@
----
-title: Boletín U07 — Avanzado (Resuelto)
+﻿---
+title: Boletín U08 — Avanzado (Resuelto)
 description: Soluciones de los ejercicios avanzados de APIs Comerciales
 ---
 
-# 💪 Boletín U07 — Avanzado (Resuelto)
+# 💪 Boletín U08 — Avanzado (Resuelto)
 
 ---
 
@@ -264,7 +264,7 @@ while True:
     time.sleep(30)  # comprobamos cada 30 segundos
 ```
 
-El contador `fallos` se incrementa con cada error y se **reinicia** al obtener un 200. Cuando llega a 3, salta la alerta. Este es el esqueleto de los monitores de disponibilidad que verás en la U11 con asyncio.
+El contador `fallos` se incrementa con cada error y se **reinicia** al obtener un 200. Cuando llega a 3, salta la alerta. Este es el esqueleto de los monitores de disponibilidad que verás en la U12 con asyncio.
 
 ## 12. 🏗️ Agregador de APIs
 

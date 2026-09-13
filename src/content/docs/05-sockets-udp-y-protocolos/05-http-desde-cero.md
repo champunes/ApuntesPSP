@@ -1,11 +1,11 @@
----
+﻿---
 title: 05 — HTTP desde cero
 description: "El protocolo que mueve la web, hablado a pelo con un socket 🌐"
 ---
 
 <p><small>El protocolo que mueve la web, hablado a pelo con un socket 🌐</small></p>
 
-> 🗺️ **Estás en:** 📡 **U05 · Sockets UDP y Protocolos** → 05 · HTTP desde cero
+> 🗺️ **Estás en:** 📡 **U06 · Sockets UDP y Protocolos** → 05 · HTTP desde cero
 
 ---
 
@@ -13,7 +13,7 @@ description: "El protocolo que mueve la web, hablado a pelo con un socket 🌐"
 
 > HTTP es un protocolo de **texto** sobre TCP: un cliente envía una petición escrita y el servidor responde con otra. Con un socket y un par de `sendall()`/`recv()` puedes hablarle a cualquier web del mundo.
 
-Esta unidad es de UDP, pero HTTP merece su capítulo aquí: es el protocolo de aplicación que ya rozaste en la U04 (el servidor web del TEMA 02) y que en la [U06](/ApuntesPSP/06-apis-rest-y-http) automatizarás con `requests`. Ahora lo vas a hablar **a pelo**: a mano, carácter por carácter.
+Esta unidad es de UDP, pero HTTP merece su capítulo aquí: es el protocolo de aplicación que ya rozaste en la U05 (el servidor web del TEMA 02) y que en la [U07](/ApuntesPSP/06-apis-rest-y-http) automatizarás con `requests`. Ahora lo vas a hablar **a pelo**: a mano, carácter por carácter.
 
 ---
 
@@ -118,7 +118,7 @@ Dos detalles importantes:
 - **`Connection: close`** → HTTP/1.1 mantiene la conexión abierta por defecto (*keep-alive*: se reutiliza para varias peticiones). Pedir `Connection: close` fuerza al servidor a cerrarla al terminar, y así el bucle del paso 6 sabe cuándo parar (`recv()` devuelve `b""`).
 - **Los bytes se acumulan** con `respuesta += datos`: la respuesta de una web no llega de una pieza, sino en trozos. El bucle los junta todos.
 
-Este ejercicio lo convertirás en una herramienta de verdad en la [U06](/ApuntesPSP/06-apis-rest-y-http): parsear el JSON, los códigos de estado y las cabeceras de forma sistemática. De momento, ya has hablado HTTP como un navegador de verdad.
+Este ejercicio lo convertirás en una herramienta de verdad en la [U07](/ApuntesPSP/06-apis-rest-y-http): parsear el JSON, los códigos de estado y las cabeceras de forma sistemática. De momento, ya has hablado HTTP como un navegador de verdad.
 
 ---
 
@@ -143,7 +143,7 @@ Este ejercicio lo convertirás en una herramienta de verdad en la [U06](/Apuntes
 
 - HTTP es un protocolo de texto sobre TCP: petición del cliente, respuesta del servidor, ambas con cabeceras y una línea en blanco final.
 - La petición empieza con verbo + recurso + versión (`GET /ruta HTTP/1.1`); la respuesta con código de estado (`200 OK`).
-- Con un socket TCP y `sendall()`/`recv()` puedes hablarle a cualquier web sin librerías: ese es el primer paso hacia las APIs de la U06.
+- Con un socket TCP y `sendall()`/`recv()` puedes hablarle a cualquier web sin librerías: ese es el primer paso hacia las APIs de la U07.
 
 ## 🐛 Vocabulario rápido
 

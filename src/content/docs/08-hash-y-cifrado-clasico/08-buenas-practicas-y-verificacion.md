@@ -1,11 +1,11 @@
----
+﻿---
 title: 08 — Buenas prácticas y verificación
 description: Checksums, cuándo hash y cuándo cifrar, y a practicar ✏️
 ---
 
 <p><small>Checksums, cuándo hash y cuándo cifrar, y a practicar ✏️</small></p>
 
-> 🗺️ **Estás en:** 🔐 **U08 · Hash y Cifrado Clásico** → 08 · Buenas prácticas y verificación
+> 🗺️ **Estás en:** 🔐 **U09 · Hash y Cifrado Clásico** → 08 · Buenas prácticas y verificación
 
 ---
 
@@ -56,7 +56,7 @@ Recuerda el [punto 7](/ApuntesPSP/08-hash-y-cifrado-clasico/07-hash-vs-cifrado):
 | Verificar que un archivo no cambió | 🧂 **Hash** | Unidireccional, un bit cambia todo el hash |
 | Guardar contraseñas | 🧂 **Hash** (con sal) | No quieres recuperarlas nunca, solo comparar |
 | Enviar un mensaje que solo el destinatario lea | 🔑 **Cifrado** | El destinatario debe poder descifrarlo |
-| Confirmar la identidad del autor de un mensaje | 🧂 Hash + 🔑 **firma digital** (U09) | Combina ambos: hash del mensaje cifrado con clave privada |
+| Confirmar la identidad del autor de un mensaje | 🧂 Hash + 🔑 **firma digital** (U10) | Combina ambos: hash del mensaje cifrado con clave privada |
 
 > ⚠️ **Error típico de novato:** cifrar la contraseña en vez de hashearla. Si roban la base de datos y la clave de cifrado, recuperan todo. El hash, al ser unidireccional, ni con la clave se deshace. Solo el hash (con sal) es correcto para contraseñas.
 
@@ -194,7 +194,7 @@ Sustituye `mi_script.py` por un archivo .py real de tu proyecto. Abrir en modo b
 | Verificar integridad | Confirmar que un dato no fue modificado |
 | Regla de oro | Hash → integridad; cifrado → confidencialidad |
 | Aprieta el lápiz | Los ejercicios prácticos de la unidad |
-| Firma digital | Hash + cifrado con clave privada (U09) |
+| Firma digital | Hash + cifrado con clave privada (U10) |
 
 ---
 

@@ -1,5 +1,5 @@
 ﻿---
-title: U06 — APIs REST y HTTP
+title: U07 — APIs REST y HTTP
 description: "Hablar con la web: REST, métodos HTTP y JSON 🌐"
 nav_order: 06
 ---
@@ -8,9 +8,9 @@ nav_order: 06
 
 ---
 
-*En la U04 y la U05 montaste sockets y hablaste con procesos en la misma máquina. Ahora toca hablar con el mundo: la web entera se apoya en HTTP, y las APIs REST son la manera moderna de pedirle datos a cualquier servicio.*
+*En la U05 y la U06 montaste sockets y hablaste con procesos en la misma máquina. Ahora toca hablar con el mundo: la web entera se apoya en HTTP, y las APIs REST son la manera moderna de pedirle datos a cualquier servicio.*
 
-Cuando tu aplicación quiere saber el tiempo, traducir un texto o buscar repositorios en GitHub, no monta un socket a mano: llama a una **API**. Esta unidad te enseña el idioma de esa conversación: qué es una API, cómo funciona HTTP, qué métodos existen (GET, POST, PUT, DELETE), qué significan los códigos de estado, cómo se lee **JSON** y cómo usar la librería `requests` de Python para hacer peticiones reales contra servicios públicos. El siguiente tema, [U07 · APIs Comerciales](/ApuntesPSP/07-apis-comerciales), tomará el relevo con APIs de pago como OpenWeatherMap y OpenAI.
+Cuando tu aplicación quiere saber el tiempo, traducir un texto o buscar repositorios en GitHub, no monta un socket a mano: llama a una **API**. Esta unidad te enseña el idioma de esa conversación: qué es una API, cómo funciona HTTP, qué métodos existen (GET, POST, PUT, DELETE), qué significan los códigos de estado, cómo se lee **JSON** y cómo usar la librería `requests` de Python para hacer peticiones reales contra servicios públicos. El siguiente tema, [U08 · APIs Comerciales](/ApuntesPSP/07-apis-comerciales), tomará el relevo con APIs de pago como OpenWeatherMap y OpenAI.
 
 Esta unidad se lee como un **libro de 9 capítulos**: los 8 primeros son teoría en progresión y el 9º aterriza todo en la práctica.
 
@@ -72,15 +72,15 @@ Al terminar, serás capaz de:
 | a) | Utiliza APIs REST para obtener datos externos | ✅ Puntos 3, 6-8 + ⚡ Laboratorio (punto 9) |
 | b) | Gestiona peticiones HTTP y procesa respuestas JSON | ✅ Puntos 1-5 y 7 + ⚡ Laboratorio (punto 9) |
 
-> RA4c (servidores concurrentes) y RA4d (ThreadPool) se cubren en la **U10 · Servidores Concurrentes**. RA4e-g (asyncio, disponibilidad, comparativa) se cubren en la **U11 · asyncio y disponibilidad**.
+> RA4c (servidores concurrentes) y RA4d (ThreadPool) se cubren en la **U11 · Servidores Concurrentes**. RA4e-g (asyncio, disponibilidad, comparativa) se cubren en la **U12 · asyncio y disponibilidad**.
 
 ---
 
 ## 🚪 ¿Por dónde empiezo?
 
-¿Vienes de la U05 y dominas los sockets UDP y TCP? Perfecto, ese es el trampolín ideal: repasa la [U05 · Sockets UDP y protocolos](/ApuntesPSP/05-sockets-udp-y-protocolos) para tener fresco qué es un protocolo y cómo se abre una conexión, y arranca en el [punto 1](/ApuntesPSP/06-apis-rest-y-http/01-web-y-http), que parte justo de ahí: del intercambio de mensajes entre dos máquinas a la conversación estructurada de HTTP.
+¿Vienes de la U06 y dominas los sockets UDP y TCP? Perfecto, ese es el trampolín ideal: repasa la [U06 · Sockets UDP y protocolos](/ApuntesPSP/05-sockets-udp-y-protocolos) para tener fresco qué es un protocolo y cómo se abre una conexión, y arranca en el [punto 1](/ApuntesPSP/06-apis-rest-y-http/01-web-y-http), que parte justo de ahí: del intercambio de mensajes entre dos máquinas a la conversación estructurada de HTTP.
 
 ¿Ya sabes qué es una API y solo necesitas `requests` o el JSON? Ve directo al [punto 5](/ApuntesPSP/06-apis-rest-y-http/05-json) y al [punto 6](/ApuntesPSP/06-apis-rest-y-http/06-requests-get). Si vienes de cero en la web, no te saltes los puntos 1 a 4: URL, métodos y códigos de estado son el idioma que vas a hablar toda la unidad.
 
 **📍 Primer punto:** [01 · Web y HTTP](/ApuntesPSP/06-apis-rest-y-http/01-web-y-http)  
-**⏭️ Al acabar la unidad, continúa en [U07 · APIs Comerciales](/ApuntesPSP/07-apis-comerciales).**
+**⏭️ Al acabar la unidad, continúa en [U08 · APIs Comerciales](/ApuntesPSP/07-apis-comerciales).**

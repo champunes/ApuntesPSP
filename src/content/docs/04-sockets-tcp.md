@@ -1,5 +1,5 @@
 ﻿---
-title: U04 — Sockets TCP
+title: U05 — Sockets TCP
 description: Cliente y servidor que hablan por el puerto 🔌
 nav_order: 04
 ---
@@ -10,7 +10,7 @@ nav_order: 04
 
 > "Un socket TCP es como una llamada telefónica: marcas, esperas a que contesten, habláis y colgáis."
 
-En la U03 sincronizaste hilos para que no se pisen entre sí dentro de un mismo programa. Ahora toca lo contrario: hacer que **procesos distintos, incluso en máquinas distintas, hablen entre ellos**. La herramienta es el **socket TCP**, el canal fiable que garantiza que cada byte que envías llegue entero y en orden. Es el mismo mecanismo que mueve la web, el correo y casi todo lo que ves en pantalla.
+En la U04 sincronizaste hilos para que no se pisen entre sí dentro de un mismo programa. Ahora toca lo contrario: hacer que **procesos distintos, incluso en máquinas distintas, hablen entre ellos**. La herramienta es el **socket TCP**, el canal fiable que garantiza que cada byte que envías llegue entero y en orden. Es el mismo mecanismo que mueve la web, el correo y casi todo lo que ves en pantalla.
 
 En esta unidad construirás tu primera conversación entre programas: un **cliente** que llama y un **servidor** que contesta. Aprenderás el three-way handshake que prepara la llamada, los errores típicos cuando la red se rompe, y el truco de `SO_REUSEADDR` para que tu servidor aguante reinicios sin quejarse. Al final, montarás un **servidor eco** completo y tendrás un método infalible para diagnosticar cualquier problema de red.
 
@@ -77,15 +77,15 @@ Al terminar, serás capaz de:
 | f) | Gestiona errores de red | ✅ Punto 5 + ⚡ Laboratorio (punto 9) |
 | g) | Configura opciones de socket (SO_REUSEADDR, non-blocking) | ✅ Puntos 5 y 6 |
 
-> RA3b (UDP), RA3e (UDP servidor/cliente) y RA3h (protocolos HTTP/NTP) se cubren en la **U05 · Sockets UDP y Protocolos**.
+> RA3b (UDP), RA3e (UDP servidor/cliente) y RA3h (protocolos HTTP/NTP) se cubren en la **U06 · Sockets UDP y Protocolos**.
 
 ---
 
 ## 🚪 ¿Por dónde empiezo?
 
-¿Vienes de la U03 y dominas hilos y sincronización? Perfecto, ese es el trampolín ideal: repasa la [U03 · Sincronización entre hilos](/ApuntesPSP/03-sincronizacion-entre-hilos) para tener frescos los locks y semáforos (te harán falta en el [TEMA 10](/ApuntesPSP/10-servidores-concurrentes)), y arranca en el [punto 1](/ApuntesPSP/04-sockets-tcp/01-que-es-un-socket), que parte de cero: qué es un socket, la IP y el puerto.
+¿Vienes de la U04 y dominas hilos y sincronización? Perfecto, ese es el trampolín ideal: repasa la [U04 · Sincronización entre hilos](/ApuntesPSP/03-sincronizacion-entre-hilos) para tener frescos los locks y semáforos (te harán falta en el [TEMA 10](/ApuntesPSP/10-servidores-concurrentes)), y arranca en el [punto 1](/ApuntesPSP/04-sockets-tcp/01-que-es-un-socket), que parte de cero: qué es un socket, la IP y el puerto.
 
 ¿Ya sabes qué es un socket y solo necesitas el servidor, los errores o el truco de `SO_REUSEADDR`? Ve directo al [punto 3](/ApuntesPSP/04-sockets-tcp/03-servidor-tcp), al [5](/ApuntesPSP/04-sockets-tcp/05-errores-y-manejo) o al [6](/ApuntesPSP/04-sockets-tcp/06-so-reuseaddr). Si vienes de cero en redes, no te saltes los puntos 1 a 4: la IP, el puerto y el handshake son la base de todo lo demás.
 
 **📍 Primer punto:** [01 · Qué es un socket](/ApuntesPSP/04-sockets-tcp/01-que-es-un-socket)  
-**⏭️ Al acabar la unidad, continúa en [U05 · Sockets UDP y Protocolos](/ApuntesPSP/05-sockets-udp-y-protocolos).**
+**⏭️ Al acabar la unidad, continúa en [U06 · Sockets UDP y Protocolos](/ApuntesPSP/05-sockets-udp-y-protocolos).**

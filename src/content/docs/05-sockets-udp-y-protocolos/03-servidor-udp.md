@@ -1,11 +1,11 @@
----
+﻿---
 title: 03 — Servidor UDP
 description: "Bind, recibir datagramas y saber de quién vienen 📥"
 ---
 
 <p><small>Bind, recibir datagramas y saber de quién vienen 📥</small></p>
 
-> 🗺️ **Estás en:** 📡 **U05 · Sockets UDP y Protocolos** → 03 · Servidor UDP
+> 🗺️ **Estás en:** 📡 **U06 · Sockets UDP y Protocolos** → 03 · Servidor UDP
 
 ---
 
@@ -13,7 +13,7 @@ description: "Bind, recibir datagramas y saber de quién vienen 📥"
 
 > Un servidor UDP se limita a `bind()` en un puerto y a esperar datagramas con `recvfrom()`. **Sin `accept()`, sin `listen()`**: cualquiera que conozca la dirección puede hablarle, y él descubre de quién viene cada mensaje.
 
-El servidor TCP de la U04 pasaba por `listen()` y `accept()`: creaba una conexión dedicada por cada cliente. UDP no tiene conexiones que aceptar: es como estar en un patio y escuchar quién te llama. El servidor **no se entera de quién llegará**, pero cuando recibe un datagrama, `recvfrom()` le dice exactamente de dónde vino.
+El servidor TCP de la U05 pasaba por `listen()` y `accept()`: creaba una conexión dedicada por cada cliente. UDP no tiene conexiones que aceptar: es como estar en un patio y escuchar quién te llama. El servidor **no se entera de quién llegará**, pero cuando recibe un datagrama, `recvfrom()` le dice exactamente de dónde vino.
 
 ---
 
@@ -47,7 +47,7 @@ Repasemos qué hace cada pieza:
 
 ## 🚫 Sin accept(), sin listen(): la diferencia con TCP
 
-| Servidor TCP (U04) | Servidor UDP (aquí) |
+| Servidor TCP (U05) | Servidor UDP (aquí) |
 |---|---|
 | `bind()` | `bind()` |
 | `listen()` | — (no existe) |

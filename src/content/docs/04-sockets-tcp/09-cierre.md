@@ -1,11 +1,11 @@
----
+﻿---
 title: "09 — Cierre: consolida lo aprendido"
 description: "Sé el socket, laboratorio TCP y el cierre de la unidad 🧠"
 ---
 
 <p><small>Sé el socket, laboratorio TCP y el cierre de la unidad 🧠</small></p>
 
-> 🗺️ **Estás en:** 🔌 **U04 · Sockets TCP** → 09 · Cierre
+> 🗺️ **Estás en:** 🔌 **U05 · Sockets TCP** → 09 · Cierre
 
 ---
 
@@ -48,7 +48,7 @@ Has terminado la teoría: socket, cliente, servidor, handshake, errores, `SO_REU
 
 **Servidor:** — Vale, vale. En realidad somos un equipo. Sin servidor no hay servicio, pero sin cliente no hay razón para existir.
 
-> **Moraleja:** servidor y cliente son dos caras de la misma moneda. El protocolo (quién envía qué y cuándo) es el verdadero protagonista. En la [U05](/ApuntesPSP/05-sockets-udp-y-protocolos) conocerás al otro protagonista: el UDP, el avión de papel.
+> **Moraleja:** servidor y cliente son dos caras de la misma moneda. El protocolo (quién envía qué y cuándo) es el verdadero protagonista. En la [U06](/ApuntesPSP/05-sockets-udp-y-protocolos) conocerás al otro protagonista: el UDP, el avión de papel.
 
 ---
 
@@ -217,7 +217,7 @@ TCP los encola. El servidor los recibe en orden. Pero si el cliente envía más 
 
 *Y en una terminal lejana, un `recv()` espera paciente a que el mundo le envíe algo que leer.*
 
-**PRÓXIMAMENTE EN U05:** *Sockets UDP. La carta certificada se convierte en avión de papel: sin handshake, sin confirmación, sin orden. Y con él, HTTP hablado a pelo y el reloj de Internet (NTP).*
+**PRÓXIMAMENTE EN U06:** *Sockets UDP. La carta certificada se convierte en avión de papel: sin handshake, sin confirmación, sin orden. Y con él, HTTP hablado a pelo y el reloj de Internet (NTP).*
 
 ---
 
@@ -233,8 +233,8 @@ TCP los encola. El servidor los recibe en orden. Pero si el cliente envía más 
 | f) | Gestiona errores de red | ✅ Punto 5 + ⚡ Laboratorio con fallo intencionado |
 | g) | Configura opciones de socket (SO_REUSEADDR, non-blocking) | ✅ Puntos 5 y 6 + ⚡ Laboratorio de tortura |
 
-> RA3b (UDP), RA3e (UDP servidor/cliente) y RA3h (protocolos HTTP/NTP) se cubren en la **U05 · Sockets UDP y Protocolos**.
+> RA3b (UDP), RA3e (UDP servidor/cliente) y RA3h (protocolos HTTP/NTP) se cubren en la **U06 · Sockets UDP y Protocolos**.
 
 ---
 
-📚 [Volver al índice de la unidad](/ApuntesPSP/04-sockets-tcp) · **Anterior:** [08 · Servidor eco completo](/ApuntesPSP/04-sockets-tcp/08-servidor-eco-completo) · **Siguiente:** **[U05 · Sockets UDP y Protocolos](/ApuntesPSP/05-sockets-udp-y-protocolos)**
+📚 [Volver al índice de la unidad](/ApuntesPSP/04-sockets-tcp) · **Anterior:** [08 · Servidor eco completo](/ApuntesPSP/04-sockets-tcp/08-servidor-eco-completo) · **Siguiente:** **[U06 · Sockets UDP y Protocolos](/ApuntesPSP/05-sockets-udp-y-protocolos)**

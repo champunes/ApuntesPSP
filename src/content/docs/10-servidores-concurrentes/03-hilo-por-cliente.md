@@ -1,11 +1,11 @@
----
+﻿---
 title: 03 — Hilo por cliente
 description: Cada cliente se atiende en su propio hilo 🔀
 ---
 
 <p><small>Cada cliente se atiende en su propio hilo 🔀</small></p>
 
-> 🗺️ **Estás en:** 🏗️ **U10 · Servidores Concurrentes** → 03 · Hilo por cliente
+> 🗺️ **Estás en:** 🏗️ **U11 · Servidores Concurrentes** → 03 · Hilo por cliente
 
 ---
 
@@ -13,7 +13,7 @@ description: Cada cliente se atiende en su propio hilo 🔀
 
 > En lugar de atender al cliente dentro del bucle, el servidor **lanza un hilo por cada cliente** y vuelve inmediatamente a `accept()`. Cada conexión tiene su propia "ventanilla".
 
-Ya conoces los hilos de la [U02 · Hilos fundamentos](/ApuntesPSP/02-hilos-fundamentos) y la sincronización de la [U03](/ApuntesPSP/03-sincronizacion-entre-hilos). Este punto los pone a trabajar: el patrón **hilo por cliente** (thread per connection) es el salto más directo desde el servidor secuencial.
+Ya conoces los hilos de la [U03 · Hilos fundamentos](/ApuntesPSP/02-hilos-fundamentos) y la sincronización de la [U04](/ApuntesPSP/03-sincronizacion-entre-hilos). Este punto los pone a trabajar: el patrón **hilo por cliente** (thread per connection) es el salto más directo desde el servidor secuencial.
 
 ---
 
@@ -92,7 +92,7 @@ Los 3 clientes son atendidos en paralelo.
 A los ~2s, todos reciben respuesta. 🏁
 ```
 
-El hilo principal **nunca se detiene**: en cuanto lanza un hilo, vuelve a `accept()`. El trabajo pesado (`time.sleep(2)`) vive en los hilos secundarios, que se ejecutan en paralelo gracias al *threading* de la [U02](/ApuntesPSP/02-hilos-fundamentos).
+El hilo principal **nunca se detiene**: en cuanto lanza un hilo, vuelve a `accept()`. El trabajo pesado (`time.sleep(2)`) vive en los hilos secundarios, que se ejecutan en paralelo gracias al *threading* de la [U03](/ApuntesPSP/02-hilos-fundamentos).
 
 ---
 

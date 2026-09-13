@@ -1,11 +1,11 @@
----
+﻿---
 title: 02 — AES
 description: El cifrado simétrico moderno con pycryptodome 🔐
 ---
 
 <p><small>El cifrado simétrico moderno con pycryptodome 🔐</small></p>
 
-> 🗺️ **Estás en:** 🧬 **U09 · Cifrado Moderno** → 02 · AES
+> 🗺️ **Estás en:** 🧬 **U10 · Cifrado Moderno** → 02 · AES
 
 ---
 
@@ -33,7 +33,7 @@ Paquete enviado: [nonce 16B | tag 16B | cifrado ...]
 ```
 
 - El **nonce** (*number used once*) hace que dos cifrados del mismo mensaje con la misma clave den resultados distintos. El receptor lo necesita para descifrar.
-- El **tag** es el código de autenticación: si alguien manipula el cifrado, el tag no coincide y el descifrado falla. Es la integridad (U08) dentro del cifrado.
+- El **tag** es el código de autenticación: si alguien manipula el cifrado, el tag no coincide y el descifrado falla. Es la integridad (U09) dentro del cifrado.
 
 > 🔑 La **clave** no viaja jamás en ese paquete: el receptor ya la tiene (o la recibe por otro canal, como verás en el [cifrado híbrido](/ApuntesPSP/09-cifrado-moderno/06-cifrado-hibrido)).
 

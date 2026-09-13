@@ -1,11 +1,11 @@
----
+﻿---
 title: "09 — Cierre: consolida lo aprendido"
 description: Sé la clave, laboratorio híbrido con firma y el cierre de la unidad 🧠
 ---
 
 <p><small>Sé la clave, laboratorio híbrido con firma y el cierre de la unidad 🧠</small></p>
 
-> 🗺️ **Estás en:** 🧬 **U09 · Cifrado Moderno** → 09 · Cierre
+> 🗺️ **Estás en:** 🧬 **U10 · Cifrado Moderno** → 09 · Cierre
 
 ---
 
@@ -84,7 +84,7 @@ Has terminado la teoría: simétrico vs asimétrico, AES con sus modos, RSA, fir
 
 **CONRAD:** — "Y lo mejor: *'es que el modo EAX no me deja descifrar con ECB'*. ¡Pues claro! El modo de cifrado es **parte de la receta**: si cifras con EAX, descifras con EAX y con el mismo nonce. Mezclar modos es mezclar cerraduras de casas distintas."
 
-**CONRAD:** — "Y no me vengas con *'¿será que pycryptodome está roto?'*. La biblioteca lleva años auditada ([punto 1 de la U08](/ApuntesPSP/08-hash-y-cifrado-clasico/01-principios-de-seguridad): no inventes tu cripto). Si no descifras, revisa la clave, el nonce y el modo. A diagnosticar."
+**CONRAD:** — "Y no me vengas con *'¿será que pycryptodome está roto?'*. La biblioteca lleva años auditada ([punto 1 de la U09](/ApuntesPSP/08-hash-y-cifrado-clasico/01-principios-de-seguridad): no inventes tu cripto). Si no descifras, revisa la clave, el nonce y el modo. A diagnosticar."
 
 ---
 
@@ -201,7 +201,7 @@ Pierdes acceso a todo lo cifrado con tu clave pública. Por eso se hacen **copia
 
 > ❓ **¿Puedo tener la misma clave RSA siempre?**
 
-Sí, las claves no caducan. Pero por seguridad se recomienda rotarlas cada cierto tiempo (como cambiar la contraseña). Es el principio de **rotación de claves** de la U08.
+Sí, las claves no caducan. Pero por seguridad se recomienda rotarlas cada cierto tiempo (como cambiar la contraseña). Es el principio de **rotación de claves** de la U09.
 
 > ❓ **¿Cuánto tarda RSA en generar claves?**
 
@@ -217,7 +217,7 @@ Generar RSA 2048 bits lleva ~1-2 segundos. AES genera clave instantáneamente. E
 
 *Nadie pudo espiar. Nadie pudo fingir. Nadie pudo modificar.*
 
-**PRÓXIMAMENTE EN U10:** *servidores concurrentes: un servidor que atiende a muchos clientes a la vez sin bloquearse. ThreadPool, hilos y benchmark.*
+**PRÓXIMAMENTE EN U11:** *servidores concurrentes: un servidor que atiende a muchos clientes a la vez sin bloquearse. ThreadPool, hilos y benchmark.*
 
 ---
 
@@ -229,7 +229,7 @@ Generar RSA 2048 bits lleva ~1-2 segundos. AES genera clave instantáneamente. E
 |---|---|---|
 | a) | Principios básicos de seguridad | ✅ Simétrico vs asimétrico (punto 1) + RBAC (punto 7) |
 | b) | Tipos de cifrado (simétrico, asimétrico) | ✅ Puntos 1, 2 y 4 |
-| c) | Implementa funciones hash (MD5, SHA) | ✅ Cubierto en la U08; se usa en las firmas (punto 5) |
+| c) | Implementa funciones hash (MD5, SHA) | ✅ Cubierto en la U09; se usa en las firmas (punto 5) |
 | d) | AES | ✅ Puntos 2-3 + ⚡ Laboratorio |
 | e) | RSA | ✅ Puntos 4-5 + ⚡ Laboratorio |
 | f) | Firmas digitales | ✅ Punto 5 + ⚡ Laboratorio |
@@ -238,4 +238,4 @@ Generar RSA 2048 bits lleva ~1-2 segundos. AES genera clave instantáneamente. E
 
 ---
 
-📚 [Volver al índice de la unidad](/ApuntesPSP/09-cifrado-moderno) · **Anterior:** [08 · Práctica sistema seguro](/ApuntesPSP/09-cifrado-moderno/08-practica-sistema-seguro) · **Siguiente:** **[U10 · Servidores Concurrentes](/ApuntesPSP/10-servidores-concurrentes)**
+📚 [Volver al índice de la unidad](/ApuntesPSP/09-cifrado-moderno) · **Anterior:** [08 · Práctica sistema seguro](/ApuntesPSP/09-cifrado-moderno/08-practica-sistema-seguro) · **Siguiente:** **[U11 · Servidores Concurrentes](/ApuntesPSP/10-servidores-concurrentes)**

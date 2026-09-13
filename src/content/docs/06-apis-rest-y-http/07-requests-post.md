@@ -1,11 +1,11 @@
----
+﻿---
 title: "07 — requests: POST, PUT y DELETE"
 description: "Enviar datos a la API y gestionar los errores 📤"
 ---
 
 <p><small>Enviar datos a la API y gestionar los errores 📤</small></p>
 
-> 🗺️ **Estás en:** 🌐 **U06 · APIs REST y HTTP** → 07 · requests: POST, PUT y DELETE
+> 🗺️ **Estás en:** 🌐 **U07 · APIs REST y HTTP** → 07 · requests: POST, PUT y DELETE
 
 ---
 

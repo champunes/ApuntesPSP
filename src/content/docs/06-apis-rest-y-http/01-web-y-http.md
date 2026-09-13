@@ -1,11 +1,11 @@
----
+﻿---
 title: 01 — Web y HTTP
 description: La conversación entre tu código y el servidor 🌍
 ---
 
 <p><small>La conversación entre tu código y el servidor 🌍</small></p>
 
-> 🗺️ **Estás en:** 🌐 **U06 · APIs REST y HTTP** → 01 · Web y HTTP
+> 🗺️ **Estás en:** 🌐 **U07 · APIs REST y HTTP** → 01 · Web y HTTP
 
 ---
 

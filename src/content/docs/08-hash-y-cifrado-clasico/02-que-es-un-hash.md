@@ -1,11 +1,11 @@
----
+﻿---
 title: 02 — Qué es un hash
 description: La huella digital de cualquier dato 🔍
 ---
 
 <p><small>La huella digital de cualquier dato 🔍</small></p>
 
-> 🗺️ **Estás en:** 🔐 **U08 · Hash y Cifrado Clásico** → 02 · Qué es un hash
+> 🗺️ **Estás en:** 🔐 **U09 · Hash y Cifrado Clásico** → 02 · Qué es un hash
 
 ---
 

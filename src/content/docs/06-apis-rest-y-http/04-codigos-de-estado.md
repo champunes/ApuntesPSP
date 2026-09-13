@@ -1,11 +1,11 @@
----
+﻿---
 title: 04 — Códigos de estado
 description: "La señal de humo del servidor: 200, 404, 500… 🚨"
 ---
 
 <p><small>La señal de humo del servidor: 200, 404, 500… 🚨</small></p>
 
-> 🗺️ **Estás en:** 🌐 **U06 · APIs REST y HTTP** → 04 · Códigos de estado
+> 🗺️ **Estás en:** 🌐 **U07 · APIs REST y HTTP** → 04 · Códigos de estado
 
 ---
 

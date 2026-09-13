@@ -1,5 +1,5 @@
----
-title: U03 — Sincronización entre Hilos
+﻿---
+title: U04 — Sincronización entre Hilos
 description: "Cuando los hilos se pisan: locks, semáforos y barreras 🔒"
 nav_order: 03
 ---
@@ -8,7 +8,7 @@ nav_order: 03
 
 ---
 
-En la U02 lanzaste hilos por todas partes y comprobaste que los hilos de un mismo proceso **comparten memoria**. Eso es fantástico… y peligroso: si dos hilos tocan la misma variable a la vez, los resultados se descontrolan. Esta unidad pone orden en el caos: aprenderás qué es una **condición de carrera**, por qué `contador += 1` esconde una trampa de 3 pasos, y cómo los **locks**, **semáforos**, **barreras** y **condiciones** del módulo `threading` convierten el desorden en coordinación.
+En la U03 lanzaste hilos por todas partes y comprobaste que los hilos de un mismo proceso **comparten memoria**. Eso es fantástico… y peligroso: si dos hilos tocan la misma variable a la vez, los resultados se descontrolan. Esta unidad pone orden en el caos: aprenderás qué es una **condición de carrera**, por qué `contador += 1` esconde una trampa de 3 pasos, y cómo los **locks**, **semáforos**, **barreras** y **condiciones** del módulo `threading` convierten el desorden en coordinación.
 
 Verás, además, el patrón de **productor-consumidor** resuelto con `Condition`, cómo evitar los temidos **deadlocks** con las reglas del oficio, y un cierre práctico con laboratorio. Los boletines de la unidad te permitirán medir cuánto has aprendido.
 
@@ -73,15 +73,15 @@ Al terminar, serás capaz de:
 | RA2d | Usa semáforos para acceso controlado | ✅ Punto 4 + ⚡ Laboratorio (punto 9) |
 | RA2g | Evita condiciones de carrera | ✅ Puntos 1, 2 y 8 + ⚡ Laboratorio (punto 9) |
 
-> RA2a (estructura de un hilo), RA2b (crear y lanzar hilos), RA2e (esperas con `join()` y `sleep()`), RA2f (hilos daemon) y RA2h (GIL) se cubren en la **U02 · Hilos Fundamentos**.
+> RA2a (estructura de un hilo), RA2b (crear y lanzar hilos), RA2e (esperas con `join()` y `sleep()`), RA2f (hilos daemon) y RA2h (GIL) se cubren en la **U03 · Hilos Fundamentos**.
 
 ---
 
 ## 🚪 ¿Por dónde empiezo?
 
-¿Vienes de la U02 y ya sabes lanzar hilos y esperarlos con `join()`? Perfecto, ese es el trampolín ideal: repasa la [U02 · Hilos Fundamentos](/ApuntesPSP/02-hilos-fundamentos) para tener frescos `Thread`, `start()`, `join()` y el concepto de hilo daemon, y arranca en el [punto 1](/ApuntesPSP/03-sincronizacion-entre-hilos/01-condicion-de-carrera), que parte justo de ahí: el momento en que dos hilos comparten memoria y todo se descontrola.
+¿Vienes de la U03 y ya sabes lanzar hilos y esperarlos con `join()`? Perfecto, ese es el trampolín ideal: repasa la [U03 · Hilos Fundamentos](/ApuntesPSP/02-hilos-fundamentos) para tener frescos `Thread`, `start()`, `join()` y el concepto de hilo daemon, y arranca en el [punto 1](/ApuntesPSP/03-sincronizacion-entre-hilos/01-condicion-de-carrera), que parte justo de ahí: el momento en que dos hilos comparten memoria y todo se descontrola.
 
 ¿Ya sabes qué es un lock y solo necesitas el semáforo o la barrera? Puedes saltar a los [puntos 4](/ApuntesPSP/03-sincronizacion-entre-hilos/04-semaphore), [5](/ApuntesPSP/03-sincronizacion-entre-hilos/05-barrier) y [6](/ApuntesPSP/03-sincronizacion-entre-hilos/06-condition). Pero si vienes de cero en sincronización, no te saltes los puntos 1 a 3: la condición de carrera y el lock son la base de todo lo demás.
 
 **📍 Primer punto:** [01 · Condición de carrera](/ApuntesPSP/03-sincronizacion-entre-hilos/01-condicion-de-carrera)  
-**⏭️ Al acabar la unidad, continúa en [U04 · Sockets TCP](/ApuntesPSP/04-sockets-tcp).**
+**⏭️ Al acabar la unidad, continúa en [U05 · Sockets TCP](/ApuntesPSP/04-sockets-tcp).**

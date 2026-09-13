@@ -1,9 +1,9 @@
----
-title: Boletín U03 — Inicial (Resuelto)
+﻿---
+title: Boletín U04 — Inicial (Resuelto)
 description: Soluciones de los ejercicios básicos de Sincronización entre Hilos
 ---
 
-# ✅ Boletín U03 — Inicial (Resuelto)
+# ✅ Boletín U04 — Inicial (Resuelto)
 
 ---
 

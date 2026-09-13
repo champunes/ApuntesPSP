@@ -1,11 +1,11 @@
----
+﻿---
 title: 04 — Timeouts
 description: wait_for para que nada se cuelgue para siempre ⏰
 ---
 
 <p><small>wait_for para que nada se cuelgue para siempre ⏰</small></p>
 
-> 🗺️ **Estás en:** ⏱️ **U11 · asyncio y Disponibilidad** → 04 · Timeouts
+> 🗺️ **Estás en:** ⏱️ **U12 · asyncio y Disponibilidad** → 04 · Timeouts
 
 ---
 

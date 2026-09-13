@@ -1,11 +1,11 @@
----
+﻿---
 title: 06 — Cifrado César
 description: El abuelo de la criptografía, roto pero didáctico 🏛️
 ---
 
 <p><small>El abuelo de la criptografía, roto pero didáctico 🏛️</small></p>
 
-> 🗺️ **Estás en:** 🔐 **U08 · Hash y Cifrado Clásico** → 06 · Cifrado César
+> 🗺️ **Estás en:** 🔐 **U09 · Hash y Cifrado Clásico** → 06 · Cifrado César
 
 ---
 
@@ -144,7 +144,7 @@ Desplazamiento 25: Lspe Qyrhs
 
 En 3 intentos lo encontramos. **Por eso el César no sirve para nada serio**: solo 25 claves posibles se prueban en segundos.
 
-> ⚠️ **César NO es seguro**. Solo 25 desplazamientos posibles. Se rompe en segundos. Pero es perfecto para aprender el concepto. El cifrado serio que sí puedes usar en producción lo verás en la [U09 · Cifrado Moderno](/ApuntesPSP/09-cifrado-moderno) con AES y RSA.
+> ⚠️ **César NO es seguro**. Solo 25 desplazamientos posibles. Se rompe en segundos. Pero es perfecto para aprender el concepto. El cifrado serio que sí puedes usar en producción lo verás en la [U10 · Cifrado Moderno](/ApuntesPSP/09-cifrado-moderno) con AES y RSA.
 
 ---
 

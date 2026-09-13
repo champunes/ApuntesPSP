@@ -1,11 +1,11 @@
----
+﻿---
 title: 02 — Tu primer hilo
 description: Crea, lanza y espera tu primer hilo con start() y join() 🚀
 ---
 
 <p><small>Crea, lanza y espera tu primer hilo con start() y join() 🚀</small></p>
 
-> 🗺️ **Estás en:** 🔀 **U02 · Hilos Fundamentos** → 02 · Tu primer hilo
+> 🗺️ **Estás en:** 🔀 **U03 · Hilos Fundamentos** → 02 · Tu primer hilo
 
 ---
 

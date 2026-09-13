@@ -1,11 +1,11 @@
----
+﻿---
 title: 01 — Condición de carrera
 description: Cuando dos hilos se pisan la memoria compartida 🏃💥
 ---
 
 <p><small>Cuando dos hilos se pisan la memoria compartida 🏃💥</small></p>
 
-> 🗺️ **Estás en:** 🔒 **U03 · Sincronización entre Hilos** → 01 · Condición de carrera
+> 🗺️ **Estás en:** 🔒 **U04 · Sincronización entre Hilos** → 01 · Condición de carrera
 
 ---
 

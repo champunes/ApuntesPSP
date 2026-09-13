@@ -1,11 +1,11 @@
----
+﻿---
 title: 01 — Principios de seguridad
 description: "La base de todo: cero confianza y defensa en profundidad 🛡️"
 ---
 
 <p><small>La base de todo: cero confianza y defensa en profundidad 🛡️</small></p>
 
-> 🗺️ **Estás en:** 🔐 **U08 · Hash y Cifrado Clásico** → 01 · Principios de seguridad
+> 🗺️ **Estás en:** 🔐 **U09 · Hash y Cifrado Clásico** → 01 · Principios de seguridad
 
 ---
 
@@ -31,9 +31,9 @@ Los algoritmos cambian (MD5 cayó, SHA-1 cayó, algún día caerá SHA-256), per
 **Desglose de cada uno:**
 
 - **Zero Trust** — La red interna no es de fiar por defecto. Un usuario autenticado hoy puede ser un atacante mañana. Por eso cada operación sensible se vuelve a verificar. En esta unidad lo ves con los hashes: ni siquiera confiamos en nuestra propia base de datos, por eso no guardamos contraseñas en claro.
-- **Mínimo privilegio** — Nadie debería tener más acceso del que necesita para su trabajo. Un becario no necesita borrar la tabla de usuarios. Esto conecta directamente con **RBAC** (Control de Acceso Basado en Roles): a cada rol le toca un paquete de permisos, y nadie se sale del suyo. Lo verás a fondo en la [U09 · Cifrado Moderno](/ApuntesPSP/09-cifrado-moderno), pero el principio lo aplicas ya.
+- **Mínimo privilegio** — Nadie debería tener más acceso del que necesita para su trabajo. Un becario no necesita borrar la tabla de usuarios. Esto conecta directamente con **RBAC** (Control de Acceso Basado en Roles): a cada rol le toca un paquete de permisos, y nadie se sale del suyo. Lo verás a fondo en la [U10 · Cifrado Moderno](/ApuntesPSP/09-cifrado-moderno), pero el principio lo aplicas ya.
 - **Defensa en profundidad** — Si solo tienes una cerradura, alguien con la llave abre la casa entera. La seguridad real apila capas: contraseña con hash + sal, cifrado en disco, firewall, logs. Si una capa cae, las demás siguen.
-- **Cifra todo** — Los datos viajan por la red (en tránsito, con TLS) y descansan en el disco (en reposo). En esta unidad ciframos en reposo las contraseñas con hash; en la U09 cifrarás mensajes completos con AES y RSA.
+- **Cifra todo** — Los datos viajan por la red (en tránsito, con TLS) y descansan en el disco (en reposo). En esta unidad ciframos en reposo las contraseñas con hash; en la U10 cifrarás mensajes completos con AES y RSA.
 - **Rotación de claves** — Una clave que lleva 5 años en uso es una clave comprometida. Igual que cambias la cerradura cuando se pierde una copia, las claves y contraseñas se renuevan periódicamente.
 - **No inventes tu cripto** — La tentación de escribir "mi propio algoritmo" es enorme… y siempre termina mal. Las bibliotecas como `hashlib` o `pycryptodome` llevan décadas siendo atacadas y parcheadas. Tú no puedes hacer eso en un finde.
 

@@ -1,9 +1,9 @@
----
-title: Boletín U07 — Inicial (Resuelto)
+﻿---
+title: Boletín U08 — Inicial (Resuelto)
 description: Soluciones de los ejercicios básicos de APIs Comerciales
 ---
 
-# ✅ Boletín U07 — Inicial (Resuelto)
+# ✅ Boletín U08 — Inicial (Resuelto)
 
 > ⚠️ **Sobre las claves:** por claridad, estas soluciones usan `API_KEY = "TU_API_KEY"` como marcador para centrarse en el parseo de la respuesta. Recuerda la regla de oro de la unidad: en un programa real la clave **nunca va en el código**, se lee de un `.env` con `load_dotenv()` + `os.getenv` (punto 2) y el `.env` va en `.gitignore` (punto 1).
 

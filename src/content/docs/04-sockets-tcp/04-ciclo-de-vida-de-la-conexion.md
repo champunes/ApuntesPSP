@@ -1,11 +1,11 @@
----
+﻿---
 title: 04 — Ciclo de vida de la conexión
 description: "Three-way handshake y cierre de una conexión TCP 🤝"
 ---
 
 <p><small>Three-way handshake y cierre de una conexión TCP 🤝</small></p>
 
-> 🗺️ **Estás en:** 🔌 **U04 · Sockets TCP** → 04 · Ciclo de vida de la conexión
+> 🗺️ **Estás en:** 🔌 **U05 · Sockets TCP** → 04 · Ciclo de vida de la conexión
 
 ---
 

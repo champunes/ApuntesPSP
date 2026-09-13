@@ -1,11 +1,11 @@
----
+﻿---
 title: 08 — Hilos en la práctica
 description: Be the code, el ring Hilo vs Proceso y Aprieta el lápiz ✏️
 ---
 
 <p><small>Be the code, el ring Hilo vs Proceso y Aprieta el lápiz ✏️</small></p>
 
-> 🗺️ **Estás en:** 🔀 **U02 · Hilos Fundamentos** → 08 · Hilos en la práctica
+> 🗺️ **Estás en:** 🔀 **U03 · Hilos Fundamentos** → 08 · Hilos en la práctica
 
 ---
 

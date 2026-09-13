@@ -1,11 +1,11 @@
----
+﻿---
 title: 05 — JSON
 description: "El idioma de las APIs: de texto a diccionario y vuelta 📦"
 ---
 
 <p><small>El idioma de las APIs: de texto a diccionario y vuelta 📦</small></p>
 
-> 🗺️ **Estás en:** 🌐 **U06 · APIs REST y HTTP** → 05 · JSON
+> 🗺️ **Estás en:** 🌐 **U07 · APIs REST y HTTP** → 05 · JSON
 
 ---
 

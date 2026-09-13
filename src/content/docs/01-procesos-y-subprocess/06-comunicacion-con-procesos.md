@@ -1,11 +1,11 @@
----
+﻿---
 title: 06 — Comunicación con procesos
 description: Pasa datos por stdin y lee la respuesta por stdout 📨
 ---
 
 <p><small>Pasa datos por stdin y lee la respuesta por stdout 📨</small></p>
 
-> 🗺️ **Estás en:** 🚀 **U01 · Procesos y Subprocess** → 06 · Comunicación con procesos
+> 🗺️ **Estás en:** 🚀 **U02 · Procesos y Subprocess** → 06 · Comunicación con procesos
 
 ---
 

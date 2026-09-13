@@ -1,9 +1,9 @@
----
-title: Boletín U06 — Avanzado (Resuelto)
+﻿---
+title: Boletín U07 — Avanzado (Resuelto)
 description: Soluciones de los ejercicios avanzados de APIs REST y HTTP
 ---
 
-# 💪 Boletín U06 — Avanzado (Resuelto)
+# 💪 Boletín U07 — Avanzado (Resuelto)
 
 ---
 

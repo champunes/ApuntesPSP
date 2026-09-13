@@ -1,11 +1,11 @@
----
+﻿---
 title: 07 — Hash vs Cifrado
 description: "El ring de los conceptos: integridad contra confidencialidad 🥊"
 ---
 
 <p><small>El ring de los conceptos: integridad contra confidencialidad 🥊</small></p>
 
-> 🗺️ **Estás en:** 🔐 **U08 · Hash y Cifrado Clásico** → 07 · Hash vs Cifrado
+> 🗺️ **Estás en:** 🔐 **U09 · Hash y Cifrado Clásico** → 07 · Hash vs Cifrado
 
 ---
 
@@ -57,7 +57,7 @@ Imagina que envías un mensaje secreto por una red hostil:
 - **Solo hash:** puedes comprobar que el mensaje no cambió, pero cualquier persona que lo intercepte **lo lee tal cual**. La integridad estaba protegida; la **confidencialidad, no**.
 - **Cifrado + hash:** cifras el mensaje (nadie lo lee) y además calculas su hash (el destinatario comprueba que nadie lo tocó). Así lo hacen de verdad los sistemas serios.
 
-El cifrado moderno (AES y RSA) y las **firmas digitales** que verás en la [U09 · Cifrado Moderno](/ApuntesPSP/09-cifrado-moderno) combinan exactamente estas dos ideas.
+El cifrado moderno (AES y RSA) y las **firmas digitales** que verás en la [U10 · Cifrado Moderno](/ApuntesPSP/09-cifrado-moderno) combinan exactamente estas dos ideas.
 
 ---
 
@@ -91,7 +91,7 @@ El cifrado moderno (AES y RSA) y las **firmas digitales** que verás en la [U09 
 | Confidencialidad | Que solo quien corresponde lo lea (cifrado) |
 | Unidireccional | Imposible de revertir, propia del hash |
 | Reversible con clave | Se deshace con la clave correcta, propia del cifrado |
-| Firma digital | Combinación de hash + cifrado (lo verás en U09) |
+| Firma digital | Combinación de hash + cifrado (lo verás en U10) |
 
 ---
 

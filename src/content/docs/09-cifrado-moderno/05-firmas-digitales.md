@@ -1,11 +1,11 @@
----
+﻿---
 title: 05 — Firmas digitales
 description: "Firmar y verificar: integridad + autenticidad ✍️"
 ---
 
 <p><small>Firmar y verificar: integridad + autenticidad ✍️</small></p>
 
-> 🗺️ **Estás en:** 🧬 **U09 · Cifrado Moderno** → 05 · Firmas digitales
+> 🗺️ **Estás en:** 🧬 **U10 · Cifrado Moderno** → 05 · Firmas digitales
 
 ---
 
@@ -38,7 +38,7 @@ Firma: 1a3f5b7c9d2e4f6a8b0c1d2e3f4a5b6c...
 
 **Firmar es cifrar un hash con tu privada:**
 
-1. Calculas `SHA256` del mensaje (256 bits de huella, lo viste en la U08).
+1. Calculas `SHA256` del mensaje (256 bits de huella, lo viste en la U09).
 2. Cifras ese hash con tu **clave privada** → eso es la firma.
 3. Envías `mensaje + firma`.
 

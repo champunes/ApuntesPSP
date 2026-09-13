@@ -1,11 +1,11 @@
----
+﻿---
 title: 07 — Productor-Consumidor
 description: El patrón clásico con cola y Condition 🏭🍽️
 ---
 
 <p><small>El patrón clásico con cola y Condition 🏭🍽️</small></p>
 
-> 🗺️ **Estás en:** 🔒 **U03 · Sincronización entre Hilos** → 07 · Productor-Consumidor
+> 🗺️ **Estás en:** 🔒 **U04 · Sincronización entre Hilos** → 07 · Productor-Consumidor
 
 ---
 

@@ -1,9 +1,9 @@
----
-title: Boletín U02 — Inicial (Resuelto)
+﻿---
+title: Boletín U03 — Inicial (Resuelto)
 description: Soluciones de los ejercicios básicos de Hilos Fundamentos
 ---
 
-# ✅ Boletín U02 — Inicial (Resuelto)
+# ✅ Boletín U03 — Inicial (Resuelto)
 
 ---
 

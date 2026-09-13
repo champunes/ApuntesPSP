@@ -1,11 +1,11 @@
----
+﻿---
 title: 08 — Práctica eco UDP
 description: "Servidor + cliente eco completos y ejercicios resueltos 🛠️"
 ---
 
 <p><small>Servidor + cliente eco completos y ejercicios resueltos 🛠️</small></p>
 
-> 🗺️ **Estás en:** 📡 **U05 · Sockets UDP y Protocolos** → 08 · Práctica eco UDP
+> 🗺️ **Estás en:** 📡 **U06 · Sockets UDP y Protocolos** → 08 · Práctica eco UDP
 
 ---
 
