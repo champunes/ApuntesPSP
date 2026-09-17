@@ -1,9 +1,9 @@
 ﻿---
-title: Boletín U02 — Inicial
-description: Ejercicios básicos de Procesos y Subprocess
+title: Boletín UD 2 — Inicial
+description: Ejercicios básicos de Gestión de procesos
 ---
 
-# 📝 Boletín U02 — Inicial
+# 📝 Boletín UD 2 — Inicial
 
 > Ejercicios básicos para afianzar los conceptos de procesos, `subprocess.run`, `subprocess.Popen` y estados de la unidad U02.
 

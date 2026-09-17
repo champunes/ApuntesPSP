@@ -1,9 +1,9 @@
 ﻿---
-title: Boletín U02 — Inicial (Resuelto)
-description: Soluciones de los ejercicios básicos de Procesos y Subprocess
+title: Boletín UD 2 — Inicial (Resuelto)
+description: Soluciones de los ejercicios básicos de Gestión de procesos
 ---
 
-# ✅ Boletín U02 — Inicial (Resuelto)
+# ✅ Boletín UD 2 — Inicial (Resuelto)
 
 ---
 

@@ -1,9 +1,9 @@
 ﻿---
-title: Boletín U02 — Avanzado
-description: Ejercicios avanzados de Procesos y Subprocess
+title: Boletín UD 2 — Avanzado
+description: Ejercicios avanzados de Gestión de procesos
 ---
 
-# 💪 Boletín U02 — Avanzado
+# 💪 Boletín UD 2 — Avanzado
 
 > Ejercicios que requieren aplicar los conceptos de procesos, `subprocess` y comunicación entre procesos de forma más profunda, con programas completos.
 
