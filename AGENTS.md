@@ -20,8 +20,8 @@ PSP/
 │   ├── content.config.ts                ← configuración colección Starlight
 │   ├── content/docs/                    ← 155 archivos de apuntes (MD)
 │   │   ├── index.md                     ← landing page (cards, descargas, licencia)
-│   │   ├── 01-procesos-y-subprocess.md  ← índice de la unidad (11 unidades)
-│   │   ├── 01-procesos-y-subprocess/    ← 9 capítulos por unidad
+│   │   ├── 01-gestion-de-procesos.md  ← índice de la unidad
+│   │   ├── 01-gestion-de-procesos/    ← 9 capítulos por unidad
 │   │   │   ├── 01-*.md … 08-*.md        ← teoría en progresión
 │   │   │   └── 09-cierre.md             ← cierre práctico de la unidad
 │   │   ├── boletines/                   ← 44 boletines (4 × 11 unidades)
@@ -198,7 +198,7 @@ Secciones del cierre `09-cierre.md`: ⭐ Sé el código, 🔥 Fireside Chat, �
 
 | Unidad | Índice + 9 capítulos | Líneas aprox | Temas clave | RAs |
 |--------|----------------------|--------------|-------------|-----|
-| U01 Procesos y Subprocess | `01-procesos-y-subprocess.md` + carpeta | ~335 | Procesos, subprocess, paralela vs distribuida | RA1 |
+| UD 2 Gestión de procesos | `01-gestion-de-procesos.md` + carpeta | ~960 | subprocess, run, Popen, pipes, comunicación | RA1 |
 | U02 Hilos Fundamentos | `02-hilos-fundamentos.md` + carpeta | ~420 | Hilos, join, daemon, Timer, GIL, estados | RA2 |
 | U03 Sincronización entre Hilos | `03-sincronizacion-entre-hilos.md` + carpeta | ~385 | Lock, Semaphore, Barrier, Condition, RLock | RA2 |
 | U04 Sockets TCP | `04-sockets-tcp.md` + carpeta | ~360 | TCP, cliente-servidor, errores, SO_REUSEADDR | RA3 |

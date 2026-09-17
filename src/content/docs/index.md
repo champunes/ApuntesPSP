@@ -1,4 +1,4 @@
----
+﻿---
 title: Inicio
 description: Apuntes de Programación de Servicios y Procesos — Python. CC BY-SA 4.0 — Sergi Garcia Barea
 ---
@@ -8,7 +8,7 @@ description: Apuntes de Programación de Servicios y Procesos — Python. CC BY-
 </div>
 
 <div align="center" style="margin-bottom:2rem;">
-  <a href="/ApuntesPSP/01-procesos-y-subprocess" style="display:inline-block;padding:0.75rem 2rem;background:linear-gradient(135deg,#306998,#1a4060);color:#fff;border-radius:8px;text-decoration:none;font-weight:600;margin:0 0.5rem;">🚀 Empezar por la Unidad 1</a>
+  <a href="/ApuntesPSP/00-python-basico" style="display:inline-block;padding:0.75rem 2rem;background:linear-gradient(135deg,#306998,#1a4060);color:#fff;border-radius:8px;text-decoration:none;font-weight:600;margin:0 0.5rem;">🐍 Empezar por la Unidad 1</a>
   <a href="https://github.com/sergarb1/ApuntesPSP" style="display:inline-block;padding:0.75rem 2rem;background:var(--sl-color-gray-5);color:var(--sl-color-white);border-radius:8px;text-decoration:none;font-weight:600;margin:0 0.5rem;">🐙 Ver en GitHub</a>
 </div>
 
@@ -35,7 +35,7 @@ description: Apuntes de Programación de Servicios y Procesos — Python. CC BY-
 
 <div class="unit-card">
   <div class="unit-card-header">
-    <span class="num">Unidad 0</span>
+    <span class="num">Unidad 2</span>
     <span class="ra">Prerequisito</span>
   </div>
   <a href="/ApuntesPSP/00-python-basico" class="title-link">Python 3 básico</a>
@@ -45,17 +45,17 @@ description: Apuntes de Programación de Servicios y Procesos — Python. CC BY-
 
 <div class="unit-card">
   <div class="unit-card-header">
-    <span class="num">Unidad 1</span>
+    <span class="num">Unidad 2</span>
     <span class="ra">RA1</span>
   </div>
-  <a href="/ApuntesPSP/01-procesos-y-subprocess" class="title-link">Procesos y Subprocess</a>
-  <p class="desc">Procesos, <code>subprocess.run</code>, <code>subprocess.Popen</code>, comunicación entre procesos, paralela vs distribuida.</p>
-  <a href="/ApuntesPSP/01-procesos-y-subprocess" class="unit-link">👉 Ver unidad 👈</a>
+  <a href="/ApuntesPSP/01-gestion-de-procesos" class="title-link">Gestión de procesos con Python</a>
+  <p class="desc">Módulo <code>subprocess</code>, ejecución de comandos, captura de salida, control de errores, tuberías (pipes).</p>
+  <a href="/ApuntesPSP/01-gestion-de-procesos" class="unit-link">👉 Ver unidad 👈</a>
 </div>
 
 <div class="unit-card">
   <div class="unit-card-header">
-    <span class="num">Unidad 2</span>
+    <span class="num">Unidad 3</span>
     <span class="ra">RA2</span>
   </div>
   <a href="/ApuntesPSP/02-hilos-fundamentos" class="title-link">Hilos Fundamentos</a>
@@ -65,7 +65,7 @@ description: Apuntes de Programación de Servicios y Procesos — Python. CC BY-
 
 <div class="unit-card">
   <div class="unit-card-header">
-    <span class="num">Unidad 3</span>
+    <span class="num">Unidad 4</span>
     <span class="ra">RA2</span>
   </div>
   <a href="/ApuntesPSP/03-sincronizacion-entre-hilos" class="title-link">Sincronización entre Hilos</a>
@@ -75,7 +75,7 @@ description: Apuntes de Programación de Servicios y Procesos — Python. CC BY-
 
 <div class="unit-card">
   <div class="unit-card-header">
-    <span class="num">Unidad 4</span>
+    <span class="num">Unidad 5</span>
     <span class="ra">RA3</span>
   </div>
   <a href="/ApuntesPSP/04-sockets-tcp" class="title-link">Sockets TCP</a>
@@ -85,7 +85,7 @@ description: Apuntes de Programación de Servicios y Procesos — Python. CC BY-
 
 <div class="unit-card">
   <div class="unit-card-header">
-    <span class="num">Unidad 5</span>
+    <span class="num">Unidad 6</span>
     <span class="ra">RA3</span>
   </div>
   <a href="/ApuntesPSP/05-sockets-udp-y-protocolos" class="title-link">Sockets UDP y Protocolos</a>
@@ -95,7 +95,7 @@ description: Apuntes de Programación de Servicios y Procesos — Python. CC BY-
 
 <div class="unit-card">
   <div class="unit-card-header">
-    <span class="num">Unidad 6</span>
+    <span class="num">Unidad 7</span>
     <span class="ra">RA4a-b</span>
   </div>
   <a href="/ApuntesPSP/06-apis-rest-y-http" class="title-link">APIs REST y HTTP</a>
@@ -105,7 +105,7 @@ description: Apuntes de Programación de Servicios y Procesos — Python. CC BY-
 
 <div class="unit-card">
   <div class="unit-card-header">
-    <span class="num">Unidad 7</span>
+    <span class="num">Unidad 8</span>
     <span class="ra">RA4a-b</span>
   </div>
   <a href="/ApuntesPSP/07-apis-comerciales" class="title-link">APIs Comerciales</a>
@@ -115,7 +115,7 @@ description: Apuntes de Programación de Servicios y Procesos — Python. CC BY-
 
 <div class="unit-card">
   <div class="unit-card-header">
-    <span class="num">Unidad 8</span>
+    <span class="num">Unidad 9</span>
     <span class="ra">RA5</span>
   </div>
   <a href="/ApuntesPSP/08-hash-y-cifrado-clasico" class="title-link">Hash y Cifrado Clásico</a>
@@ -125,7 +125,7 @@ description: Apuntes de Programación de Servicios y Procesos — Python. CC BY-
 
 <div class="unit-card">
   <div class="unit-card-header">
-    <span class="num">Unidad 9</span>
+    <span class="num">Unidad 10</span>
     <span class="ra">RA5</span>
   </div>
   <a href="/ApuntesPSP/09-cifrado-moderno" class="title-link">Cifrado Moderno</a>
@@ -135,7 +135,7 @@ description: Apuntes de Programación de Servicios y Procesos — Python. CC BY-
 
 <div class="unit-card">
   <div class="unit-card-header">
-    <span class="num">Unidad 10</span>
+    <span class="num">Unidad 11</span>
     <span class="ra">RA4c-d</span>
   </div>
   <a href="/ApuntesPSP/10-servidores-concurrentes" class="title-link">Servidores Concurrentes</a>
@@ -145,7 +145,7 @@ description: Apuntes de Programación de Servicios y Procesos — Python. CC BY-
 
 <div class="unit-card">
   <div class="unit-card-header">
-    <span class="num">Unidad 11</span>
+    <span class="num">Unidad 12</span>
     <span class="ra">RA4e-g</span>
   </div>
   <a href="/ApuntesPSP/11-asyncio-y-disponibilidad" class="title-link">Asyncio y Disponibilidad</a>
@@ -163,7 +163,7 @@ Cada unidad tiene **4 boletines** (44 en total): inicial y avanzado, con y sin s
 
 <div class="unit-card">
   <div class="unit-card-header">
-    <span class="num">Unidad 1</span>
+    <span class="num">Unidad 2</span>
   </div>
   <div class="ejercicio-links">
     <a href="/ApuntesPSP/boletines/boletin-u1-inicial-resuelto" class="elink">✅ Inicial resuelto</a>
@@ -175,7 +175,7 @@ Cada unidad tiene **4 boletines** (44 en total): inicial y avanzado, con y sin s
 
 <div class="unit-card">
   <div class="unit-card-header">
-    <span class="num">Unidad 2</span>
+    <span class="num">Unidad 3</span>
   </div>
   <div class="ejercicio-links">
     <a href="/ApuntesPSP/boletines/boletin-u2-inicial-resuelto" class="elink">✅ Inicial resuelto</a>
@@ -187,7 +187,7 @@ Cada unidad tiene **4 boletines** (44 en total): inicial y avanzado, con y sin s
 
 <div class="unit-card">
   <div class="unit-card-header">
-    <span class="num">Unidad 3</span>
+    <span class="num">Unidad 4</span>
   </div>
   <div class="ejercicio-links">
     <a href="/ApuntesPSP/boletines/boletin-u3-inicial-resuelto" class="elink">✅ Inicial resuelto</a>
@@ -199,7 +199,7 @@ Cada unidad tiene **4 boletines** (44 en total): inicial y avanzado, con y sin s
 
 <div class="unit-card">
   <div class="unit-card-header">
-    <span class="num">Unidad 4</span>
+    <span class="num">Unidad 5</span>
   </div>
   <div class="ejercicio-links">
     <a href="/ApuntesPSP/boletines/boletin-u4-inicial-resuelto" class="elink">✅ Inicial resuelto</a>
@@ -211,7 +211,7 @@ Cada unidad tiene **4 boletines** (44 en total): inicial y avanzado, con y sin s
 
 <div class="unit-card">
   <div class="unit-card-header">
-    <span class="num">Unidad 5</span>
+    <span class="num">Unidad 6</span>
   </div>
   <div class="ejercicio-links">
     <a href="/ApuntesPSP/boletines/boletin-u5-inicial-resuelto" class="elink">✅ Inicial resuelto</a>
@@ -223,7 +223,7 @@ Cada unidad tiene **4 boletines** (44 en total): inicial y avanzado, con y sin s
 
 <div class="unit-card">
   <div class="unit-card-header">
-    <span class="num">Unidad 6</span>
+    <span class="num">Unidad 7</span>
   </div>
   <div class="ejercicio-links">
     <a href="/ApuntesPSP/boletines/boletin-u6-inicial-resuelto" class="elink">✅ Inicial resuelto</a>
@@ -235,7 +235,7 @@ Cada unidad tiene **4 boletines** (44 en total): inicial y avanzado, con y sin s
 
 <div class="unit-card">
   <div class="unit-card-header">
-    <span class="num">Unidad 7</span>
+    <span class="num">Unidad 8</span>
   </div>
   <div class="ejercicio-links">
     <a href="/ApuntesPSP/boletines/boletin-u7-inicial-resuelto" class="elink">✅ Inicial resuelto</a>
@@ -247,7 +247,7 @@ Cada unidad tiene **4 boletines** (44 en total): inicial y avanzado, con y sin s
 
 <div class="unit-card">
   <div class="unit-card-header">
-    <span class="num">Unidad 8</span>
+    <span class="num">Unidad 9</span>
   </div>
   <div class="ejercicio-links">
     <a href="/ApuntesPSP/boletines/boletin-u8-inicial-resuelto" class="elink">✅ Inicial resuelto</a>
@@ -259,7 +259,7 @@ Cada unidad tiene **4 boletines** (44 en total): inicial y avanzado, con y sin s
 
 <div class="unit-card">
   <div class="unit-card-header">
-    <span class="num">Unidad 9</span>
+    <span class="num">Unidad 10</span>
   </div>
   <div class="ejercicio-links">
     <a href="/ApuntesPSP/boletines/boletin-u9-inicial-resuelto" class="elink">✅ Inicial resuelto</a>
@@ -271,7 +271,7 @@ Cada unidad tiene **4 boletines** (44 en total): inicial y avanzado, con y sin s
 
 <div class="unit-card">
   <div class="unit-card-header">
-    <span class="num">Unidad 10</span>
+    <span class="num">Unidad 11</span>
   </div>
   <div class="ejercicio-links">
     <a href="/ApuntesPSP/boletines/boletin-u10-inicial-resuelto" class="elink">✅ Inicial resuelto</a>
@@ -283,7 +283,7 @@ Cada unidad tiene **4 boletines** (44 en total): inicial y avanzado, con y sin s
 
 <div class="unit-card">
   <div class="unit-card-header">
-    <span class="num">Unidad 11</span>
+    <span class="num">Unidad 12</span>
   </div>
   <div class="ejercicio-links">
     <a href="/ApuntesPSP/boletines/boletin-u11-inicial-resuelto" class="elink">✅ Inicial resuelto</a>

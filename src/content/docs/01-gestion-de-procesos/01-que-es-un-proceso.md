@@ -5,7 +5,7 @@ description: La burbuja de memoria que vive en tu sistema 🫧
 
 <p><small>La burbuja de memoria que vive en tu sistema 🫧</small></p>
 
-> 🗺️ **Estás en:** 🚀 **U02 · Procesos y Subprocess** → 01 · Qué es un proceso
+> 🗺️ **Estás en:** 🚀 **UD 2 · Gestión de procesos** → 01 · Qué es un proceso
 
 ---
 
@@ -81,7 +81,7 @@ Para ver los procesos de tu sistema con sus PIDs:
 | **Contexto** | Estado de la CPU, registros, contador de programa |
 | **Comunicación** | Necesita mecanismos externos (pipes, sockets, archivos) |
 
-La última fila es la clave: los procesos **no comparten memoria por defecto**. Si quieren intercambiar datos necesitan un mecanismo externo: un archivo, un socket o un pipe. Lo verás en el [punto 6](/ApuntesPSP/01-procesos-y-subprocess/06-comunicacion-con-procesos).
+La última fila es la clave: los procesos **no comparten memoria por defecto**. Si quieren intercambiar datos necesitan un mecanismo externo: un archivo, un socket o un pipe. Lo verás en el [punto 6](/ApuntesPSP/01-gestion-de-procesos/06-comunicacion-con-procesos).
 
 ---
 
@@ -89,7 +89,7 @@ La última fila es la clave: los procesos **no comparten memoria por defecto**. 
 
 Un proceso es una **receta en marcha** en una cocina. La receta escrita en el libro es el **programa** (código muerto en el disco). Cuando un cocinero la coge, pone los ingredientes sobre su mesa (memoria), empieza a leerla por el paso 1 (contador de programa) y recibe su propio número de pedido (PID).
 
-Cada cocinero con su receta y su mesa: si uno se quema, los demás siguen cocinando sin enterarse. Eso es el **aislamiento** de la burbuja de memoria. En el [punto 3](/ApuntesPSP/01-procesos-y-subprocess/03-paralela-vs-distribuida) verás qué pasa cuando hay varias cocinas (varias CPUs) o varios restaurantes (varias máquinas).
+Cada cocinero con su receta y su mesa: si uno se quema, los demás siguen cocinando sin enterarse. Eso es el **aislamiento** de la burbuja de memoria. En el [punto 3](/ApuntesPSP/01-gestion-de-procesos/03-paralela-vs-distribuida) verás qué pasa cuando hay varias cocinas (varias CPUs) o varios restaurantes (varias máquinas).
 
 ---
 
@@ -128,4 +128,4 @@ Cada cocinero con su receta y su mesa: si uno se quema, los demás siguen cocina
 
 ---
 
-📚 [Volver al índice de la unidad](/ApuntesPSP/01-procesos-y-subprocess) · **Siguiente:** [02 · Estados de un proceso](/ApuntesPSP/01-procesos-y-subprocess/02-estados-de-un-proceso)
+📚 [Volver al índice de la unidad](/ApuntesPSP/01-gestion-de-procesos) · **Siguiente:** [02 · Estados de un proceso](/ApuntesPSP/01-gestion-de-procesos/02-estados-de-un-proceso)

@@ -5,7 +5,7 @@ description: CPUs, máquinas y la concurrencia de por medio 🤹
 
 <p><small>CPUs, máquinas y la concurrencia de por medio 🤹</small></p>
 
-> 🗺️ **Estás en:** 🚀 **U02 · Procesos y Subprocess** → 03 · Paralela vs Distribuida
+> 🗺️ **Estás en:** 🚀 **UD 2 · Gestión de procesos** → 03 · Paralela vs Distribuida
 
 ---
 
@@ -75,7 +75,7 @@ La computación distribuida lleva la idea al límite: no varias CPUs de la misma
         └───────────┘         └────────────┘
 ```
 
-Cada máquina ejecuta uno o varios procesos independientes. La distribución introduce un problema nuevo: **la comunicación por red** y **los fallos de máquina**. Eso lo verás en las unidades de sockets ([U05](/ApuntesPSP/04-sockets-tcp)) y de APIs REST ([U07](/ApuntesPSP/06-apis-rest-y-http)).
+Cada máquina ejecuta uno o varios procesos independientes. La distribución introduce un problema nuevo: **la comunicación por red** y **los fallos de máquina**. Eso lo verás en las unidades de sockets ([UD 5](/ApuntesPSP/04-sockets-tcp)) y de APIs REST ([UD 7](/ApuntesPSP/06-apis-rest-y-http)).
 
 ---
 
@@ -84,12 +84,12 @@ Cada máquina ejecuta uno o varios procesos independientes. La distribución int
 | Pregunta | Paralela | Distribuida |
 |---|---|---|
 | ¿Dónde se ejecuta? | Múltiples CPUs/núcleos de **una** máquina | Múltiples **máquinas** conectadas por red |
-| ¿Comparten memoria? | No por defecto: cada **proceso** vive en su burbuja aislada (los **hilos** de una misma máquina sí comparten, [U03](/ApuntesPSP/02-hilos-fundamentos)) | No (cada máquina tiene la suya) |
+| ¿Comparten memoria? | No por defecto: cada **proceso** vive en su burbuja aislada (los **hilos** de una misma máquina sí comparten, [UD 3](/ApuntesPSP/02-hilos-fundamentos)) | No (cada máquina tiene la suya) |
 | ¿Comunicación? | Pipes, memoria compartida, locks | Sockets, HTTP, mensajería |
 | ¿Escala? | Hasta los núcleos de tu CPU | Hasta cientos de máquinas |
 | Ejemplo en Python | `multiprocessing.Pool` | `socket`, APIs REST |
 
-> 💡 El **GIL** de Python limita la concurrencia real de los hilos (lo verás en la [U03](/ApuntesPSP/02-hilos-fundamentos)); con **procesos** (`multiprocessing`) ese límite no existe porque cada proceso tiene su propio intérprete.
+> 💡 El **GIL** de Python limita la concurrencia real de los hilos (lo verás en la [UD 3](/ApuntesPSP/02-hilos-fundamentos)); con **procesos** (`multiprocessing`) ese límite no existe porque cada proceso tiene su propio intérprete.
 
 ---
 
@@ -128,4 +128,4 @@ Cada máquina ejecuta uno o varios procesos independientes. La distribución int
 
 ---
 
-📚 [Volver al índice de la unidad](/ApuntesPSP/01-procesos-y-subprocess) · **Anterior:** [02 · Estados de un proceso](/ApuntesPSP/01-procesos-y-subprocess/02-estados-de-un-proceso) · **Siguiente:** [04 · subprocess.run()](/ApuntesPSP/01-procesos-y-subprocess/04-subprocess-run)
+📚 [Volver al índice de la unidad](/ApuntesPSP/01-gestion-de-procesos) · **Anterior:** [02 · Estados de un proceso](/ApuntesPSP/01-gestion-de-procesos/02-estados-de-un-proceso) · **Siguiente:** [04 · subprocess.run()](/ApuntesPSP/01-gestion-de-procesos/04-subprocess-run)

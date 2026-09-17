@@ -5,7 +5,7 @@ description: Lanza un programa y espera a que termine ⏳
 
 <p><small>Lanza un programa y espera a que termine ⏳</small></p>
 
-> 🗺️ **Estás en:** 🚀 **U02 · Procesos y Subprocess** → 04 · subprocess.run()
+> 🗺️ **Estás en:** 🚀 **UD 2 · Gestión de procesos** → 04 · subprocess.run()
 
 ---
 
@@ -145,4 +145,4 @@ El código de retorno **2** (distinto de 0) te dice que el comando falló, y `st
 
 ---
 
-📚 [Volver al índice de la unidad](/ApuntesPSP/01-procesos-y-subprocess) · **Anterior:** [03 · Paralela vs Distribuida](/ApuntesPSP/01-procesos-y-subprocess/03-paralela-vs-distribuida) · **Siguiente:** [05 · subprocess.Popen()](/ApuntesPSP/01-procesos-y-subprocess/05-subprocess-popen)
+📚 [Volver al índice de la unidad](/ApuntesPSP/01-gestion-de-procesos) · **Anterior:** [03 · Paralela vs Distribuida](/ApuntesPSP/01-gestion-de-procesos/03-paralela-vs-distribuida) · **Siguiente:** [05 · subprocess.Popen()](/ApuntesPSP/01-gestion-de-procesos/05-subprocess-popen)

@@ -5,7 +5,7 @@ description: Sé el código, el ring y los ejercicios del lápiz ✏️
 
 <p><small>Sé el código, el ring y los ejercicios del lápiz ✏️</small></p>
 
-> 🗺️ **Estás en:** 🚀 **U02 · Procesos y Subprocess** → 08 · Procesos en la práctica
+> 🗺️ **Estás en:** 🚀 **UD 2 · Gestión de procesos** → 08 · Procesos en la práctica
 
 ---
 
@@ -69,7 +69,7 @@ print("Hecho 🏁")
    → Mata la calculadora forzosamente
 ```
 
-Fíjate en el paso 4: **Python no se bloquea**. Mientras los dos programas están abiertos, el proceso de Python sigue imprimiendo. Tres procesos independientes conviven a la vez, cada uno con su PID, su memoria y su turno de CPU ([punto 1](/ApuntesPSP/01-procesos-y-subprocess/01-que-es-un-proceso) y [punto 2](/ApuntesPSP/01-procesos-y-subprocess/02-estados-de-un-proceso)).
+Fíjate en el paso 4: **Python no se bloquea**. Mientras los dos programas están abiertos, el proceso de Python sigue imprimiendo. Tres procesos independientes conviven a la vez, cada uno con su PID, su memoria y su turno de CPU ([punto 1](/ApuntesPSP/01-gestion-de-procesos/01-que-es-un-proceso) y [punto 2](/ApuntesPSP/01-gestion-de-procesos/02-estados-de-un-proceso)).
 
 ---
 
@@ -183,7 +183,7 @@ print(f"El proceso respondió: {salida.strip()}")
 # → "HOLA MUNDO"
 ```
 
-`communicate(input="...")` escribe en el stdin del hijo, espera y devuelve su stdout ([punto 6](/ApuntesPSP/01-procesos-y-subprocess/06-comunicacion-con-procesos)).
+`communicate(input="...")` escribe en el stdin del hijo, espera y devuelve su stdout ([punto 6](/ApuntesPSP/01-gestion-de-procesos/06-comunicacion-con-procesos)).
 
 </details>
 
@@ -251,4 +251,4 @@ Guardamos los 5 objetos `Popen` en una lista y terminamos todos menos el índice
 
 ---
 
-📚 [Volver al índice de la unidad](/ApuntesPSP/01-procesos-y-subprocess) · **Anterior:** [07 · Compatibilidad Windows / Linux](/ApuntesPSP/01-procesos-y-subprocess/07-compatibilidad-windows-linux) · **Siguiente:** [09 · Cierre](/ApuntesPSP/01-procesos-y-subprocess/09-cierre)
+📚 [Volver al índice de la unidad](/ApuntesPSP/01-gestion-de-procesos) · **Anterior:** [07 · Compatibilidad Windows / Linux](/ApuntesPSP/01-gestion-de-procesos/07-compatibilidad-windows-linux) · **Siguiente:** [09 · Cierre](/ApuntesPSP/01-gestion-de-procesos/09-cierre)

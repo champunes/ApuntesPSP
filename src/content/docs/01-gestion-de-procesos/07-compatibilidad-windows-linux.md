@@ -5,7 +5,7 @@ description: "Un mismo código, dos mundos: la tabla de trucos 🪟🐧"
 
 <p><small>Un mismo código, dos mundos: la tabla de trucos 🪟🐧</small></p>
 
-> 🗺️ **Estás en:** 🚀 **U02 · Procesos y Subprocess** → 07 · Compatibilidad Windows / Linux
+> 🗺️ **Estás en:** 🚀 **UD 2 · Gestión de procesos** → 07 · Compatibilidad Windows / Linux
 
 ---
 
@@ -123,4 +123,4 @@ Aprende los conceptos con `notepad.exe` y `calc.exe` y, cuando toques Linux, sol
 
 ---
 
-📚 [Volver al índice de la unidad](/ApuntesPSP/01-procesos-y-subprocess) · **Anterior:** [06 · Comunicación con procesos](/ApuntesPSP/01-procesos-y-subprocess/06-comunicacion-con-procesos) · **Siguiente:** [08 · Procesos en la práctica](/ApuntesPSP/01-procesos-y-subprocess/08-procesos-en-la-practica)
+📚 [Volver al índice de la unidad](/ApuntesPSP/01-gestion-de-procesos) · **Anterior:** [06 · Comunicación con procesos](/ApuntesPSP/01-gestion-de-procesos/06-comunicacion-con-procesos) · **Siguiente:** [08 · Procesos en la práctica](/ApuntesPSP/01-gestion-de-procesos/08-procesos-en-la-practica)

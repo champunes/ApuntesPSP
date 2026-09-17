@@ -81,7 +81,7 @@ Al terminar, serás capaz de:
 
 ## 🚪 ¿Por dónde empiezo?
 
-¿Vienes de la U02 y dominas procesos y `subprocess`? Perfecto, ese es el trampolín ideal: repasa la [U02 · Procesos y subprocess](/ApuntesPSP/01-procesos-y-subprocess) para tener fresca la diferencia entre lanzar un programa entero y ejecutar una tarea dentro de él, y arranca en el [punto 1](/ApuntesPSP/02-hilos-fundamentos/01-de-proceso-a-hilo), que parte justo de ahí: de proceso a hilo.
+¿Vienes de la U02 y dominas procesos y `subprocess`? Perfecto, ese es el trampolín ideal: repasa la [U02 · Procesos y subprocess](/ApuntesPSP/01-gestion-de-procesos) para tener fresca la diferencia entre lanzar un programa entero y ejecutar una tarea dentro de él, y arranca en el [punto 1](/ApuntesPSP/02-hilos-fundamentos/01-de-proceso-a-hilo), que parte justo de ahí: de proceso a hilo.
 
 ¿Ya sabes lanzar hilos con `start()` y `join()` y solo necesitas el GIL o los estados? Puedes saltar a los [puntos 6](/ApuntesPSP/02-hilos-fundamentos/06-gil) y [7](/ApuntesPSP/02-hilos-fundamentos/07-estados-del-hilo). Pero si vienes de cero en multitarea, no te saltes los puntos 1 a 3: entender qué es un hilo y cómo se lanza es la base de todo el módulo.
 

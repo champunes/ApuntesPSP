@@ -5,7 +5,7 @@ description: Pasa datos por stdin y lee la respuesta por stdout 📨
 
 <p><small>Pasa datos por stdin y lee la respuesta por stdout 📨</small></p>
 
-> 🗺️ **Estás en:** 🚀 **U02 · Procesos y Subprocess** → 06 · Comunicación con procesos
+> 🗺️ **Estás en:** 🚀 **UD 2 · Gestión de procesos** → 06 · Comunicación con procesos
 
 ---
 
@@ -13,7 +13,7 @@ description: Pasa datos por stdin y lee la respuesta por stdout 📨
 
 > Un proceso hijo puede **leer de su stdin** y **escribir en su stdout**; con `communicate()` le pasas datos por un tubo y lees su respuesta por el otro.
 
-Los procesos no comparten memoria ([punto 1](/ApuntesPSP/01-procesos-y-subprocess/01-que-es-un-proceso)), pero el sistema operativo les presta **pipes** (tuberías): el `stdin`, `stdout` y `stderr` de cada proceso pueden conectarse a Python. Así un proceso "pregunta" y el otro "responde".
+Los procesos no comparten memoria ([punto 1](/ApuntesPSP/01-gestion-de-procesos/01-que-es-un-proceso)), pero el sistema operativo les presta **pipes** (tuberías): el `stdin`, `stdout` y `stderr` de cada proceso pueden conectarse a Python. Así un proceso "pregunta" y el otro "responde".
 
 ---
 
@@ -134,4 +134,4 @@ print(f"Error (None si todo bien): {error}")
 
 ---
 
-📚 [Volver al índice de la unidad](/ApuntesPSP/01-procesos-y-subprocess) · **Anterior:** [05 · subprocess.Popen()](/ApuntesPSP/01-procesos-y-subprocess/05-subprocess-popen) · **Siguiente:** [07 · Compatibilidad Windows / Linux](/ApuntesPSP/01-procesos-y-subprocess/07-compatibilidad-windows-linux)
+📚 [Volver al índice de la unidad](/ApuntesPSP/01-gestion-de-procesos) · **Anterior:** [05 · subprocess.Popen()](/ApuntesPSP/01-gestion-de-procesos/05-subprocess-popen) · **Siguiente:** [07 · Compatibilidad Windows / Linux](/ApuntesPSP/01-gestion-de-procesos/07-compatibilidad-windows-linux)

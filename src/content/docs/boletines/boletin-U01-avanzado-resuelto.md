@@ -48,7 +48,7 @@ subprocess.run(["start", "http://localhost:4321"], shell=True)
 # subprocess.run(["xdg-open", "http://localhost:4321"])
 ```
 
-`start` no es un ejecutable real: es un comando interno de `cmd`, por eso usa `shell=True`. `xdg-open` sí es un ejecutable real en Linux ([punto 7](/ApuntesPSP/01-procesos-y-subprocess/07-compatibilidad-windows-linux)).
+`start` no es un ejecutable real: es un comando interno de `cmd`, por eso usa `shell=True`. `xdg-open` sí es un ejecutable real en Linux ([punto 7](/ApuntesPSP/01-gestion-de-procesos/07-compatibilidad-windows-linux)).
 
 ## 4. Lanzador múltiple
 
@@ -116,7 +116,7 @@ print(f"El proceso respondió: {salida.strip()}")
 # → "HOLA MUNDO"
 ```
 
-`communicate(input="hola mundo")` escribe en el stdin del hijo, espera su fin y devuelve `(stdout, stderr)`. El hijo ejecuta `print(input().upper())` ([punto 6](/ApuntesPSP/01-procesos-y-subprocess/06-comunicacion-con-procesos)).
+`communicate(input="hola mundo")` escribe en el stdin del hijo, espera su fin y devuelve `(stdout, stderr)`. El hijo ejecuta `print(input().upper())` ([punto 6](/ApuntesPSP/01-gestion-de-procesos/06-comunicacion-con-procesos)).
 
 ## 8. Timeout con reintentos
 

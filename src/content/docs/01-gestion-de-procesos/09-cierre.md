@@ -5,11 +5,11 @@ description: Sé el proceso, laboratorio con subprocess y el ring final de la un
 
 <p><small>Sé el proceso, laboratorio con subprocess y el ring final de la unidad 🧠</small></p>
 
-> 🗺️ **Estás en:** 🚀 **U02 · Procesos y Subprocess** → 09 · Cierre
+> 🗺️ **Estás en:** 🚀 **UD 2 · Gestión de procesos** → 09 · Cierre
 
 ---
 
-Has terminado la teoría: la burbuja de memoria y el PID, los cinco estados, paralela contra distribuida, `run()`, `Popen()`, los pipes con `communicate()` y la compatibilidad Windows/Linux. Este cierre es el aterrizaje: recorres lo aprendido con juegos, un laboratorio real con fallos intencionados y las preguntas que te harán en una entrevista. Léelo justo después del [punto 8](/ApuntesPSP/01-procesos-y-subprocess/08-procesos-en-la-practica) y antes de abrir los boletines.
+Has terminado la teoría: la burbuja de memoria y el PID, los cinco estados, paralela contra distribuida, `run()`, `Popen()`, los pipes con `communicate()` y la compatibilidad Windows/Linux. Este cierre es el aterrizaje: recorres lo aprendido con juegos, un laboratorio real con fallos intencionados y las preguntas que te harán en una entrevista. Léelo justo después del [punto 8](/ApuntesPSP/01-gestion-de-procesos/08-procesos-en-la-practica) y antes de abrir los boletines.
 
 ---
 
@@ -27,7 +27,7 @@ Has terminado la teoría: la burbuja de memoria y el PID, los cinco estados, par
 6. La CPU te toca otra vez (**EJECUCIÓN**), terminas tu último `print()` y llegas a **TERMINADO**.
 7. Tu padre espera con `proceso.wait()` o `poll()` y recoge tu código de retorno: **0**.
 
-> 💡 **Ahora tú:** ¿y si tu padre lanza a la vez otros dos procesos (`calc.exe` y `notepad.exe`)? Los tres avanzáis turnándoos la CPU (concurrencia) y, si hay varios núcleos, alguno ejecutará de verdad a la vez (paralelismo). Eso es lo que viste en el [punto 3](/ApuntesPSP/01-procesos-y-subprocess/03-paralela-vs-distribuida).
+> 💡 **Ahora tú:** ¿y si tu padre lanza a la vez otros dos procesos (`calc.exe` y `notepad.exe`)? Los tres avanzáis turnándoos la CPU (concurrencia) y, si hay varios núcleos, alguno ejecutará de verdad a la vez (paralelismo). Eso es lo que viste en el [punto 3](/ApuntesPSP/01-gestion-de-procesos/03-paralela-vs-distribuida).
 
 ---
 
@@ -35,7 +35,7 @@ Has terminado la teoría: la burbuja de memoria y el PID, los cinco estados, par
 
 > *Un proceso y un hilo se sientan junto a la chimenea a resolver, de una vez, quién es más ligero.*
 
-**Proceso:** — Yo soy la unidad completa: memoria propia, recursos, PID. Si me cuelgo, tú ni te enteras. Soy el [punto 1](/ApuntesPSP/01-procesos-y-subprocess/01-que-es-un-proceso).
+**Proceso:** — Yo soy la unidad completa: memoria propia, recursos, PID. Si me cuelgo, tú ni te enteras. Soy el [punto 1](/ApuntesPSP/01-gestion-de-procesos/01-que-es-un-proceso).
 
 **Hilo:** — ¿Y para qué quieres toda esa burbuja? Yo vivo **dentro** de un proceso y comparto su memoria. Soy mucho más barato de crear.
 
@@ -47,9 +47,9 @@ Has terminado la teoría: la burbuja de memoria y el PID, los cinco estados, par
 
 **Hilo:** — Vale, vale. Tú para aislamiento y paralelismo real; yo para tareas ligeras que comparten memoria. ¿Empate?
 
-**Proceso:** — *sonríe* Empate... hasta la U03.
+**Proceso:** — *sonríe* Empate... hasta la UD 3.
 
-> **Moraleja**: el proceso aísla y paraleliza de verdad; el hilo es ligero y comparte memoria. Los hilos son el plato principal de la [U03 · Hilos Fundamentos](/ApuntesPSP/02-hilos-fundamentos).
+> **Moraleja**: el proceso aísla y paraleliza de verdad; el hilo es ligero y comparte memoria. Los hilos son el plato principal de la [UD 3 · Hilos y concurrencia](/ApuntesPSP/02-hilos-fundamentos).
 
 ---
 
@@ -132,7 +132,7 @@ Has terminado la teoría: la burbuja de memoria y el PID, los cinco estados, par
 <details>
 <summary>💡 Soluciones</summary>
 
-1. Porque cada proceso vive en su **burbuja de memoria aislada** ([punto 1](/ApuntesPSP/01-procesos-y-subprocess/01-que-es-un-proceso)); si compartieran memoria, un fallo de uno corrompería a todos. Por eso se comunican con **mecanismos externos**: pipes, sockets, archivos.
+1. Porque cada proceso vive en su **burbuja de memoria aislada** ([punto 1](/ApuntesPSP/01-gestion-de-procesos/01-que-es-un-proceso)); si compartieran memoria, un fallo de uno corrompería a todos. Por eso se comunican con **mecanismos externos**: pipes, sockets, archivos.
 2. Se queda como **zombie**: ya terminó, pero su código de retorno sigue en la tabla de procesos hasta que el padre lo recoge con `wait()` o `poll()`. El sistema lo limpia cuando el padre muere.
 3. `multiprocessing` para **paralelismo real** dentro de tu programa (repartir trabajo entre CPUs); `subprocess` para **lanzar otros programas** (apps, comandos del sistema).
 4. Porque `shell=True` delega en el intérprete de comandos: un dato del usuario con `;`, `&` o `|` puede **ejecutar comandos extra** (inyección). La lista de argumentos no tiene ese problema.
@@ -177,7 +177,7 @@ Vertical:
 5. **"¿Qué diferencia hay entre `run()` y `Popen()`? ¿Cuándo usarías cada uno?"**
 6. **"¿Cómo comunicarías dos procesos entre sí?"**
 
-> 💡 **Cómo encararlas:** la 4 y la 5 son las "preguntas reina". Para la 4, recorre la cadena: `subprocess.run([...], capture_output=True, text=True)` → `resultado.stdout`; si el proceso necesita datos, `Popen(stdin=PIPE, stdout=PIPE)` + `communicate(input=...)`. Para la 5, repite la moraleja del [punto 8](/ApuntesPSP/01-procesos-y-subprocess/08-procesos-en-la-practica): `run()` para respuestas inmediatas, `Popen()` para segundo plano. Y para la 1 no olvides la **burbuja de memoria** y el **PID**. Si sabes contarlo fluido, ya eres medio programador de sistemas.
+> 💡 **Cómo encararlas:** la 4 y la 5 son las "preguntas reina". Para la 4, recorre la cadena: `subprocess.run([...], capture_output=True, text=True)` → `resultado.stdout`; si el proceso necesita datos, `Popen(stdin=PIPE, stdout=PIPE)` + `communicate(input=...)`. Para la 5, repite la moraleja del [punto 8](/ApuntesPSP/01-gestion-de-procesos/08-procesos-en-la-practica): `run()` para respuestas inmediatas, `Popen()` para segundo plano. Y para la 1 no olvides la **burbuja de memoria** y el **PID**. Si sabes contarlo fluido, ya eres medio programador de sistemas.
 
 ---
 
@@ -216,7 +216,7 @@ Sí, cualquier ejecutable. Pero el **PATH** debe incluirlo o debes dar la ruta c
 
 *Los procesos se comunican sin compartir memoria. Cada uno en su burbuja.*
 
-**PRÓXIMAMENTE EN U03:** *Los procesos son pesados: cada uno su memoria, su burbuja, su PID. Pero ¿y si quieres que varias tareas compartan memoria y se turnen la CPU? Necesitas algo más ligero: los hilos.*
+**PRÓXIMAMENTE EN UD 3:** *Los procesos son pesados: cada uno su memoria, su burbuja, su PID. Pero ¿y si quieres que varias tareas compartan memoria y se turnen la CPU? Necesitas algo más ligero: los hilos.*
 
 ---
 
@@ -229,12 +229,12 @@ Sí, cualquier ejecutable. Pero el **PATH** debe incluirlo o debes dar la ruta c
 | a) | Reconoce las características de los procesos | ✅ Burbuja de memoria y PID (punto 1) + ⭐ Sé el proceso |
 | b) | Distingue entre computación paralela y distribuida | ✅ Punto 3 + 🔥 Fireside (punto 9) |
 | c) | Conoce los estados de un proceso | ✅ Punto 2 + ⭐ Sé el proceso |
-| d) | Identifica las diferencias clave entre proceso e hilo | → U03 (🔥 Fireside lo anticipa) |
+| d) | Identifica las diferencias clave entre proceso e hilo | → UD 3 (🔥 Fireside lo anticipa) |
 | e) | Crea programas con procesos (subprocess) | ✅ Puntos 4-5-8 + ⚡ Laboratorio de tortura |
 | f) | Establece comunicación entre procesos | ✅ Punto 6 + ⚡ Laboratorio de tortura |
 
-> RA1d (proceso vs hilo) se cubre en la **U03 · Hilos Fundamentos**. RA1g (análisis de ventajas de procesos frente a hilos) también en **U03**. RA1h (documentación) es transversal a todo el curso.
+> RA1d (proceso vs hilo) se cubre en la **UD 3 · Hilos y concurrencia**. RA1g (análisis de ventajas de procesos frente a hilos) también en **UD 3**. RA1h (documentación) es transversal a todo el curso.
 
 ---
 
-📚 [Volver al índice de la unidad](/ApuntesPSP/01-procesos-y-subprocess) · **Anterior:** [08 · Procesos en la práctica](/ApuntesPSP/01-procesos-y-subprocess/08-procesos-en-la-practica) · **Siguiente:** **[U03 · Hilos Fundamentos](/ApuntesPSP/02-hilos-fundamentos)**
+📚 [Volver al índice de la unidad](/ApuntesPSP/01-gestion-de-procesos) · **Anterior:** [08 · Procesos en la práctica](/ApuntesPSP/01-gestion-de-procesos/08-procesos-en-la-practica) · **Siguiente:** **[UD 3 · Hilos y concurrencia](/ApuntesPSP/02-hilos-fundamentos)**

@@ -5,7 +5,7 @@ description: Lanza un proceso y sigue tu camino 🚶
 
 <p><small>Lanza un proceso y sigue tu camino 🚶</small></p>
 
-> 🗺️ **Estás en:** 🚀 **U02 · Procesos y Subprocess** → 05 · subprocess.Popen()
+> 🗺️ **Estás en:** 🚀 **UD 2 · Gestión de procesos** → 05 · subprocess.Popen()
 
 ---
 
@@ -145,4 +145,4 @@ Los 3 procesos viven a la vez, cada uno con su PID, mientras Python hace otras c
 
 ---
 
-📚 [Volver al índice de la unidad](/ApuntesPSP/01-procesos-y-subprocess) · **Anterior:** [04 · subprocess.run()](/ApuntesPSP/01-procesos-y-subprocess/04-subprocess-run) · **Siguiente:** [06 · Comunicación con procesos](/ApuntesPSP/01-procesos-y-subprocess/06-comunicacion-con-procesos)
+📚 [Volver al índice de la unidad](/ApuntesPSP/01-gestion-de-procesos) · **Anterior:** [04 · subprocess.run()](/ApuntesPSP/01-gestion-de-procesos/04-subprocess-run) · **Siguiente:** [06 · Comunicación con procesos](/ApuntesPSP/01-gestion-de-procesos/06-comunicacion-con-procesos)

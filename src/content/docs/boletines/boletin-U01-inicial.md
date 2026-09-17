@@ -39,7 +39,7 @@ Usa `subprocess.Popen` para abrir `notepad.exe`, muestra su PID, espera 3 segund
 
 Ordena los siguientes estados de un proceso en el orden correcto de su ciclo de vida: `EJECUCIÓN`, `NUEVO`, `TERMINADO`, `BLOQUEADO`, `LISTO`.
 
-**Pista:** el proceso nace, luego espera su turno de CPU, se ejecuta, puede quedarse esperando un recurso y finalmente muere. Repasa el [punto 2](/ApuntesPSP/01-procesos-y-subprocess/02-estados-de-un-proceso).
+**Pista:** el proceso nace, luego espera su turno de CPU, se ejecuta, puede quedarse esperando un recurso y finalmente muere. Repasa el [punto 2](/ApuntesPSP/01-gestion-de-procesos/02-estados-de-un-proceso).
 
 ## 8. Ping con timeout
 

@@ -5,7 +5,7 @@ description: "El ciclo de vida: de NUEVO a TERMINADO 🔄"
 
 <p><small>El ciclo de vida: de NUEVO a TERMINADO 🔄</small></p>
 
-> 🗺️ **Estás en:** 🚀 **U02 · Procesos y Subprocess** → 02 · Estados de un proceso
+> 🗺️ **Estás en:** 🚀 **UD 2 · Gestión de procesos** → 02 · Estados de un proceso
 
 ---
 
@@ -106,4 +106,4 @@ El camarero (la CPU) alterna entre los clientes de la cola dando a cada uno unos
 
 ---
 
-📚 [Volver al índice de la unidad](/ApuntesPSP/01-procesos-y-subprocess) · **Anterior:** [01 · Qué es un proceso](/ApuntesPSP/01-procesos-y-subprocess/01-que-es-un-proceso) · **Siguiente:** [03 · Paralela vs Distribuida](/ApuntesPSP/01-procesos-y-subprocess/03-paralela-vs-distribuida)
+📚 [Volver al índice de la unidad](/ApuntesPSP/01-gestion-de-procesos) · **Anterior:** [01 · Qué es un proceso](/ApuntesPSP/01-gestion-de-procesos/01-que-es-un-proceso) · **Siguiente:** [03 · Paralela vs Distribuida](/ApuntesPSP/01-gestion-de-procesos/03-paralela-vs-distribuida)
