@@ -4,7 +4,7 @@
 
 - **Lenguaje:** Python 3.10/3.11
 - **Stdlib:** `threading`, `socket`, `subprocess`, `hashlib`, `time`, `random`, `json`, `struct`, `pathlib`
-- **Externas:** `pycryptodome`, `openai`, `requests`, `python-dotenv`, `httpx`, `transformers`, `asyncio`
+- **Externas:** `cryptography`, `openai`, `requests`, `python-dotenv`, `httpx`, `transformers`, `asyncio`
 - **Web:** Astro + Starlight, Node.js 24, Geist Sans, Pagefind
 
 ## Estructura
@@ -18,7 +18,7 @@ PSP/
 │
 ├── src/
 │   ├── content.config.ts                ← configuración colección Starlight
-│   ├── content/docs/                    ← 155 archivos de apuntes (MD)
+│   ├── content/docs/                    ← 158 archivos de apuntes (MD)
 │   │   ├── index.md                     ← landing page (cards, descargas, licencia)
 │   │   ├── 01-gestion-de-procesos.md  ← índice de la unidad
 │   │   ├── 01-gestion-de-procesos/    ← 9 capítulos por unidad
@@ -29,7 +29,7 @@ PSP/
 │   │   │   ├── boletin-U01-inicial-resuelto.md ← ✅ inicial CON solución
 │   │   │   ├── boletin-U01-avanzado.md       ← 💪 avanzado SIN resolver
 │   │   │   └── boletin-U01-avanzado-resuelto.md ← ⭐ avanzado CON solución
-│   │   └── ... hasta unidad 11
+│   │   └── ... hasta unidad 10 + anexo
 │   └── styles/
 │       └── custom.css                   ← CSS premium (azul Python #306998 + teal)
 │
@@ -64,7 +64,7 @@ PSP/
 | RA2 | Hilos, sincronización, locks, semáforos, barreras, daemon, timer | T01 | `lock_*.py`, `semaforos.py`, `barreras.py`, `productor_consumidor.py`, `hilos_daemon.py`, `timer.py` |
 | RA3 | Sockets TCP/UDP, cliente-servidor | T02 | `TeoriaServidorWebTCP.py`, `Tema 4-*TCP-bye.py`, `ServidorHora.py`, `Tarea5*` |
 | RA4 | APIs REST, servidores concurrentes, asyncio | T03 + T05 | `APIRest-Meteo*.py`, `API_OpenaAI*.py`, `servidor.py`, `lanzaclientes.py` |
-| RA5 | Hash, cifrado (César, AES, RSA), firmas, sockets seguros | T04 | `md5.py`, `sha1.py`, `cesar*.py`, `AESejemplo.py`, `Generador_de_claves.py`, `FrimarRSA.py`, `VerificarRSA.py` |
+| RA5 | Hash, cifrado (AES, RSA), firmas, cifrado híbrido, RBAC | T04 | `cryptography` (AESGCM, RSA, PKCS1v15) |
 
 ## Convenciones de código
 
@@ -173,7 +173,7 @@ d2 archivo.d2 ../public/diagrams/archivo.svg --pad 20
 
 ## Apuntes (MD por unidad)
 
-Estructura "libro" por unidad (formato replicado de ApuntesRedes): índice + 9 capítulos en subcarpeta + 4 boletines en `boletines/`. Total 155 ficheros MD (~10.000+ líneas). Cada unidad indica al final qué RAs cubre.
+Estructura "libro" por unidad (formato replicado de ApuntesRedes): índice + 9 capítulos en subcarpeta + 4 boletines en `boletines/`. Total 158 ficheros MD (~10.000+ líneas). Cada unidad indica al final qué RAs cubre.
 
 Por unidad: `0X-unidad.md` (índice, ~90 líneas) → `0X-unidad/01-…-08.md` (capítulos, 110-280 líneas) + `09-cierre.md` (cierre, ~250 líneas) → `boletines/boletin-UXX-inicial[-resuelto].md` y `-avanzado[-resuelto].md`.
 
@@ -184,7 +184,6 @@ Secciones por capítulo:
 - ✍️ **Revisión es-ES (nota 1)**: vocabulario peninsular, mayúsculas oracionales y formato numérico español antes de dar el capítulo por cerrado
 
 Secciones del índice:
-- 🗺️ **Ruta del viaje** (🚀 Proceso → 🔀 Hilo → 🔒 Sincronización → 🔌 TCP → 📡 UDP → 🌐 API REST → 🧪 APIs comerciales → 🔐 Hash → 🧬 Cifrado → 🏗️ Servidores → ⏱️ asyncio)
 - 🎯 **Objetivo de la unidad** + 🗺️ **Mapa de la unidad** (9 enlaces)
 - 📝 **Boletines** con `.ejercicio-links` + `a.elink` a los 4 boletines
 - ✅ **Criterios de evaluación** con columna "Dónde se cubre"
@@ -198,6 +197,7 @@ Secciones del cierre `09-cierre.md`: ⭐ Sé el código, 🔥 Fireside Chat, �
 
 | Unidad | Índice + 9 capítulos | Líneas aprox | Temas clave | RAs |
 |--------|----------------------|--------------|-------------|-----|
+| UD 1 Python básico | `00-python-basico.md` + carpeta | ~1.200 | Tipos, flujo, funciones, clases, módulos | — |
 | UD 2 Gestión de procesos | `01-gestion-de-procesos.md` + carpeta | ~960 | subprocess, run, Popen, pipes, comunicación | RA1 |
 | UD 3 Hilos y concurrencia | `02-hilos-y-concurrencia.md` + carpeta | ~1.113 | threading, join, daemon, Timer, GIL, estados | RA2 |
 | UD 4 Sincronización | `03-sincronizacion.md` + carpeta | ~1.102 | Lock, Semaphore, Barrier, Condition, RLock | RA2 |
@@ -205,10 +205,11 @@ Secciones del cierre `09-cierre.md`: ⭐ Sé el código, 🔥 Fireside Chat, �
 | UD 6 Servidores concurrentes | `05-servidores-concurrentes.md` + carpeta | ~1.029 | socketserver, ThreadPool, benchmark | RA4c-d |
 | UD 7 HTTP y APIs REST | `06-http-y-apis-rest.md` + carpeta | ~938 | REST, métodos HTTP, requests, JSON | RA4a-b |
 | UD 8 APIs comerciales | `07-apis-comerciales.md` + carpeta | ~998 | OpenWeatherMap, OpenAI, dotenv, rate limit | RA4a-b |
-| UD 9 Seguridad y cifrado | `08-seguridad-y-cifrado.md` + carpeta | ~1.975 | Hash, AES, RSA, firmas, cifrado híbrido | RA5 |
+| UD 9 Seguridad y cifrado | `08-seguridad-y-cifrado.md` + carpeta | ~1.500 | Hash, AES, RSA, firmas, cifrado híbrido, RBAC | RA5 |
 | UD 10 Alta disponibilidad | `09-alta-disponibilidad.md` + carpeta | ~913 | asyncio, heartbeat, backoff, timeouts | RA4e-g |
+| Anexo Spring Boot | `10-anexo-spring-boot.md` + carpeta | ~700 | Java, Spring Boot, DI, REST, JPA | — |
 
-**Boletines (44):** 4 por unidad en `boletines/boletin-UXX-*`: inicial (8 ejercicios), inicial-resuelto, avanzado (≥8), avanzado-resuelto. Pistas inline `**Pista:**` en los por-resolver; respuestas inline en negrita en los resueltos.
+**Boletines (44):** 4 por unidad en `boletines/boletin-UXX-*`: inicial (8 ejercicios), inicial-resuelto, avanzado (≥8), avanzado-resuelto. Pistas inline `**Pista:**` en los por-resolver; respuestas inline en negrita en los resueltos. El Anexo no tiene boletines.
 
 **Licencia:** CC BY-SA 4.0 — Sergi Garcia Barea
 
