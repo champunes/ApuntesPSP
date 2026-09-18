@@ -1,9 +1,9 @@
 ﻿---
-title: Boletín U10 — Inicial (Resuelto)
+title: Boletín UD 9 — Inicial (Resuelto)
 description: Soluciones de los ejercicios básicos de Cifrado Moderno
 ---
 
-# ✅ Boletín U10 — Inicial (Resuelto)
+# ✅ Boletín UD 9 — Inicial (Resuelto)
 
 > `cryptography` debe estar instalado: `pip install cryptography`.
 
@@ -21,7 +21,7 @@ texto_cifrado = cifrador.encrypt(b"0123456789ABCDEF")
 print(f"Cifrado (hex): {texto_cifrado.hex()}")
 ```
 
-El mensaje mide **exactamente 16 bytes**, así que no hace falta padding. ECB cifra cada bloque de forma independiente (recuerda: no lo uses con datos largos o repetitivos, [punto 3](/ApuntesPSP/08-seguridad-y-cifrado/03-modos-aes)).
+El mensaje mide **exactamente 16 bytes**, así que no hace falta padding. ECB cifra cada bloque de forma independiente (recuerda: no lo uses con datos largos o repetitivos, [punto 3](/ApuntesPSP/08-seguridad-y-cifrado/05-cifrado-simetrico-aes)).
 
 ## 2. Nonce y tag
 
@@ -38,7 +38,7 @@ print(f"Longitud tag:   {len(tag)} bytes")
 print(f"Longitud cifrado: {len(texto_cifrado)} bytes")
 ```
 
-En modo EAX el **nonce** mide **16 bytes** y el **tag** también **16 bytes**. Los tres (nonce, tag y cifrado) viajan juntos; la clave no ([punto 2](/ApuntesPSP/08-seguridad-y-cifrado/02-aes)).
+En modo EAX el **nonce** mide **16 bytes** y el **tag** también **16 bytes**. Los tres (nonce, tag y cifrado) viajan juntos; la clave no ([punto 2](/ApuntesPSP/08-seguridad-y-cifrado/05-cifrado-simetrico-aes)).
 
 ## 3. RSA: exportar clave
 
@@ -81,7 +81,7 @@ original = cifrador2.decrypt(texto_cifrado)
 print(f"Original: {original.decode()}")
 ```
 
-Necesitas la **misma clave** y el **mismo nonce** para descifrar ([punto 2](/ApuntesPSP/08-seguridad-y-cifrado/02-aes)).
+Necesitas la **misma clave** y el **mismo nonce** para descifrar ([punto 2](/ApuntesPSP/08-seguridad-y-cifrado/05-cifrado-simetrico-aes)).
 
 ## 6. RSA: generar claves
 
@@ -105,7 +105,7 @@ a) El simétrico usa **una sola clave** (misma para cifrar y descifrar). El asim
 
 b) Con la clave **pública de Bob**. Solo su clave privada puede descifrarlo.
 
-c) Por su **límite de tamaño** (~190 bytes con claves de 2048 bits) y su **velocidad** (~1 MB/s). Para volúmenes grandes se usa AES (o el cifrado híbrido del [punto 6](/ApuntesPSP/08-seguridad-y-cifrado/06-cifrado-hibrido)).
+c) Por su **límite de tamaño** (~190 bytes con claves de 2048 bits) y su **velocidad** (~1 MB/s). Para volúmenes grandes se usa AES (o el cifrado híbrido del [punto 6](/ApuntesPSP/08-seguridad-y-cifrado/08-cifrado-hibrido-y-practica)).
 
 ## 8. AES: cifrar y descifrar completo
 
@@ -128,4 +128,4 @@ original = descifrador.decrypt(texto_cifrado)
 print(f"Original: {original.decode()}")
 ```
 
-El nonce y el tag se envían junto al cifrado; el receptor los usa con la misma clave para descifrar y verificar la integridad ([punto 2](/ApuntesPSP/08-seguridad-y-cifrado/02-aes)).
+El nonce y el tag se envían junto al cifrado; el receptor los usa con la misma clave para descifrar y verificar la integridad ([punto 2](/ApuntesPSP/08-seguridad-y-cifrado/05-cifrado-simetrico-aes)).

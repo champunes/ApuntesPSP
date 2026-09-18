@@ -1,9 +1,9 @@
 ﻿---
-title: Boletín U09 — Inicial (Resuelto)
+title: Boletín UD 9 — Inicial (Resuelto)
 description: Soluciones de los ejercicios básicos de Hash y Cifrado Clásico
 ---
 
-# ✅ Boletín U09 — Inicial (Resuelto)
+# ✅ Boletín UD 9 — Inicial (Resuelto)
 
 ---
 
@@ -41,7 +41,7 @@ print(f"¿Iguales? {h1 == h2}")
 - `Hola` → `e633f4fc79badea1dc5db970cf397c8248bac47cc3acf9915ba60b5d76b0e88f`
 - `hola` → `b221d9dbb083a7f33428d7c2a3c3198ae925614d70210e28716ccaa7cd4ddb79`
 
-Son **diferentes**: aunque solo cambia la mayúscula por la minúscula, el hash cambia por completo. Es el **efecto avalancha** ([punto 2](/ApuntesPSP/08-seguridad-y-cifrado/02-que-es-un-hash)).
+Son **diferentes**: aunque solo cambia la mayúscula por la minúscula, el hash cambia por completo. Es el **efecto avalancha** ([punto 2](/ApuntesPSP/08-seguridad-y-cifrado/02-hash-y-huellas-digitales)).
 
 ## 4. Longitud de los hashes de "Hola mundo"
 
@@ -108,7 +108,7 @@ def descifrar_cesar(texto, desplazamiento):
 print(descifrar_cesar("Krod", 3))  # "Hola"
 ```
 
-Descifrar es cifrar con desplazamiento **negativo** ([punto 6](/ApuntesPSP/08-seguridad-y-cifrado/06-cifrado-cesar)): `"Krod"` con -3 devuelve `"Hola"`.
+Descifrar es cifrar con desplazamiento **negativo** ([punto 6](/ApuntesPSP/08-seguridad-y-cifrado/04-cifrado-clasico)): `"Krod"` con -3 devuelve `"Hola"`.
 
 ## 8. Determinismo del hash
 
@@ -121,4 +121,4 @@ print(f"Segunda:  {h2}")
 print(f"¿Iguales? {h1 == h2}")  # True
 ```
 
-Son **iguales**: el hash es **determinista** ([punto 2](/ApuntesPSP/08-seguridad-y-cifrado/02-que-es-un-hash)). Misma entrada → mismo hash, siempre. Esa propiedad es la que hace posible el login por comparación de hashes del [punto 4](/ApuntesPSP/08-seguridad-y-cifrado/04-hash-de-contrasenas).
+Son **iguales**: el hash es **determinista** ([punto 2](/ApuntesPSP/08-seguridad-y-cifrado/02-hash-y-huellas-digitales)). Misma entrada → mismo hash, siempre. Esa propiedad es la que hace posible el login por comparación de hashes del [punto 4](/ApuntesPSP/08-seguridad-y-cifrado/03-contrasenas-seguras).

@@ -1,9 +1,9 @@
 ﻿---
-title: Boletín U10 — Avanzado (Resuelto)
+title: Boletín UD 9 — Avanzado (Resuelto)
 description: Soluciones de los ejercicios avanzados de Cifrado Moderno
 ---
 
-# 💪 Boletín U10 — Avanzado (Resuelto)
+# 💪 Boletín UD 9 — Avanzado (Resuelto)
 
 ---
 
@@ -34,7 +34,7 @@ print(f"Mensaje original: {original.decode()}")
 Mensaje original: El cifrado hibrido funciona
 ```
 
-RSA reparte la clave AES (32 bytes) y AES cifra el mensaje completo. El orden de descifrado es el inverso al de cifrado ([punto 6](/ApuntesPSP/08-seguridad-y-cifrado/06-cifrado-hibrido)).
+RSA reparte la clave AES (32 bytes) y AES cifra el mensaje completo. El orden de descifrado es el inverso al de cifrado ([punto 6](/ApuntesPSP/08-seguridad-y-cifrado/08-cifrado-hibrido-y-practica)).
 
 ## 2. Firma alterada
 
@@ -65,7 +65,7 @@ except (ValueError, TypeError):
 ❌ Firma inválida — la firma fue alterada
 ```
 
-La firma depende del hash y de la clave: **un solo byte distinto** la invalida por completo ([punto 5](/ApuntesPSP/08-seguridad-y-cifrado/05-firmas-digitales)).
+La firma depende del hash y de la clave: **un solo byte distinto** la invalida por completo ([punto 5](/ApuntesPSP/08-seguridad-y-cifrado/07-firmas-digitales)).
 
 ## 3. RBAC con permisos cifrado
 
@@ -94,7 +94,7 @@ False
 True
 ```
 
-Cada rol tiene su paquete de permisos; `puede` comprueba si la acción está en el del rol ([punto 7](/ApuntesPSP/08-seguridad-y-cifrado/07-rbac-y-roles)). `permisos.get(usuario["rol"], [])` devuelve lista vacía para roles desconocidos: por defecto, nada permitido.
+Cada rol tiene su paquete de permisos; `puede` comprueba si la acción está en el del rol ([punto 7](/ApuntesPSP/08-seguridad-y-cifrado/08-cifrado-hibrido-y-practica)). `permisos.get(usuario["rol"], [])` devuelve lista vacía para roles desconocidos: por defecto, nada permitido.
 
 ## 4. Cifrar archivo completo
 
@@ -175,7 +175,7 @@ print(f"Longitud del original: {len(original)} bytes")
 Longitud del original: 300 bytes
 ```
 
-Así cualquier mensaje cabe, sea cual sea su tamaño ([punto 6](/ApuntesPSP/08-seguridad-y-cifrado/06-cifrado-hibrido)).
+Así cualquier mensaje cabe, sea cual sea su tamaño ([punto 6](/ApuntesPSP/08-seguridad-y-cifrado/08-cifrado-hibrido-y-practica)).
 
 ## 6. Intercambio de claves simulado
 
@@ -205,7 +205,7 @@ print(f"Ana recibe: {original.decode()}")
 Ana recibe: Mensaje para Ana
 ```
 
-Los 4 componentes que viajan son `(clave_AES_cifrada, nonce, tag, cifrado)`. Ana usa su **clave privada** para extraer la clave AES y luego descifra con ella ([punto 6](/ApuntesPSP/08-seguridad-y-cifrado/06-cifrado-hibrido)).
+Los 4 componentes que viajan son `(clave_AES_cifrada, nonce, tag, cifrado)`. Ana usa su **clave privada** para extraer la clave AES y luego descifra con ella ([punto 6](/ApuntesPSP/08-seguridad-y-cifrado/08-cifrado-hibrido-y-practica)).
 
 ## 7. Firma con verificación de integridad
 
@@ -235,7 +235,7 @@ except (ValueError, TypeError):
 ❌ Firma inválida — el mensaje fue manipulado
 ```
 
-La firma se calcula sobre el **hash del mensaje original**. Si el mensaje cambia un solo byte, el hash es distinto y la verificación falla: la firma detecta cualquier modificación ([punto 5](/ApuntesPSP/08-seguridad-y-cifrado/05-firmas-digitales)).
+La firma se calcula sobre el **hash del mensaje original**. Si el mensaje cambia un solo byte, el hash es distinto y la verificación falla: la firma detecta cualquier modificación ([punto 5](/ApuntesPSP/08-seguridad-y-cifrado/07-firmas-digitales)).
 
 ## 8. RSA vs AES benchmark
 
@@ -268,7 +268,7 @@ print(f"100 cifrados RSA:  {rsa_ms:.1f} ms")
 print(f"1000 cifrados AES: {aes_ms:.1f} ms")
 ```
 
-La diferencia es **abismal**: cifrar 10 veces más mensajes con AES tarda una fracción de lo que tarda RSA con solo 100. Por eso AES va para el volumen y RSA solo para repartir la clave ([punto 1](/ApuntesPSP/08-seguridad-y-cifrado/01-cifrado-simetrico-vs-asimetrico)).
+La diferencia es **abismal**: cifrar 10 veces más mensajes con AES tarda una fracción de lo que tarda RSA con solo 100. Por eso AES va para el volumen y RSA solo para repartir la clave ([punto 1](/ApuntesPSP/08-seguridad-y-cifrado/05-cifrado-simetrico-aes)).
 
 ## 9. Sistema de cifrado de extremo a extremo
 
@@ -305,4 +305,4 @@ print(f"Bob recibe: {bob.descifrar(nonce, tag, clave_aes_cifrada, cifrado)}")
 Bob recibe: Hola Bob, quedamos a las 8
 ```
 
-`cifrar_para` cifra el mensaje con AES y protege la clave AES con la **pública del destinatario**. `descifrar` invierte el proceso usando la **privada del propio usuario** y verifica el tag. Es el esquema del [punto 8](/ApuntesPSP/08-seguridad-y-cifrado/08-practica-sistema-seguro): cada usuario guarda su privada y solo él puede descifrar lo que le envían.
+`cifrar_para` cifra el mensaje con AES y protege la clave AES con la **pública del destinatario**. `descifrar` invierte el proceso usando la **privada del propio usuario** y verifica el tag. Es el esquema del [punto 8](/ApuntesPSP/08-seguridad-y-cifrado/08-cifrado-hibrido-y-practica): cada usuario guarda su privada y solo él puede descifrar lo que le envían.

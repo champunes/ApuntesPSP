@@ -1,9 +1,9 @@
 ﻿---
-title: Boletín U10 — Avanzado
+title: Boletín UD 9 — Avanzado
 description: Ejercicios avanzados de Cifrado Moderno
 ---
 
-# 💪 Boletín U10 — Avanzado
+# 💪 Boletín UD 9 — Avanzado
 
 > Ejercicios que requieren aplicar AES, RSA, firmas y cifrado híbrido de forma más profunda, con programas completos.
 

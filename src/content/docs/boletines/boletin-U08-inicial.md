@@ -1,9 +1,9 @@
 ﻿---
-title: Boletín U09 — Inicial
+title: Boletín UD 9 — Inicial
 description: Ejercicios básicos de Hash y Cifrado Clásico
 ---
 
-# 📝 Boletín U09 — Inicial
+# 📝 Boletín UD 9 — Inicial
 
 > Ejercicios básicos para afianzar los conceptos de hash (MD5, SHA-1, SHA-256) y cifrado César de la unidad U09.
 
