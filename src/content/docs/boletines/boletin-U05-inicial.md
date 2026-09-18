@@ -1,6 +1,6 @@
 ﻿---
 title: Boletín U06 — Inicial
-description: Ejercicios básicos de Sockets UDP y Protocolos
+description: Ejercicios básicos de Sockets TCP y UDP
 ---
 
 # 📝 Boletín U06 — Inicial

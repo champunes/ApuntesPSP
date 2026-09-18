@@ -5,7 +5,7 @@ description: "HTTP hablado a pelo y el orden de los bytes 🌐"
 
 <p><small>HTTP hablado a pelo y el orden de los bytes 🌐</small></p>
 
-> 🗺️ **Estás en:** 🔌 **U05 · Sockets TCP** → 07 · Protocolos sobre TCP
+> 🗺️ **Estás en:** 🔌 **UD 5 · Sockets TCP y UDP** → 07 · Protocolos sobre TCP
 
 ---
 
@@ -56,9 +56,9 @@ Desglosemos:
 | `Connection: close` | "Ciérrame la conexión cuando termines" |
 | `\r\n\r\n` (línea en blanco) | Marca el final de las cabeceras |
 
-Y el bucle de lectura es el truco del [punto 2](/ApuntesPSP/04-sockets-tcp/02-cliente-tcp) en acción: `recv()` tantas veces como haga falta hasta que devuelva `b""` (el servidor cerró gracias a `Connection: close`), **concatenando** cada trozo.
+Y el bucle de lectura es el truco del [punto 2](/ApuntesPSP/04-sockets-tcp-y-udp/02-cliente-tcp) en acción: `recv()` tantas veces como haga falta hasta que devuelva `b""` (el servidor cerró gracias a `Connection: close`), **concatenando** cada trozo.
 
-> 💡 Esto es la base de la [U07 · APIs REST y HTTP](/ApuntesPSP/06-apis-rest-y-http): las librerías como `requests` hacen exactamente esto por debajo, pero ahora sabes el truco. HTTP sobre TCP también es un criterio de la [U06](/ApuntesPSP/05-sockets-udp-y-protocolos).
+> 💡 Esto es la base de la [U07 · APIs REST y HTTP](/ApuntesPSP/06-apis-rest-y-http): las librerías como `requests` hacen exactamente esto por debajo, pero ahora sabes el truco. HTTP sobre TCP también es un criterio de la [UD 6](/ApuntesPSP/05-sockets-udp-y-protocolos).
 
 ---
 
@@ -123,4 +123,4 @@ print(puerto)                         # 5000
 
 ---
 
-📚 [Volver al índice de la unidad](/ApuntesPSP/04-sockets-tcp) · **Anterior:** [06 · SO_REUSEADDR](/ApuntesPSP/04-sockets-tcp/06-so-reuseaddr) · **Siguiente:** [08 · Servidor eco completo](/ApuntesPSP/04-sockets-tcp/08-servidor-eco-completo)
+📚 [Volver al índice de la unidad](/ApuntesPSP/04-sockets-tcp) · **Anterior:** [06 · SO_REUSEADDR](/ApuntesPSP/04-sockets-tcp-y-udp/06-so-reuseaddr) · **Siguiente:** [08 · Servidor eco completo](/ApuntesPSP/04-sockets-tcp-y-udp/08-servidor-eco-completo)

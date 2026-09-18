@@ -5,11 +5,11 @@ description: "Sé el socket, laboratorio TCP y el cierre de la unidad 🧠"
 
 <p><small>Sé el socket, laboratorio TCP y el cierre de la unidad 🧠</small></p>
 
-> 🗺️ **Estás en:** 🔌 **U05 · Sockets TCP** → 09 · Cierre
+> 🗺️ **Estás en:** 🔌 **UD 5 · Sockets TCP y UDP** → 09 · Cierre
 
 ---
 
-Has terminado la teoría: socket, cliente, servidor, handshake, errores, `SO_REUSEADDR` y protocolos sobre TCP. Este cierre es el aterrizaje: recorres lo aprendido con juegos, un laboratorio real con fallos intencionados y las preguntas que te harán en una entrevista. Léelo justo después del [punto 8](/ApuntesPSP/04-sockets-tcp/08-servidor-eco-completo) y antes de abrir los boletines.
+Has terminado la teoría: socket, cliente, servidor, handshake, errores, `SO_REUSEADDR` y protocolos sobre TCP. Este cierre es el aterrizaje: recorres lo aprendido con juegos, un laboratorio real con fallos intencionados y las preguntas que te harán en una entrevista. Léelo justo después del [punto 8](/ApuntesPSP/04-sockets-tcp-y-udp/08-servidor-eco-completo) y antes de abrir los boletines.
 
 ---
 
@@ -30,7 +30,7 @@ Has terminado la teoría: socket, cliente, servidor, handshake, errores, `SO_REU
 
 **Todo el tiempo, el SO ha hecho el trabajo sucio: handshakes, despedidas, orden de bytes.**
 
-> 💡 **Ahora tú:** ¿y si el cliente llama mientras sigues en el paso 6 atendiendo a otro? La conexión queda **en la cola** de `listen()` (el *backlog*), esperando tu próximo `accept()`. Eso es lo que viste en el [punto 3](/ApuntesPSP/04-sockets-tcp/03-servidor-tcp): un solo hilo atiende a un cliente cada vez.
+> 💡 **Ahora tú:** ¿y si el cliente llama mientras sigues en el paso 6 atendiendo a otro? La conexión queda **en la cola** de `listen()` (el *backlog*), esperando tu próximo `accept()`. Eso es lo que viste en el [punto 3](/ApuntesPSP/04-sockets-tcp-y-udp/03-servidor-tcp): un solo hilo atiende a un cliente cada vez.
 
 ---
 
@@ -48,7 +48,7 @@ Has terminado la teoría: socket, cliente, servidor, handshake, errores, `SO_REU
 
 **Servidor:** — Vale, vale. En realidad somos un equipo. Sin servidor no hay servicio, pero sin cliente no hay razón para existir.
 
-> **Moraleja:** servidor y cliente son dos caras de la misma moneda. El protocolo (quién envía qué y cuándo) es el verdadero protagonista. En la [U06](/ApuntesPSP/05-sockets-udp-y-protocolos) conocerás al otro protagonista: el UDP, el avión de papel.
+> **Moraleja:** servidor y cliente son dos caras de la misma moneda. El protocolo (quién envía qué y cuándo) es el verdadero protagonista. En la [UD 6](/ApuntesPSP/05-sockets-udp-y-protocolos) conocerás al otro protagonista: el UDP, el avión de papel.
 
 ---
 
@@ -79,7 +79,7 @@ Has terminado la teoría: socket, cliente, servidor, handshake, errores, `SO_REU
 
 **CONRAD:** — "Clásico: el cliente hace `recv()` y le salta *'ConnectionResetError'*. Pues claro. Razones: 1) **El servidor se cayó** en mitad de la conversación y su SO mandó un RST. 2) **Cerraste el servidor con Ctrl+C** mientras el cliente hablaba: misma historia. 3) El cliente intentó **escribir en un socket ya cerrado** → `BrokenPipeError`. 4) O el **timeout** se te pasó: `recv()` bloqueado para siempre porque nadie respondió."
 
-**CONRAD:** — "Y lo mejor: *'pero yo hacía sendall y me daba error'*. ¡Pues claro! `sendall()` no avisa: es el SO quien lanza la excepción cuando la otra punta de la tubería ya no existe. Captura `ConnectionResetError` y `BrokenPipeError` por separado, como viste en el [punto 5](/ApuntesPSP/04-sockets-tcp/05-errores-y-manejo), y tu cliente dejará de morir a lo loco."
+**CONRAD:** — "Y lo mejor: *'pero yo hacía sendall y me daba error'*. ¡Pues claro! `sendall()` no avisa: es el SO quien lanza la excepción cuando la otra punta de la tubería ya no existe. Captura `ConnectionResetError` y `BrokenPipeError` por separado, como viste en el [punto 5](/ApuntesPSP/04-sockets-tcp-y-udp/05-errores-y-manejo), y tu cliente dejará de morir a lo loco."
 
 **CONRAD:** — "Y no me vengas con *'¿será que la red va lenta?'*. Si el servidor se reinició y volvió a arrancar, **sin `SO_REUSEADDR`** te salta *Address already in use* al instante. Tres errores, tres causas, tres soluciones: reintentos con `try/except`, `settimeout()`, y la línea mágica de `setsockopt`. A diagnosticar."
 
@@ -90,7 +90,7 @@ Has terminado la teoría: socket, cliente, servidor, handshake, errores, `SO_REU
 > **Duración:** 45 minutos
 > **Herramienta:** Python 3 (`socket`, sin instalar nada) + dos terminales
 
-**Escenario:** construye un servidor eco TCP y un cliente que le mande mensajes, exactamente como en el [punto 8](/ApuntesPSP/04-sockets-tcp/08-servidor-eco-completo).
+**Escenario:** construye un servidor eco TCP y un cliente que le mande mensajes, exactamente como en el [punto 8](/ApuntesPSP/04-sockets-tcp-y-udp/08-servidor-eco-completo).
 
 **Tareas paso a paso:**
 
@@ -102,7 +102,7 @@ Has terminado la teoría: socket, cliente, servidor, handshake, errores, `SO_REU
 
 **Fallo intencionado:** cierra el servidor con Ctrl+C y **relánzalo al instante**. ¿Qué pasa? Sin `SO_REUSEADDR`, el `bind()` falla con *"Address already in use"* porque las conexiones anteriores siguen en **TIME_WAIT**. Añade `servidor.setsockopt(socket.SOL_SOCKET, socket.SO_REUSEADDR, 1)` antes del `bind()` y comprueba que ahora sí puedes reiniciar sin esperar.
 
-> **Pista 1:** el estado TIME_WAIT es el culpable de que el puerto no se libere al instante. Con `SO_REUSEADDR` activado (como en el [punto 6](/ApuntesPSP/04-sockets-tcp/06-so-reuseaddr)), el SO te deja reutilizar la dirección aunque queden conexiones en ese estado.
+> **Pista 1:** el estado TIME_WAIT es el culpable de que el puerto no se libere al instante. Con `SO_REUSEADDR` activado (como en el [punto 6](/ApuntesPSP/04-sockets-tcp-y-udp/06-so-reuseaddr)), el SO te deja reutilizar la dirección aunque queden conexiones en ese estado.
 >
 > **Pista 2:** si el cliente se queda colgado en `recv()`, ese es el síntoma clásico de "el servidor nunca respondió". Añade `cli.settimeout(3)` y verás la excepción `socket.timeout` aparecer a los 3 segundos, confirmando que la respuesta nunca llegó.
 
@@ -175,7 +175,7 @@ Vertical:
 4. **"¿Qué errores pueden ocurrir al comunicar por sockets y cómo los gestionas?"**
 5. **"¿Qué es SO_REUSEADDR y cuándo lo necesitas?"**
 
-> 💡 **Cómo encararlas:** la 2 y la 3 son las "preguntas reina". Para la 2, escribe el servidor del [punto 3](/ApuntesPSP/04-sockets-tcp/03-servidor-tcp) sin pensarlo: `socket()` + `bind()` + `listen()` + `accept()` + `recv()` + `sendall()`. Para la 3, dibuja el SYN → SYN+ACK → ACK sobre los dos extremos y cuenta por qué hace falta el tercer mensaje. Si sabes contarlo fluido, ya eres medio desarrollador de redes.
+> 💡 **Cómo encararlas:** la 2 y la 3 son las "preguntas reina". Para la 2, escribe el servidor del [punto 3](/ApuntesPSP/04-sockets-tcp-y-udp/03-servidor-tcp) sin pensarlo: `socket()` + `bind()` + `listen()` + `accept()` + `recv()` + `sendall()`. Para la 3, dibuja el SYN → SYN+ACK → ACK sobre los dos extremos y cuenta por qué hace falta el tercer mensaje. Si sabes contarlo fluido, ya eres medio desarrollador de redes.
 
 ---
 
@@ -217,7 +217,7 @@ TCP los encola. El servidor los recibe en orden. Pero si el cliente envía más 
 
 *Y en una terminal lejana, un `recv()` espera paciente a que el mundo le envíe algo que leer.*
 
-**PRÓXIMAMENTE EN U06:** *Sockets UDP. La carta certificada se convierte en avión de papel: sin handshake, sin confirmación, sin orden. Y con él, HTTP hablado a pelo y el reloj de Internet (NTP).*
+**PRÓXIMAMENTE EN UD 6:** *Sockets UDP. La carta certificada se convierte en avión de papel: sin handshake, sin confirmación, sin orden. Y con él, HTTP hablado a pelo y el reloj de Internet (NTP).*
 
 ---
 
@@ -233,8 +233,8 @@ TCP los encola. El servidor los recibe en orden. Pero si el cliente envía más 
 | f) | Gestiona errores de red | ✅ Punto 5 + ⚡ Laboratorio con fallo intencionado |
 | g) | Configura opciones de socket (SO_REUSEADDR, non-blocking) | ✅ Puntos 5 y 6 + ⚡ Laboratorio de tortura |
 
-> RA3b (UDP), RA3e (UDP servidor/cliente) y RA3h (protocolos HTTP/NTP) se cubren en la **U06 · Sockets UDP y Protocolos**.
+> RA3b (UDP), RA3e (UDP servidor/cliente) y RA3h (protocolos HTTP/NTP) se cubren en la **UD 5 · Sockets TCP y UDP**.
 
 ---
 
-📚 [Volver al índice de la unidad](/ApuntesPSP/04-sockets-tcp) · **Anterior:** [08 · Servidor eco completo](/ApuntesPSP/04-sockets-tcp/08-servidor-eco-completo) · **Siguiente:** **[U06 · Sockets UDP y Protocolos](/ApuntesPSP/05-sockets-udp-y-protocolos)**
+📚 [Volver al índice de la unidad](/ApuntesPSP/04-sockets-tcp) · **Anterior:** [08 · Servidor eco completo](/ApuntesPSP/04-sockets-tcp-y-udp/08-servidor-eco-completo) · **Siguiente:** **[UD 5 · Sockets TCP y UDP](/ApuntesPSP/05-sockets-udp-y-protocolos)**

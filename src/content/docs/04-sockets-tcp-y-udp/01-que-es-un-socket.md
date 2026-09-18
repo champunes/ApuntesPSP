@@ -5,7 +5,7 @@ description: "IP + puerto y el punto final de toda conexión 🔌"
 
 <p><small>IP + puerto y el punto final de toda conexión 🔌</small></p>
 
-> 🗺️ **Estás en:** 🔌 **U05 · Sockets TCP** → 01 · Qué es un socket
+> 🗺️ **Estás en:** 🔌 **UD 5 · Sockets TCP y UDP** → 01 · Qué es un socket
 
 ---
 
@@ -51,7 +51,7 @@ s = socket.socket(socket.AF_INET, socket.SOCK_STREAM)
 
 - **`AF_INET`** dice al SO que usaremos direcciones **IPv4** (`AF_INET6` para IPv6).
 - **`SOCK_STREAM`** pide un socket **TCP**, orientado a conexión: el canal fiable, ordenado y sin pérdidas que estudias en esta unidad.
-- **`SOCK_DGRAM`** (lo verás en la [U06](/ApuntesPSP/05-sockets-udp-y-protocolos)) es el UDP sin conexión.
+- **`SOCK_DGRAM`** (lo verás en la [UD 6](/ApuntesPSP/05-sockets-udp-y-protocolos)) es el UDP sin conexión.
 
 ---
 
@@ -107,4 +107,4 @@ El **SO** es la centralita: se encarga de que el paquete con tu mensaje salga de
 
 ---
 
-📚 [Volver al índice de la unidad](/ApuntesPSP/04-sockets-tcp) · **Siguiente:** [02 · Cliente TCP](/ApuntesPSP/04-sockets-tcp/02-cliente-tcp)
+📚 [Volver al índice de la unidad](/ApuntesPSP/04-sockets-tcp) · **Siguiente:** [02 · Cliente TCP](/ApuntesPSP/04-sockets-tcp-y-udp/02-cliente-tcp)

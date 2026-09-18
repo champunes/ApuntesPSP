@@ -1,6 +1,6 @@
 ﻿---
 title: Boletín U06 — Avanzado
-description: Ejercicios avanzados de Sockets UDP y Protocolos
+description: Ejercicios avanzados de Sockets TCP y UDP
 ---
 
 # 💪 Boletín U06 — Avanzado

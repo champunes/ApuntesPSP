@@ -5,7 +5,7 @@ description: "connect, sendall y recv: el cliente que habla primero 🗣️"
 
 <p><small>connect, sendall y recv: el cliente que habla primero 🗣️</small></p>
 
-> 🗺️ **Estás en:** 🔌 **U05 · Sockets TCP** → 02 · Cliente TCP
+> 🗺️ **Estás en:** 🔌 **UD 5 · Sockets TCP y UDP** → 02 · Cliente TCP
 
 ---
 
@@ -13,7 +13,7 @@ description: "connect, sendall y recv: el cliente que habla primero 🗣️"
 
 > El cliente TCP **marca el número**: crea el socket, se conecta con `connect()`, envía con `sendall()`, recibe con `recv()` y cierra. Sin cliente nadie llama; sin él, el servidor esperaría en el puerto para siempre.
 
-En el [punto 1](/ApuntesPSP/04-sockets-tcp/01-que-es-un-socket) viste qué es un socket. Aquí lo pones a trabajar por el lado del **cliente**: el que inicia la conversación. En la analogía del teléfono, eres tú marcando el número y esperando a que contesten.
+En el [punto 1](/ApuntesPSP/04-sockets-tcp-y-udp/01-que-es-un-socket) viste qué es un socket. Aquí lo pones a trabajar por el lado del **cliente**: el que inicia la conversación. En la analogía del teléfono, eres tú marcando el número y esperando a que contesten.
 
 ---
 
@@ -42,7 +42,7 @@ with socket.socket(socket.AF_INET, socket.SOCK_STREAM) as cliente:
     print(f"Respuesta: {respuesta.decode()}")
 ```
 
-**Salida** (con el servidor del [punto 3](/ApuntesPSP/04-sockets-tcp/03-servidor-tcp) escuchando en el puerto 5000):
+**Salida** (con el servidor del [punto 3](/ApuntesPSP/04-sockets-tcp-y-udp/03-servidor-tcp) escuchando en el puerto 5000):
 
 ```
 Respuesta: Recibido: Hola servidor!
@@ -85,7 +85,7 @@ Respuesta: Recibido: Hola servidor!
  6. close()
 ```
 
-> ⚠️ **`recv()` es bloqueante**: el programa se queda esperando hasta que lleguen datos. Si el servidor nunca responde, te quedas colgado ahí (para salir del apuro, verás los **timeouts** en el [punto 5](/ApuntesPSP/04-sockets-tcp/05-errores-y-manejo)).
+> ⚠️ **`recv()` es bloqueante**: el programa se queda esperando hasta que lleguen datos. Si el servidor nunca responde, te quedas colgado ahí (para salir del apuro, verás los **timeouts** en el [punto 5](/ApuntesPSP/04-sockets-tcp-y-udp/05-errores-y-manejo)).
 
 ---
 
@@ -124,4 +124,4 @@ Respuesta: Recibido: Hola servidor!
 
 ---
 
-📚 [Volver al índice de la unidad](/ApuntesPSP/04-sockets-tcp) · **Anterior:** [01 · Qué es un socket](/ApuntesPSP/04-sockets-tcp/01-que-es-un-socket) · **Siguiente:** [03 · Servidor TCP](/ApuntesPSP/04-sockets-tcp/03-servidor-tcp)
+📚 [Volver al índice de la unidad](/ApuntesPSP/04-sockets-tcp) · **Anterior:** [01 · Qué es un socket](/ApuntesPSP/04-sockets-tcp-y-udp/01-que-es-un-socket) · **Siguiente:** [03 · Servidor TCP](/ApuntesPSP/04-sockets-tcp-y-udp/03-servidor-tcp)

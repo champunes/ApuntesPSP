@@ -78,7 +78,7 @@ Al terminar, serás capaz de:
 
 ## 🚪 ¿Por dónde empiezo?
 
-¿Vienes de la U06 y dominas los sockets UDP y TCP? Perfecto, ese es el trampolín ideal: repasa la [U06 · Sockets UDP y protocolos](/ApuntesPSP/05-sockets-udp-y-protocolos) para tener fresco qué es un protocolo y cómo se abre una conexión, y arranca en el [punto 1](/ApuntesPSP/06-apis-rest-y-http/01-web-y-http), que parte justo de ahí: del intercambio de mensajes entre dos máquinas a la conversación estructurada de HTTP.
+¿Vienes de la U06 y dominas los sockets UDP y TCP? Perfecto, ese es el trampolín ideal: repasa la [U06 · Sockets TCP y UDP](/ApuntesPSP/05-sockets-udp-y-protocolos) para tener fresco qué es un protocolo y cómo se abre una conexión, y arranca en el [punto 1](/ApuntesPSP/06-apis-rest-y-http/01-web-y-http), que parte justo de ahí: del intercambio de mensajes entre dos máquinas a la conversación estructurada de HTTP.
 
 ¿Ya sabes qué es una API y solo necesitas `requests` o el JSON? Ve directo al [punto 5](/ApuntesPSP/06-apis-rest-y-http/05-json) y al [punto 6](/ApuntesPSP/06-apis-rest-y-http/06-requests-get). Si vienes de cero en la web, no te saltes los puntos 1 a 4: URL, métodos y códigos de estado son el idioma que vas a hablar toda la unidad.
 

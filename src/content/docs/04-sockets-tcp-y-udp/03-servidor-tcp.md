@@ -5,7 +5,7 @@ description: "bind, listen y accept: el que escucha y atiende 🛎️"
 
 <p><small>bind, listen y accept: el que escucha y atiende 🛎️</small></p>
 
-> 🗺️ **Estás en:** 🔌 **U05 · Sockets TCP** → 03 · Servidor TCP
+> 🗺️ **Estás en:** 🔌 **UD 5 · Sockets TCP y UDP** → 03 · Servidor TCP
 
 ---
 
@@ -13,7 +13,7 @@ description: "bind, listen y accept: el que escucha y atiende 🛎️"
 
 > El servidor TCP **descolgó primero**: reserva un puerto con `bind()`, avisa con `listen()` y se queda esperando con `accept()` a que un cliente llame. Todo el peso de la conversación recae sobre él.
 
-En el [punto 2](/ApuntesPSP/04-sockets-tcp/02-cliente-tcp) el cliente marcaba el número. Este punto es la otra cara de la moneda: el servidor que **escucha**. Sin `bind()` no tiene puerto; sin `listen()` no anuncia que espera llamadas; sin `accept()` no recibe a nadie.
+En el [punto 2](/ApuntesPSP/04-sockets-tcp-y-udp/02-cliente-tcp) el cliente marcaba el número. Este punto es la otra cara de la moneda: el servidor que **escucha**. Sin `bind()` no tiene puerto; sin `listen()` no anuncia que espera llamadas; sin `accept()` no recibe a nadie.
 
 ---
 
@@ -188,4 +188,4 @@ with socket.socket() as srv:         # a) crear el socket
 
 ---
 
-📚 [Volver al índice de la unidad](/ApuntesPSP/04-sockets-tcp) · **Anterior:** [02 · Cliente TCP](/ApuntesPSP/04-sockets-tcp/02-cliente-tcp) · **Siguiente:** [04 · Ciclo de vida de la conexión](/ApuntesPSP/04-sockets-tcp/04-ciclo-de-vida-de-la-conexion)
+📚 [Volver al índice de la unidad](/ApuntesPSP/04-sockets-tcp) · **Anterior:** [02 · Cliente TCP](/ApuntesPSP/04-sockets-tcp-y-udp/02-cliente-tcp) · **Siguiente:** [04 · Ciclo de vida de la conexión](/ApuntesPSP/04-sockets-tcp-y-udp/04-ciclo-de-vida-de-la-conexion)

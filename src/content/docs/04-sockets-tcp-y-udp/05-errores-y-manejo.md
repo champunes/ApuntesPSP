@@ -5,7 +5,7 @@ description: "Timeouts, reinicios y conexiones rechazadas bajo control 🛡️"
 
 <p><small>Timeouts, reinicios y conexiones rechazadas bajo control 🛡️</small></p>
 
-> 🗺️ **Estás en:** 🔌 **U05 · Sockets TCP** → 05 · Errores y gestión
+> 🗺️ **Estás en:** 🔌 **UD 5 · Sockets TCP y UDP** → 05 · Errores y gestión
 
 ---
 
@@ -13,7 +13,7 @@ description: "Timeouts, reinicios y conexiones rechazadas bajo control 🛡️"
 
 > Las redes **fallan**, y tu programa debe saber qué hacer cuando lo hacen. Los dos aliados son el **`try/except`** (capturar el error y reaccionar) y los **timeouts** (no quedarse esperando para siempre).
 
-En los [puntos 2](/ApuntesPSP/04-sockets-tcp/02-cliente-tcp) y [3](/ApuntesPSP/04-sockets-tcp/03-servidor-tcp) todo iba bien. En la vida real el servidor se cae, la red se corta o el mensaje tarda demasiado. Este punto te da la **red de seguridad** para que tu cliente (y tu servidor) no exploten ante lo inesperado.
+En los [puntos 2](/ApuntesPSP/04-sockets-tcp-y-udp/02-cliente-tcp) y [3](/ApuntesPSP/04-sockets-tcp-y-udp/03-servidor-tcp) todo iba bien. En la vida real el servidor se cae, la red se corta o el mensaje tarda demasiado. Este punto te da la **red de seguridad** para que tu cliente (y tu servidor) no exploten ante lo inesperado.
 
 ---
 
@@ -136,4 +136,4 @@ if lectura:
 
 ---
 
-📚 [Volver al índice de la unidad](/ApuntesPSP/04-sockets-tcp) · **Anterior:** [04 · Ciclo de vida de la conexión](/ApuntesPSP/04-sockets-tcp/04-ciclo-de-vida-de-la-conexion) · **Siguiente:** [06 · SO_REUSEADDR](/ApuntesPSP/04-sockets-tcp/06-so-reuseaddr)
+📚 [Volver al índice de la unidad](/ApuntesPSP/04-sockets-tcp) · **Anterior:** [04 · Ciclo de vida de la conexión](/ApuntesPSP/04-sockets-tcp-y-udp/04-ciclo-de-vida-de-la-conexion) · **Siguiente:** [06 · SO_REUSEADDR](/ApuntesPSP/04-sockets-tcp-y-udp/06-so-reuseaddr)

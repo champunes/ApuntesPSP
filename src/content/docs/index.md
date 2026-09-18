@@ -78,24 +78,14 @@ description: Apuntes de Programación de Servicios y Procesos — Python. CC BY-
     <span class="num">Unidad 5</span>
     <span class="ra">RA3</span>
   </div>
-  <a href="/ApuntesPSP/04-sockets-tcp" class="title-link">Sockets TCP</a>
-  <p class="desc">TCP cliente/servidor, <code>socket</code>, <code>bind</code>, <code>listen</code>, <code>accept</code>, errores, <code>SO_REUSEADDR</code>.</p>
-  <a href="/ApuntesPSP/04-sockets-tcp" class="unit-link">👉 Ver unidad 👈</a>
+  <a href="/ApuntesPSP/04-sockets-tcp-y-udp" class="title-link">Sockets TCP y UDP</a>
+  <p class="desc">TCP/UDP, cliente/servidor, <code>socket</code>, <code>bind</code>, <code>listen</code>, <code>accept</code>, errores, <code>SO_REUSEADDR</code>.</p>
+  <a href="/ApuntesPSP/04-sockets-tcp-y-udp" class="unit-link">👉 Ver unidad 👈</a>
 </div>
 
 <div class="unit-card">
   <div class="unit-card-header">
     <span class="num">Unidad 6</span>
-    <span class="ra">RA3</span>
-  </div>
-  <a href="/ApuntesPSP/05-sockets-udp-y-protocolos" class="title-link">Sockets UDP y Protocolos</a>
-  <p class="desc">UDP, HTTP desde cero, NTP, TCP vs UDP, protocolos de aplicación.</p>
-  <a href="/ApuntesPSP/05-sockets-udp-y-protocolos" class="unit-link">👉 Ver unidad 👈</a>
-</div>
-
-<div class="unit-card">
-  <div class="unit-card-header">
-    <span class="num">Unidad 7</span>
     <span class="ra">RA4a-b</span>
   </div>
   <a href="/ApuntesPSP/06-apis-rest-y-http" class="title-link">APIs REST y HTTP</a>
@@ -105,7 +95,7 @@ description: Apuntes de Programación de Servicios y Procesos — Python. CC BY-
 
 <div class="unit-card">
   <div class="unit-card-header">
-    <span class="num">Unidad 8</span>
+    <span class="num">Unidad 7</span>
     <span class="ra">RA4a-b</span>
   </div>
   <a href="/ApuntesPSP/07-apis-comerciales" class="title-link">APIs Comerciales</a>
@@ -115,7 +105,7 @@ description: Apuntes de Programación de Servicios y Procesos — Python. CC BY-
 
 <div class="unit-card">
   <div class="unit-card-header">
-    <span class="num">Unidad 9</span>
+    <span class="num">Unidad 8</span>
     <span class="ra">RA5</span>
   </div>
   <a href="/ApuntesPSP/08-hash-y-cifrado-clasico" class="title-link">Hash y Cifrado Clásico</a>
@@ -125,7 +115,7 @@ description: Apuntes de Programación de Servicios y Procesos — Python. CC BY-
 
 <div class="unit-card">
   <div class="unit-card-header">
-    <span class="num">Unidad 10</span>
+    <span class="num">Unidad 9</span>
     <span class="ra">RA5</span>
   </div>
   <a href="/ApuntesPSP/09-cifrado-moderno" class="title-link">Cifrado Moderno</a>
@@ -135,7 +125,7 @@ description: Apuntes de Programación de Servicios y Procesos — Python. CC BY-
 
 <div class="unit-card">
   <div class="unit-card-header">
-    <span class="num">Unidad 11</span>
+    <span class="num">Unidad 10</span>
     <span class="ra">RA4c-d</span>
   </div>
   <a href="/ApuntesPSP/10-servidores-concurrentes" class="title-link">Servidores Concurrentes</a>
@@ -145,7 +135,7 @@ description: Apuntes de Programación de Servicios y Procesos — Python. CC BY-
 
 <div class="unit-card">
   <div class="unit-card-header">
-    <span class="num">Unidad 12</span>
+    <span class="num">Unidad 11</span>
     <span class="ra">RA4e-g</span>
   </div>
   <a href="/ApuntesPSP/11-asyncio-y-disponibilidad" class="title-link">Asyncio y Disponibilidad</a>

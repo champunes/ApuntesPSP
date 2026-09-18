@@ -5,7 +5,7 @@ description: "Adiós al 'Address already in use' 🔁"
 
 <p><small>Adiós al 'Address already in use' 🔁</small></p>
 
-> 🗺️ **Estás en:** 🔌 **U05 · Sockets TCP** → 06 · SO_REUSEADDR
+> 🗺️ **Estás en:** 🔌 **UD 5 · Sockets TCP y UDP** → 06 · SO_REUSEADDR
 
 ---
 
@@ -13,7 +13,7 @@ description: "Adiós al 'Address already in use' 🔁"
 
 > Si matas un servidor y lo reinicias rápido, el SO puede decir que la dirección **ya está en uso**. Una sola línea —`setsockopt(SO_REUSEADDR, 1)`— evita el error y te ahorra minutos de depuración.
 
-El culpable se llama **TIME_WAIT** (lo viste al hablar del cierre en el [punto 4](/ApuntesPSP/04-sockets-tcp/04-ciclo-de-vida-de-la-conexion)): al cerrar, la conexión no se libera al instante. `SO_REUSEADDR` le dice al SO que puedes reutilizar ese puerto. Ponlo siempre en tus servidores.
+El culpable se llama **TIME_WAIT** (lo viste al hablar del cierre en el [punto 4](/ApuntesPSP/04-sockets-tcp-y-udp/04-ciclo-de-vida-de-la-conexion)): al cerrar, la conexión no se libera al instante. `SO_REUSEADDR` le dice al SO que puedes reutilizar ese puerto. Ponlo siempre en tus servidores.
 
 ---
 
@@ -27,7 +27,7 @@ srv.bind(("127.0.0.1", 5000))     # ✅ OK
 srv.bind(("127.0.0.1", 5000))     # 💥 OSError: Address already in use (Errno 98 en Linux, WinError 10048 en Windows)
 ```
 
-¿Por qué? Tras el cierre, la conexión entra en estado **TIME_WAIT** durante un tiempo breve (típicamente 1-2 minutos, 2×MSL): el SO mantiene reservado el par (IP, puerto) para asegurarse de que los últimos mensajes de la despedida (los FIN/ACK del [punto 4](/ApuntesPSP/04-sockets-tcp/04-ciclo-de-vida-de-la-conexion)) no queden huérfanos. Mientras tanto, nadie más puede hacer `bind()` a ese puerto.
+¿Por qué? Tras el cierre, la conexión entra en estado **TIME_WAIT** durante un tiempo breve (típicamente 1-2 minutos, 2×MSL): el SO mantiene reservado el par (IP, puerto) para asegurarse de que los últimos mensajes de la despedida (los FIN/ACK del [punto 4](/ApuntesPSP/04-sockets-tcp-y-udp/04-ciclo-de-vida-de-la-conexion)) no queden huérfanos. Mientras tanto, nadie más puede hacer `bind()` a ese puerto.
 
 ---
 
@@ -97,4 +97,4 @@ No es un capricho: la despedida TCP necesita tiempo para garantizar que los mens
 
 ---
 
-📚 [Volver al índice de la unidad](/ApuntesPSP/04-sockets-tcp) · **Anterior:** [05 · Errores y gestión](/ApuntesPSP/04-sockets-tcp/05-errores-y-manejo) · **Siguiente:** [07 · Protocolos sobre TCP](/ApuntesPSP/04-sockets-tcp/07-protocolos-sobre-tcp)
+📚 [Volver al índice de la unidad](/ApuntesPSP/04-sockets-tcp) · **Anterior:** [05 · Errores y gestión](/ApuntesPSP/04-sockets-tcp-y-udp/05-errores-y-manejo) · **Siguiente:** [07 · Protocolos sobre TCP](/ApuntesPSP/04-sockets-tcp-y-udp/07-protocolos-sobre-tcp)

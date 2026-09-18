@@ -5,7 +5,7 @@ description: "Three-way handshake y cierre de una conexión TCP 🤝"
 
 <p><small>Three-way handshake y cierre de una conexión TCP 🤝</small></p>
 
-> 🗺️ **Estás en:** 🔌 **U05 · Sockets TCP** → 04 · Ciclo de vida de la conexión
+> 🗺️ **Estás en:** 🔌 **UD 5 · Sockets TCP y UDP** → 04 · Ciclo de vida de la conexión
 
 ---
 
@@ -13,7 +13,7 @@ description: "Three-way handshake y cierre de una conexión TCP 🤝"
 
 > Una conexión TCP **nace, vive y muere**: arranca con un **three-way handshake** (SYN → SYN+ACK → ACK), transporta los datos y se cierra con un apretón de despedida. Todo esto pasa *debajo* de tu `connect()` y tu `accept()`.
 
-En el [punto 2](/ApuntesPSP/04-sockets-tcp/02-cliente-tcp) y el [3](/ApuntesPSP/04-sockets-tcp/03-servidor-tcp) llamaste a `connect()` y `accept()` sin saber qué pasaba por dentro. Aquí levantas el capó y ves el **protocolo de transporte**: los tres mensajes que estrechan la mano y la despedida cuando la conversación acaba.
+En el [punto 2](/ApuntesPSP/04-sockets-tcp-y-udp/02-cliente-tcp) y el [3](/ApuntesPSP/04-sockets-tcp-y-udp/03-servidor-tcp) llamaste a `connect()` y `accept()` sin saber qué pasaba por dentro. Aquí levantas el capó y ves el **protocolo de transporte**: los tres mensajes que estrechan la mano y la despedida cuando la conversación acaba.
 
 ---
 
@@ -43,7 +43,7 @@ Los tres primeros mensajes son el handshake:
 2. **SYN + ACK**: el servidor contesta *"de acuerdo, y yo también quiero hablar contigo"*.
 3. **ACK** (acknowledge): el cliente confirma *"recibido, hablemos"*.
 
-A partir de ahí, **los datos fluyen en ambas direcciones**. Si cuentas los mensajes (3), tienes el nombre: **three-way handshake**. Es exactamente lo que ocurre dentro de tu `cliente.connect()` en el [punto 2](/ApuntesPSP/04-sockets-tcp/02-cliente-tcp).
+A partir de ahí, **los datos fluyen en ambas direcciones**. Si cuentas los mensajes (3), tienes el nombre: **three-way handshake**. Es exactamente lo que ocurre dentro de tu `cliente.connect()` en el [punto 2](/ApuntesPSP/04-sockets-tcp-y-udp/02-cliente-tcp).
 
 ---
 
@@ -65,7 +65,7 @@ CLIENTE                    SERVIDOR
 2. El otro lado responde **ACK** y, cuando también termina, envía su propio **FIN**.
 3. El primero confirma con **ACK** y la conexión se libera.
 
-> 💡 En Python no gestionas el cierre a mano: cuando el `with` termina (o llamas a `close()`), el SO ejecuta esta despedida por ti. Aunque lo parezca, **no es instantáneo**: el estado de cierre queda unos segundos en el sistema (eso te dará el problema de "Address already in use" del [punto 6](/ApuntesPSP/04-sockets-tcp/06-so-reuseaddr)).
+> 💡 En Python no gestionas el cierre a mano: cuando el `with` termina (o llamas a `close()`), el SO ejecuta esta despedida por ti. Aunque lo parezca, **no es instantáneo**: el estado de cierre queda unos segundos en el sistema (eso te dará el problema de "Address already in use" del [punto 6](/ApuntesPSP/04-sockets-tcp-y-udp/06-so-reuseaddr)).
 
 ---
 
@@ -118,4 +118,4 @@ El **ciclo de vida de la conexión** es la historia completa entre la primera `s
 
 ---
 
-📚 [Volver al índice de la unidad](/ApuntesPSP/04-sockets-tcp) · **Anterior:** [03 · Servidor TCP](/ApuntesPSP/04-sockets-tcp/03-servidor-tcp) · **Siguiente:** [05 · Errores y gestión](/ApuntesPSP/04-sockets-tcp/05-errores-y-manejo)
+📚 [Volver al índice de la unidad](/ApuntesPSP/04-sockets-tcp) · **Anterior:** [03 · Servidor TCP](/ApuntesPSP/04-sockets-tcp-y-udp/03-servidor-tcp) · **Siguiente:** [05 · Errores y gestión](/ApuntesPSP/04-sockets-tcp-y-udp/05-errores-y-manejo)

@@ -201,14 +201,12 @@ Secciones del cierre `09-cierre.md`: ⭐ Sé el código, 🔥 Fireside Chat, �
 | UD 2 Gestión de procesos | `01-gestion-de-procesos.md` + carpeta | ~960 | subprocess, run, Popen, pipes, comunicación | RA1 |
 | UD 3 Hilos y concurrencia | `02-hilos-y-concurrencia.md` + carpeta | ~1.113 | threading, join, daemon, Timer, GIL, estados | RA2 |
 | UD 4 Sincronización | `03-sincronizacion.md` + carpeta | ~1.102 | Lock, Semaphore, Barrier, Condition, RLock | RA2 |
-| U04 Sockets TCP | `04-sockets-tcp.md` + carpeta | ~360 | TCP, cliente-servidor, errores, SO_REUSEADDR | RA3 |
-| U05 Sockets UDP y Protocolos | `05-sockets-udp-y-protocolos.md` + carpeta | ~250 | UDP, HTTP, NTP, TCP vs UDP | RA3 |
-| U06 APIs REST y HTTP | `06-apis-rest-y-http.md` + carpeta | ~370 | REST, métodos HTTP, requests, JSON | RA4a-b |
-| U07 APIs Comerciales | `07-apis-comerciales.md` + carpeta | ~320 | OpenWeatherMap, OpenAI, dotenv, rate limit | RA4a-b |
-| U08 Hash y Cifrado Clásico | `08-hash-y-cifrado-clasico.md` + carpeta | ~380 | Hash, MD5, SHA, César, principios seguridad | RA5 |
-| U09 Cifrado Moderno | `09-cifrado-moderno.md` + carpeta | ~380 | AES, RSA, híbrido, firmas, RBAC | RA5 |
-| U10 Servidores Concurrentes | `10-servidores-concurrentes.md` + carpeta | ~360 | ThreadPool, benchmark, servidor multihilo | RA4c-d |
-| U11 asyncio y Disponibilidad | `11-asyncio-y-disponibilidad.md` + carpeta | ~330 | asyncio, heartbeat, backoff, timeouts | RA4e-g |
+| UD 5 Sockets TCP y UDP | `04-sockets-tcp-y-udp.md` + carpeta | ~1.359 | TCP, UDP, cliente, servidor, HTTP, NTP | RA3 |
+| UD 6 Servidores concurrentes | `05-servidores-concurrentes.md` + carpeta | ~1.029 | socketserver, ThreadPool, benchmark | RA4c-d |
+| UD 7 HTTP y APIs REST | `06-apis-rest-y-http.md` + carpeta | ~938 | REST, métodos HTTP, requests, JSON | RA4a-b |
+| UD 8 APIs comerciales | `07-apis-comerciales.md` + carpeta | ~998 | OpenWeatherMap, OpenAI, dotenv, rate limit | RA4a-b |
+| UD 9 Seguridad y cifrado | `08-seguridad-y-cifrado.md` + carpeta | ~1.975 | Hash, AES, RSA, firmas, cifrado híbrido | RA5 |
+| UD 10 Alta disponibilidad | `09-alta-disponibilidad.md` + carpeta | ~913 | asyncio, heartbeat, backoff, timeouts | RA4e-g |
 
 **Boletines (44):** 4 por unidad en `boletines/boletin-UXX-*`: inicial (8 ejercicios), inicial-resuelto, avanzado (≥8), avanzado-resuelto. Pistas inline `**Pista:**` en los por-resolver; respuestas inline en negrita en los resueltos.
 

@@ -1,6 +1,6 @@
 ﻿---
 title: Boletín U06 — Inicial (Resuelto)
-description: Soluciones de los ejercicios básicos de Sockets UDP y Protocolos
+description: Soluciones de los ejercicios básicos de Sockets TCP y UDP
 ---
 
 # ✅ Boletín U06 — Inicial (Resuelto)

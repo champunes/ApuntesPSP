@@ -5,15 +5,15 @@ description: "Servidor + cliente eco, mano a mano y ejercicios resueltos 🛠️
 
 <p><small>Servidor + cliente eco, mano a mano y ejercicios resueltos 🛠️</small></p>
 
-> 🗺️ **Estás en:** 🔌 **U05 · Sockets TCP** → 08 · Servidor eco completo
+> 🗺️ **Estás en:** 🔌 **UD 5 · Sockets TCP y UDP** → 08 · Servidor eco completo
 
 ---
 
 ## 📬 La idea en una frase
 
-> La práctica clásica de TCP: un **servidor eco** que devuelve al cliente exactamente lo que recibe. Es el "Hola mundo" de los sockets y la base del laboratorio del [punto 9](/ApuntesPSP/04-sockets-tcp/09-cierre).
+> La práctica clásica de TCP: un **servidor eco** que devuelve al cliente exactamente lo que recibe. Es el "Hola mundo" de los sockets y la base del laboratorio del [punto 9](/ApuntesPSP/04-sockets-tcp-y-udp/09-cierre).
 
-Junta todo lo aprendido: cliente ([punto 2](/ApuntesPSP/04-sockets-tcp/02-cliente-tcp)), servidor ([punto 3](/ApuntesPSP/04-sockets-tcp/03-servidor-tcp)) y `SO_REUSEADDR` ([punto 6](/ApuntesPSP/04-sockets-tcp/06-so-reuseaddr)). Con dos terminales verás el protocolo completo en acción.
+Junta todo lo aprendido: cliente ([punto 2](/ApuntesPSP/04-sockets-tcp-y-udp/02-cliente-tcp)), servidor ([punto 3](/ApuntesPSP/04-sockets-tcp-y-udp/03-servidor-tcp)) y `SO_REUSEADDR` ([punto 6](/ApuntesPSP/04-sockets-tcp-y-udp/06-so-reuseaddr)). Con dos terminales verás el protocolo completo en acción.
 
 ---
 
@@ -202,4 +202,4 @@ with socket.socket() as cli:
 
 ---
 
-📚 [Volver al índice de la unidad](/ApuntesPSP/04-sockets-tcp) · **Anterior:** [07 · Protocolos sobre TCP](/ApuntesPSP/04-sockets-tcp/07-protocolos-sobre-tcp) · **Siguiente:** [09 · Cierre](/ApuntesPSP/04-sockets-tcp/09-cierre)
+📚 [Volver al índice de la unidad](/ApuntesPSP/04-sockets-tcp) · **Anterior:** [07 · Protocolos sobre TCP](/ApuntesPSP/04-sockets-tcp-y-udp/07-protocolos-sobre-tcp) · **Siguiente:** [09 · Cierre](/ApuntesPSP/04-sockets-tcp-y-udp/09-cierre)

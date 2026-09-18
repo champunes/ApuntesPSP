@@ -236,4 +236,4 @@ Usa `multiprocessing.Lock`, `multiprocessing.Semaphore`, etc. Son equivalentes p
 
 ---
 
-📚 [Volver al índice de la unidad](/ApuntesPSP/03-sincronizacion) · **Anterior:** [08 · Buenas prácticas](/ApuntesPSP/03-sincronizacion/08-buenas-practicas) · **Siguiente:** **[U05 · Sockets TCP](/ApuntesPSP/04-sockets-tcp)**
+📚 [Volver al índice de la unidad](/ApuntesPSP/03-sincronizacion) · **Anterior:** [08 · Buenas prácticas](/ApuntesPSP/03-sincronizacion/08-buenas-practicas) · **Siguiente:** **[UD 5 · Sockets TCP y UDP](/ApuntesPSP/04-sockets-tcp)**
