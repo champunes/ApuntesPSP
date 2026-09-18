@@ -5,11 +5,11 @@ description: Sé el lock, laboratorio con carrera y el duelo final de la unidad 
 
 <p><small>Sé el lock, laboratorio con carrera y el duelo final de la unidad 🧠</small></p>
 
-> 🗺️ **Estás en:** 🔒 **U04 · Sincronización entre Hilos** → 09 · Cierre
+> 🗺️ **Estás en:** 🔒 **UD 4 · Sincronización** → 09 · Cierre
 
 ---
 
-Has terminado la teoría: condición de carrera, Lock, RLock, Semaphore, Barrier, Condition, productor-consumidor y las reglas anti-deadlock. Este cierre es el aterrizaje: recorres lo aprendido con juegos, un laboratorio real con fallos intencionados y las preguntas que te harán en una entrevista. Léelo justo después del [punto 8](/ApuntesPSP/03-sincronizacion-entre-hilos/08-buenas-practicas) y antes de abrir los boletines.
+Has terminado la teoría: condición de carrera, Lock, RLock, Semaphore, Barrier, Condition, productor-consumidor y las reglas anti-deadlock. Este cierre es el aterrizaje: recorres lo aprendido con juegos, un laboratorio real con fallos intencionados y las preguntas que te harán en una entrevista. Léelo justo después del [punto 8](/ApuntesPSP/03-sincronizacion/08-buenas-practicas) y antes de abrir los boletines.
 
 ---
 
@@ -27,7 +27,7 @@ Has terminado la teoría: condición de carrera, Lock, RLock, Semaphore, Barrier
 
 **Resultado:** el contador llega a **400.000**, exacto, en todas las ejecuciones. Tú (el Lock) has convertido el caos de la condición de carrera en un turno ordenado.
 
-> 💡 **Ahora tú:** ¿y si un hilo olvidara llamarte con `release()`? Te quedarías puesto para siempre y el resto esperaría eternamente: eso es un **deadlock**. Por eso los hilos te usan siempre con `with lock:`, que garantiza el `release()` pase lo que pase (lo viste en el [punto 2](/ApuntesPSP/03-sincronizacion-entre-hilos/02-lock)).
+> 💡 **Ahora tú:** ¿y si un hilo olvidara llamarte con `release()`? Te quedarías puesto para siempre y el resto esperaría eternamente: eso es un **deadlock**. Por eso los hilos te usan siempre con `with lock:`, que garantiza el `release()` pase lo que pase (lo viste en el [punto 2](/ApuntesPSP/03-sincronizacion/02-lock)).
 
 ---
 
@@ -84,7 +84,7 @@ Has terminado la teoría: condición de carrera, Lock, RLock, Semaphore, Barrier
 
 **CONRAD:** — "Y lo mejor: *'pero yo hago acquire solo en este sitio'*. ¡Pues claro! También lo haces dentro de un `with`, y así nunca más. El `with lock:` hace el `release()` solo, aunque haya una excepción en medio. Adquirir a mano sin liberar es firmar una sentencia de muerte para tus hilos."
 
-**CONRAD:** — "Y no me vengas con *'¿será que el ordenador va lento?'*. No. Si un hilo se queda esperando para siempre y el contador no llega a su valor, ya tienes la respuesta: hay un lock mal liberado o un orden de adquisición incorrecto. El GIL del [punto 1](/ApuntesPSP/03-sincronizacion-entre-hilos/01-condicion-de-carrera) no te protege de esto. A diagnosticar."
+**CONRAD:** — "Y no me vengas con *'¿será que el ordenador va lento?'*. No. Si un hilo se queda esperando para siempre y el contador no llega a su valor, ya tienes la respuesta: hay un lock mal liberado o un orden de adquisición incorrecto. El GIL del [punto 1](/ApuntesPSP/03-sincronizacion/01-condicion-de-carrera) no te protege de esto. A diagnosticar."
 
 ---
 
@@ -97,17 +97,17 @@ Has terminado la teoría: condición de carrera, Lock, RLock, Semaphore, Barrier
 
 **Tareas paso a paso:**
 
-1. Escribe la versión **sin sincronizar** del contador y ejecútala varias veces: anota que el total casi nunca es 400.000. Para que la carrera sea visible, pasa la suma por una función (`contador = sumar(contador)`) y añade `sys.setswitchinterval(1e-6)` (condición de carrera del [punto 1](/ApuntesPSP/03-sincronizacion-entre-hilos/01-condicion-de-carrera)).
-2. Protege el incremento con `lock = threading.Lock()` y `with lock:` (el [punto 2](/ApuntesPSP/03-sincronizacion-entre-hilos/02-lock)). Ejecútala 3 veces: ahora siempre da **400.000**.
-3. Sustituye el `Lock` por un `Semaphore(1)` y verifica que también funciona (el [punto 4](/ApuntesPSP/03-sincronizacion-entre-hilos/04-semaphore)).
-4. Añade una **segunda caja** (otro contador de operaciones) que se incremente desde una función auxiliar llamada dentro de otra: protégelas con un `RLock` para que el mismo hilo pueda adquirirlo dos veces ([punto 3](/ApuntesPSP/03-sincronizacion-entre-hilos/03-rlock)).
-5. Añade una `Barrier(4)` para que los 4 socios **empiecen a aportar a la vez**: nadie toca su caja hasta que los 4 están en la salida ([punto 5](/ApuntesPSP/03-sincronizacion-entre-hilos/05-barrier)).
+1. Escribe la versión **sin sincronizar** del contador y ejecútala varias veces: anota que el total casi nunca es 400.000. Para que la carrera sea visible, pasa la suma por una función (`contador = sumar(contador)`) y añade `sys.setswitchinterval(1e-6)` (condición de carrera del [punto 1](/ApuntesPSP/03-sincronizacion/01-condicion-de-carrera)).
+2. Protege el incremento con `lock = threading.Lock()` y `with lock:` (el [punto 2](/ApuntesPSP/03-sincronizacion/02-lock)). Ejecútala 3 veces: ahora siempre da **400.000**.
+3. Sustituye el `Lock` por un `Semaphore(1)` y verifica que también funciona (el [punto 4](/ApuntesPSP/03-sincronizacion/04-semaphore)).
+4. Añade una **segunda caja** (otro contador de operaciones) que se incremente desde una función auxiliar llamada dentro de otra: protégelas con un `RLock` para que el mismo hilo pueda adquirirlo dos veces ([punto 3](/ApuntesPSP/03-sincronizacion/03-rlock)).
+5. Añade una `Barrier(4)` para que los 4 socios **empiecen a aportar a la vez**: nadie toca su caja hasta que los 4 están en la salida ([punto 5](/ApuntesPSP/03-sincronizacion/05-barrier)).
 
 **Fallo intencionado:** en la tarea 2, "por accidente", uno de los 4 hilos hace `contador += 1` **fuera** del `with lock:` (o bien un hilo que usa `lock.acquire()` sin `release()`). ¿Qué pasa? El contador vuelve a dar valores por debajo de 400.000, y si es el `release()` olvidado, el programa se **cuelga** esperando el `join()`. Los demás hilos están perfectos: el fallo es de un único hilo.
 
 > **Pista 1:** busca el único `contador += 1` que no está dentro de `with lock:`. El contador da mal aunque los otros 3 hilos estén bien protegidos: basta **un** hilo fuera de la sección crítica.
 >
-> **Pista 2:** si todo parece protegido pero el programa no termina, revisa que nadie llamó a `acquire()` sin su `release()`. Un `with lock:` nunca lo olvida; un `acquire()` suelto, sí. Ahí tienes el deadlock del [punto 8](/ApuntesPSP/03-sincronizacion-entre-hilos/08-buenas-practicas).
+> **Pista 2:** si todo parece protegido pero el programa no termina, revisa que nadie llamó a `acquire()` sin su `release()`. Un `with lock:` nunca lo olvida; un `acquire()` suelto, sí. Ahí tienes el deadlock del [punto 8](/ApuntesPSP/03-sincronizacion/08-buenas-practicas).
 
 ---
 
@@ -178,7 +178,7 @@ Vertical:
 4. **"Implementa un productor-consumidor con varios consumidores."**
 5. **"¿Qué es un deadlock? Pon un ejemplo y explica cómo prevenirlo."**
 
-> 💡 **Cómo encararlas:** la 2 y la 4 son las "preguntas reina". Para la 2, recorre el ring del [punto 8](/ApuntesPSP/03-sincronizacion-entre-hilos/08-buenas-practicas): Lock = exclusión mutua (solo uno), Semaphore = aforo (hasta N), Barrier = fases (cuando todos llegan), RLock = reentrante. Para la 4, plantea una cola compartida, `Condition` con `notify_all()`, y la regla `while not cola: wait()`. Si sabes contarlo fluido, ya eres medio experto en concurrencia.
+> 💡 **Cómo encararlas:** la 2 y la 4 son las "preguntas reina". Para la 2, recorre el ring del [punto 8](/ApuntesPSP/03-sincronizacion/08-buenas-practicas): Lock = exclusión mutua (solo uno), Semaphore = aforo (hasta N), Barrier = fases (cuando todos llegan), RLock = reentrante. Para la 4, plantea una cola compartida, `Condition` con `notify_all()`, y la regla `while not cola: wait()`. Si sabes contarlo fluido, ya eres medio experto en concurrencia.
 
 ---
 
@@ -232,8 +232,8 @@ Usa `multiprocessing.Lock`, `multiprocessing.Semaphore`, etc. Son equivalentes p
 | RA2d | Usa semáforos para acceso controlado | ✅ Punto 4 + ⚡ Laboratorio de tortura |
 | RA2g | Evita condiciones de carrera | ✅ Puntos 1, 2 y 8 + ⚡ Laboratorio con fallo intencionado |
 
-> RA2a, RA2b, RA2e, RA2f y RA2h se cubren en la **U03 · Hilos Fundamentos**.
+> RA2a, RA2b, RA2e, RA2f y RA2h se cubren en la **UD 3 · Hilos y concurrencia**.
 
 ---
 
-📚 [Volver al índice de la unidad](/ApuntesPSP/03-sincronizacion-entre-hilos) · **Anterior:** [08 · Buenas prácticas](/ApuntesPSP/03-sincronizacion-entre-hilos/08-buenas-practicas) · **Siguiente:** **[U05 · Sockets TCP](/ApuntesPSP/04-sockets-tcp)**
+📚 [Volver al índice de la unidad](/ApuntesPSP/03-sincronizacion) · **Anterior:** [08 · Buenas prácticas](/ApuntesPSP/03-sincronizacion/08-buenas-practicas) · **Siguiente:** **[U05 · Sockets TCP](/ApuntesPSP/04-sockets-tcp)**

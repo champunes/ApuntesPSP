@@ -1,6 +1,6 @@
 ﻿---
 title: Boletín U04 — Avanzado (Resuelto)
-description: Soluciones de los ejercicios avanzados de Sincronización entre Hilos
+description: Soluciones de los ejercicios avanzados de Sincronización
 ---
 
 # 💪 Boletín U04 — Avanzado (Resuelto)
@@ -37,7 +37,7 @@ for h in hilos: h.start()
 for h in hilos: h.join()
 ```
 
-Con 3 consumidores esperando, `notify_all()` los despierta a **todos**; si usáramos `notify()` solo despertaría a uno y los demás podrían quedarse dormidos ([punto 6](/ApuntesPSP/03-sincronizacion-entre-hilos/06-condition)).
+Con 3 consumidores esperando, `notify_all()` los despierta a **todos**; si usáramos `notify()` solo despertaría a uno y los demás podrían quedarse dormidos ([punto 6](/ApuntesPSP/03-sincronizacion/06-condition)).
 
 ## 2. Deadlock entre dos hilos
 
@@ -65,7 +65,7 @@ h1.start(); h2.start()
 h1.join(); h2.join()  # ❌ nunca termina: deadlock
 ```
 
-El hilo 1 tiene A y espera B; el hilo 2 tiene B y espera A. **Ningún `print` sale nunca** y el programa se queda colgado ([punto 8](/ApuntesPSP/03-sincronizacion-entre-hilos/08-buenas-practicas)).
+El hilo 1 tiene A y espera B; el hilo 2 tiene B y espera A. **Ningún `print` sale nunca** y el programa se queda colgado ([punto 8](/ApuntesPSP/03-sincronizacion/08-buenas-practicas)).
 
 ## 3. Semáforo con recursos limitados
 
@@ -85,7 +85,7 @@ for h in hilos: h.start()
 for h in hilos: h.join()
 ```
 
-Con `Semaphore(3)` nunca hay más de **3 documentos imprimiendo a la vez**, aunque haya 6 hilos esperando ([punto 4](/ApuntesPSP/03-sincronizacion-entre-hilos/04-semaphore)).
+Con `Semaphore(3)` nunca hay más de **3 documentos imprimiendo a la vez**, aunque haya 6 hilos esperando ([punto 4](/ApuntesPSP/03-sincronizacion/04-semaphore)).
 
 ## 4. 🎯 Banco con cuentas compartidas
 
@@ -166,7 +166,7 @@ for h in hilos: h.start()
 for h in hilos: h.join()
 ```
 
-Los `barrera.wait()` después de cada fase garantizan que **ningún hilo empieza la fase N+1** hasta que los 3 terminaron la fase N ([punto 5](/ApuntesPSP/03-sincronizacion-entre-hilos/05-barrier)).
+Los `barrera.wait()` después de cada fase garantizan que **ningún hilo empieza la fase N+1** hasta que los 3 terminaron la fase N ([punto 5](/ApuntesPSP/03-sincronizacion/05-barrier)).
 
 ## 7. 🎭 Condition con timeout
 
@@ -238,7 +238,7 @@ def hilo_b():
             print("B: trabajando")
 ```
 
-Adquiriendo los locks **siempre en el mismo orden** (`lock1 → lock2`), es imposible que un hilo tenga lock2 esperando lock1 mientras otro tiene lock1 esperando lock2. El programa termina correctamente ([punto 8](/ApuntesPSP/03-sincronizacion-entre-hilos/08-buenas-practicas)).
+Adquiriendo los locks **siempre en el mismo orden** (`lock1 → lock2`), es imposible que un hilo tenga lock2 esperando lock1 mientras otro tiene lock1 esperando lock2. El programa termina correctamente ([punto 8](/ApuntesPSP/03-sincronizacion/08-buenas-practicas)).
 
 ## 9. 🏗️ Productor-Consumidor múltiple
 
@@ -266,4 +266,4 @@ for h in hilos: h.start()
 for h in hilos: h.join()
 ```
 
-`queue.Queue(maxsize=5)` es **thread-safe**: `put()` y `get()` ya están sincronizadas internamente. Con `maxsize=5`, si el buffer se llena, los productores esperan; si se vacía, los consumidores esperan. Sin locks a mano ([punto 7](/ApuntesPSP/03-sincronizacion-entre-hilos/07-productor-consumidor)).
+`queue.Queue(maxsize=5)` es **thread-safe**: `put()` y `get()` ya están sincronizadas internamente. Con `maxsize=5`, si el buffer se llena, los productores esperan; si se vacía, los consumidores esperan. Sin locks a mano ([punto 7](/ApuntesPSP/03-sincronizacion/07-productor-consumidor)).

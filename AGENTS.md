@@ -200,7 +200,7 @@ Secciones del cierre `09-cierre.md`: ⭐ Sé el código, 🔥 Fireside Chat, �
 |--------|----------------------|--------------|-------------|-----|
 | UD 2 Gestión de procesos | `01-gestion-de-procesos.md` + carpeta | ~960 | subprocess, run, Popen, pipes, comunicación | RA1 |
 | UD 3 Hilos y concurrencia | `02-hilos-y-concurrencia.md` + carpeta | ~1.113 | threading, join, daemon, Timer, GIL, estados | RA2 |
-| U03 Sincronización entre Hilos | `03-sincronizacion-entre-hilos.md` + carpeta | ~385 | Lock, Semaphore, Barrier, Condition, RLock | RA2 |
+| UD 4 Sincronización | `03-sincronizacion.md` + carpeta | ~1.102 | Lock, Semaphore, Barrier, Condition, RLock | RA2 |
 | U04 Sockets TCP | `04-sockets-tcp.md` + carpeta | ~360 | TCP, cliente-servidor, errores, SO_REUSEADDR | RA3 |
 | U05 Sockets UDP y Protocolos | `05-sockets-udp-y-protocolos.md` + carpeta | ~250 | UDP, HTTP, NTP, TCP vs UDP | RA3 |
 | U06 APIs REST y HTTP | `06-apis-rest-y-http.md` + carpeta | ~370 | REST, métodos HTTP, requests, JSON | RA4a-b |

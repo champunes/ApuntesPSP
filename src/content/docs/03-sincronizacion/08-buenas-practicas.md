@@ -5,7 +5,7 @@ description: Deadlocks, orden de locks, el ring final y a practicar 🛡️
 
 <p><small>Deadlocks, orden de locks, el ring final y a practicar 🛡️</small></p>
 
-> 🗺️ **Estás en:** 🔒 **U04 · Sincronización entre Hilos** → 08 · Buenas prácticas
+> 🗺️ **Estás en:** 🔒 **UD 4 · Sincronización** → 08 · Buenas prácticas
 
 ---
 
@@ -64,7 +64,7 @@ Los `sleep(0.1)` fuerzan el escenario: A coge el lock1, B coge el lock2, y despu
 
 1. **Adquirir los locks siempre en el mismo orden.** Si todos los hilos piden primero Lock-1 y luego Lock-2, el escenario anterior no puede darse: nadie tiene Lock-2 sin haber pasado por Lock-1.
 2. **Usar `with lock:`** (nunca olvidar `release()`). Un `release()` olvidado deja el cerrojo puesto para siempre y cualquier hilo que lo espere, esperará eternamente.
-3. **Usar `RLock` si el mismo hilo necesita adquirirlo varias veces** (lo viste en el [punto 3](/ApuntesPSP/03-sincronizacion-entre-hilos/03-rlock)): evita que un hilo se espere a sí mismo.
+3. **Usar `RLock` si el mismo hilo necesita adquirirlo varias veces** (lo viste en el [punto 3](/ApuntesPSP/03-sincronizacion/03-rlock)): evita que un hilo se espere a sí mismo.
 
 > ⚠️ **¿Puedo tener más de un Lock?** Sí, pero cada Lock añade riesgo de deadlock. Sé disciplinado con el orden de adquisición: **mismo orden para todos los hilos, siempre**.
 
@@ -94,7 +94,7 @@ Usa `multiprocessing.Lock`, `multiprocessing.Semaphore`, etc. Son equivalentes a
 
 **Barrera:** "Para sincronizar **fases de un trabajo**. Todos completan la fase 1, luego todos empiezan la fase 2."
 
-> **Moraleja del ring:** cada mecanismo responde a una pregunta distinta — ¿quién? (Lock), ¿cuántos? (Semáforo), ¿cuándo? (Barrera). Y la `Condition` del [punto 6](/ApuntesPSP/03-sincronizacion-entre-hilos/06-condition) añade el aviso entre hilos.
+> **Moraleja del ring:** cada mecanismo responde a una pregunta distinta — ¿quién? (Lock), ¿cuántos? (Semáforo), ¿cuándo? (Barrera). Y la `Condition` del [punto 6](/ApuntesPSP/03-sincronizacion/06-condition) añade el aviso entre hilos.
 
 ---
 
@@ -129,7 +129,7 @@ for h in hilos: h.join()
 print(f"Con Lock: {contador}")  # ✅ 2.000.000
 ```
 
-Quita el `with lock:` y el resultado será menor de 2.000.000 (condición de carrera del [punto 1](/ApuntesPSP/03-sincronizacion-entre-hilos/01-condicion-de-carrera)).
+Quita el `with lock:` y el resultado será menor de 2.000.000 (condición de carrera del [punto 1](/ApuntesPSP/03-sincronizacion/01-condicion-de-carrera)).
 
 **2. Semáforo descargas:**
 
@@ -171,7 +171,7 @@ for h in hilos: h.start()
 for h in hilos: h.join()
 ```
 
-Ningún "Fase 2" se imprime hasta que los 4 hilos han imprimido su "Fase 1": eso es sincronizar fases con la [barrera](/ApuntesPSP/03-sincronizacion-entre-hilos/05-barrier).
+Ningún "Fase 2" se imprime hasta que los 4 hilos han imprimido su "Fase 1": eso es sincronizar fases con la [barrera](/ApuntesPSP/03-sincronizacion/05-barrier).
 
 **4. Productor-Consumidor:**
 
@@ -204,7 +204,7 @@ h_prod.join()
 for h in h_cons: h.join()
 ```
 
-La `Condition` y la regla `while not cola: wait()` del [punto 7](/ApuntesPSP/03-sincronizacion-entre-hilos/07-productor-consumidor) coordinan a los tres.
+La `Condition` y la regla `while not cola: wait()` del [punto 7](/ApuntesPSP/03-sincronizacion/07-productor-consumidor) coordinan a los tres.
 
 **5. Deadlock provocado:**
 
@@ -327,4 +327,4 @@ El resultado es **300.000** (3 hilos × 100.000) gracias al `with lock:` que pro
 
 ---
 
-📚 [Volver al índice de la unidad](/ApuntesPSP/03-sincronizacion-entre-hilos) · **Anterior:** [07 · Productor-Consumidor](/ApuntesPSP/03-sincronizacion-entre-hilos/07-productor-consumidor) · **Siguiente:** [09 · Cierre](/ApuntesPSP/03-sincronizacion-entre-hilos/09-cierre)
+📚 [Volver al índice de la unidad](/ApuntesPSP/03-sincronizacion) · **Anterior:** [07 · Productor-Consumidor](/ApuntesPSP/03-sincronizacion/07-productor-consumidor) · **Siguiente:** [09 · Cierre](/ApuntesPSP/03-sincronizacion/09-cierre)

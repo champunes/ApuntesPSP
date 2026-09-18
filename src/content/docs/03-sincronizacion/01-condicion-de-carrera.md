@@ -5,7 +5,7 @@ description: Cuando dos hilos se pisan la memoria compartida 🏃💥
 
 <p><small>Cuando dos hilos se pisan la memoria compartida 🏃💥</small></p>
 
-> 🗺️ **Estás en:** 🔒 **U04 · Sincronización entre Hilos** → 01 · Condición de carrera
+> 🗺️ **Estás en:** 🔒 **UD 4 · Sincronización** → 01 · Condición de carrera
 
 ---
 
@@ -82,7 +82,7 @@ Imagina una tienda con **una sola caja** y **dos cajeros**. La caja solo puede g
 
 Se han cobrado 100 € en total, pero en la caja solo hay 150 € en lugar de 200 €. **Los 50 € del cajero A han desaparecido** en la caja compartida: se perdieron por una condición de carrera. Exactamente lo mismo le pasa a `contador`.
 
-El remedio es la **exclusión mutua**: mientras un cajero toca la caja, el otro espera fuera. Ese es el `Lock`, que verás en el [punto 2](/ApuntesPSP/03-sincronizacion-entre-hilos/02-lock).
+El remedio es la **exclusión mutua**: mientras un cajero toca la caja, el otro espera fuera. Ese es el `Lock`, que verás en el [punto 2](/ApuntesPSP/03-sincronizacion/02-lock).
 
 ---
 
@@ -134,4 +134,4 @@ El remedio es la **exclusión mutua**: mientras un cajero toca la caja, el otro 
 
 ---
 
-📚 [Volver al índice de la unidad](/ApuntesPSP/03-sincronizacion-entre-hilos) · **Siguiente:** [02 · Lock](/ApuntesPSP/03-sincronizacion-entre-hilos/02-lock)
+📚 [Volver al índice de la unidad](/ApuntesPSP/03-sincronizacion) · **Siguiente:** [02 · Lock](/ApuntesPSP/03-sincronizacion/02-lock)

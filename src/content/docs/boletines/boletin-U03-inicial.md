@@ -1,6 +1,6 @@
 ﻿---
 title: Boletín U04 — Inicial
-description: Ejercicios básicos de Sincronización entre Hilos
+description: Ejercicios básicos de Sincronización
 ---
 
 # 📝 Boletín U04 — Inicial

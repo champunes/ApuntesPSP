@@ -83,7 +83,7 @@ Al terminar, serás capaz de:
 
 ## 🚪 ¿Por dónde empiezo?
 
-¿Vienes de la U04 y dominas hilos y sincronización? Perfecto, ese es el trampolín ideal: repasa la [U04 · Sincronización entre hilos](/ApuntesPSP/03-sincronizacion-entre-hilos) para tener frescos los locks y semáforos (te harán falta en el [TEMA 10](/ApuntesPSP/10-servidores-concurrentes)), y arranca en el [punto 1](/ApuntesPSP/04-sockets-tcp/01-que-es-un-socket), que parte de cero: qué es un socket, la IP y el puerto.
+¿Vienes de la U04 y dominas hilos y sincronización? Perfecto, ese es el trampolín ideal: repasa la [U04 · Sincronización](/ApuntesPSP/03-sincronizacion) para tener frescos los locks y semáforos (te harán falta en el [TEMA 10](/ApuntesPSP/10-servidores-concurrentes)), y arranca en el [punto 1](/ApuntesPSP/04-sockets-tcp/01-que-es-un-socket), que parte de cero: qué es un socket, la IP y el puerto.
 
 ¿Ya sabes qué es un socket y solo necesitas el servidor, los errores o el truco de `SO_REUSEADDR`? Ve directo al [punto 3](/ApuntesPSP/04-sockets-tcp/03-servidor-tcp), al [5](/ApuntesPSP/04-sockets-tcp/05-errores-y-manejo) o al [6](/ApuntesPSP/04-sockets-tcp/06-so-reuseaddr). Si vienes de cero en redes, no te saltes los puntos 1 a 4: la IP, el puerto y el handshake son la base de todo lo demás.
 

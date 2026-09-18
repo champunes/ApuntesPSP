@@ -5,7 +5,7 @@ description: El aforo máximo de la sección crítica 🎟️
 
 <p><small>El aforo máximo de la sección crítica 🎟️</small></p>
 
-> 🗺️ **Estás en:** 🔒 **U04 · Sincronización entre Hilos** → 04 · Semaphore
+> 🗺️ **Estás en:** 🔒 **UD 4 · Sincronización** → 04 · Semaphore
 
 ---
 
@@ -13,7 +13,7 @@ description: El aforo máximo de la sección crítica 🎟️
 
 > Un **Semaphore** permite que hasta **N hilos** accedan al recurso a la vez: es como el aforo máximo de un local. Cuando se libera un puesto, entra el siguiente.
 
-El `Lock` del [punto 2](/ApuntesPSP/03-sincronizacion-entre-hilos/02-lock) deja pasar a **uno** a la vez. El `Semaphore(2)` deja pasar a **dos** a la vez; `Semaphore(3)`, a **tres**… y así hasta el número que le pases al constructor.
+El `Lock` del [punto 2](/ApuntesPSP/03-sincronizacion/02-lock) deja pasar a **uno** a la vez. El `Semaphore(2)` deja pasar a **dos** a la vez; `Semaphore(3)`, a **tres**… y así hasta el número que le pases al constructor.
 
 ```python
 import threading, time
@@ -136,4 +136,4 @@ El hilo 0 ocupa el único puesto; los otros esperan 1 segundo y, al no entrar, *
 
 ---
 
-📚 [Volver al índice de la unidad](/ApuntesPSP/03-sincronizacion-entre-hilos) · **Anterior:** [03 · RLock](/ApuntesPSP/03-sincronizacion-entre-hilos/03-rlock) · **Siguiente:** [05 · Barrier](/ApuntesPSP/03-sincronizacion-entre-hilos/05-barrier)
+📚 [Volver al índice de la unidad](/ApuntesPSP/03-sincronizacion) · **Anterior:** [03 · RLock](/ApuntesPSP/03-sincronizacion/03-rlock) · **Siguiente:** [05 · Barrier](/ApuntesPSP/03-sincronizacion/05-barrier)

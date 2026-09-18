@@ -5,7 +5,7 @@ description: Cuando un hilo necesita que otro le avise 📢
 
 <p><small>Cuando un hilo necesita que otro le avise 📢</small></p>
 
-> 🗺️ **Estás en:** 🔒 **U04 · Sincronización entre Hilos** → 06 · Condition
+> 🗺️ **Estás en:** 🔒 **UD 4 · Sincronización** → 06 · Condition
 
 ---
 
@@ -153,4 +153,4 @@ Sin la condición, el trabajador tendría que comprobar `listo` en bucle gastand
 
 ---
 
-📚 [Volver al índice de la unidad](/ApuntesPSP/03-sincronizacion-entre-hilos) · **Anterior:** [05 · Barrier](/ApuntesPSP/03-sincronizacion-entre-hilos/05-barrier) · **Siguiente:** [07 · Productor-Consumidor](/ApuntesPSP/03-sincronizacion-entre-hilos/07-productor-consumidor)
+📚 [Volver al índice de la unidad](/ApuntesPSP/03-sincronizacion) · **Anterior:** [05 · Barrier](/ApuntesPSP/03-sincronizacion/05-barrier) · **Siguiente:** [07 · Productor-Consumidor](/ApuntesPSP/03-sincronizacion/07-productor-consumidor)

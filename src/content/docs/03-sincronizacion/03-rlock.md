@@ -5,7 +5,7 @@ description: Cuando el mismo hilo quiere entrar dos veces 🔁
 
 <p><small>Cuando el mismo hilo quiere entrar dos veces 🔁</small></p>
 
-> 🗺️ **Estás en:** 🔒 **U04 · Sincronización entre Hilos** → 03 · RLock
+> 🗺️ **Estás en:** 🔒 **UD 4 · Sincronización** → 03 · RLock
 
 ---
 
@@ -13,7 +13,7 @@ description: Cuando el mismo hilo quiere entrar dos veces 🔁
 
 > Un **Lock normal no es reentrante**: si el mismo hilo intenta adquirirlo dos veces, se espera a sí mismo y se produce un **deadlock**. Un **RLock** (Reentrant Lock) sí permite que el mismo hilo lo adquiera varias veces antes de liberarlo.
 
-Recuerda el [punto 2](/ApuntesPSP/03-sincronizacion-entre-hilos/02-lock): `acquire()` bloquea "si otro hilo lo tiene". El problema es que el Lock no distingue entre "otro hilo" y "yo mismo".
+Recuerda el [punto 2](/ApuntesPSP/03-sincronizacion/02-lock): `acquire()` bloquea "si otro hilo lo tiene". El problema es que el Lock no distingue entre "otro hilo" y "yo mismo".
 
 ```python
 import threading
@@ -75,7 +75,7 @@ Si `registrar_operacion` usara un `Lock` normal, `depositar` tendría el lock pu
 | Uso típico | Sección crítica simple | Funciones que se llaman entre sí / recursión |
 | Coste | Mínimo | Mínimo (un poco más de contabilidad) |
 
-> ⚠️ **Regla:** usa `Lock` por defecto. Solo cambia a `RLock` cuando de verdad el mismo hilo necesite adquirirlo más de una vez (funciones que se llaman entre sí). Un `RLock` no evita que dos hilos distintos se pisen: para eso siguen valiendo las mismas reglas del [punto 2](/ApuntesPSP/03-sincronizacion-entre-hilos/02-lock).
+> ⚠️ **Regla:** usa `Lock` por defecto. Solo cambia a `RLock` cuando de verdad el mismo hilo necesite adquirirlo más de una vez (funciones que se llaman entre sí). Un `RLock` no evita que dos hilos distintos se pisen: para eso siguen valiendo las mismas reglas del [punto 2](/ApuntesPSP/03-sincronizacion/02-lock).
 
 ---
 
@@ -113,4 +113,4 @@ Si `registrar_operacion` usara un `Lock` normal, `depositar` tendría el lock pu
 
 ---
 
-📚 [Volver al índice de la unidad](/ApuntesPSP/03-sincronizacion-entre-hilos) · **Anterior:** [02 · Lock](/ApuntesPSP/03-sincronizacion-entre-hilos/02-lock) · **Siguiente:** [04 · Semaphore](/ApuntesPSP/03-sincronizacion-entre-hilos/04-semaphore)
+📚 [Volver al índice de la unidad](/ApuntesPSP/03-sincronizacion) · **Anterior:** [02 · Lock](/ApuntesPSP/03-sincronizacion/02-lock) · **Siguiente:** [04 · Semaphore](/ApuntesPSP/03-sincronizacion/04-semaphore)

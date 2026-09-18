@@ -217,7 +217,7 @@ En Python, no hay prioridades nativas. El scheduler del SO decide. Puedes simula
 
 *Los hilos comparten memoria, y compartir sin ponerse de acuerdo es peligroso.*
 
-**PRÓXIMAMENTE EN UD 4:** *Dos hilos tocando la misma variable a la vez es una carrera. Si no se ponen de acuerdo, los datos se corrompen. Necesitan locks, semáforos y barreras: sincronización entre hilos.*
+**PRÓXIMAMENTE EN UD 4:** *Dos hilos tocando la misma variable a la vez es una carrera. Si no se ponen de acuerdo, los datos se corrompen. Necesitan locks, semáforos y barreras: Sincronización.*
 
 ---
 
@@ -233,8 +233,8 @@ En Python, no hay prioridades nativas. El scheduler del SO decide. Puedes simula
 | RA2f | Gestiona hilos daemon | ✅ Punto 4 + ⚡ Laboratorio de tortura |
 | RA2h | Conoce el GIL y sus limitaciones | ✅ Punto 6 + Punto 8 |
 
-> Los criterios RA2c (Lock), RA2d (semáforos) y RA2g (condiciones de carrera) se cubren en el **TEMA 03 — Sincronización entre Hilos**.
+> Los criterios RA2c (Lock), RA2d (semáforos) y RA2g (condiciones de carrera) se cubren en el **TEMA 03 — Sincronización**.
 
 ---
 
-📚 [Volver al índice de la unidad](/ApuntesPSP/02-hilos-y-concurrencia) · **Anterior:** [08 · Hilos en la práctica](/ApuntesPSP/02-hilos-y-concurrencia/08-hilos-en-la-practica) · **Siguiente:** **[UD 4 · Sincronización](/ApuntesPSP/03-sincronizacion-entre-hilos)**
+📚 [Volver al índice de la unidad](/ApuntesPSP/02-hilos-y-concurrencia) · **Anterior:** [08 · Hilos en la práctica](/ApuntesPSP/02-hilos-y-concurrencia/08-hilos-en-la-practica) · **Siguiente:** **[UD 4 · Sincronización](/ApuntesPSP/03-sincronizacion)**

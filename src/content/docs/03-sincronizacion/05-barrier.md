@@ -5,7 +5,7 @@ description: Ningún hilo avanza hasta que llegan todos 🏁
 
 <p><small>Ningún hilo avanza hasta que llegan todos 🏁</small></p>
 
-> 🗺️ **Estás en:** 🔒 **U04 · Sincronización entre Hilos** → 05 · Barrier
+> 🗺️ **Estás en:** 🔒 **UD 4 · Sincronización** → 05 · Barrier
 
 ---
 
@@ -144,4 +144,4 @@ Ningún archivo se procesa hasta que los 3 están descargados. La barrera convie
 
 ---
 
-📚 [Volver al índice de la unidad](/ApuntesPSP/03-sincronizacion-entre-hilos) · **Anterior:** [04 · Semaphore](/ApuntesPSP/03-sincronizacion-entre-hilos/04-semaphore) · **Siguiente:** [06 · Condition](/ApuntesPSP/03-sincronizacion-entre-hilos/06-condition)
+📚 [Volver al índice de la unidad](/ApuntesPSP/03-sincronizacion) · **Anterior:** [04 · Semaphore](/ApuntesPSP/03-sincronizacion/04-semaphore) · **Siguiente:** [06 · Condition](/ApuntesPSP/03-sincronizacion/06-condition)

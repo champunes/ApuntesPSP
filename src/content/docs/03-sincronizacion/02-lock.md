@@ -5,13 +5,13 @@ description: El cerrojo que protege la sección crítica 🔒
 
 <p><small>El cerrojo que protege la sección crítica 🔒</small></p>
 
-> 🗺️ **Estás en:** 🔒 **U04 · Sincronización entre Hilos** → 02 · Lock
+> 🗺️ **Estás en:** 🔒 **UD 4 · Sincronización** → 02 · Lock
 
 ---
 
 ## 📬 La idea en una frase
 
-> Un **Lock** (cerrojo) garantiza que solo un hilo entre en la **sección crítica** a la vez: el resto espera fuera hasta que el primero lo libera. Es la exclusión mutua que faltaba en el [punto 1](/ApuntesPSP/03-sincronizacion-entre-hilos/01-condicion-de-carrera).
+> Un **Lock** (cerrojo) garantiza que solo un hilo entre en la **sección crítica** a la vez: el resto espera fuera hasta que el primero lo libera. Es la exclusión mutua que faltaba en el [punto 1](/ApuntesPSP/03-sincronizacion/01-condicion-de-carrera).
 
 En el ejemplo del contador compartido, la sección crítica es `contador += 1`. Protegerla con un Lock hace que los 4 hilos se turnen: nadie puede leer mientras otro está escribiendo, y el resultado final vuelve a ser el esperado.
 
@@ -101,7 +101,7 @@ Hilo-C: lee contador = 2          ← valor correcto
 ...
 ```
 
-Con el Lock, el "leer → sumar → escribir" de cada hilo ocurre **de principio a fin sin que nadie se cuele** entre medias. Los cajeros de la analogía del [punto 1](/ApuntesPSP/03-sincronizacion-entre-hilos/01-condicion-de-carrera) ya no se pisan: mientras uno toca la caja, el otro espera fuera.
+Con el Lock, el "leer → sumar → escribir" de cada hilo ocurre **de principio a fin sin que nadie se cuele** entre medias. Los cajeros de la analogía del [punto 1](/ApuntesPSP/03-sincronizacion/01-condicion-de-carrera) ya no se pisan: mientras uno toca la caja, el otro espera fuera.
 
 > 💡 **Regla de oro:** el Lock protege la **sección crítica**, no el hilo. Todo el código que toque la variable compartida debe ir dentro del mismo lock.
 
@@ -127,7 +127,7 @@ Con el Lock, el "leer → sumar → escribir" de cada hilo ocurre **de principio
 
 - El `Lock` es el cerrojo que protege la sección crítica: solo un hilo a la vez.
 - Con `with lock:` nunca se olvida liberarlo; con `acquire()`/`release()` manuales, un `release()` olvidado = deadlock.
-- Protegido con Lock, el contador del [punto 1](/ApuntesPSP/03-sincronizacion-entre-hilos/01-condicion-de-carrera) pasa de resultados aleatorios a un **400.000** exacto.
+- Protegido con Lock, el contador del [punto 1](/ApuntesPSP/03-sincronizacion/01-condicion-de-carrera) pasa de resultados aleatorios a un **400.000** exacto.
 
 ## 🐛 Vocabulario rápido
 
@@ -141,4 +141,4 @@ Con el Lock, el "leer → sumar → escribir" de cada hilo ocurre **de principio
 
 ---
 
-📚 [Volver al índice de la unidad](/ApuntesPSP/03-sincronizacion-entre-hilos) · **Anterior:** [01 · Condición de carrera](/ApuntesPSP/03-sincronizacion-entre-hilos/01-condicion-de-carrera) · **Siguiente:** [03 · RLock](/ApuntesPSP/03-sincronizacion-entre-hilos/03-rlock)
+📚 [Volver al índice de la unidad](/ApuntesPSP/03-sincronizacion) · **Anterior:** [01 · Condición de carrera](/ApuntesPSP/03-sincronizacion/01-condicion-de-carrera) · **Siguiente:** [03 · RLock](/ApuntesPSP/03-sincronizacion/03-rlock)

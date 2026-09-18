@@ -13,7 +13,7 @@ description: Cada cliente se atiende en su propio hilo 🔀
 
 > En lugar de atender al cliente dentro del bucle, el servidor **lanza un hilo por cada cliente** y vuelve inmediatamente a `accept()`. Cada conexión tiene su propia "ventanilla".
 
-Ya conoces los hilos de la [U03 · Hilos fundamentos](/ApuntesPSP/02-hilos-y-concurrencia) y la sincronización de la [U04](/ApuntesPSP/03-sincronizacion-entre-hilos). Este punto los pone a trabajar: el patrón **hilo por cliente** (thread per connection) es el salto más directo desde el servidor secuencial.
+Ya conoces los hilos de la [U03 · Hilos fundamentos](/ApuntesPSP/02-hilos-y-concurrencia) y la sincronización de la [U04](/ApuntesPSP/03-sincronizacion). Este punto los pone a trabajar: el patrón **hilo por cliente** (thread per connection) es el salto más directo desde el servidor secuencial.
 
 ---
 

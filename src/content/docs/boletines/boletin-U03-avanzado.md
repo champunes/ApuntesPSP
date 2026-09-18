@@ -1,6 +1,6 @@
 ﻿---
 title: Boletín U04 — Avanzado
-description: Ejercicios avanzados de Sincronización entre Hilos
+description: Ejercicios avanzados de Sincronización
 ---
 
 # 💪 Boletín U04 — Avanzado

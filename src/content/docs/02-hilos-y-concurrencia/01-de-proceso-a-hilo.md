@@ -70,7 +70,7 @@ Imagina una cocina de restaurante con varios cocineros:
 
 > "Un hilo es como una tarea dentro de una casa. Todos los hilos comparten la misma casa (memoria), pero cada uno hace su propia cosa."
 
-Ese reparto de la misma nevera es lo que hace a los hilos tan rápidos para comunicarse… y tan peligrosos si dos tocan el mismo ingrediente a la vez. Ese peligro se llama **condición de carrera** y lo atacarás en el [TEMA 03 · Sincronización](/ApuntesPSP/03-sincronizacion-entre-hilos).
+Ese reparto de la misma nevera es lo que hace a los hilos tan rápidos para comunicarse… y tan peligrosos si dos tocan el mismo ingrediente a la vez. Ese peligro se llama **condición de carrera** y lo atacarás en el [TEMA 03 · Sincronización](/ApuntesPSP/03-sincronizacion).
 
 ---
 

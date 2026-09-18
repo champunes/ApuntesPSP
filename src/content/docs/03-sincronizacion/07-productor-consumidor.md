@@ -5,7 +5,7 @@ description: El patrón clásico con cola y Condition 🏭🍽️
 
 <p><small>El patrón clásico con cola y Condition 🏭🍽️</small></p>
 
-> 🗺️ **Estás en:** 🔒 **U04 · Sincronización entre Hilos** → 07 · Productor-Consumidor
+> 🗺️ **Estás en:** 🔒 **UD 4 · Sincronización** → 07 · Productor-Consumidor
 
 ---
 
@@ -13,7 +13,7 @@ description: El patrón clásico con cola y Condition 🏭🍽️
 
 > El patrón **productor-consumidor** separa a quien **crea** datos (productor) de quien los **procesa** (consumidor): comparten una cola y una `Condition` para que el consumidor espere cuando la cola está vacía y el productor le avise cuando añade algo.
 
-Es el patrón de sincronización más usado en el mundo real: un hilo llena una cola de tareas, otros hilos las procesan. La `Condition` del [punto 6](/ApuntesPSP/03-sincronizacion-entre-hilos/06-condition) es el pegamento que los coordina.
+Es el patrón de sincronización más usado en el mundo real: un hilo llena una cola de tareas, otros hilos las procesan. La `Condition` del [punto 6](/ApuntesPSP/03-sincronizacion/06-condition) es el pegamento que los coordina.
 
 ```python
 import threading, time, random
@@ -83,7 +83,7 @@ Veamos cómo se coordinan los dos hilos:
    → sale del with → libera el lock
 ```
 
-La magia de `wait()` del [punto 6](/ApuntesPSP/03-sincronizacion-entre-hilos/06-condition): mientras el consumidor duerme, **libera el lock** para que el productor pueda entrar y producir. Sin esa liberación, el productor nunca podría producir y el consumidor esperaría eternamente (deadlock).
+La magia de `wait()` del [punto 6](/ApuntesPSP/03-sincronizacion/06-condition): mientras el consumidor duerme, **libera el lock** para que el productor pueda entrar y producir. Sin esa liberación, el productor nunca podría producir y el consumidor esperaría eternamente (deadlock).
 
 ---
 
@@ -124,7 +124,7 @@ for h in hilos: h.start()
 for h in hilos: h.join()
 ```
 
-> 💡 Y si quieres limitar el tamaño de la cola (buffer con tope), el semáforo del [punto 4](/ApuntesPSP/03-sincronizacion-entre-hilos/04-semaphore) o la clase `queue.Queue(maxsize=N)` (thread-safe, sin locks a mano) te dan el control: los productores llaman a `put()` y los consumidores a `get()`. El ejemplo produce exactamente lo que los consumidores van a consumir (2 × 3 = 6); si produjera menos, los consumidores se quedarían esperando en `wait()` para siempre.
+> 💡 Y si quieres limitar el tamaño de la cola (buffer con tope), el semáforo del [punto 4](/ApuntesPSP/03-sincronizacion/04-semaphore) o la clase `queue.Queue(maxsize=N)` (thread-safe, sin locks a mano) te dan el control: los productores llaman a `put()` y los consumidores a `get()`. El ejemplo produce exactamente lo que los consumidores van a consumir (2 × 3 = 6); si produjera menos, los consumidores se quedarían esperando en `wait()` para siempre.
 
 ---
 
@@ -162,4 +162,4 @@ for h in hilos: h.join()
 
 ---
 
-📚 [Volver al índice de la unidad](/ApuntesPSP/03-sincronizacion-entre-hilos) · **Anterior:** [06 · Condition](/ApuntesPSP/03-sincronizacion-entre-hilos/06-condition) · **Siguiente:** [08 · Buenas prácticas](/ApuntesPSP/03-sincronizacion-entre-hilos/08-buenas-practicas)
+📚 [Volver al índice de la unidad](/ApuntesPSP/03-sincronizacion) · **Anterior:** [06 · Condition](/ApuntesPSP/03-sincronizacion/06-condition) · **Siguiente:** [08 · Buenas prácticas](/ApuntesPSP/03-sincronizacion/08-buenas-practicas)

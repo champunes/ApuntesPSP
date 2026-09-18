@@ -68,9 +68,9 @@ description: Apuntes de Programación de Servicios y Procesos — Python. CC BY-
     <span class="num">Unidad 4</span>
     <span class="ra">RA2</span>
   </div>
-  <a href="/ApuntesPSP/03-sincronizacion-entre-hilos" class="title-link">Sincronización entre Hilos</a>
+  <a href="/ApuntesPSP/03-sincronizacion" class="title-link">Sincronización</a>
   <p class="desc"><code>Lock</code>, <code>Semaphore</code>, <code>Barrier</code>, <code>Condition</code>, <code>RLock</code>, productor-consumidor.</p>
-  <a href="/ApuntesPSP/03-sincronizacion-entre-hilos" class="unit-link">👉 Ver unidad 👈</a>
+  <a href="/ApuntesPSP/03-sincronizacion" class="unit-link">👉 Ver unidad 👈</a>
 </div>
 
 <div class="unit-card">
