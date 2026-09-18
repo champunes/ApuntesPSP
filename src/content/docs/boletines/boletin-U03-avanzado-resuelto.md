@@ -1,9 +1,9 @@
 ﻿---
-title: Boletín U04 — Avanzado (Resuelto)
+title: Boletín UD 4 — Avanzado (Resuelto)
 description: Soluciones de los ejercicios avanzados de Sincronización
 ---
 
-# 💪 Boletín U04 — Avanzado (Resuelto)
+# 💪 Boletín UD 4 — Avanzado (Resuelto)
 
 ---
 

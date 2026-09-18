@@ -1,9 +1,9 @@
 ﻿---
-title: Boletín U04 — Inicial (Resuelto)
+title: Boletín UD 4 — Inicial (Resuelto)
 description: Soluciones de los ejercicios básicos de Sincronización
 ---
 
-# ✅ Boletín U04 — Inicial (Resuelto)
+# ✅ Boletín UD 4 — Inicial (Resuelto)
 
 ---
 

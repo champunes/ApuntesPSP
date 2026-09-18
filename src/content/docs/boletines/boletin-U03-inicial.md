@@ -1,9 +1,9 @@
 ﻿---
-title: Boletín U04 — Inicial
+title: Boletín UD 4 — Inicial
 description: Ejercicios básicos de Sincronización
 ---
 
-# 📝 Boletín U04 — Inicial
+# 📝 Boletín UD 4 — Inicial
 
 > Ejercicios básicos para afianzar los conceptos de sincronización: condición de carrera, Lock, RLock, semáforo y barrera.
 
