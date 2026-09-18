@@ -1,9 +1,9 @@
 ﻿---
-title: Boletín U12 — Avanzado (Resuelto)
+title: Boletín UD 10 — Avanzado (Resuelto)
 description: Soluciones de los ejercicios avanzados de Alta disponibilidad
 ---
 
-# 💪 Boletín U12 — Avanzado (Resuelto)
+# 💪 Boletín UD 10 — Avanzado (Resuelto)
 
 ---
 

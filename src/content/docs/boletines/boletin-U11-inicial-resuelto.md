@@ -1,9 +1,9 @@
 ﻿---
-title: Boletín U12 — Inicial (Resuelto)
+title: Boletín UD 10 — Inicial (Resuelto)
 description: Soluciones de los ejercicios básicos de Alta disponibilidad
 ---
 
-# ✅ Boletín U12 — Inicial (Resuelto)
+# ✅ Boletín UD 10 — Inicial (Resuelto)
 
 ---
 

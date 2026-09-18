@@ -1,9 +1,9 @@
 ﻿---
-title: Boletín U12 — Avanzado
+title: Boletín UD 10 — Avanzado
 description: Ejercicios avanzados de Alta disponibilidad
 ---
 
-# 💪 Boletín U12 — Avanzado
+# 💪 Boletín UD 10 — Avanzado
 
 > Ejercicios que requieren aplicar asyncio de forma más profunda: backoff, timeouts con respaldo, heartbeats múltiples, descargas concurrentes, servidores con latido y monitorización de varios servicios.
 

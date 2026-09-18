@@ -1,9 +1,9 @@
 ﻿---
-title: Boletín U12 — Inicial
+title: Boletín UD 10 — Inicial
 description: Ejercicios básicos de Alta disponibilidad
 ---
 
-# 📝 Boletín U12 — Inicial
+# 📝 Boletín UD 10 — Inicial
 
 > Ejercicios básicos para afianzar los conceptos de asyncio: corrutinas, el event loop, gather, las tareas en segundo plano y los primeros mecanismos de disponibilidad.
 
