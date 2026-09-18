@@ -138,9 +138,9 @@ description: Apuntes de Programación de Servicios y Procesos — Python. CC BY-
     <span class="num">Unidad 11</span>
     <span class="ra">RA4e-g</span>
   </div>
-  <a href="/ApuntesPSP/11-asyncio-y-disponibilidad" class="title-link">Asyncio y Disponibilidad</a>
+  <a href="/ApuntesPSP/09-alta-disponibilidad" class="title-link">Alta disponibilidad</a>
   <p class="desc"><code>asyncio</code>, <code>async</code>/<code>await</code>, heartbeat, reintentos con backoff, timeouts, alta disponibilidad.</p>
-  <a href="/ApuntesPSP/11-asyncio-y-disponibilidad" class="unit-link">👉 Ver unidad 👈</a>
+  <a href="/ApuntesPSP/09-alta-disponibilidad" class="unit-link">👉 Ver unidad 👈</a>
 </div>
 
 </div>

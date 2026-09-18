@@ -1,6 +1,6 @@
 ﻿---
 title: Boletín U12 — Inicial
-description: Ejercicios básicos de asyncio y Disponibilidad
+description: Ejercicios básicos de Alta disponibilidad
 ---
 
 # 📝 Boletín U12 — Inicial

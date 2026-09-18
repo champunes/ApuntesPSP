@@ -1,6 +1,6 @@
 ﻿---
 title: Boletín U12 — Avanzado
-description: Ejercicios avanzados de asyncio y Disponibilidad
+description: Ejercicios avanzados de Alta disponibilidad
 ---
 
 # 💪 Boletín U12 — Avanzado

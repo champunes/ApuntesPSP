@@ -62,13 +62,13 @@ Ese hilo queda **bloqueado**, pero los demás siguen funcionando: la concurrenci
 
 - Con hilo por cliente: 10.000 hilos → el sistema se colapsa.
 - Con ThreadPool de **100 hilos + cola de espera**: el servidor sobrevive, aunque los clientes esperen turno.
-- La alternativa que **escala mejor** es **asyncio** (la verás en la [UD 10 · asyncio y Disponibilidad](/ApuntesPSP/11-asyncio-y-disponibilidad)): atiende miles de conexiones sin un hilo por conexión, con un bucle de eventos muy ligero.
+- La alternativa que **escala mejor** es **asyncio** (la verás en la [UD 10 · Alta disponibilidad](/ApuntesPSP/09-alta-disponibilidad)): atiende miles de conexiones sin un hilo por conexión, con un bucle de eventos muy ligero.
 
 ---
 
 ## 🔀 ¿Puedo mezclar hilos y asyncio?
 
-Sí, con `loop.run_in_executor()`. Pero como principiante, la recomendación es clara: **empieza con uno u otro**. Los dos modelos (hilos y asyncio) son potentes por separado y confusos juntos. Cuando domines asyncio en la [UD 10](/ApuntesPSP/11-asyncio-y-disponibilidad), podrás combinar bloqueos de bibliotecas de terceros (que no son asíncronas) usando el ejecutor.
+Sí, con `loop.run_in_executor()`. Pero como principiante, la recomendación es clara: **empieza con uno u otro**. Los dos modelos (hilos y asyncio) son potentes por separado y confusos juntos. Cuando domines asyncio en la [UD 10](/ApuntesPSP/09-alta-disponibilidad), podrás combinar bloqueos de bibliotecas de terceros (que no son asíncronas) usando el ejecutor.
 
 ---
 

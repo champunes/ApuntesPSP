@@ -5,7 +5,7 @@ description: wait_for para que nada se cuelgue para siempre ⏰
 
 <p><small>wait_for para que nada se cuelgue para siempre ⏰</small></p>
 
-> 🗺️ **Estás en:** ⏱️ **U12 · asyncio y Disponibilidad** → 04 · Timeouts
+> 🗺️ **Estás en:** ⏱️ **UD 10 · Alta disponibilidad** → 04 · Timeouts
 
 ---
 
@@ -66,9 +66,9 @@ async def main():
 asyncio.run(main())
 ```
 
-Salida: `Resultado en caché` — la tarea lenta no llegó en 5 segundos y el respaldo tomó el relevo. Es la semilla del mecanismo de disponibilidad que montarás en el [punto 8](/ApuntesPSP/11-asyncio-y-disponibilidad/08-disponibilidad-y-practica).
+Salida: `Resultado en caché` — la tarea lenta no llegó en 5 segundos y el respaldo tomó el relevo. Es la semilla del mecanismo de disponibilidad que montarás en el [punto 8](/ApuntesPSP/09-alta-disponibilidad/08-disponibilidad-y-practica).
 
-> 💡 El timeout también se combina con el [backoff](/ApuntesPSP/11-asyncio-y-disponibilidad/06-backoff): en cada intento de conexión, `wait_for` corta la espera y el backoff decide cuánto esperar antes del siguiente.
+> 💡 El timeout también se combina con el [backoff](/ApuntesPSP/09-alta-disponibilidad/06-backoff): en cada intento de conexión, `wait_for` corta la espera y el backoff decide cuánto esperar antes del siguiente.
 
 ---
 
@@ -107,4 +107,4 @@ Salida: `Resultado en caché` — la tarea lenta no llegó en 5 segundos y el re
 
 ---
 
-📚 [Volver al índice de la unidad](/ApuntesPSP/11-asyncio-y-disponibilidad) · **Anterior:** [03 · create_task y gather](/ApuntesPSP/11-asyncio-y-disponibilidad/03-create-task-y-gather) · **Siguiente:** [05 · Heartbeat](/ApuntesPSP/11-asyncio-y-disponibilidad/05-heartbeat)
+📚 [Volver al índice de la unidad](/ApuntesPSP/09-alta-disponibilidad) · **Anterior:** [03 · create_task y gather](/ApuntesPSP/09-alta-disponibilidad/03-create-task-y-gather) · **Siguiente:** [05 · Heartbeat](/ApuntesPSP/09-alta-disponibilidad/05-heartbeat)

@@ -5,7 +5,7 @@ description: "Todo junto: el monitor de servicio y Aprieta el lápiz 🩺"
 
 <p><small>Todo junto: el monitor de servicio y Aprieta el lápiz 🩺</small></p>
 
-> 🗺️ **Estás en:** ⏱️ **U12 · asyncio y Disponibilidad** → 08 · Disponibilidad y práctica
+> 🗺️ **Estás en:** ⏱️ **UD 10 · Alta disponibilidad** → 08 · Disponibilidad y práctica
 
 ---
 
@@ -65,7 +65,7 @@ Tres mecanismos de disponibilidad en un solo script:
 
 > "Sé el event loop. Tu trabajo es coordinar corrutinas sin bloquear ni un milisegundo."
 
-El servidor asyncio con todas las piezas (del [punto 3](/ApuntesPSP/11-asyncio-y-disponibilidad/03-create-task-y-gather) + el [punto 5](/ApuntesPSP/11-asyncio-y-disponibilidad/05-heartbeat)):
+El servidor asyncio con todas las piezas (del [punto 3](/ApuntesPSP/09-alta-disponibilidad/03-create-task-y-gather) + el [punto 5](/ApuntesPSP/09-alta-disponibilidad/05-heartbeat)):
 
 ```python
 import asyncio
@@ -276,4 +276,4 @@ Esperas: 1s, 2s, 4s.
 
 ---
 
-📚 [Volver al índice de la unidad](/ApuntesPSP/11-asyncio-y-disponibilidad) · **Anterior:** [07 · Threads vs asyncio](/ApuntesPSP/11-asyncio-y-disponibilidad/07-threads-vs-asyncio) · **Siguiente:** [09 · Cierre](/ApuntesPSP/11-asyncio-y-disponibilidad/09-cierre)
+📚 [Volver al índice de la unidad](/ApuntesPSP/09-alta-disponibilidad) · **Anterior:** [07 · Threads vs asyncio](/ApuntesPSP/09-alta-disponibilidad/07-threads-vs-asyncio) · **Siguiente:** [09 · Cierre](/ApuntesPSP/09-alta-disponibilidad/09-cierre)

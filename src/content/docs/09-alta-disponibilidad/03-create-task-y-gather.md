@@ -5,7 +5,7 @@ description: Lanzar varias tareas "a la vez" de verdad 🚀
 
 <p><small>Lanzar varias tareas "a la vez" de verdad 🚀</small></p>
 
-> 🗺️ **Estás en:** ⏱️ **U12 · asyncio y Disponibilidad** → 03 · create_task y gather
+> 🗺️ **Estás en:** ⏱️ **UD 10 · Alta disponibilidad** → 03 · create_task y gather
 
 ---
 
@@ -17,7 +17,7 @@ description: Lanzar varias tareas "a la vez" de verdad 🚀
 
 ## 🚀 asyncio.gather: todas a la vez
 
-Del [punto 1](/ApuntesPSP/11-asyncio-y-disponibilidad/01-event-loop):
+Del [punto 1](/ApuntesPSP/09-alta-disponibilidad/01-event-loop):
 
 ```python
 import asyncio
@@ -82,7 +82,7 @@ asyncio.run(main())
 | Cuándo usarla | Quieres el resultado de todas | Tareas de fondo: heartbeat, timers, monitorización |
 | Captura | Se puede `await` el resultado | Hay que guardar la referencia para no perderla |
 
-> ⚠️ **Truco del maestro:** si creas una tarea con `create_task`, el `main()` termina y **se lleva la tarea consigo**. Para que una tarea de fondo sobreviva, `main()` debe esperar (un `await asyncio.sleep(...)` o `await tarea`) — lo verás en el [punto 5](/ApuntesPSP/11-asyncio-y-disponibilidad/05-heartbeat).
+> ⚠️ **Truco del maestro:** si creas una tarea con `create_task`, el `main()` termina y **se lleva la tarea consigo**. Para que una tarea de fondo sobreviva, `main()` debe esperar (un `await asyncio.sleep(...)` o `await tarea`) — lo verás en el [punto 5](/ApuntesPSP/09-alta-disponibilidad/05-heartbeat).
 
 ---
 
@@ -121,4 +121,4 @@ asyncio.run(main())
 
 ---
 
-📚 [Volver al índice de la unidad](/ApuntesPSP/11-asyncio-y-disponibilidad) · **Anterior:** [02 · Corrutinas](/ApuntesPSP/11-asyncio-y-disponibilidad/02-corrutinas) · **Siguiente:** [04 · Timeouts](/ApuntesPSP/11-asyncio-y-disponibilidad/04-timeouts)
+📚 [Volver al índice de la unidad](/ApuntesPSP/09-alta-disponibilidad) · **Anterior:** [02 · Corrutinas](/ApuntesPSP/09-alta-disponibilidad/02-corrutinas) · **Siguiente:** [04 · Timeouts](/ApuntesPSP/09-alta-disponibilidad/04-timeouts)

@@ -5,7 +5,7 @@ description: El latido que confirma que el servicio sigue vivo 💓
 
 <p><small>El latido que confirma que el servicio sigue vivo 💓</small></p>
 
-> 🗺️ **Estás en:** ⏱️ **U12 · asyncio y Disponibilidad** → 05 · Heartbeat
+> 🗺️ **Estás en:** ⏱️ **UD 10 · Alta disponibilidad** → 05 · Heartbeat
 
 ---
 
@@ -17,7 +17,7 @@ description: El latido que confirma que el servicio sigue vivo 💓
 
 ## 💓 El latido en asyncio
 
-En un hilo, un heartbeat sería un `threading.Thread` daemon con `time.sleep`. En asyncio, es una **corrutina en segundo plano** lanzada con `create_task` (el [punto 3](/ApuntesPSP/11-asyncio-y-disponibilidad/03-create-task-y-gather)):
+En un hilo, un heartbeat sería un `threading.Thread` daemon con `time.sleep`. En asyncio, es una **corrutina en segundo plano** lanzada con `create_task` (el [punto 3](/ApuntesPSP/09-alta-disponibilidad/03-create-task-y-gather)):
 
 ```python
 import asyncio
@@ -117,4 +117,4 @@ Si el latido deja de aparecer en el log... el proceso está muerto o bloqueado. 
 
 ---
 
-📚 [Volver al índice de la unidad](/ApuntesPSP/11-asyncio-y-disponibilidad) · **Anterior:** [04 · Timeouts](/ApuntesPSP/11-asyncio-y-disponibilidad/04-timeouts) · **Siguiente:** [06 · Backoff](/ApuntesPSP/11-asyncio-y-disponibilidad/06-backoff)
+📚 [Volver al índice de la unidad](/ApuntesPSP/09-alta-disponibilidad) · **Anterior:** [04 · Timeouts](/ApuntesPSP/09-alta-disponibilidad/04-timeouts) · **Siguiente:** [06 · Backoff](/ApuntesPSP/09-alta-disponibilidad/06-backoff)

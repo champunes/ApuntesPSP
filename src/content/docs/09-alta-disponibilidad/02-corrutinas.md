@@ -5,7 +5,7 @@ description: async def, await y la función que sabe esperar 🌀
 
 <p><small>async def, await y la función que sabe esperar 🌀</small></p>
 
-> 🗺️ **Estás en:** ⏱️ **U12 · asyncio y Disponibilidad** → 02 · Corrutinas
+> 🗺️ **Estás en:** ⏱️ **UD 10 · Alta disponibilidad** → 02 · Corrutinas
 
 ---
 
@@ -110,4 +110,4 @@ async def main():
 
 ---
 
-📚 [Volver al índice de la unidad](/ApuntesPSP/11-asyncio-y-disponibilidad) · **Anterior:** [01 · Event Loop](/ApuntesPSP/11-asyncio-y-disponibilidad/01-event-loop) · **Siguiente:** [03 · create_task y gather](/ApuntesPSP/11-asyncio-y-disponibilidad/03-create-task-y-gather)
+📚 [Volver al índice de la unidad](/ApuntesPSP/09-alta-disponibilidad) · **Anterior:** [01 · Event Loop](/ApuntesPSP/09-alta-disponibilidad/01-event-loop) · **Siguiente:** [03 · create_task y gather](/ApuntesPSP/09-alta-disponibilidad/03-create-task-y-gather)

@@ -1,6 +1,6 @@
 ﻿---
 title: Boletín U12 — Inicial (Resuelto)
-description: Soluciones de los ejercicios básicos de asyncio y Disponibilidad
+description: Soluciones de los ejercicios básicos de Alta disponibilidad
 ---
 
 # ✅ Boletín U12 — Inicial (Resuelto)

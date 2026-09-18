@@ -5,7 +5,7 @@ description: La comparativa definitiva de modelos de concurrencia 🥊
 
 <p><small>La comparativa definitiva de modelos de concurrencia 🥊</small></p>
 
-> 🗺️ **Estás en:** ⏱️ **U12 · asyncio y Disponibilidad** → 07 · Threads vs asyncio
+> 🗺️ **Estás en:** ⏱️ **UD 10 · Alta disponibilidad** → 07 · Threads vs asyncio
 
 ---
 
@@ -103,4 +103,4 @@ description: La comparativa definitiva de modelos de concurrencia 🥊
 
 ---
 
-📚 [Volver al índice de la unidad](/ApuntesPSP/11-asyncio-y-disponibilidad) · **Anterior:** [06 · Backoff](/ApuntesPSP/11-asyncio-y-disponibilidad/06-backoff) · **Siguiente:** [08 · Disponibilidad y práctica](/ApuntesPSP/11-asyncio-y-disponibilidad/08-disponibilidad-y-practica)
+📚 [Volver al índice de la unidad](/ApuntesPSP/09-alta-disponibilidad) · **Anterior:** [06 · Backoff](/ApuntesPSP/09-alta-disponibilidad/06-backoff) · **Siguiente:** [08 · Disponibilidad y práctica](/ApuntesPSP/09-alta-disponibilidad/08-disponibilidad-y-practica)

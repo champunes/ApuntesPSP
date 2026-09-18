@@ -5,11 +5,11 @@ description: Sé la corrutina, el ring final y el último Laboratorio de tortura
 
 <p><small>Sé la corrutina, el ring final y el último Laboratorio de tortura 🏁</small></p>
 
-> 🗺️ **Estás en:** ⏱️ **U12 · asyncio y Disponibilidad** → 09 · Cierre
+> 🗺️ **Estás en:** ⏱️ **UD 10 · Alta disponibilidad** → 09 · Cierre
 
 ---
 
-Has terminado la teoría: el event loop, las corrutinas, gather y create_task, los timeouts, el heartbeat, el backoff y la comparativa con los hilos. Este cierre es el aterrizaje final del viaje: recorres lo aprendido con juegos, un laboratorio con fallos intencionados y las preguntas que te harán en una entrevista. Léelo justo después del [punto 8](/ApuntesPSP/11-asyncio-y-disponibilidad/08-disponibilidad-y-practica) y antes de abrir los boletines.
+Has terminado la teoría: el event loop, las corrutinas, gather y create_task, los timeouts, el heartbeat, el backoff y la comparativa con los hilos. Este cierre es el aterrizaje final del viaje: recorres lo aprendido con juegos, un laboratorio con fallos intencionados y las preguntas que te harán en una entrevista. Léelo justo después del [punto 8](/ApuntesPSP/09-alta-disponibilidad/08-disponibilidad-y-practica) y antes de abrir los boletines.
 
 ---
 
@@ -25,7 +25,7 @@ Has terminado la teoría: el event loop, las corrutinas, gather y create_task, l
 4. Un día el servicio no responde: `TimeoutError`. Imprimes `💔 caído` y esperas `2 ** min(fallos, 4)` segundos (**backoff** con tope: 1, 2, 4, 8, 16, 16…), pausada, mientras el event loop sigue con las demás.
 5. Así, con una corrutina, vigilas un servicio **sin bloquear a nadie**: las otras 2.000 corrutinas nunca se enteran de tu espera.
 
-> 💡 **Ahora tú:** ¿y si fueran 2.000 monitores vigilando 2.000 servicios? Con asyncio no pasa nada: 2.000 corrutinas en un hilo. Con hilos, 2.000 hilos hundirían el sistema ([punto 7](/ApuntesPSP/11-asyncio-y-disponibilidad/07-threads-vs-asyncio)).
+> 💡 **Ahora tú:** ¿y si fueran 2.000 monitores vigilando 2.000 servicios? Con asyncio no pasa nada: 2.000 corrutinas en un hilo. Con hilos, 2.000 hilos hundirían el sistema ([punto 7](/ApuntesPSP/09-alta-disponibilidad/07-threads-vs-asyncio)).
 
 ---
 
@@ -97,17 +97,17 @@ Has terminado la teoría: el event loop, las corrutinas, gather y create_task, l
 
 **Tareas paso a paso:**
 
-1. Escribe el servidor asyncio mínimo con `asyncio.start_server` que responda `b"OK"` y se detenga a los 15s con `asyncio.sleep(15)` ([punto 8](/ApuntesPSP/11-asyncio-y-disponibilidad/08-disponibilidad-y-practica)).
-2. Escribe `comprobar_servicio()` con `asyncio.wait_for(asyncio.open_connection(...), timeout=2)` que devuelva `True`/`False` ([punto 4](/ApuntesPSP/11-asyncio-y-disponibilidad/04-timeouts)).
-3. Escribe el monitor con `while True` + `asyncio.sleep(5)` y backoff `2 ** min(fallos, 4)` ([puntos 5 y 6](/ApuntesPSP/11-asyncio-y-disponibilidad/05-heartbeat)).
+1. Escribe el servidor asyncio mínimo con `asyncio.start_server` que responda `b"OK"` y se detenga a los 15s con `asyncio.sleep(15)` ([punto 8](/ApuntesPSP/09-alta-disponibilidad/08-disponibilidad-y-practica)).
+2. Escribe `comprobar_servicio()` con `asyncio.wait_for(asyncio.open_connection(...), timeout=2)` que devuelva `True`/`False` ([punto 4](/ApuntesPSP/09-alta-disponibilidad/04-timeouts)).
+3. Escribe el monitor con `while True` + `asyncio.sleep(5)` y backoff `2 ** min(fallos, 4)` ([puntos 5 y 6](/ApuntesPSP/09-alta-disponibilidad/05-heartbeat)).
 4. Ejecuta monitor y servidor en **terminales separadas**. El servidor se apaga solo a los 15s; el monitor debe pasar de `💚 disponible` a `💔 caído` con esperas crecientes.
 5. Vuelve a arrancar el servidor a mano: el monitor debe volver a `💚` (se ha recuperado).
 
 **Fallo intencionado:** cambia el timeout del monitor a **`timeout=0.1`** con el servidor funcionando. ¿Qué pasa? El monitor ve `TimeoutError` casi siempre, aunque el servicio esté sano: con 0.1s no le da tiempo a completar la conexión. Ahora tienes un monitor **falso positivo**: reporta caído un servicio que responde. Un timeout demasiado agresivo es tan malo como no tenerlo.
 
-> **Pista 1:** el fallo no está en el servidor (que responde), está en el **timeout del monitor**: con `timeout=0.1` la comprobación no llega a completarse y salta `TimeoutError`. Es el mismo mecanismo del [punto 4](/ApuntesPSP/11-asyncio-y-disponibilidad/04-timeouts), pero usado mal.
+> **Pista 1:** el fallo no está en el servidor (que responde), está en el **timeout del monitor**: con `timeout=0.1` la comprobación no llega a completarse y salta `TimeoutError`. Es el mismo mecanismo del [punto 4](/ApuntesPSP/09-alta-disponibilidad/04-timeouts), pero usado mal.
 >
-> **Pista 2:** fíjate en el orden del [punto 8](/ApuntesPSP/11-asyncio-y-disponibilidad/08-disponibilidad-y-practica): heartbeat (¿compruebo?), timeout (¿respondo a tiempo?), backoff (¿cómo reintento?). Si el monitor dice "caído" con el servicio arriba, el problema es el **umbral**: el timeout debe ser mayor que el tiempo real de respuesta del servicio.
+> **Pista 2:** fíjate en el orden del [punto 8](/ApuntesPSP/09-alta-disponibilidad/08-disponibilidad-y-practica): heartbeat (¿compruebo?), timeout (¿respondo a tiempo?), backoff (¿cómo reintento?). Si el monitor dice "caído" con el servicio arriba, el problema es el **umbral**: el timeout debe ser mayor que el tiempo real de respuesta del servicio.
 
 ---
 
@@ -136,11 +136,11 @@ Has terminado la teoría: el event loop, las corrutinas, gather y create_task, l
 <details>
 <summary>💡 Soluciones</summary>
 
-1. Porque el **event loop** alterna corrutinas en cada `await`: cuando una espera (I/O, timers), otra se ejecuta. Un solo hilo repartido entre miles de corrutinas ([puntos 1-3](/ApuntesPSP/11-asyncio-y-disponibilidad/01-event-loop)).
+1. Porque el **event loop** alterna corrutinas en cada `await`: cuando una espera (I/O, timers), otra se ejecuta. Un solo hilo repartido entre miles de corrutinas ([puntos 1-3](/ApuntesPSP/09-alta-disponibilidad/01-event-loop)).
 2. La operación **no se espera** (ni a veces se ejecuta): en el mejor caso es un fallo silencioso; en el peor, una corrutina que no hace lo que crees (por ejemplo, `asyncio.sleep(2)` sin `await` no pausa nada).
-3. **Threads** para código bloqueante de terceros y pocos clientes; **asyncio** para I/O masivo y miles de conexiones; **procesos** para CPU-bound ([punto 7](/ApuntesPSP/11-asyncio-y-disponibilidad/07-threads-vs-asyncio)).
+3. **Threads** para código bloqueante de terceros y pocos clientes; **asyncio** para I/O masivo y miles de conexiones; **procesos** para CPU-bound ([punto 7](/ApuntesPSP/09-alta-disponibilidad/07-threads-vs-asyncio)).
 4. Porque produce **falsos positivos**: reporta caído un servicio que simplemente tarda un poco más de lo previsto. El timeout debe ser mayor que el tiempo real de respuesta (Laboratorio de tortura).
-5. Heartbeat para **comprobar** periódicamente, timeout para **cortar** lo que no responde, y backoff para **reintentar** sin machacar: el monitor del [punto 8](/ApuntesPSP/11-asyncio-y-disponibilidad/08-disponibilidad-y-practica).
+5. Heartbeat para **comprobar** periódicamente, timeout para **cortar** lo que no responde, y backoff para **reintentar** sin machacar: el monitor del [punto 8](/ApuntesPSP/09-alta-disponibilidad/08-disponibilidad-y-practica).
 
 </details>
 
@@ -180,7 +180,7 @@ Vertical:
 4. **"¿Cómo harías que un servidor no se cuelgue nunca con un cliente mudo?"**
 5. **"Diseña un servicio siempre disponible: ¿qué mecanismos le pones?"**
 
-> 💡 **Cómo encararlas:** la 1 y la 4 son las "preguntas reina". Para la 1, recorre la cadena de la unidad: bloqueo → hilos (caros con miles) → event loop → corrutinas → gather/create_task → comparativa del [punto 7](/ApuntesPSP/11-asyncio-y-disponibilidad/07-threads-vs-asyncio). Para la 4, plantea `asyncio.wait_for(reader.read(...), timeout=10)` con `except asyncio.TimeoutError` y cierre de la conexión: el [punto 4](/ApuntesPSP/11-asyncio-y-disponibilidad/04-timeouts) es tu respuesta. Y la 5 es tu momento estrella: heartbeat + timeout + backoff. Si lo cuentas fluido, ya eres medio ingeniero de disponibilidad.
+> 💡 **Cómo encararlas:** la 1 y la 4 son las "preguntas reina". Para la 1, recorre la cadena de la unidad: bloqueo → hilos (caros con miles) → event loop → corrutinas → gather/create_task → comparativa del [punto 7](/ApuntesPSP/09-alta-disponibilidad/07-threads-vs-asyncio). Para la 4, plantea `asyncio.wait_for(reader.read(...), timeout=10)` con `except asyncio.TimeoutError` y cierre de la conexión: el [punto 4](/ApuntesPSP/09-alta-disponibilidad/04-timeouts) es tu respuesta. Y la 5 es tu momento estrella: heartbeat + timeout + backoff. Si lo cuentas fluido, ya eres medio ingeniero de disponibilidad.
 
 ---
 
@@ -247,4 +247,4 @@ La operación no se espera (ni a veces se ejecuta): la corrutina no hace lo que 
 
 ---
 
-📚 [Volver al índice de la unidad](/ApuntesPSP/11-asyncio-y-disponibilidad) · **Anterior:** [08 · Disponibilidad y práctica](/ApuntesPSP/11-asyncio-y-disponibilidad/08-disponibilidad-y-practica)
+📚 [Volver al índice de la unidad](/ApuntesPSP/09-alta-disponibilidad) · **Anterior:** [08 · Disponibilidad y práctica](/ApuntesPSP/09-alta-disponibilidad/08-disponibilidad-y-practica)

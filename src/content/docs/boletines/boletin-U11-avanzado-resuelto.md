@@ -1,6 +1,6 @@
 ﻿---
 title: Boletín U12 — Avanzado (Resuelto)
-description: Soluciones de los ejercicios avanzados de asyncio y Disponibilidad
+description: Soluciones de los ejercicios avanzados de Alta disponibilidad
 ---
 
 # 💪 Boletín U12 — Avanzado (Resuelto)
@@ -175,7 +175,7 @@ async def main():
 asyncio.run(main())
 ```
 
-Cada servidor simulado cambia su estado de forma aleatoria; el monitor lee el diccionario cada 3s y reporta los caídos. Es el heartbeat del [punto 8](/ApuntesPSP/11-asyncio-y-disponibilidad/08-disponibilidad-y-practica) aplicado a varios servicios a la vez.
+Cada servidor simulado cambia su estado de forma aleatoria; el monitor lee el diccionario cada 3s y reporta los caídos. Es el heartbeat del [punto 8](/ApuntesPSP/09-alta-disponibilidad/08-disponibilidad-y-practica) aplicado a varios servicios a la vez.
 
 ## 7. 🧩 Semáforo asyncio
 
