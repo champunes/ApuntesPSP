@@ -5,7 +5,7 @@ description: Cuántos hilos puedes crear y cómo hacerlo bien 🛡️
 
 <p><small>Cuántos hilos puedes crear y cómo hacerlo bien 🛡️</small></p>
 
-> 🗺️ **Estás en:** 🏗️ **U11 · Servidores Concurrentes** → 07 · Límites y buenas prácticas
+> 🗺️ **Estás en:** 🏗️ **UD 6 · Servidores concurrentes** → 07 · Límites y buenas prácticas
 
 ---
 
@@ -23,7 +23,7 @@ Ya tienes las dos herramientas (hilo por cliente y ThreadPool). Este punto respo
 
 > Más allá de **~100 hilos**, el **cambio de contexto** (context switch) perjudica el rendimiento.
 
-Cada vez que la CPU alterna entre hilos, pierde tiempo en guardar y restaurar el estado de cada uno. Con pocos hilos, ese coste es despreciable; con cientos, la CPU pasa más tiempo *cambiando de hilo* que *trabajando*. Por eso el ThreadPool del [punto 4](/ApuntesPSP/10-servidores-concurrentes/04-threadpoolexecutor) limita `max_workers`: el rendimiento sube con los hilos… hasta un punto, y luego baja.
+Cada vez que la CPU alterna entre hilos, pierde tiempo en guardar y restaurar el estado de cada uno. Con pocos hilos, ese coste es despreciable; con cientos, la CPU pasa más tiempo *cambiando de hilo* que *trabajando*. Por eso el ThreadPool del [punto 4](/ApuntesPSP/05-servidores-concurrentes/04-threadpoolexecutor) limita `max_workers`: el rendimiento sube con los hilos… hasta un punto, y luego baja.
 
 | Nº de hilos | Efecto esperado |
 |---|---|
@@ -62,13 +62,13 @@ Ese hilo queda **bloqueado**, pero los demás siguen funcionando: la concurrenci
 
 - Con hilo por cliente: 10.000 hilos → el sistema se colapsa.
 - Con ThreadPool de **100 hilos + cola de espera**: el servidor sobrevive, aunque los clientes esperen turno.
-- La alternativa que **escala mejor** es **asyncio** (la verás en la [U12 · asyncio y Disponibilidad](/ApuntesPSP/11-asyncio-y-disponibilidad)): atiende miles de conexiones sin un hilo por conexión, con un bucle de eventos muy ligero.
+- La alternativa que **escala mejor** es **asyncio** (la verás en la [UD 10 · asyncio y Disponibilidad](/ApuntesPSP/11-asyncio-y-disponibilidad)): atiende miles de conexiones sin un hilo por conexión, con un bucle de eventos muy ligero.
 
 ---
 
 ## 🔀 ¿Puedo mezclar hilos y asyncio?
 
-Sí, con `loop.run_in_executor()`. Pero como principiante, la recomendación es clara: **empieza con uno u otro**. Los dos modelos (hilos y asyncio) son potentes por separado y confusos juntos. Cuando domines asyncio en la [U12](/ApuntesPSP/11-asyncio-y-disponibilidad), podrás combinar bloqueos de bibliotecas de terceros (que no son asíncronas) usando el ejecutor.
+Sí, con `loop.run_in_executor()`. Pero como principiante, la recomendación es clara: **empieza con uno u otro**. Los dos modelos (hilos y asyncio) son potentes por separado y confusos juntos. Cuando domines asyncio en la [UD 10](/ApuntesPSP/11-asyncio-y-disponibilidad), podrás combinar bloqueos de bibliotecas de terceros (que no son asíncronas) usando el ejecutor.
 
 ---
 
@@ -109,7 +109,7 @@ Sin ese `try/except`, el hilo de ese cliente muere con un traceback (el servidor
 
 1. Por el **coste del context switch**: la CPU pierde tiempo alternando entre miles de hilos, y además cada hilo consume memoria. El rendimiento empeora a partir de cierto punto.
 2. Los demás hilos **siguen trabajando** (ventaja de la concurrencia), pero cada socket sin cerrar es una **fuga de recursos**: a largo plazo el servidor agota descriptores y deja de aceptar conexiones.
-3. Un **ThreadPool de ~100 hilos con cola de espera**, o directamente **asyncio** (U12), que es el que mejor escala para miles de conexiones. Nunca 10.000 hilos.
+3. Un **ThreadPool de ~100 hilos con cola de espera**, o directamente **asyncio** (UD 10), que es el que mejor escala para miles de conexiones. Nunca 10.000 hilos.
 
 </details>
 
@@ -129,8 +129,8 @@ Sin ese `try/except`, el hilo de ese cliente muere con un traceback (el servidor
 | Fuga de recursos | Socket o memoria que nunca se libera |
 | settimeout() | Límite de tiempo para `recv()`: evita hilos colgados |
 | max_workers | Límite de hilos del pool (tu freno de mano) |
-| asyncio | Modelo de concurrencia ligera para miles de conexiones (U12) |
+| asyncio | Modelo de concurrencia ligera para miles de conexiones (UD 10) |
 
 ---
 
-📚 [Volver al índice de la unidad](/ApuntesPSP/10-servidores-concurrentes) · **Anterior:** [06 · Sincronización en servidores](/ApuntesPSP/10-servidores-concurrentes/06-sincronizacion-en-servidores) · **Siguiente:** [08 · Servidor concurrente completo](/ApuntesPSP/10-servidores-concurrentes/08-servidor-concurrente-completo)
+📚 [Volver al índice de la unidad](/ApuntesPSP/05-servidores-concurrentes) · **Anterior:** [06 · Sincronización en servidores](/ApuntesPSP/05-servidores-concurrentes/06-sincronizacion-en-servidores) · **Siguiente:** [08 · Servidor concurrente completo](/ApuntesPSP/05-servidores-concurrentes/08-servidor-concurrente-completo)

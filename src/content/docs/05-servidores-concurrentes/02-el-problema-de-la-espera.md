@@ -5,7 +5,7 @@ description: El cliente lento que bloquea a todos los demás 🥶
 
 <p><small>El cliente lento que bloquea a todos los demás 🥶</small></p>
 
-> 🗺️ **Estás en:** 🏗️ **U11 · Servidores Concurrentes** → 02 · El problema de la espera
+> 🗺️ **Estás en:** 🏗️ **UD 6 · Servidores concurrentes** → 02 · El problema de la espera
 
 ---
 
@@ -13,7 +13,7 @@ description: El cliente lento que bloquea a todos los demás 🥶
 
 > El problema del servidor secuencial no es el número de clientes, sino el **cliente lento**: uno solo que tarda 3 segundos congela a todos los que esperan detrás. Basta un cliente pesado para paralizar el servidor entero.
 
-En el [punto 1](/ApuntesPSP/10-servidores-concurrentes/01-servidor-secuencial) viste que el tiempo crece linealmente. Ahora vamos a entender por qué es un problema real, no solo una curiosidad teórica: cualquier cliente que tarde, tarde por lo que sea (cálculo pesado, acceso a una base de datos lenta, una red de 56k…), convierte a todos los demás en espectadores.
+En el [punto 1](/ApuntesPSP/05-servidores-concurrentes/01-servidor-secuencial) viste que el tiempo crece linealmente. Ahora vamos a entender por qué es un problema real, no solo una curiosidad teórica: cualquier cliente que tarde, tarde por lo que sea (cálculo pesado, acceso a una base de datos lenta, una red de 56k…), convierte a todos los demás en espectadores.
 
 ---
 
@@ -69,7 +69,7 @@ Imagina un banco con **una sola ventanilla**. Llegan 10 personas a la vez. La pr
   Cada persona tiene su ventanilla: todas avanzan a la vez.
 ```
 
-La moraleja es obvia: si el banco tiene 10 ventanillas, 10 personas se atienden en paralelo. Esa es exactamente la idea del [punto 3](/ApuntesPSP/10-servidores-concurrentes/03-hilo-por-cliente): dar a cada cliente su propia "ventanilla" (su hilo).
+La moraleja es obvia: si el banco tiene 10 ventanillas, 10 personas se atienden en paralelo. Esa es exactamente la idea del [punto 3](/ApuntesPSP/05-servidores-concurrentes/03-hilo-por-cliente): dar a cada cliente su propia "ventanilla" (su hilo).
 
 | Situación | Servidor secuencial | Servidor concurrente |
 |---|---|---|
@@ -114,4 +114,4 @@ La moraleja es obvia: si el banco tiene 10 ventanillas, 10 personas se atienden 
 
 ---
 
-📚 [Volver al índice de la unidad](/ApuntesPSP/10-servidores-concurrentes) · **Anterior:** [01 · Servidor secuencial](/ApuntesPSP/10-servidores-concurrentes/01-servidor-secuencial) · **Siguiente:** [03 · Hilo por cliente](/ApuntesPSP/10-servidores-concurrentes/03-hilo-por-cliente)
+📚 [Volver al índice de la unidad](/ApuntesPSP/05-servidores-concurrentes) · **Anterior:** [01 · Servidor secuencial](/ApuntesPSP/05-servidores-concurrentes/01-servidor-secuencial) · **Siguiente:** [03 · Hilo por cliente](/ApuntesPSP/05-servidores-concurrentes/03-hilo-por-cliente)

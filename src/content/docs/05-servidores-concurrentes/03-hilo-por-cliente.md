@@ -5,7 +5,7 @@ description: Cada cliente se atiende en su propio hilo 🔀
 
 <p><small>Cada cliente se atiende en su propio hilo 🔀</small></p>
 
-> 🗺️ **Estás en:** 🏗️ **U11 · Servidores Concurrentes** → 03 · Hilo por cliente
+> 🗺️ **Estás en:** 🏗️ **UD 6 · Servidores concurrentes** → 03 · Hilo por cliente
 
 ---
 
@@ -47,7 +47,7 @@ def servidor_multihilo():
             hilo.start()
 ```
 
-Dos diferencias frente al servidor secuencial del [punto 1](/ApuntesPSP/10-servidores-concurrentes/01-servidor-secuencial):
+Dos diferencias frente al servidor secuencial del [punto 1](/ApuntesPSP/05-servidores-concurrentes/01-servidor-secuencial):
 
 1. **No hay trabajo en el bucle principal**: `accept()` → crear hilo → `start()` → vuelta a `accept()`. El bucle nunca se bloquea.
 2. **`conn` se pasa como argumento** al hilo: cada hilo recibe su socket y su dirección, y los libera con `with conn:` al terminar.
@@ -104,7 +104,7 @@ El hilo principal **nunca se detiene**: en cuanto lanza un hilo, vuelve a `accep
 | ✅ Aprovecha la CPU | Varios clientes procesados de verdad en paralelo |
 | ✅ El bucle no se bloquea | `accept()` vuelve al instante, nadie espera en la cola |
 
-Pero hay una letra pequeña: **crear un hilo por cada cliente puede saturar el sistema con 10.000 conexiones**. Cada hilo consume memoria y el sistema operativo tiene que gestionarlos. Ese límite lo verás en el [punto 4](/ApuntesPSP/10-servidores-concurrentes/04-threadpoolexecutor) (el ThreadPool) y en el [punto 7](/ApuntesPSP/10-servidores-concurrentes/07-limites-y-buenas-practicas).
+Pero hay una letra pequeña: **crear un hilo por cada cliente puede saturar el sistema con 10.000 conexiones**. Cada hilo consume memoria y el sistema operativo tiene que gestionarlos. Ese límite lo verás en el [punto 4](/ApuntesPSP/05-servidores-concurrentes/04-threadpoolexecutor) (el ThreadPool) y en el [punto 7](/ApuntesPSP/05-servidores-concurrentes/07-limites-y-buenas-practicas).
 
 ---
 
@@ -119,7 +119,7 @@ Pero hay una letra pequeña: **crear un hilo por cada cliente puede saturar el s
 
 1. Vuelve a **`accept()`** a esperar la siguiente conexión. Por eso el servidor nunca se bloquea y los clientes no esperan.
 2. Porque queremos que los hilos trabajen en paralelo **mientras el servidor sigue aceptando**. Si hiciéramos `join()` en cada iteración, esperaríamos a que el hilo terminara… y volveríamos al servidor secuencial. El `join()` solo se usa en el lanzador de clientes (punto 5).
-3. Se crearían **10.000 hilos**: el sistema se quedaría sin memoria o el cambio de contexto (context switch) degradaría el rendimiento. Ahí entra el ThreadPool del [punto 4](/ApuntesPSP/10-servidores-concurrentes/04-threadpoolexecutor).
+3. Se crearían **10.000 hilos**: el sistema se quedaría sin memoria o el cambio de contexto (context switch) degradaría el rendimiento. Ahí entra el ThreadPool del [punto 4](/ApuntesPSP/05-servidores-concurrentes/04-threadpoolexecutor).
 
 </details>
 
@@ -143,4 +143,4 @@ Pero hay una letra pequeña: **crear un hilo por cada cliente puede saturar el s
 
 ---
 
-📚 [Volver al índice de la unidad](/ApuntesPSP/10-servidores-concurrentes) · **Anterior:** [02 · El problema de la espera](/ApuntesPSP/10-servidores-concurrentes/02-el-problema-de-la-espera) · **Siguiente:** [04 · ThreadPoolExecutor](/ApuntesPSP/10-servidores-concurrentes/04-threadpoolexecutor)
+📚 [Volver al índice de la unidad](/ApuntesPSP/05-servidores-concurrentes) · **Anterior:** [02 · El problema de la espera](/ApuntesPSP/05-servidores-concurrentes/02-el-problema-de-la-espera) · **Siguiente:** [04 · ThreadPoolExecutor](/ApuntesPSP/05-servidores-concurrentes/04-threadpoolexecutor)

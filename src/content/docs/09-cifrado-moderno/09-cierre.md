@@ -217,7 +217,7 @@ Generar RSA 2048 bits lleva ~1-2 segundos. AES genera clave instantáneamente. E
 
 *Nadie pudo espiar. Nadie pudo fingir. Nadie pudo modificar.*
 
-**PRÓXIMAMENTE EN U11:** *servidores concurrentes: un servidor que atiende a muchos clientes a la vez sin bloquearse. ThreadPool, hilos y benchmark.*
+**PRÓXIMAMENTE EN U11:** *Servidores concurrentes: un servidor que atiende a muchos clientes a la vez sin bloquearse. ThreadPool, hilos y benchmark.*
 
 ---
 
@@ -238,4 +238,4 @@ Generar RSA 2048 bits lleva ~1-2 segundos. AES genera clave instantáneamente. E
 
 ---
 
-📚 [Volver al índice de la unidad](/ApuntesPSP/09-cifrado-moderno) · **Anterior:** [08 · Práctica sistema seguro](/ApuntesPSP/09-cifrado-moderno/08-practica-sistema-seguro) · **Siguiente:** **[U11 · Servidores Concurrentes](/ApuntesPSP/10-servidores-concurrentes)**
+📚 [Volver al índice de la unidad](/ApuntesPSP/09-cifrado-moderno) · **Anterior:** [08 · Práctica sistema seguro](/ApuntesPSP/09-cifrado-moderno/08-practica-sistema-seguro) · **Siguiente:** **[UD 6 · Servidores concurrentes](/ApuntesPSP/05-servidores-concurrentes)**

@@ -1,6 +1,6 @@
 ﻿---
 title: Boletín U11 — Avanzado (Resuelto)
-description: Soluciones de los ejercicios avanzados de Servidores Concurrentes
+description: Soluciones de los ejercicios avanzados de Servidores concurrentes
 ---
 
 # 💪 Boletín U11 — Avanzado (Resuelto)
@@ -28,7 +28,7 @@ with socket.socket() as srv:
                 print(f"  ⏰ {addr} no envió nada en 5s → cierro conexión")
 ```
 
-`conn.settimeout(5)` limita el `recv()`: si el cliente no envía datos en 5 segundos, salta `socket.timeout` y el `with conn:` cierra el socket ([punto 7](/ApuntesPSP/10-servidores-concurrentes/07-limites-y-buenas-practicas)). Un cliente mudo ya no cuelga un hilo para siempre.
+`conn.settimeout(5)` limita el `recv()`: si el cliente no envía datos en 5 segundos, salta `socket.timeout` y el `with conn:` cierra el socket ([punto 7](/ApuntesPSP/05-servidores-concurrentes/07-limites-y-buenas-practicas)). Un cliente mudo ya no cuelga un hilo para siempre.
 
 ## 2. Cliente con timeout
 
@@ -72,7 +72,7 @@ with socket.socket() as srv:
         threading.Thread(target=atender, args=(conn, addr)).start()
 ```
 
-El `recv()` queda **fuera** del Lock (cada socket es independiente) y solo la suma al contador global entra en `with lock:`: así varios hilos suman bytes sin condición de carrera ([punto 6](/ApuntesPSP/10-servidores-concurrentes/06-sincronizacion-en-servidores)).
+El `recv()` queda **fuera** del Lock (cada socket es independiente) y solo la suma al contador global entra en `with lock:`: así varios hilos suman bytes sin condición de carrera ([punto 6](/ApuntesPSP/05-servidores-concurrentes/06-sincronizacion-en-servidores)).
 
 ## 4. Servidor con límite de clientes
 
@@ -148,7 +148,7 @@ media = sum(tiempos) / len(tiempos) if tiempos else 0
 print(f"Exitosos: {exitosos}/20 | Total: {sum(tiempos):.2f}s | Media: {media:.2f}s")
 ```
 
-Cada cliente guarda su resultado (éxito + duración) en un diccionario compartido protegido por Lock. Tras `join()` a todos, se calculan las estadísticas: es el **benchmark** del [punto 5](/ApuntesPSP/10-servidores-concurrentes/05-benchmark) llevado a 20 clientes.
+Cada cliente guarda su resultado (éxito + duración) en un diccionario compartido protegido por Lock. Tras `join()` a todos, se calculan las estadísticas: es el **benchmark** del [punto 5](/ApuntesPSP/05-servidores-concurrentes/05-benchmark) llevado a 20 clientes.
 
 ## 6. Servidor con cola de espera
 
@@ -180,7 +180,7 @@ with socket.socket() as srv:
         COLA.put((conn, addr))           # 📦 encola la conexión
 ```
 
-El hilo principal solo **acepta y encola**. Los N trabajadores (daemon) sacan conexiones con `COLA.get()` y las atienden: es un ThreadPool hecho a mano con `queue.Queue`, el mecanismo interno de los pools del [punto 4](/ApuntesPSP/10-servidores-concurrentes/04-threadpoolexecutor).
+El hilo principal solo **acepta y encola**. Los N trabajadores (daemon) sacan conexiones con `COLA.get()` y las atienden: es un ThreadPool hecho a mano con `queue.Queue`, el mecanismo interno de los pools del [punto 4](/ApuntesPSP/05-servidores-concurrentes/04-threadpoolexecutor).
 
 ## 7. Estado del servidor
 

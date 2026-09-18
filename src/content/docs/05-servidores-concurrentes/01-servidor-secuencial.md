@@ -5,7 +5,7 @@ description: El servidor que atiende a un cliente cada vez 🐢
 
 <p><small>El servidor que atiende a un cliente cada vez 🐢</small></p>
 
-> 🗺️ **Estás en:** 🏗️ **U11 · Servidores Concurrentes** → 01 · Servidor secuencial
+> 🗺️ **Estás en:** 🏗️ **UD 6 · Servidores concurrentes** → 01 · Servidor secuencial
 
 ---
 
@@ -76,7 +76,7 @@ Tiempo:  0s ──── Cliente-1 conecta → hilo-1 procesa
 
 > Con hilos, todos terminan a la vez. Sin hilos, el último espera 9s.
 
-Por ahora nos quedamos con la primera columna: el secuencial. El límite se ve solo: **el tiempo total crece linealmente** con el número de clientes. En el [punto 3](/ApuntesPSP/10-servidores-concurrentes/03-hilo-por-cliente) construiremos el concurrente.
+Por ahora nos quedamos con la primera columna: el secuencial. El límite se ve solo: **el tiempo total crece linealmente** con el número de clientes. En el [punto 3](/ApuntesPSP/05-servidores-concurrentes/03-hilo-por-cliente) construiremos el concurrente.
 
 ---
 
@@ -115,4 +115,4 @@ Por ahora nos quedamos con la primera columna: el secuencial. El límite se ve s
 
 ---
 
-📚 [Volver al índice de la unidad](/ApuntesPSP/10-servidores-concurrentes) · **Siguiente:** [02 · El problema de la espera](/ApuntesPSP/10-servidores-concurrentes/02-el-problema-de-la-espera)
+📚 [Volver al índice de la unidad](/ApuntesPSP/05-servidores-concurrentes) · **Siguiente:** [02 · El problema de la espera](/ApuntesPSP/05-servidores-concurrentes/02-el-problema-de-la-espera)

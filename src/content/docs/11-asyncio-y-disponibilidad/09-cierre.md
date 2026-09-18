@@ -243,7 +243,7 @@ La operación no se espera (ni a veces se ejecuta): la corrutina no hace lo que 
 | f) | Desarrolla servidores con asyncio | ✅ Corrutinas, gather y start_server (puntos 1-3 y 8) + ⚡ Laboratorio |
 | g) | Compara modelos de concurrencia (hilos vs asyncio) | ✅ Comparativa (punto 7) + 🔥 Fireside Chat |
 
-> RA4c (servidores concurrentes con hilos) y RA4d (ThreadPool) se cubrieron en la **U11 · Servidores Concurrentes**.
+> RA4c (Servidores concurrentes con hilos) y RA4d (ThreadPool) se cubrieron en la **UD 6 · Servidores concurrentes**.
 
 ---
 

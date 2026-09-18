@@ -86,6 +86,16 @@ description: Apuntes de Programación de Servicios y Procesos — Python. CC BY-
 <div class="unit-card">
   <div class="unit-card-header">
     <span class="num">Unidad 6</span>
+    <span class="ra">RA4c-d</span>
+  </div>
+  <a href="/ApuntesPSP/05-servidores-concurrentes" class="title-link">Servidores concurrentes con Python</a>
+  <p class="desc">Servidor multihilo, <code>ThreadPool</code>, <code>concurrent.futures</code>, benchmark.</p>
+  <a href="/ApuntesPSP/05-servidores-concurrentes" class="unit-link">👉 Ver unidad 👈</a>
+</div>
+
+<div class="unit-card">
+  <div class="unit-card-header">
+    <span class="num">Unidad 7</span>
     <span class="ra">RA4a-b</span>
   </div>
   <a href="/ApuntesPSP/06-apis-rest-y-http" class="title-link">APIs REST y HTTP</a>
@@ -95,7 +105,7 @@ description: Apuntes de Programación de Servicios y Procesos — Python. CC BY-
 
 <div class="unit-card">
   <div class="unit-card-header">
-    <span class="num">Unidad 7</span>
+    <span class="num">Unidad 8</span>
     <span class="ra">RA4a-b</span>
   </div>
   <a href="/ApuntesPSP/07-apis-comerciales" class="title-link">APIs Comerciales</a>
@@ -105,7 +115,7 @@ description: Apuntes de Programación de Servicios y Procesos — Python. CC BY-
 
 <div class="unit-card">
   <div class="unit-card-header">
-    <span class="num">Unidad 8</span>
+    <span class="num">Unidad 9</span>
     <span class="ra">RA5</span>
   </div>
   <a href="/ApuntesPSP/08-hash-y-cifrado-clasico" class="title-link">Hash y Cifrado Clásico</a>
@@ -115,22 +125,12 @@ description: Apuntes de Programación de Servicios y Procesos — Python. CC BY-
 
 <div class="unit-card">
   <div class="unit-card-header">
-    <span class="num">Unidad 9</span>
+    <span class="num">Unidad 10</span>
     <span class="ra">RA5</span>
   </div>
   <a href="/ApuntesPSP/09-cifrado-moderno" class="title-link">Cifrado Moderno</a>
   <p class="desc">AES, RSA, cifrado híbrido, firmas digitales, RBAC, <code>pycryptodome</code>.</p>
   <a href="/ApuntesPSP/09-cifrado-moderno" class="unit-link">👉 Ver unidad 👈</a>
-</div>
-
-<div class="unit-card">
-  <div class="unit-card-header">
-    <span class="num">Unidad 10</span>
-    <span class="ra">RA4c-d</span>
-  </div>
-  <a href="/ApuntesPSP/10-servidores-concurrentes" class="title-link">Servidores Concurrentes</a>
-  <p class="desc">ThreadPool, servidor multihilo, <code>concurrent.futures</code>, balanceo de carga básico.</p>
-  <a href="/ApuntesPSP/10-servidores-concurrentes" class="unit-link">👉 Ver unidad 👈</a>
 </div>
 
 <div class="unit-card">

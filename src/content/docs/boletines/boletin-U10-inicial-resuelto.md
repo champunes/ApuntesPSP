@@ -1,6 +1,6 @@
 ﻿---
 title: Boletín U11 — Inicial (Resuelto)
-description: Soluciones de los ejercicios básicos de Servidores Concurrentes
+description: Soluciones de los ejercicios básicos de Servidores concurrentes
 ---
 
 # ✅ Boletín U11 — Inicial (Resuelto)
@@ -38,7 +38,7 @@ with socket.socket() as srv:
             conn.sendall(datos)  # eco
 ```
 
-Clientes uno tras otro. Si uno tarda, los demás esperan: es el servidor secuencial del [punto 1](/ApuntesPSP/10-servidores-concurrentes/01-servidor-secuencial).
+Clientes uno tras otro. Si uno tarda, los demás esperan: es el servidor secuencial del [punto 1](/ApuntesPSP/05-servidores-concurrentes/01-servidor-secuencial).
 
 ## 3. Cliente eco
 
@@ -85,7 +85,7 @@ with socket.socket() as srv:
         threading.Thread(target=atender, args=(conn, addr)).start()
 ```
 
-Cada cliente en su propio hilo. Todos se atienden en paralelo ([punto 3](/ApuntesPSP/10-servidores-concurrentes/03-hilo-por-cliente)).
+Cada cliente en su propio hilo. Todos se atienden en paralelo ([punto 3](/ApuntesPSP/05-servidores-concurrentes/03-hilo-por-cliente)).
 
 ## 6. Cliente con respuesta
 
@@ -115,7 +115,7 @@ with socket.socket() as srv, concurrent.futures.ThreadPoolExecutor(3) as pool:
         pool.submit(atender, conn, addr)
 ```
 
-Máximo **3 hilos**. Los clientes adicionales esperan en cola ([punto 4](/ApuntesPSP/10-servidores-concurrentes/04-threadpoolexecutor)).
+Máximo **3 hilos**. Los clientes adicionales esperan en cola ([punto 4](/ApuntesPSP/05-servidores-concurrentes/04-threadpoolexecutor)).
 
 ## 8. Lanzador de 5 clientes
 

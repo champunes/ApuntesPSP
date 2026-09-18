@@ -5,7 +5,7 @@ description: El Lock para el estado compartido entre hilos 🔒
 
 <p><small>El Lock para el estado compartido entre hilos 🔒</small></p>
 
-> 🗺️ **Estás en:** 🏗️ **U11 · Servidores Concurrentes** → 06 · Sincronización en servidores
+> 🗺️ **Estás en:** 🏗️ **UD 6 · Servidores concurrentes** → 06 · Sincronización en servidores
 
 ---
 
@@ -13,7 +13,7 @@ description: El Lock para el estado compartido entre hilos 🔒
 
 > Cuando varios hilos del servidor tocan la **misma variable global** (un contador de conexiones, un total de bytes), hay **condición de carrera**: dos hilos pueden leer y escribir a la vez y perder actualizaciones. La solución es el **Lock** de la [U04](/ApuntesPSP/03-sincronizacion).
 
-En el [punto 3](/ApuntesPSP/10-servidores-concurrentes/03-hilo-por-cliente) y el [punto 4](/ApuntesPSP/10-servidores-concurrentes/04-threadpoolexecutor) los hilos eran independientes. Pero un servidor real suele llevar **estado**: "¿cuántos clientes he atendido?", "¿cuántos bytes he recibido?". Ese estado es compartido… y eso es un problema.
+En el [punto 3](/ApuntesPSP/05-servidores-concurrentes/03-hilo-por-cliente) y el [punto 4](/ApuntesPSP/05-servidores-concurrentes/04-threadpoolexecutor) los hilos eran independientes. Pero un servidor real suele llevar **estado**: "¿cuántos clientes he atendido?", "¿cuántos bytes he recibido?". Ese estado es compartido… y eso es un problema.
 
 ---
 
@@ -141,4 +141,4 @@ Nota: el `recv()` y el `sendall()` **no** necesitan lock (cada conexión es un s
 
 ---
 
-📚 [Volver al índice de la unidad](/ApuntesPSP/10-servidores-concurrentes) · **Anterior:** [05 · Benchmark](/ApuntesPSP/10-servidores-concurrentes/05-benchmark) · **Siguiente:** [07 · Límites y buenas prácticas](/ApuntesPSP/10-servidores-concurrentes/07-limites-y-buenas-practicas)
+📚 [Volver al índice de la unidad](/ApuntesPSP/05-servidores-concurrentes) · **Anterior:** [05 · Benchmark](/ApuntesPSP/05-servidores-concurrentes/05-benchmark) · **Siguiente:** [07 · Límites y buenas prácticas](/ApuntesPSP/05-servidores-concurrentes/07-limites-y-buenas-practicas)

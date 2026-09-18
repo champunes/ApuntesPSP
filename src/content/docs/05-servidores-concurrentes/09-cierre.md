@@ -5,11 +5,11 @@ description: Sé el servidor, el ring final y el Laboratorio de tortura 🏗️
 
 <p><small>Sé el servidor, el ring final y el Laboratorio de tortura 🏗️</small></p>
 
-> 🗺️ **Estás en:** 🏗️ **U11 · Servidores Concurrentes** → 09 · Cierre
+> 🗺️ **Estás en:** 🏗️ **UD 6 · Servidores concurrentes** → 09 · Cierre
 
 ---
 
-Has terminado la teoría: el servidor secuencial y su límite, el cliente lento que bloquea la cola, el hilo por cliente, el ThreadPoolExecutor, el benchmark, el Lock para el estado compartido y las buenas prácticas. Este cierre es el aterrizaje: recorres lo aprendido con juegos, un laboratorio real con fallos intencionados y las preguntas que te harán en una entrevista. Léelo justo después del [punto 8](/ApuntesPSP/10-servidores-concurrentes/08-servidor-concurrente-completo) y antes de abrir los boletines.
+Has terminado la teoría: el servidor secuencial y su límite, el cliente lento que bloquea la cola, el hilo por cliente, el ThreadPoolExecutor, el benchmark, el Lock para el estado compartido y las buenas prácticas. Este cierre es el aterrizaje: recorres lo aprendido con juegos, un laboratorio real con fallos intencionados y las preguntas que te harán en una entrevista. Léelo justo después del [punto 8](/ApuntesPSP/05-servidores-concurrentes/08-servidor-concurrente-completo) y antes de abrir los boletines.
 
 ---
 
@@ -24,11 +24,11 @@ Has terminado la teoría: el servidor secuencial y su límite, el cliente lento 
 3. Vuelves a `accept()` y recibes la **conexión-2**, **conexión-3**, … hasta la **conexión-5**: cada una ocupa un hilo libre (hilo-1 a hilo-5).
 4. Llega la **conexión-6**: los 5 hilos están ocupados, así que `submit()` la **encola** internamente.
 5. En cuanto hilo-1 termina con la conexión-1 (responde y cierra con `with conn:`), el pool **reutiliza** ese hilo para la conexión-6.
-6. Así hasta la conexión-10: **dos tandas de 5**, el `ceil(10/5)` del [punto 5](/ApuntesPSP/10-servidores-concurrentes/05-benchmark).
+6. Así hasta la conexión-10: **dos tandas de 5**, el `ceil(10/5)` del [punto 5](/ApuntesPSP/05-servidores-concurrentes/05-benchmark).
 
 **Nunca se crea un hilo nuevo.** El servidor tiene exactamente 5 hilos y una cola: el sistema no se ahoga.
 
-> 💡 **Ahora tú:** ¿y si llegaran 10.000 conexiones? El pool las iría encolando y sirviendo de a 5. Tardarían más, pero el servidor **sobreviviría**. Y para 10.000 conexiones, la solución de la [U12 · asyncio](/ApuntesPSP/11-asyncio-y-disponibilidad) sería todavía más ligera.
+> 💡 **Ahora tú:** ¿y si llegaran 10.000 conexiones? El pool las iría encolando y sirviendo de a 5. Tardarían más, pero el servidor **sobreviviría**. Y para 10.000 conexiones, la solución de la [UD 10 · asyncio](/ApuntesPSP/11-asyncio-y-disponibilidad) sería todavía más ligera.
 
 ---
 
@@ -79,9 +79,9 @@ Has terminado la teoría: el servidor secuencial y su límite, el cliente lento 
 
 **CONRAD:** — "Clásico: montas un servidor secuencial, llega un cliente que tarda 30 segundos y *'el servidor se ha quedado colgado'*. Pues no: solo tiene **una ventanilla**. Mientras procesa al lento, el `accept()` no se ejecuta y toda la cola espera. Los clientes 2 al 10 ya están conectados al socket… pero nadie los atiende."
 
-**CONRAD:** — "Y lo mejor: *'he puesto time.sleep(3) y las pruebas van lentas'*. ¡Pues claro! Cada cliente suma 3 segundos. Con 10 clientes, el último espera 30. **n × tiempo_por_cliente**, lo dijimos en el [punto 1](/ApuntesPSP/10-servidores-concurrentes/01-servidor-secuencial). Si quieres que todos terminen a la vez, necesitas hilos o un pool."
+**CONRAD:** — "Y lo mejor: *'he puesto time.sleep(3) y las pruebas van lentas'*. ¡Pues claro! Cada cliente suma 3 segundos. Con 10 clientes, el último espera 30. **n × tiempo_por_cliente**, lo dijimos en el [punto 1](/ApuntesPSP/05-servidores-concurrentes/01-servidor-secuencial). Si quieres que todos terminen a la vez, necesitas hilos o un pool."
 
-**CONRAD:** — "Y no me vengas con *'¿será que el puerto está ocupado?'*. El puerto va bien: lo que pasa es que el servidor atiende de uno en uno. Lanza el **lanzador de clientes** del [punto 5](/ApuntesPSP/10-servidores-concurrentes/05-benchmark) y míralo en el log: si las respuestas llegan de una en una, tienes un secuencial. A diagnosticar."
+**CONRAD:** — "Y no me vengas con *'¿será que el puerto está ocupado?'*. El puerto va bien: lo que pasa es que el servidor atiende de uno en uno. Lanza el **lanzador de clientes** del [punto 5](/ApuntesPSP/05-servidores-concurrentes/05-benchmark) y míralo en el log: si las respuestas llegan de una en una, tienes un secuencial. A diagnosticar."
 
 ---
 
@@ -95,17 +95,17 @@ Has terminado la teoría: el servidor secuencial y su límite, el cliente lento 
 **Tareas paso a paso:**
 
 1. Escribe `atender(conn, addr)` con `with conn:`: recibe con `recv(1024)` y responde con `sendall(b"OK: " + datos)`.
-2. Monta el servidor con `with socket.socket() as srv, ThreadPoolExecutor(max_workers=3) as pool:` (patrón del [punto 4](/ApuntesPSP/10-servidores-concurrentes/04-threadpoolexecutor)).
+2. Monta el servidor con `with socket.socket() as srv, ThreadPoolExecutor(max_workers=3) as pool:` (patrón del [punto 4](/ApuntesPSP/05-servidores-concurrentes/04-threadpoolexecutor)).
 3. En el bucle: `conn, addr = srv.accept()` → `pool.submit(atender, conn, addr)`.
-4. Escribe el lanzador de 10 clientes con `threading.Thread` y mide el tiempo total con `time.time()` ([punto 5](/ApuntesPSP/10-servidores-concurrentes/05-benchmark)).
-5. Añade un **contador global de conexiones activas** protegido con `Lock` ([punto 6](/ApuntesPSP/10-servidores-concurrentes/06-sincronizacion-en-servidores)) que se imprima con cada `[+]`/`[-]`.
+4. Escribe el lanzador de 10 clientes con `threading.Thread` y mide el tiempo total con `time.time()` ([punto 5](/ApuntesPSP/05-servidores-concurrentes/05-benchmark)).
+5. Añade un **contador global de conexiones activas** protegido con `Lock` ([punto 6](/ApuntesPSP/05-servidores-concurrentes/06-sincronizacion-en-servidores)) que se imprima con cada `[+]`/`[-]`.
 6. Ejecuta servidor y lanzador en terminales separadas. El servidor se mata con **Ctrl+C**.
 
 **Fallo intencionado:** cambia `max_workers=3` por **`max_workers=1`**. ¿Qué pasa? El pool se convierte en un servidor **secuencial de facto**: una sola tarea a la vez, las otras 9 en cola. El tiempo total pasa de ~1 tanda a **10 tandas**: con clientes que tardan 2s, el lanzador marca ~20s en lugar de ~8s (ceil(10/3)=4 tandas × 2s).
 
-> **Pista 1:** el problema no está en el código del cliente ni del servidor: está en el **tamaño del pool**. Con `max_workers=1`, el ThreadPool se comporta como el servidor secuencial del [punto 1](/ApuntesPSP/10-servidores-concurrentes/01-servidor-secuencial): el tiempo total es `n × tiempo_por_cliente`.
+> **Pista 1:** el problema no está en el código del cliente ni del servidor: está en el **tamaño del pool**. Con `max_workers=1`, el ThreadPool se comporta como el servidor secuencial del [punto 1](/ApuntesPSP/05-servidores-concurrentes/01-servidor-secuencial): el tiempo total es `n × tiempo_por_cliente`.
 >
-> **Pista 2:** usa la fórmula del [punto 5](/ApuntesPSP/10-servidores-concurrentes/05-benchmark): `ceil(n/workers) × tiempo_por_cliente`. Con workers=1, `ceil(10/1) = 10` tandas. Con workers=3, `ceil(10/3) = 4`. La diferencia de tiempo te delata la configuración.
+> **Pista 2:** usa la fórmula del [punto 5](/ApuntesPSP/05-servidores-concurrentes/05-benchmark): `ceil(n/workers) × tiempo_por_cliente`. Con workers=1, `ceil(10/1) = 10` tandas. Con workers=3, `ceil(10/3) = 4`. La diferencia de tiempo te delata la configuración.
 
 ---
 
@@ -133,10 +133,10 @@ Has terminado la teoría: el servidor secuencial y su límite, el cliente lento 
 <summary>💡 Soluciones</summary>
 
 1. Porque la conexión TCP la **acepta el sistema operativo** en la cola del socket. El `accept()` del código no se ejecuta hasta que termina el cliente actual: los demás están conectados a nivel de red, pero sin atención.
-2. **Coste de creación/destrucción**: el pool reutiliza los mismos 5 hilos una y otra vez, evitando el trabajo de crear y destruir hilos por cada conexión (el [punto 4](/ApuntesPSP/10-servidores-concurrentes/04-threadpoolexecutor)).
+2. **Coste de creación/destrucción**: el pool reutiliza los mismos 5 hilos una y otra vez, evitando el trabajo de crear y destruir hilos por cada conexión (el [punto 4](/ApuntesPSP/05-servidores-concurrentes/04-threadpoolexecutor)).
 3. Cuando la **carga es impredecible** (picos): esperar en la cola del pool es mejor que saturar el sistema y que el servidor muera. Estabilidad > latencia en producción.
-4. Porque cada `conn` es un **socket distinto** (independiente entre hilos), mientras que el contador es **una única variable compartida** que todos modifican: sin Lock hay condición de carrera ([punto 6](/ApuntesPSP/10-servidores-concurrentes/06-sincronizacion-en-servidores)).
-5. Se agotaría la **memoria** (pila de cada hilo) y el **context switch** degradaría la CPU hasta dejar el servidor inútil ([punto 7](/ApuntesPSP/10-servidores-concurrentes/07-limites-y-buenas-practicas)). El pool y asyncio existen precisamente para no llegar ahí.
+4. Porque cada `conn` es un **socket distinto** (independiente entre hilos), mientras que el contador es **una única variable compartida** que todos modifican: sin Lock hay condición de carrera ([punto 6](/ApuntesPSP/05-servidores-concurrentes/06-sincronizacion-en-servidores)).
+5. Se agotaría la **memoria** (pila de cada hilo) y el **context switch** degradaría la CPU hasta dejar el servidor inútil ([punto 7](/ApuntesPSP/05-servidores-concurrentes/07-limites-y-buenas-practicas)). El pool y asyncio existen precisamente para no llegar ahí.
 
 </details>
 
@@ -184,7 +184,7 @@ Vertical:
 
 > ❓ **¿Cuántos hilos puede tener un servidor?**
 
-Depende del SO. En Windows, unos pocos miles. Pero más allá de ~100, el cambio de contexto (context switch) perjudica el rendimiento ([punto 7](/ApuntesPSP/10-servidores-concurrentes/07-limites-y-buenas-practicas)).
+Depende del SO. En Windows, unos pocos miles. Pero más allá de ~100, el cambio de contexto (context switch) perjudica el rendimiento ([punto 7](/ApuntesPSP/05-servidores-concurrentes/07-limites-y-buenas-practicas)).
 
 > ❓ **¿Qué pasa si un hilo se cuelga?**
 
@@ -204,7 +204,7 @@ Sí, con `loop.run_in_executor()`. Pero empieza con uno u otro.
 
 > ❓ **¿Y si el servidor recibe 10.000 conexiones?**
 
-ThreadPool con 100 hilos + cola de espera. O usa **asyncio** ([U12](/ApuntesPSP/11-asyncio-y-disponibilidad)) que escala mejor.
+ThreadPool con 100 hilos + cola de espera. O usa **asyncio** ([UD 10](/ApuntesPSP/11-asyncio-y-disponibilidad)) que escala mejor.
 
 ---
 
@@ -220,7 +220,7 @@ ThreadPool con 100 hilos + cola de espera. O usa **asyncio** ([U12](/ApuntesPSP/
 >
 > *El servidor ya atiende a muchos. Pero 10.000 conexiones siguen esperando algo más ligero…*
 
-**PRÓXIMAMENTE EN U12:** *asyncio y disponibilidad. Sin un hilo por conexión, un solo bucle de eventos atenderá miles de clientes a la vez. El servidor concurrente se vuelve esbelto.*
+**PRÓXIMAMENTE EN UD 10:** *asyncio y disponibilidad. Sin un hilo por conexión, un solo bucle de eventos atenderá miles de clientes a la vez. El servidor concurrente se vuelve esbelto.*
 
 ---
 
@@ -233,8 +233,8 @@ ThreadPool con 100 hilos + cola de espera. O usa **asyncio** ([U12](/ApuntesPSP/
 | c) | Implementa servidores concurrentes con hilos | ✅ Hilo por cliente (puntos 3 y 8) + ⚡ Laboratorio |
 | d) | Gestiona pools de hilos (ThreadPoolExecutor) | ✅ ThreadPool y benchmark (puntos 4-5) + ⚡ Laboratorio |
 
-> RA4a-b (APIs REST y comerciales) se cubren en las **U07 y U08**. RA4e-g (asyncio, disponibilidad, comparativa de modelos) se cubren en la **U12 · asyncio y Disponibilidad**.
+> RA4a-b (APIs REST y comerciales) se cubren en las **U07 y U08**. RA4e-g (asyncio, disponibilidad, comparativa de modelos) se cubren en la **UD 10 · asyncio y Disponibilidad**.
 
 ---
 
-📚 [Volver al índice de la unidad](/ApuntesPSP/10-servidores-concurrentes) · **Anterior:** [08 · Servidor concurrente completo](/ApuntesPSP/10-servidores-concurrentes/08-servidor-concurrente-completo) · **Siguiente:** **[U12 · asyncio y Disponibilidad](/ApuntesPSP/11-asyncio-y-disponibilidad)**
+📚 [Volver al índice de la unidad](/ApuntesPSP/05-servidores-concurrentes) · **Anterior:** [08 · Servidor concurrente completo](/ApuntesPSP/05-servidores-concurrentes/08-servidor-concurrente-completo) · **Siguiente:** **[UD 10 · asyncio y Disponibilidad](/ApuntesPSP/11-asyncio-y-disponibilidad)**

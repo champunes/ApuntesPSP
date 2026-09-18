@@ -96,7 +96,7 @@ if lectura:
 - **`setblocking(False)`** → nada bloquea: si no hay datos, la llamada lanza `BlockingIOError` al instante.
 - **`select.select([s], [], [], 1.0)`** → espera hasta 1 segundo a que **alguno** de los sockets de la lista tenga datos. Si lo tiene, `lectura` no está vacía.
 
-> `select.select()` es la solución para esperar en **varios sockets a la vez sin hilos**: le pasas la lista y te avisa cuáles están listos. Lo usarás a fondo en el [TEMA 10 — Servidores Concurrentes](/ApuntesPSP/10-servidores-concurrentes).
+> `select.select()` es la solución para esperar en **varios sockets a la vez sin hilos**: le pasas la lista y te avisa cuáles están listos. Lo usarás a fondo en el [TEMA 10 — Servidores concurrentes](/ApuntesPSP/05-servidores-concurrentes).
 
 ---
 

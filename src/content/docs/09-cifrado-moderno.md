@@ -86,4 +86,4 @@ Al terminar, serás capaz de:
 ¿Ya sabes qué es AES y RSA y solo necesitas las firmas o el híbrido? Puedes saltar a los [puntos 5](/ApuntesPSP/09-cifrado-moderno/05-firmas-digitales) y [6](/ApuntesPSP/09-cifrado-moderno/06-cifrado-hibrido). Pero si vienes de cero en criptografía moderna, no te saltes los puntos 1 a 4: entender la diferencia simétrico/asimétrico y cómo se cifra con cada uno es la base de todo lo demás.
 
 **📍 Primer punto:** [01 · Cifrado simétrico vs asimétrico](/ApuntesPSP/09-cifrado-moderno/01-cifrado-simetrico-vs-asimetrico)  
-**⏭️ Al acabar la unidad, continúa en [U11 · Servidores Concurrentes](/ApuntesPSP/10-servidores-concurrentes).**
+**⏭️ Al acabar la unidad, continúa en [UD 6 · Servidores concurrentes](/ApuntesPSP/05-servidores-concurrentes).**

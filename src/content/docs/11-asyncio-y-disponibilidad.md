@@ -10,7 +10,7 @@ nav_order: 11
 
 > "Asyncio es como un cocinero que, mientras espera a que hierva el agua, corta verduras. En vez de quedarse mirando la olla, hace otras cosas."
 
-En la U11 construiste servidores concurrentes con hilos: un hilo por cliente o un ThreadPool. Funcionan, pero cada hilo cuesta memoria y contexto de sistema. En esta unidad cambiarás de modelo: **asyncio**, un solo hilo que coordina miles de tareas cooperativas, y las herramientas de **disponibilidad** (heartbeat, timeouts y backoff) que mantienen un servicio vivo cuando todo falla alrededor.
+En la U11 construiste Servidores concurrentes con hilos: un hilo por cliente o un ThreadPool. Funcionan, pero cada hilo cuesta memoria y contexto de sistema. En esta unidad cambiarás de modelo: **asyncio**, un solo hilo que coordina miles de tareas cooperativas, y las herramientas de **disponibilidad** (heartbeat, timeouts y backoff) que mantienen un servicio vivo cuando todo falla alrededor.
 
 También aprenderás a que un servidor **nunca se cuelgue** con un cliente mudo (timeout), a que **avise** de que sigue vivo (heartbeat) y a que **reintente** con cabeza cuando un servicio se cae (backoff). El siguiente tema ya no existe: esta es la última unidad del viaje, y cierras con un servidor asyncio robusto que no se bloquea, se vigila solo y se recupera.
 
@@ -77,13 +77,13 @@ Al terminar, serás capaz de:
 | f) | Desarrolla servidores con asyncio | ✅ Puntos 1-3 y 8 + ⚡ Laboratorio (punto 9) |
 | g) | Compara modelos de concurrencia (hilos vs asyncio) | ✅ Punto 7 + 🔥 Fireside Chat (punto 9) |
 
-> RA4c (servidores concurrentes con hilos) y RA4d (ThreadPool) se cubren en la **U11 · Servidores Concurrentes**.
+> RA4c (Servidores concurrentes con hilos) y RA4d (ThreadPool) se cubren en la **UD 6 · Servidores concurrentes**.
 
 ---
 
 ## 🚪 ¿Por dónde empiezo?
 
-¿Vienes de la U11 y dominas los servidores concurrentes? Perfecto, ese es el trampolín ideal: repasa la [U11 · Servidores Concurrentes](/ApuntesPSP/10-servidores-concurrentes) para tener frescos el hilo por cliente, el ThreadPool y el problema del bloqueo, y arranca en el [punto 1](/ApuntesPSP/11-asyncio-y-disponibilidad/01-event-loop), que parte justo del problema de la espera que dejaste planteado.
+¿Vienes de la U11 y dominas los Servidores concurrentes? Perfecto, ese es el trampolín ideal: repasa la [UD 6 · Servidores concurrentes](/ApuntesPSP/05-servidores-concurrentes) para tener frescos el hilo por cliente, el ThreadPool y el problema del bloqueo, y arranca en el [punto 1](/ApuntesPSP/11-asyncio-y-disponibilidad/01-event-loop), que parte justo del problema de la espera que dejaste planteado.
 
 ¿Ya sabes qué es asyncio y solo quieres la disponibilidad? Ve directo al [punto 4](/ApuntesPSP/11-asyncio-y-disponibilidad/04-timeouts) y de ahí a los puntos 5 y 6. Pero si vienes de cero, no te saltes los puntos 1 a 3: el event loop y las corrutinas son la base de todo lo demás.
 

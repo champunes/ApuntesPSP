@@ -13,7 +13,7 @@ description: El gestor de tareas que no se bloquea nunca ⚙️
 
 > El **event loop** es el gestor de asyncio: un bucle que decide qué tarea se ejecuta en cada momento. Cuando una corrutina espera, la pausa y ejecuta otra. Un solo hilo, miles de tareas, ninguna espera activa.
 
-Viene directo del problema que dejaste en la [U11 · Servidores Concurrentes](/ApuntesPSP/10-servidores-concurrentes): un servidor que usa `accept()` y `recv()` se **bloquea** mientras espera. La solución de la U11 fueron los hilos. La de hoy es distinta: **un solo hilo que cambia de tarea cuando una espera**.
+Viene directo del problema que dejaste en la [UD 6 · Servidores concurrentes](/ApuntesPSP/05-servidores-concurrentes): un servidor que usa `accept()` y `recv()` se **bloquea** mientras espera. La solución de la U11 fueron los hilos. La de hoy es distinta: **un solo hilo que cambia de tarea cuando una espera**.
 
 ---
 
@@ -99,7 +99,7 @@ El event loop también gestiona timers, sockets, procesos y cualquier I/O: cada 
 <details>
 <summary>🔄 Respuestas</summary>
 
-1. Porque el hilo que ejecuta esa línea **se queda parado** esperando datos: mientras tanto no puede atender a nadie (el problema del servidor secuencial de la [U11](/ApuntesPSP/10-servidores-concurrentes)).
+1. Porque el hilo que ejecuta esa línea **se queda parado** esperando datos: mientras tanto no puede atender a nadie (el problema del servidor secuencial de la [U11](/ApuntesPSP/05-servidores-concurrentes)).
 2. **Uno solo.** El event loop coordina todas las corrutinas en un único hilo.
 3. La **operación de I/O asíncrona** (un `await asyncio.sleep(...)` o un `recv()`): la cafetera hace su trabajo mientras el camarero atiende a otras mesas.
 

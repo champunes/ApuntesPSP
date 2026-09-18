@@ -5,7 +5,7 @@ description: "Todo junto: servidor multihilo y su lanzador de clientes 🏗️"
 
 <p><small>Todo junto: servidor multihilo y su lanzador de clientes 🏗️</small></p>
 
-> 🗺️ **Estás en:** 🏗️ **U11 · Servidores Concurrentes** → 08 · Servidor concurrente completo
+> 🗺️ **Estás en:** 🏗️ **UD 6 · Servidores concurrentes** → 08 · Servidor concurrente completo
 
 ---
 
@@ -19,7 +19,7 @@ Es el "Be the code" definitivo: aquí tienes el código completo, cómo ejecutar
 
 ## 🏗️ El servidor: `servidor.py`
 
-Un servidor TCP multihilo con contador de conexiones protegido por Lock (el punto [3](/ApuntesPSP/10-servidores-concurrentes/03-hilo-por-cliente) + el punto [6](/ApuntesPSP/10-servidores-concurrentes/06-sincronizacion-en-servidores)):
+Un servidor TCP multihilo con contador de conexiones protegido por Lock (el punto [3](/ApuntesPSP/05-servidores-concurrentes/03-hilo-por-cliente) + el punto [6](/ApuntesPSP/05-servidores-concurrentes/06-sincronizacion-en-servidores)):
 
 ```python
 import socket, threading
@@ -73,7 +73,7 @@ Lo que demuestra este servidor:
 
 ## 🚀 El lanzador: `lanzaclientes.py`
 
-Un script que lanza 10 clientes simultáneos contra el servidor (el lanzador masivo del [punto 5](/ApuntesPSP/10-servidores-concurrentes/05-benchmark)):
+Un script que lanza 10 clientes simultáneos contra el servidor (el lanzador masivo del [punto 5](/ApuntesPSP/05-servidores-concurrentes/05-benchmark)):
 
 ```python
 import socket, threading, time
@@ -116,7 +116,7 @@ python servidor.py             python lanzaclientes.py
     Recibido: Cliente-1         🏁 Todos los clientes terminaron
 ```
 
-Si el servidor fuera secuencial, el lanzador tardaría 10 × tiempo_por_cliente y las respuestas llegarían de una en una. Con el servidor concurrente, **todas responden casi a la vez**: ese es el resultado del punto [5](/ApuntesPSP/10-servidores-concurrentes/05-benchmark). Se mata el servidor con **Ctrl+C** y cada script se ejecuta en su terminal.
+Si el servidor fuera secuencial, el lanzador tardaría 10 × tiempo_por_cliente y las respuestas llegarían de una en una. Con el servidor concurrente, **todas responden casi a la vez**: ese es el resultado del punto [5](/ApuntesPSP/05-servidores-concurrentes/05-benchmark). Se mata el servidor con **Ctrl+C** y cada script se ejecuta en su terminal.
 
 ---
 
@@ -251,4 +251,4 @@ with socket.socket() as srv:
 
 ---
 
-📚 [Volver al índice de la unidad](/ApuntesPSP/10-servidores-concurrentes) · **Anterior:** [07 · Límites y buenas prácticas](/ApuntesPSP/10-servidores-concurrentes/07-limites-y-buenas-practicas) · **Siguiente:** [09 · Cierre](/ApuntesPSP/10-servidores-concurrentes/09-cierre)
+📚 [Volver al índice de la unidad](/ApuntesPSP/05-servidores-concurrentes) · **Anterior:** [07 · Límites y buenas prácticas](/ApuntesPSP/05-servidores-concurrentes/07-limites-y-buenas-practicas) · **Siguiente:** [09 · Cierre](/ApuntesPSP/05-servidores-concurrentes/09-cierre)

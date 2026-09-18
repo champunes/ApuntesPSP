@@ -5,7 +5,7 @@ description: Un equipo fijo de hilos que se reutiliza ⚡
 
 <p><small>Un equipo fijo de hilos que se reutiliza ⚡</small></p>
 
-> 🗺️ **Estás en:** 🏗️ **U11 · Servidores Concurrentes** → 04 · ThreadPoolExecutor
+> 🗺️ **Estás en:** 🏗️ **UD 6 · Servidores concurrentes** → 04 · ThreadPoolExecutor
 
 ---
 
@@ -13,13 +13,13 @@ description: Un equipo fijo de hilos que se reutiliza ⚡
 
 > Crear un hilo por cada cliente puede saturar el sistema con 10.000 conexiones. Un **ThreadPoolExecutor** reutiliza un número fijo de hilos: si llegan más clientes que hilos, esperan en una cola en lugar de multiplicar los hilos.
 
-Es el mismo servicio del [punto 3](/ApuntesPSP/10-servidores-concurrentes/03-hilo-por-cliente), pero con **recursos bajo control**: el pool es un equipo de camareros limitado, no un camarero nuevo por cada mesa.
+Es el mismo servicio del [punto 3](/ApuntesPSP/05-servidores-concurrentes/03-hilo-por-cliente), pero con **recursos bajo control**: el pool es un equipo de camareros limitado, no un camarero nuevo por cada mesa.
 
 ---
 
 ## ⚠️ El problema: miles de hilos
 
-El enfoque del [punto 3](/ApuntesPSP/10-servidores-concurrentes/03-hilo-por-cliente) funciona de maravilla con 10 clientes. Con 10.000 conexiones simultáneas se convierte en una bomba:
+El enfoque del [punto 3](/ApuntesPSP/05-servidores-concurrentes/03-hilo-por-cliente) funciona de maravilla con 10 clientes. Con 10.000 conexiones simultáneas se convierte en una bomba:
 
 - Cada hilo consume **memoria propia** (pila de ejecución).
 - El sistema operativo debe **planificar** (context switch) entre miles de hilos: la CPU pierde más tiempo cambiando de hilo que trabajando.
@@ -59,7 +59,7 @@ def servidor_pool():
                 pool.submit(atender, conn, addr)
 ```
 
-Dos piezas nuevas frente al [punto 3](/ApuntesPSP/10-servidores-concurrentes/03-hilo-por-cliente):
+Dos piezas nuevas frente al [punto 3](/ApuntesPSP/05-servidores-concurrentes/03-hilo-por-cliente):
 
 1. **`ThreadPoolExecutor(max_workers=MAX_HILOS)`** crea el equipo de hilos (10 aquí). Se usa como contexto (`with ... as pool`) para que se cierre solo al salir.
 2. **`pool.submit(atender, conn, addr)`** sustituye a `Thread(target=...).start()`: entrega la tarea al pool y este decide qué hilo libre la coge. Si todos están ocupados, la tarea espera en la cola interna del pool.
@@ -78,7 +78,7 @@ No hay una fórmula mágica, pero estas reglas de oro ayudan:
 | CPU intensivo (cálculo puro) | Nº de núcleos de la CPU |
 | I/O intensivo (red, discos, APIs) | Más hilos que núcleos (los hilos esperan mucho en I/O) |
 
-> 💡 En [U12 · asyncio](/ApuntesPSP/11-asyncio-y-disponibilidad) verás que la concurrencia por I/O se puede hacer aún más ligera, sin hilos. De momento, el pool es la opción sensata.
+> 💡 En [UD 10 · asyncio](/ApuntesPSP/11-asyncio-y-disponibilidad) verás que la concurrencia por I/O se puede hacer aún más ligera, sin hilos. De momento, el pool es la opción sensata.
 
 ---
 
@@ -171,4 +171,4 @@ with socket.socket() as srv:                              # h) crear socket
 
 ---
 
-📚 [Volver al índice de la unidad](/ApuntesPSP/10-servidores-concurrentes) · **Anterior:** [03 · Hilo por cliente](/ApuntesPSP/10-servidores-concurrentes/03-hilo-por-cliente) · **Siguiente:** [05 · Benchmark](/ApuntesPSP/10-servidores-concurrentes/05-benchmark)
+📚 [Volver al índice de la unidad](/ApuntesPSP/05-servidores-concurrentes) · **Anterior:** [03 · Hilo por cliente](/ApuntesPSP/05-servidores-concurrentes/03-hilo-por-cliente) · **Siguiente:** [05 · Benchmark](/ApuntesPSP/05-servidores-concurrentes/05-benchmark)

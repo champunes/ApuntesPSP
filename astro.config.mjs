@@ -13,7 +13,7 @@ const unitSlugs = [
   '07-apis-comerciales',
   '08-hash-y-cifrado-clasico',
   '09-cifrado-moderno',
-  '10-servidores-concurrentes',
+  '05-servidores-concurrentes',
   '11-asyncio-y-disponibilidad',
 ];
 
@@ -27,7 +27,7 @@ const unitLabels = [
   'APIs Comerciales',
   'Hash y Cifrado Clásico',
   'Cifrado Moderno',
-  'Servidores Concurrentes',
+  'Servidores concurrentes',
   'Asyncio y Disponibilidad',
 ];
 
@@ -42,7 +42,7 @@ const unidadesExpandidas = {
   '07-apis-comerciales': true,
   '08-hash-y-cifrado-clasico': true,
   '09-cifrado-moderno': true,
-  '10-servidores-concurrentes': true,
+  '05-servidores-concurrentes': true,
   '11-asyncio-y-disponibilidad': true,
 };
 
@@ -57,7 +57,7 @@ const boletinesReady = [
   '07-apis-comerciales',
   '08-hash-y-cifrado-clasico',
   '09-cifrado-moderno',
-  '10-servidores-concurrentes',
+  '05-servidores-concurrentes',
   '11-asyncio-y-disponibilidad',
 ];
 
@@ -72,7 +72,7 @@ const unitPuntos = {
   '07-apis-comerciales': ['01-api-keys', '02-variables-de-entorno', '03-openweathermap', '04-openai', '05-rate-limiting', '06-errores-http', '07-seguridad-y-buenas-practicas', '08-practica-apis-comerciales', '09-cierre'],
   '08-hash-y-cifrado-clasico': ['01-principios-de-seguridad', '02-que-es-un-hash', '03-md5-sha1-sha256', '04-hash-de-contrasenas', '05-hash-con-sal', '06-cifrado-cesar', '07-hash-vs-cifrado', '08-buenas-practicas-y-verificacion', '09-cierre'],
   '09-cifrado-moderno': ['01-cifrado-simetrico-vs-asimetrico', '02-aes', '03-modos-aes', '04-rsa', '05-firmas-digitales', '06-cifrado-hibrido', '07-rbac-y-roles', '08-practica-sistema-seguro', '09-cierre'],
-  '10-servidores-concurrentes': ['01-servidor-secuencial', '02-el-problema-de-la-espera', '03-hilo-por-cliente', '04-threadpoolexecutor', '05-benchmark', '06-sincronizacion-en-servidores', '07-limites-y-buenas-practicas', '08-servidor-concurrente-completo', '09-cierre'],
+  '05-servidores-concurrentes': ['01-servidor-secuencial', '02-el-problema-de-la-espera', '03-hilo-por-cliente', '04-threadpoolexecutor', '05-benchmark', '06-sincronizacion-en-servidores', '07-limites-y-buenas-practicas', '08-servidor-concurrente-completo', '09-cierre'],
   '11-asyncio-y-disponibilidad': ['01-event-loop', '02-corrutinas', '03-create-task-y-gather', '04-timeouts', '05-heartbeat', '06-backoff', '07-threads-vs-asyncio', '08-disponibilidad-y-practica', '09-cierre'],
 };
 

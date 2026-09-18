@@ -72,7 +72,7 @@ Al terminar, serás capaz de:
 | a) | Utiliza APIs REST para obtener datos externos | ✅ Puntos 3, 6-8 + ⚡ Laboratorio (punto 9) |
 | b) | Gestiona peticiones HTTP y procesa respuestas JSON | ✅ Puntos 1-5 y 7 + ⚡ Laboratorio (punto 9) |
 
-> RA4c (servidores concurrentes) y RA4d (ThreadPool) se cubren en la **U11 · Servidores Concurrentes**. RA4e-g (asyncio, disponibilidad, comparativa) se cubren en la **U12 · asyncio y disponibilidad**.
+> RA4c (Servidores concurrentes) y RA4d (ThreadPool) se cubren en la **UD 6 · Servidores concurrentes**. RA4e-g (asyncio, disponibilidad, comparativa) se cubren en la **U12 · asyncio y disponibilidad**.
 
 ---
 
