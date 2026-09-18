@@ -1,9 +1,9 @@
 ﻿---
-title: Boletín U11 — Inicial (Resuelto)
+title: Boletín UD 6 — Inicial (Resuelto)
 description: Soluciones de los ejercicios básicos de Servidores concurrentes
 ---
 
-# ✅ Boletín U11 — Inicial (Resuelto)
+# ✅ Boletín UD 6 — Inicial (Resuelto)
 
 ---
 

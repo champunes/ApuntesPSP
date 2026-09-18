@@ -1,9 +1,9 @@
 ﻿---
-title: Boletín U11 — Avanzado (Resuelto)
+title: Boletín UD 6 — Avanzado (Resuelto)
 description: Soluciones de los ejercicios avanzados de Servidores concurrentes
 ---
 
-# 💪 Boletín U11 — Avanzado (Resuelto)
+# 💪 Boletín UD 6 — Avanzado (Resuelto)
 
 ---
 

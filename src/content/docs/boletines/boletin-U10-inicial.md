@@ -1,9 +1,9 @@
 ﻿---
-title: Boletín U11 — Inicial
+title: Boletín UD 6 — Inicial
 description: Ejercicios básicos de Servidores Concurrentes
 ---
 
-# 📝 Boletín U11 — Inicial
+# 📝 Boletín UD 6 — Inicial
 
 > Ejercicios básicos para afianzar los conceptos de servidores concurrentes: sockets TCP, el servidor secuencial y sus límites, y el salto a los hilos.
 
