@@ -5,7 +5,7 @@ description: Hilos de fondo que se sacrifican para que el programa pueda salir �
 
 <p><small>Hilos de fondo que se sacrifican para que el programa pueda salir 😈</small></p>
 
-> 🗺️ **Estás en:** 🔀 **U03 · Hilos Fundamentos** → 04 · Hilos daemon
+> 🗺️ **Estás en:** 🔀 **UD 3 · Hilos y concurrencia** → 04 · Hilos daemon
 
 ---
 
@@ -189,4 +189,4 @@ print("Continuamos...")
 
 ---
 
-📚 [Volver al índice de la unidad](/ApuntesPSP/02-hilos-fundamentos) · **Anterior:** [03 · Hilos con argumentos](/ApuntesPSP/02-hilos-fundamentos/03-hilos-con-argumentos) · **Siguiente:** [05 · Timer](/ApuntesPSP/02-hilos-fundamentos/05-timer)
+📚 [Volver al índice de la unidad](/ApuntesPSP/02-hilos-y-concurrencia) · **Anterior:** [03 · Hilos con argumentos](/ApuntesPSP/02-hilos-y-concurrencia/03-hilos-con-argumentos) · **Siguiente:** [05 · Timer](/ApuntesPSP/02-hilos-y-concurrencia/05-timer)

@@ -79,7 +79,7 @@ Al terminar, serás capaz de:
 
 ## 🚪 ¿Por dónde empiezo?
 
-¿Vienes de la U03 y ya sabes lanzar hilos y esperarlos con `join()`? Perfecto, ese es el trampolín ideal: repasa la [U03 · Hilos Fundamentos](/ApuntesPSP/02-hilos-fundamentos) para tener frescos `Thread`, `start()`, `join()` y el concepto de hilo daemon, y arranca en el [punto 1](/ApuntesPSP/03-sincronizacion-entre-hilos/01-condicion-de-carrera), que parte justo de ahí: el momento en que dos hilos comparten memoria y todo se descontrola.
+¿Vienes de la U03 y ya sabes lanzar hilos y esperarlos con `join()`? Perfecto, ese es el trampolín ideal: repasa la [U03 · Hilos Fundamentos](/ApuntesPSP/02-hilos-y-concurrencia) para tener frescos `Thread`, `start()`, `join()` y el concepto de hilo daemon, y arranca en el [punto 1](/ApuntesPSP/03-sincronizacion-entre-hilos/01-condicion-de-carrera), que parte justo de ahí: el momento en que dos hilos comparten memoria y todo se descontrola.
 
 ¿Ya sabes qué es un lock y solo necesitas el semáforo o la barrera? Puedes saltar a los [puntos 4](/ApuntesPSP/03-sincronizacion-entre-hilos/04-semaphore), [5](/ApuntesPSP/03-sincronizacion-entre-hilos/05-barrier) y [6](/ApuntesPSP/03-sincronizacion-entre-hilos/06-condition). Pero si vienes de cero en sincronización, no te saltes los puntos 1 a 3: la condición de carrera y el lock son la base de todo lo demás.
 

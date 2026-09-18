@@ -5,7 +5,7 @@ description: Pasa datos al hilo con args y kwargs, y ponle nombre a cada hilo �
 
 <p><small>Pasa datos al hilo con args y kwargs, y ponle nombre a cada hilo 📇</small></p>
 
-> 🗺️ **Estás en:** 🔀 **U03 · Hilos Fundamentos** → 03 · Hilos con argumentos
+> 🗺️ **Estás en:** 🔀 **UD 3 · Hilos y concurrencia** → 03 · Hilos con argumentos
 
 ---
 
@@ -127,7 +127,7 @@ Fíjate en los detalles:
 
 ## 👨‍👩‍👧 Varios hilos a la vez
 
-Con una **lista por comprensión** puedes crear y lanzar N hilos en tres líneas. Es el patrón que usarás toda la unidad (y en los servidores concurrentes de la U11):
+Con una **lista por comprensión** puedes crear y lanzar N hilos en tres líneas. Es el patrón que usarás toda la unidad (y en los servidores concurrentes de la UD 6):
 
 ```python
 import threading
@@ -194,4 +194,4 @@ El mensaje final **siempre aparece el último** gracias a los dos bucles: primer
 
 ---
 
-📚 [Volver al índice de la unidad](/ApuntesPSP/02-hilos-fundamentos) · **Anterior:** [02 · Tu primer hilo](/ApuntesPSP/02-hilos-fundamentos/02-primer-hilo) · **Siguiente:** [04 · Hilos daemon](/ApuntesPSP/02-hilos-fundamentos/04-hilos-daemon)
+📚 [Volver al índice de la unidad](/ApuntesPSP/02-hilos-y-concurrencia) · **Anterior:** [02 · Tu primer hilo](/ApuntesPSP/02-hilos-y-concurrencia/02-primer-hilo) · **Siguiente:** [04 · Hilos daemon](/ApuntesPSP/02-hilos-y-concurrencia/04-hilos-daemon)

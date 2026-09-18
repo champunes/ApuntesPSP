@@ -5,7 +5,7 @@ description: El ciclo de vida de un hilo, de nuevo a terminado 🔄
 
 <p><small>El ciclo de vida de un hilo, de nuevo a terminado 🔄</small></p>
 
-> 🗺️ **Estás en:** 🔀 **U03 · Hilos Fundamentos** → 07 · Estados del hilo
+> 🗺️ **Estás en:** 🔀 **UD 3 · Hilos y concurrencia** → 07 · Estados del hilo
 
 ---
 
@@ -63,10 +63,10 @@ Cada hilo pasa por estados, igual que una persona pasa por situaciones a lo larg
 
 En la práctica, el estado que más vemos es **BLOQUEADO**, y casi siempre por dos motivos:
 
-- **`time.sleep(n)`** — el hilo pide "no me des CPU durante n segundos" (lo usaste en los [puntos 2](/ApuntesPSP/02-hilos-fundamentos/02-primer-hilo) y [4](/ApuntesPSP/02-hilos-fundamentos/04-hilos-daemon)).
+- **`time.sleep(n)`** — el hilo pide "no me des CPU durante n segundos" (lo usaste en los [puntos 2](/ApuntesPSP/02-hilos-y-concurrencia/02-primer-hilo) y [4](/ApuntesPSP/02-hilos-y-concurrencia/04-hilos-daemon)).
 - **Espera de I/O** — descarga, lectura de archivo, esperar un socket (del TEMA 04 para allá).
 
-Mientras un hilo está BLOQUEADO, **libera la CPU** (y, como viste en el [punto 6](/ApuntesPSP/02-hilos-fundamentos/06-gil), también el GIL): otro hilo puede ejecutar. Es exactamente el mecanismo que hace rápidas las tareas I/O-bound.
+Mientras un hilo está BLOQUEADO, **libera la CPU** (y, como viste en el [punto 6](/ApuntesPSP/02-hilos-y-concurrencia/06-gil), también el GIL): otro hilo puede ejecutar. Es exactamente el mecanismo que hace rápidas las tareas I/O-bound.
 
 > 💡 `sleep(0)` es un caso curioso: cede la CPU **voluntariamente** sin esperar nada, solo para dar paso a otro hilo. Es una "buena práctica" en hilos cooperativos.
 
@@ -74,7 +74,7 @@ Mientras un hilo está BLOQUEADO, **libera la CPU** (y, como viste en el [punto 
 
 ## 🕐 ¿Cuándo termina un hilo?
 
-Un hilo llega a **TERMINADO** cuando su función acaba (o si lanza una excepción no capturada). Y aquí entra el matiz del [punto 4](/ApuntesPSP/02-hilos-fundamentos/04-hilos-daemon):
+Un hilo llega a **TERMINADO** cuando su función acaba (o si lanza una excepción no capturada). Y aquí entra el matiz del [punto 4](/ApuntesPSP/02-hilos-y-concurrencia/04-hilos-daemon):
 
 - Un hilo **no daemon** que llega a TERMINADO es requisito para que el programa principal pueda salir.
 - Un hilo **daemon** puede ser cortado en seco por el final del programa principal, aunque esté en EJECUCIÓN o BLOQUEADO: muere sin llegar "bien" a TERMINADO.
@@ -140,4 +140,4 @@ Tras join: False
 
 ---
 
-📚 [Volver al índice de la unidad](/ApuntesPSP/02-hilos-fundamentos) · **Anterior:** [06 · El GIL](/ApuntesPSP/02-hilos-fundamentos/06-gil) · **Siguiente:** [08 · Hilos en la práctica](/ApuntesPSP/02-hilos-fundamentos/08-hilos-en-la-practica)
+📚 [Volver al índice de la unidad](/ApuntesPSP/02-hilos-y-concurrencia) · **Anterior:** [06 · El GIL](/ApuntesPSP/02-hilos-y-concurrencia/06-gil) · **Siguiente:** [08 · Hilos en la práctica](/ApuntesPSP/02-hilos-y-concurrencia/08-hilos-en-la-practica)

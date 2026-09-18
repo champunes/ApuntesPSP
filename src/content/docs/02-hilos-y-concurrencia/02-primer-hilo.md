@@ -5,7 +5,7 @@ description: Crea, lanza y espera tu primer hilo con start() y join() 🚀
 
 <p><small>Crea, lanza y espera tu primer hilo con start() y join() 🚀</small></p>
 
-> 🗺️ **Estás en:** 🔀 **U03 · Hilos Fundamentos** → 02 · Tu primer hilo
+> 🗺️ **Estás en:** 🔀 **UD 3 · Hilos y concurrencia** → 02 · Tu primer hilo
 
 ---
 
@@ -39,7 +39,7 @@ Desglose de las tres líneas clave:
 
 | Línea | Qué hace |
 |---|---|
-| `threading.Thread(target=saludar)` | **Crea** el hilo. En este momento el hilo existe pero no hace nada (estado NUEVO, lo verás en el [punto 7](/ApuntesPSP/02-hilos-fundamentos/07-estados-del-hilo)). |
+| `threading.Thread(target=saludar)` | **Crea** el hilo. En este momento el hilo existe pero no hace nada (estado NUEVO, lo verás en el [punto 7](/ApuntesPSP/02-hilos-y-concurrencia/07-estados-del-hilo)). |
 | `hilo.start()` | **Lanza** el hilo: pasa a ejecutable y el sistema operativo decide cuándo ejecutar `saludar()`. |
 | `hilo.join()` | **Espera** a que el hilo termine. Sin ella, el programa principal seguiría su camino y podría terminar antes que el hilo. |
 
@@ -166,4 +166,4 @@ print(hilo.is_alive())  # True si sigue ejecutándose
 
 ---
 
-📚 [Volver al índice de la unidad](/ApuntesPSP/02-hilos-fundamentos) · **Anterior:** [01 · De proceso a hilo](/ApuntesPSP/02-hilos-fundamentos/01-de-proceso-a-hilo) · **Siguiente:** [03 · Hilos con argumentos](/ApuntesPSP/02-hilos-fundamentos/03-hilos-con-argumentos)
+📚 [Volver al índice de la unidad](/ApuntesPSP/02-hilos-y-concurrencia) · **Anterior:** [01 · De proceso a hilo](/ApuntesPSP/02-hilos-y-concurrencia/01-de-proceso-a-hilo) · **Siguiente:** [03 · Hilos con argumentos](/ApuntesPSP/02-hilos-y-concurrencia/03-hilos-con-argumentos)

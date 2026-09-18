@@ -58,9 +58,9 @@ description: Apuntes de Programación de Servicios y Procesos — Python. CC BY-
     <span class="num">Unidad 3</span>
     <span class="ra">RA2</span>
   </div>
-  <a href="/ApuntesPSP/02-hilos-fundamentos" class="title-link">Hilos Fundamentos</a>
-  <p class="desc">Crear hilos con <code>threading.Thread</code>, <code>join</code>, <code>daemon</code>, <code>Timer</code>, GIL, estados del hilo.</p>
-  <a href="/ApuntesPSP/02-hilos-fundamentos" class="unit-link">👉 Ver unidad 👈</a>
+  <a href="/ApuntesPSP/02-hilos-y-concurrencia" class="title-link">Hilos y concurrencia con Python</a>
+  <p class="desc">Módulo <code>threading</code>, creación de hilos, <code>join</code>, <code>daemon</code>, <code>Timer</code>, GIL, ciclo de vida.</p>
+  <a href="/ApuntesPSP/02-hilos-y-concurrencia" class="unit-link">👉 Ver unidad 👈</a>
 </div>
 
 <div class="unit-card">

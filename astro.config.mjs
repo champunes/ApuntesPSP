@@ -6,7 +6,7 @@ const emojis = ['🐍', '🚀', '🔀', '🔒', '🔌', '📡', '🌐', '🧪', 
 const unitSlugs = [
   '00-python-basico',
   '01-gestion-de-procesos',
-  '02-hilos-fundamentos',
+  '02-hilos-y-concurrencia',
   '03-sincronizacion-entre-hilos',
   '04-sockets-tcp',
   '05-sockets-udp-y-protocolos',
@@ -21,7 +21,7 @@ const unitSlugs = [
 const unitLabels = [
   'Python 3 básico',
   'Gestión de procesos',
-  'Hilos Fundamentos',
+  'Hilos y concurrencia',
   'Sincronización entre Hilos',
   'Sockets TCP',
   'Sockets UDP y Protocolos',
@@ -37,7 +37,7 @@ const unitLabels = [
 const unidadesExpandidas = {
   '00-python-basico': true,
   '01-gestion-de-procesos': true,
-  '02-hilos-fundamentos': true,
+  '02-hilos-y-concurrencia': true,
   '03-sincronizacion-entre-hilos': true,
   '04-sockets-tcp': true,
   '05-sockets-udp-y-protocolos': true,
@@ -53,7 +53,7 @@ const unidadesExpandidas = {
 const boletinesReady = [
   '00-python-basico',
   '01-gestion-de-procesos',
-  '02-hilos-fundamentos',
+  '02-hilos-y-concurrencia',
   '03-sincronizacion-entre-hilos',
   '04-sockets-tcp',
   '05-sockets-udp-y-protocolos',
@@ -69,7 +69,7 @@ const boletinesReady = [
 const unitPuntos = {
   '00-python-basico': ['01-introduccion', '02-comentarios', '03-tipos-de-datos', '04-variables-y-colecciones', '05-control-de-flujo', '06-funciones', '07-clases', '08-modulos-y-avanzado', '09-cierre'],
   '01-gestion-de-procesos': ['01-que-es-un-proceso', '02-estados-de-un-proceso', '03-paralela-vs-distribuida', '04-subprocess-run', '05-subprocess-popen', '06-comunicacion-con-procesos', '07-compatibilidad-windows-linux', '08-procesos-en-la-practica', '09-cierre'],
-  '02-hilos-fundamentos': ['01-de-proceso-a-hilo', '02-primer-hilo', '03-hilos-con-argumentos', '04-hilos-daemon', '05-timer', '06-gil', '07-estados-del-hilo', '08-hilos-en-la-practica', '09-cierre'],
+  '02-hilos-y-concurrencia': ['01-de-proceso-a-hilo', '02-primer-hilo', '03-hilos-con-argumentos', '04-hilos-daemon', '05-timer', '06-gil', '07-estados-del-hilo', '08-hilos-en-la-practica', '09-cierre'],
   '03-sincronizacion-entre-hilos': ['01-condicion-de-carrera', '02-lock', '03-rlock', '04-semaphore', '05-barrier', '06-condition', '07-productor-consumidor', '08-buenas-practicas', '09-cierre'],
   '04-sockets-tcp': ['01-que-es-un-socket', '02-cliente-tcp', '03-servidor-tcp', '04-ciclo-de-vida-de-la-conexion', '05-errores-y-manejo', '06-so-reuseaddr', '07-protocolos-sobre-tcp', '08-servidor-eco-completo', '09-cierre'],
   '05-sockets-udp-y-protocolos': ['01-tcp-vs-udp', '02-cliente-udp', '03-servidor-udp', '04-datagramas-y-perdida', '05-http-desde-cero', '06-ntp-y-servidores-de-tiempo', '07-cuando-usar-cada-protocolo', '08-practica-eco-udp', '09-cierre'],

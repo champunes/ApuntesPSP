@@ -49,7 +49,7 @@ Has terminado la teoría: la burbuja de memoria y el PID, los cinco estados, par
 
 **Proceso:** — *sonríe* Empate... hasta la UD 3.
 
-> **Moraleja**: el proceso aísla y paraleliza de verdad; el hilo es ligero y comparte memoria. Los hilos son el plato principal de la [UD 3 · Hilos y concurrencia](/ApuntesPSP/02-hilos-fundamentos).
+> **Moraleja**: el proceso aísla y paraleliza de verdad; el hilo es ligero y comparte memoria. Los hilos son el plato principal de la [UD 3 · Hilos y concurrencia](/ApuntesPSP/02-hilos-y-concurrencia).
 
 ---
 
@@ -237,4 +237,4 @@ Sí, cualquier ejecutable. Pero el **PATH** debe incluirlo o debes dar la ruta c
 
 ---
 
-📚 [Volver al índice de la unidad](/ApuntesPSP/01-gestion-de-procesos) · **Anterior:** [08 · Procesos en la práctica](/ApuntesPSP/01-gestion-de-procesos/08-procesos-en-la-practica) · **Siguiente:** **[UD 3 · Hilos y concurrencia](/ApuntesPSP/02-hilos-fundamentos)**
+📚 [Volver al índice de la unidad](/ApuntesPSP/01-gestion-de-procesos) · **Anterior:** [08 · Procesos en la práctica](/ApuntesPSP/01-gestion-de-procesos/08-procesos-en-la-practica) · **Siguiente:** **[UD 3 · Hilos y concurrencia](/ApuntesPSP/02-hilos-y-concurrencia)**

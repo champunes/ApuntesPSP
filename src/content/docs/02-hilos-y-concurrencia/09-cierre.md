@@ -5,17 +5,17 @@ description: Sé el hilo, el ring final y el laboratorio de la unidad 🧠
 
 <p><small>Sé el hilo, el ring final y el laboratorio de la unidad 🧠</small></p>
 
-> 🗺️ **Estás en:** 🔀 **U03 · Hilos Fundamentos** → 09 · Cierre
+> 🗺️ **Estás en:** 🔀 **UD 3 · Hilos y concurrencia** → 09 · Cierre
 
 ---
 
-Has terminado la teoría: qué es un hilo, cómo se crea y se espera, argumentos y nombres, daemons, Timer, el GIL y el ciclo de vida. Este cierre es el aterrizaje: recorres lo aprendido con juegos, un laboratorio real con fallos intencionados y las preguntas que te harán en una entrevista. Léelo justo después del [punto 8](/ApuntesPSP/02-hilos-fundamentos/08-hilos-en-la-practica) y antes de abrir los boletines.
+Has terminado la teoría: qué es un hilo, cómo se crea y se espera, argumentos y nombres, daemons, Timer, el GIL y el ciclo de vida. Este cierre es el aterrizaje: recorres lo aprendido con juegos, un laboratorio real con fallos intencionados y las preguntas que te harán en una entrevista. Léelo justo después del [punto 8](/ApuntesPSP/02-hilos-y-concurrencia/08-hilos-en-la-practica) y antes de abrir los boletines.
 
 ---
 
 ## ⭐ Sé el hilo
 
-> *Eres un hilo llamado "hilo-1". Acabas de nacer en el programa de los viajeros del [punto 8](/ApuntesPSP/02-hilos-fundamentos/08-hilos-en-la-practica). Tu misión: recorrer 3 paradas con 0.5s de sueño entre cada una.*
+> *Eres un hilo llamado "hilo-1". Acabas de nacer en el programa de los viajeros del [punto 8](/ApuntesPSP/02-hilos-y-concurrencia/08-hilos-en-la-practica). Tu misión: recorrer 3 paradas con 0.5s de sueño entre cada una.*
 
 **¿Qué pasa, paso a paso?**
 
@@ -28,7 +28,7 @@ Has terminado la teoría: qué es un hilo, cómo se crea y se espera, argumentos
 
 **En ningún momento decides tú cuándo te toca.** El scheduler del sistema operativo reparte la CPU entre ti y Bob como quiere; tu único control es lanzarte (`start()`) y hacer esperar al principal (`join()`).
 
-> 💡 **Ahora tú:** ¿y si fueras el reloj daemon del [punto 4](/ApuntesPSP/02-hilos-fundamentos/04-hilos-daemon)? Tu función es un `while True`: nunca llegas "bien" a TERMINADO. El día que el programa principal acabe, te matan en seco, estés en EJECUCIÓN o BLOQUEADO. Ese es el destino del daemon.
+> 💡 **Ahora tú:** ¿y si fueras el reloj daemon del [punto 4](/ApuntesPSP/02-hilos-y-concurrencia/04-hilos-daemon)? Tu función es un `while True`: nunca llegas "bien" a TERMINADO. El día que el programa principal acabe, te matan en seco, estés en EJECUCIÓN o BLOQUEADO. Ese es el destino del daemon.
 
 ---
 
@@ -102,7 +102,7 @@ Has terminado la teoría: qué es un hilo, cómo se crea y se espera, argumentos
 
 **Fallo intencionado:** en el paso 2, en lugar de `target=descargar`, escribe `target=descargar("foto.png")` — **con paréntesis y argumento**. ¿Qué pasa? La función se ejecuta en el momento de crear el hilo, en el hilo principal y **en serie**: los 4 archivos tardan 8 segundos, las descargas aparecen "ya terminadas" antes de lanzar nada, y los hilos nacen haciendo nada.
 
-> **Pista 1:** `target` recibe una **referencia** a la función, no una llamada. `descargar` sin paréntesis le pasa la función; `descargar("foto.png")` la ejecuta ahí mismo (lo avisamos en el [punto 2](/ApuntesPSP/02-hilos-fundamentos/02-primer-hilo)). Si tus descargas imprimen antes del primer `start()`, ese es el bug.
+> **Pista 1:** `target` recibe una **referencia** a la función, no una llamada. `descargar` sin paréntesis le pasa la función; `descargar("foto.png")` la ejecuta ahí mismo (lo avisamos en el [punto 2](/ApuntesPSP/02-hilos-y-concurrencia/02-primer-hilo)). Si tus descargas imprimen antes del primer `start()`, ese es el bug.
 >
 > **Pista 2:** si el lote tarda ~8 segundos en vez de ~2, no hay paralelismo: los `time.sleep(2)` se están sumando porque todo se ejecuta en el hilo principal. Un `print(f"Creando {archivo}")` dentro del bucle te delata: los 4 mensajes aparecen juntos y seguidos, sin intercalarse con los `⬇️`.
 
@@ -175,7 +175,7 @@ Vertical:
 4. **"¿Qué es el GIL y cómo afecta al rendimiento de tus hilos?"**
 5. **"¿Cómo sabes si un hilo ha terminado y cómo esperas a varios hilos a la vez?"**
 
-> 💡 **Cómo encararlas:** la 1 y la 4 son las "preguntas reina". Para la 1, compara memoria, coste de creación, comunicación y aislamiento (la tabla del [punto 1](/ApuntesPSP/02-hilos-fundamentos/01-de-proceso-a-hilo)) y remata con la moraleja del [ring](/ApuntesPSP/02-hilos-fundamentos/08-hilos-en-la-practica): hilos para I/O y servicios ligeros, procesos para aislamiento y CPU. Para la 4, recorre el [punto 6](/ApuntesPSP/02-hilos-fundamentos/06-gil): qué es el GIL, por qué los hilos no aceleran CPU-bound, por qué sí I/O-bound, y cuándo toca `multiprocessing`. Si sabes contarlo fluido, ya eres medio programador concurrente.
+> 💡 **Cómo encararlas:** la 1 y la 4 son las "preguntas reina". Para la 1, compara memoria, coste de creación, comunicación y aislamiento (la tabla del [punto 1](/ApuntesPSP/02-hilos-y-concurrencia/01-de-proceso-a-hilo)) y remata con la moraleja del [ring](/ApuntesPSP/02-hilos-y-concurrencia/08-hilos-en-la-practica): hilos para I/O y servicios ligeros, procesos para aislamiento y CPU. Para la 4, recorre el [punto 6](/ApuntesPSP/02-hilos-y-concurrencia/06-gil): qué es el GIL, por qué los hilos no aceleran CPU-bound, por qué sí I/O-bound, y cuándo toca `multiprocessing`. Si sabes contarlo fluido, ya eres medio programador concurrente.
 
 ---
 
@@ -217,7 +217,7 @@ En Python, no hay prioridades nativas. El scheduler del SO decide. Puedes simula
 
 *Los hilos comparten memoria, y compartir sin ponerse de acuerdo es peligroso.*
 
-**PRÓXIMAMENTE EN U04:** *Dos hilos tocando la misma variable a la vez es una carrera. Si no se ponen de acuerdo, los datos se corrompen. Necesitan locks, semáforos y barreras: sincronización entre hilos.*
+**PRÓXIMAMENTE EN UD 4:** *Dos hilos tocando la misma variable a la vez es una carrera. Si no se ponen de acuerdo, los datos se corrompen. Necesitan locks, semáforos y barreras: sincronización entre hilos.*
 
 ---
 
@@ -237,4 +237,4 @@ En Python, no hay prioridades nativas. El scheduler del SO decide. Puedes simula
 
 ---
 
-📚 [Volver al índice de la unidad](/ApuntesPSP/02-hilos-fundamentos) · **Anterior:** [08 · Hilos en la práctica](/ApuntesPSP/02-hilos-fundamentos/08-hilos-en-la-practica) · **Siguiente:** **[U04 · Sincronización entre Hilos](/ApuntesPSP/03-sincronizacion-entre-hilos)**
+📚 [Volver al índice de la unidad](/ApuntesPSP/02-hilos-y-concurrencia) · **Anterior:** [08 · Hilos en la práctica](/ApuntesPSP/02-hilos-y-concurrencia/08-hilos-en-la-practica) · **Siguiente:** **[UD 4 · Sincronización](/ApuntesPSP/03-sincronizacion-entre-hilos)**

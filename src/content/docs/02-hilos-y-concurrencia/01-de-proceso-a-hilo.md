@@ -5,7 +5,7 @@ description: Qué es un hilo y en qué se diferencia de un proceso 🧵
 
 <p><small>Qué es un hilo y en qué se diferencia de un proceso 🧵</small></p>
 
-> 🗺️ **Estás en:** 🔀 **U03 · Hilos Fundamentos** → 01 · De proceso a hilo
+> 🗺️ **Estás en:** 🔀 **UD 3 · Hilos y concurrencia** → 01 · De proceso a hilo
 
 ---
 
@@ -13,7 +13,7 @@ description: Qué es un hilo y en qué se diferencia de un proceso 🧵
 
 > Un **hilo** es la unidad más pequeña de ejecución: una tarea que vive *dentro* de un proceso y comparte su memoria con los demás hilos de ese proceso.
 
-En la U02 lanzaste procesos: programas completos con su propia memoria, su propio PID y su propio estado. Ahora entramos a un nivel más fino: un solo proceso puede tener **varios hilos ejecutándose a la vez**, todos trabajando con la misma memoria. Es como pasar de abrir varias casas (procesos) a repartir habitaciones dentro de una sola (hilos).
+En la UD 2 lanzaste procesos: programas completos con su propia memoria, su propio PID y su propio estado. Ahora entramos a un nivel más fino: un solo proceso puede tener **varios hilos ejecutándose a la vez**, todos trabajando con la misma memoria. Es como pasar de abrir varias casas (procesos) a repartir habitaciones dentro de una sola (hilos).
 
 ---
 
@@ -43,7 +43,7 @@ Fíjate en las tres líneas mágicas que ya usarás toda la unidad:
 - **Comparten memoria** con otros hilos del mismo proceso (por eso se comunican tan rápido).
 - Son **más ligeros que los procesos**: cuestan muchos menos recursos al crearlos.
 - Se comunican mediante **variables compartidas** (con cuidado: eso es el TEMA 03).
-- En Python, están **limitados por el GIL** para código CPU-bound (lo verás en el [punto 6](/ApuntesPSP/02-hilos-fundamentos/06-gil)).
+- En Python, están **limitados por el GIL** para código CPU-bound (lo verás en el [punto 6](/ApuntesPSP/02-hilos-y-concurrencia/06-gil)).
 
 ---
 
@@ -110,4 +110,4 @@ Ese reparto de la misma nevera es lo que hace a los hilos tan rápidos para comu
 
 ---
 
-📚 [Volver al índice de la unidad](/ApuntesPSP/02-hilos-fundamentos) · **Siguiente:** [02 · Tu primer hilo](/ApuntesPSP/02-hilos-fundamentos/02-primer-hilo)
+📚 [Volver al índice de la unidad](/ApuntesPSP/02-hilos-y-concurrencia) · **Siguiente:** [02 · Tu primer hilo](/ApuntesPSP/02-hilos-y-concurrencia/02-primer-hilo)

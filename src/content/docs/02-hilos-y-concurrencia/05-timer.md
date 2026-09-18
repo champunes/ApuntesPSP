@@ -5,7 +5,7 @@ description: Ejecuta una función una sola vez después de un retardo ⏰
 
 <p><small>Ejecuta una función una sola vez después de un retardo ⏰</small></p>
 
-> 🗺️ **Estás en:** 🔀 **U03 · Hilos Fundamentos** → 05 · Timer
+> 🗺️ **Estás en:** 🔀 **UD 3 · Hilos y concurrencia** → 05 · Timer
 
 ---
 
@@ -154,4 +154,4 @@ t.start()
 
 ---
 
-📚 [Volver al índice de la unidad](/ApuntesPSP/02-hilos-fundamentos) · **Anterior:** [04 · Hilos daemon](/ApuntesPSP/02-hilos-fundamentos/04-hilos-daemon) · **Siguiente:** [06 · El GIL](/ApuntesPSP/02-hilos-fundamentos/06-gil)
+📚 [Volver al índice de la unidad](/ApuntesPSP/02-hilos-y-concurrencia) · **Anterior:** [04 · Hilos daemon](/ApuntesPSP/02-hilos-y-concurrencia/04-hilos-daemon) · **Siguiente:** [06 · El GIL](/ApuntesPSP/02-hilos-y-concurrencia/06-gil)

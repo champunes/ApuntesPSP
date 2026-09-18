@@ -5,7 +5,7 @@ description: Be the code, el ring Hilo vs Proceso y Aprieta el lápiz ✏️
 
 <p><small>Be the code, el ring Hilo vs Proceso y Aprieta el lápiz ✏️</small></p>
 
-> 🗺️ **Estás en:** 🔀 **U03 · Hilos Fundamentos** → 08 · Hilos en la práctica
+> 🗺️ **Estás en:** 🔀 **UD 3 · Hilos y concurrencia** → 08 · Hilos en la práctica
 
 ---
 
@@ -58,7 +58,7 @@ h2.join()
 Fíjate en los detalles que te piden en los exámenes:
 
 - Ambos hilos **arrancan a la vez**: Ana y Bob dicen su parada 1 casi al mismo tiempo.
-- Mientras Ana duerme sus 0.5s (estado **BLOQUEADO** del [punto 7](/ApuntesPSP/02-hilos-fundamentos/07-estados-del-hilo)), Bob aprovecha y avanza.
+- Mientras Ana duerme sus 0.5s (estado **BLOQUEADO** del [punto 7](/ApuntesPSP/02-hilos-y-concurrencia/07-estados-del-hilo)), Bob aprovecha y avanza.
 - Bob hace solo 2 paradas; Ana hace 3. **Bob llega antes** a su destino.
 - Los `join()` del final garantizan que el mensaje del principal (si lo hubiera) esperaría a ambos.
 
@@ -80,7 +80,7 @@ Fíjate en los detalles que te piden en los exámenes:
 
 **Proceso**: — Al final, cada uno a su oficio. Yo para aislamiento y CPU de verdad; tú para esperas y servicios ligeros.
 
-> **Moraleja**: Usa **procesos** cuando necesites aislamiento o paralelismo real de CPU (`multiprocessing`). Usa **hilos** cuando tu tarea es de espera (I/O) o quieres algo ligero y que comparta memoria. La tabla completa la tienes en el [punto 1](/ApuntesPSP/02-hilos-fundamentos/01-de-proceso-a-hilo).
+> **Moraleja**: Usa **procesos** cuando necesites aislamiento o paralelismo real de CPU (`multiprocessing`). Usa **hilos** cuando tu tarea es de espera (I/O) o quieres algo ligero y que comparta memoria. La tabla completa la tienes en el [punto 1](/ApuntesPSP/02-hilos-y-concurrencia/01-de-proceso-a-hilo).
 
 ---
 
@@ -173,7 +173,7 @@ print(f"4 hilos CPU: {time.time() - inicio:.2f}s")
 # → tiempo parecido: el GIL solo deja ejecutar a uno
 ```
 
-El resultado confirma el [punto 6](/ApuntesPSP/02-hilos-fundamentos/06-gil): 4 hilos CPU-bound tardan lo mismo que 1, porque el GIL solo deja ejecutar a uno.
+El resultado confirma el [punto 6](/ApuntesPSP/02-hilos-y-concurrencia/06-gil): 4 hilos CPU-bound tardan lo mismo que 1, porque el GIL solo deja ejecutar a uno.
 
 **5. I/O vs CPU**
 
@@ -275,4 +275,4 @@ Cada hilo saluda 3 veces; los mensajes se entremezclan sin orden garantizado, y 
 
 ---
 
-📚 [Volver al índice de la unidad](/ApuntesPSP/02-hilos-fundamentos) · **Anterior:** [07 · Estados del hilo](/ApuntesPSP/02-hilos-fundamentos/07-estados-del-hilo) · **Siguiente:** [09 · Cierre](/ApuntesPSP/02-hilos-fundamentos/09-cierre)
+📚 [Volver al índice de la unidad](/ApuntesPSP/02-hilos-y-concurrencia) · **Anterior:** [07 · Estados del hilo](/ApuntesPSP/02-hilos-y-concurrencia/07-estados-del-hilo) · **Siguiente:** [09 · Cierre](/ApuntesPSP/02-hilos-y-concurrencia/09-cierre)

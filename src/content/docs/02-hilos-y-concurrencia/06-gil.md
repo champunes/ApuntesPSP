@@ -5,7 +5,7 @@ description: El candado de CPython que limita a los hilos para código CPU-bound
 
 <p><small>El candado de CPython que limita a los hilos para código CPU-bound 🔒</small></p>
 
-> 🗺️ **Estás en:** 🔀 **U03 · Hilos Fundamentos** → 06 · El GIL
+> 🗺️ **Estás en:** 🔀 **UD 3 · Hilos y concurrencia** → 06 · El GIL
 
 ---
 
@@ -97,10 +97,10 @@ Con lo visto, el mapa mental queda así:
 
 - **Solicitudes de red** → hilos sí. Descargar 10 archivos con 10 hilos es ~10 veces más rápido.
 - **Lecturas/escrituras de archivos** → hilos sí. Varias operaciones de disco en paralelo.
-- **Servidores que atienden clientes** → hilos sí. Cada cliente espera su turno; mientras espera, otros avanzan (lo verás en la U11).
+- **Servidores que atienden clientes** → hilos sí. Cada cliente espera su turno; mientras espera, otros avanzan (lo verás en la UD 6).
 - **Cálculo puro** → hilos no. Para eso, **`multiprocessing`**.
 
-> Para CPU-bound en Python, usa `multiprocessing` (varios procesos, cada uno con su propio GIL). Esos procesos sí ejecutan en paralelo de verdad, a cambio del coste de crear procesos que viste en el [punto 1](/ApuntesPSP/02-hilos-fundamentos/01-de-proceso-a-hilo).
+> Para CPU-bound en Python, usa `multiprocessing` (varios procesos, cada uno con su propio GIL). Esos procesos sí ejecutan en paralelo de verdad, a cambio del coste de crear procesos que viste en el [punto 1](/ApuntesPSP/02-hilos-y-concurrencia/01-de-proceso-a-hilo).
 
 ---
 
@@ -139,4 +139,4 @@ Con lo visto, el mapa mental queda así:
 
 ---
 
-📚 [Volver al índice de la unidad](/ApuntesPSP/02-hilos-fundamentos) · **Anterior:** [05 · Timer](/ApuntesPSP/02-hilos-fundamentos/05-timer) · **Siguiente:** [07 · Estados del hilo](/ApuntesPSP/02-hilos-fundamentos/07-estados-del-hilo)
+📚 [Volver al índice de la unidad](/ApuntesPSP/02-hilos-y-concurrencia) · **Anterior:** [05 · Timer](/ApuntesPSP/02-hilos-y-concurrencia/05-timer) · **Siguiente:** [07 · Estados del hilo](/ApuntesPSP/02-hilos-y-concurrencia/07-estados-del-hilo)
