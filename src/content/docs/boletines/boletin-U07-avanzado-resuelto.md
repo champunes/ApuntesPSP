@@ -1,9 +1,9 @@
 ﻿---
-title: Boletín U08 — Avanzado (Resuelto)
+title: Boletín UD 8 — Avanzado (Resuelto)
 description: Soluciones de los ejercicios avanzados de APIs Comerciales
 ---
 
-# 💪 Boletín U08 — Avanzado (Resuelto)
+# 💪 Boletín UD 8 — Avanzado (Resuelto)
 
 ---
 

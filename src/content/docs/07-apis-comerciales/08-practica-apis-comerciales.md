@@ -5,7 +5,7 @@ description: "Sé el código, el programa completo y los ejercicios del lápiz �
 
 <p><small>Sé el código, el programa completo y los ejercicios del lápiz 🛠️</small></p>
 
-> 🗺️ **Estás en:** 🧪 **U08 · APIs Comerciales** → 08 · Práctica: APIs comerciales
+> 🗺️ **Estás en:** 🧪 **UD 8 · APIs Comerciales** → 08 · Práctica: APIs comerciales
 
 ---
 
@@ -68,7 +68,7 @@ if __name__ == "__main__":
     print("\n💬 GPT dice:", preguntar_a_gpt("¿Qué es un Lock en 2 frases?"))
 ```
 
-Fíjate en el esqueleto que se repite en toda la unidad: clave del `.env` → `requests.get`/`OpenAI` → comprobar / parsear → usar los datos. Es el mismo patrón del [punto 6 de la U07](/ApuntesPSP/06-http-y-apis-rest/06-requests-get), ahora con API key.
+Fíjate en el esqueleto que se repite en toda la unidad: clave del `.env` → `requests.get`/`OpenAI` → comprobar / parsear → usar los datos. Es el mismo patrón del [punto 6 de la UD 7](/ApuntesPSP/06-http-y-apis-rest/06-requests-get), ahora con API key.
 
 ---
 
@@ -106,7 +106,7 @@ $ python clima.py Barcelona
 10. print → "   nubes dispersas" 🏁
 ```
 
-En los pasos 3 a 5 ocurre lo que en la U05 hacías a mano con sockets: DNS, TCP, TLS y el GET HTTP. La única novedad frente a la U07 es el paso 1: la **API key** que ahora viaja en la petición.
+En los pasos 3 a 5 ocurre lo que en la U05 hacías a mano con sockets: DNS, TCP, TLS y el GET HTTP. La única novedad frente a la UD 7 es el paso 1: la **API key** que ahora viaja en la petición.
 
 ---
 
@@ -219,7 +219,7 @@ conectar_con_backoff("https://192.0.2.1")  # IP de test que nunca responde
 ## 🧠 Mini-chequeo
 
 1. ¿Qué tres bloques forman el programa completo de esta práctica?
-2. En la traza del "Sé el código", ¿qué nuevo paso añade la U08 frente a la U07?
+2. En la traza del "Sé el código", ¿qué nuevo paso añade la U08 frente a la UD 7?
 3. ¿Para qué te sirve Postman o curl antes de escribir Python?
 
 <details>
@@ -235,7 +235,7 @@ conectar_con_backoff("https://192.0.2.1")  # IP de test que nunca responde
 ## ✅ Resumen en 3 frases
 
 - Un cliente de APIs comerciales = claves del `.env` + llamada a la API + parseo de la respuesta.
-- El programa completo consume OpenWeatherMap (tiempo) y OpenAI (chat) siguiendo el mismo patrón `requests` de la U07.
+- El programa completo consume OpenWeatherMap (tiempo) y OpenAI (chat) siguiendo el mismo patrón `requests` de la UD 7.
 - Postman, curl, httpie e Insomnia te dejan probar la API a mano antes de programar.
 
 ## 🐛 Vocabulario rápido

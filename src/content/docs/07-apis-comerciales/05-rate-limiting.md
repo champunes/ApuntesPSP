@@ -5,7 +5,7 @@ description: Límites, cuotas y el temido 429 🐢
 
 <p><small>Límites, cuotas y el temido 429 🐢</small></p>
 
-> 🗺️ **Estás en:** 🧪 **U08 · APIs Comerciales** → 05 · Rate limiting
+> 🗺️ **Estás en:** 🧪 **UD 8 · APIs Comerciales** → 05 · Rate limiting
 
 ---
 
