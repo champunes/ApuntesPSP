@@ -1,9 +1,9 @@
 ﻿---
-title: Boletín U03 — Inicial
+title: Boletín UD 3 — Inicial
 description: Ejercicios básicos de Hilos Fundamentos
 ---
 
-# 📝 Boletín U03 — Inicial
+# 📝 Boletín UD 3 — Inicial
 
 > Ejercicios básicos para afianzar los conceptos de hilos de la unidad U03: crear, lanzar, esperar, pasar argumentos y nombrar hilos.
 
