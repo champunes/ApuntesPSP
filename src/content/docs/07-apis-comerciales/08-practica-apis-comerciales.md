@@ -68,7 +68,7 @@ if __name__ == "__main__":
     print("\n💬 GPT dice:", preguntar_a_gpt("¿Qué es un Lock en 2 frases?"))
 ```
 
-Fíjate en el esqueleto que se repite en toda la unidad: clave del `.env` → `requests.get`/`OpenAI` → comprobar / parsear → usar los datos. Es el mismo patrón del [punto 6 de la U07](/ApuntesPSP/06-apis-rest-y-http/06-requests-get), ahora con API key.
+Fíjate en el esqueleto que se repite en toda la unidad: clave del `.env` → `requests.get`/`OpenAI` → comprobar / parsear → usar los datos. Es el mismo patrón del [punto 6 de la U07](/ApuntesPSP/06-http-y-apis-rest/06-requests-get), ahora con API key.
 
 ---
 

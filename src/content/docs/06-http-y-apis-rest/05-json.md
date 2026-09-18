@@ -5,7 +5,7 @@ description: "El idioma de las APIs: de texto a diccionario y vuelta 📦"
 
 <p><small>El idioma de las APIs: de texto a diccionario y vuelta 📦</small></p>
 
-> 🗺️ **Estás en:** 🌐 **U07 · APIs REST y HTTP** → 05 · JSON
+> 🗺️ **Estás en:** 🌐 **UD 7 · HTTP y APIs REST** → 05 · JSON
 
 ---
 
@@ -13,7 +13,7 @@ description: "El idioma de las APIs: de texto a diccionario y vuelta 📦"
 
 > **JSON** (*JavaScript Object Notation*) es el formato de intercambio de datos más usado en las APIs: un texto estructurado con llaves, corchetes y comillas que Python convierte directamente a **diccionarios** y **listas**.
 
-Es el "idioma" en el que las APIs te devuelven los datos. En el [punto 3](/ApuntesPSP/06-apis-rest-y-http/03-principios-rest) lo viste como uno de los cuatro pilares de REST; aquí le toca el turno de verdad.
+Es el "idioma" en el que las APIs te devuelven los datos. En el [punto 3](/ApuntesPSP/06-http-y-apis-rest/03-principios-rest) lo viste como uno de los cuatro pilares de REST; aquí le toca el turno de verdad.
 
 ---
 
@@ -93,7 +93,7 @@ print(f"Hay {len(posts)} posts")        # 100
 print(posts[0]["title"])                # el título del primer post
 ```
 
-> ⚠️ `resp.json()` **lanza excepción** si el cuerpo no es JSON (por ejemplo, un HTML de error). Por eso en el [punto 4](/ApuntesPSP/06-apis-rest-y-http/04-codigos-de-estado) primero compruebas `status_code` y luego parseas.
+> ⚠️ `resp.json()` **lanza excepción** si el cuerpo no es JSON (por ejemplo, un HTML de error). Por eso en el [punto 4](/ApuntesPSP/06-http-y-apis-rest/04-codigos-de-estado) primero compruebas `status_code` y luego parseas.
 
 ---
 
@@ -132,4 +132,4 @@ print(posts[0]["title"])                # el título del primer post
 
 ---
 
-📚 [Volver al índice de la unidad](/ApuntesPSP/06-apis-rest-y-http) · **Anterior:** [04 · Códigos de estado](/ApuntesPSP/06-apis-rest-y-http/04-codigos-de-estado) · **Siguiente:** [06 · requests: el GET](/ApuntesPSP/06-apis-rest-y-http/06-requests-get)
+📚 [Volver al índice de la unidad](/ApuntesPSP/06-http-y-apis-rest) · **Anterior:** [04 · Códigos de estado](/ApuntesPSP/06-http-y-apis-rest/04-codigos-de-estado) · **Siguiente:** [06 · requests: el GET](/ApuntesPSP/06-http-y-apis-rest/06-requests-get)

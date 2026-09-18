@@ -98,9 +98,9 @@ description: Apuntes de Programación de Servicios y Procesos — Python. CC BY-
     <span class="num">Unidad 7</span>
     <span class="ra">RA4a-b</span>
   </div>
-  <a href="/ApuntesPSP/06-apis-rest-y-http" class="title-link">APIs REST y HTTP</a>
+  <a href="/ApuntesPSP/06-http-y-apis-rest" class="title-link">HTTP y APIs REST</a>
   <p class="desc">REST, métodos HTTP, <code>requests</code>, JSON, códigos de estado, consumo de APIs.</p>
-  <a href="/ApuntesPSP/06-apis-rest-y-http" class="unit-link">👉 Ver unidad 👈</a>
+  <a href="/ApuntesPSP/06-http-y-apis-rest" class="unit-link">👉 Ver unidad 👈</a>
 </div>
 
 <div class="unit-card">

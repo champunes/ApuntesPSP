@@ -75,7 +75,7 @@ La computación distribuida lleva la idea al límite: no varias CPUs de la misma
         └───────────┘         └────────────┘
 ```
 
-Cada máquina ejecuta uno o varios procesos independientes. La distribución introduce un problema nuevo: **la comunicación por red** y **los fallos de máquina**. Eso lo verás en las unidades de sockets ([UD 5](/ApuntesPSP/04-sockets-tcp)) y de APIs REST ([UD 7](/ApuntesPSP/06-apis-rest-y-http)).
+Cada máquina ejecuta uno o varios procesos independientes. La distribución introduce un problema nuevo: **la comunicación por red** y **los fallos de máquina**. Eso lo verás en las unidades de sockets ([UD 5](/ApuntesPSP/04-sockets-tcp)) y de APIs REST ([UD 7](/ApuntesPSP/06-http-y-apis-rest)).
 
 ---
 

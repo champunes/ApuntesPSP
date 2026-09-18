@@ -58,7 +58,7 @@ Desglosemos:
 
 Y el bucle de lectura es el truco del [punto 2](/ApuntesPSP/04-sockets-tcp-y-udp/02-cliente-tcp) en acción: `recv()` tantas veces como haga falta hasta que devuelva `b""` (el servidor cerró gracias a `Connection: close`), **concatenando** cada trozo.
 
-> 💡 Esto es la base de la [U07 · APIs REST y HTTP](/ApuntesPSP/06-apis-rest-y-http): las librerías como `requests` hacen exactamente esto por debajo, pero ahora sabes el truco. HTTP sobre TCP también es un criterio de la [UD 6](/ApuntesPSP/05-sockets-udp-y-protocolos).
+> 💡 Esto es la base de la [UD 7 · HTTP y APIs REST](/ApuntesPSP/06-http-y-apis-rest): las librerías como `requests` hacen exactamente esto por debajo, pero ahora sabes el truco. HTTP sobre TCP también es un criterio de la [UD 6](/ApuntesPSP/05-sockets-udp-y-protocolos).
 
 ---
 

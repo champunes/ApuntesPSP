@@ -5,7 +5,7 @@ description: "La librería estándar de facto para hablar HTTP 📥"
 
 <p><small>La librería estándar de facto para hablar HTTP 📥</small></p>
 
-> 🗺️ **Estás en:** 🌐 **U07 · APIs REST y HTTP** → 06 · requests: el GET
+> 🗺️ **Estás en:** 🌐 **UD 7 · HTTP y APIs REST** → 06 · requests: el GET
 
 ---
 
@@ -29,7 +29,7 @@ print(resp.headers)         # Cabeceras de respuesta
 print(resp.elapsed)         # Tiempo que tardó
 ```
 
-`requests.get` se encarga de todo lo que en la U05 hacías a mano con sockets: resolver el DNS, abrir la conexión TCP, el handshake TLS en HTTPS, construir la petición HTTP y leer la respuesta.
+`requests.get` se encarga de todo lo que en la UD 5 hacías a mano con sockets: resolver el DNS, abrir la conexión TCP, el handshake TLS en HTTPS, construir la petición HTTP y leer la respuesta.
 
 ---
 
@@ -81,7 +81,7 @@ cabeceras = {
 resp = requests.get("https://api.github.com/user", headers=cabeceras)
 ```
 
-> ⚠️ **Seguridad**: un token en la cabecera `Authorization` nunca debe ir "en claro" en el código ni subirse a GitHub. En la [U08](/ApuntesPSP/07-apis-comerciales) verás cómo guardarlo en variables de entorno con `python-dotenv`.
+> ⚠️ **Seguridad**: un token en la cabecera `Authorization` nunca debe ir "en claro" en el código ni subirse a GitHub. En la [UD 8](/ApuntesPSP/07-apis-comerciales) verás cómo guardarlo en variables de entorno con `python-dotenv`.
 
 ---
 
@@ -120,4 +120,4 @@ resp = requests.get("https://api.github.com/user", headers=cabeceras)
 
 ---
 
-📚 [Volver al índice de la unidad](/ApuntesPSP/06-apis-rest-y-http) · **Anterior:** [05 · JSON](/ApuntesPSP/06-apis-rest-y-http/05-json) · **Siguiente:** [07 · requests: POST, PUT y DELETE](/ApuntesPSP/06-apis-rest-y-http/07-requests-post)
+📚 [Volver al índice de la unidad](/ApuntesPSP/06-http-y-apis-rest) · **Anterior:** [05 · JSON](/ApuntesPSP/06-http-y-apis-rest/05-json) · **Siguiente:** [07 · requests: POST, PUT y DELETE](/ApuntesPSP/06-http-y-apis-rest/07-requests-post)

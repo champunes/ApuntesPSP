@@ -5,7 +5,7 @@ description: "Sé el código, un cliente completo y los ejercicios del lápiz �
 
 <p><small>Sé el código, un cliente completo y los ejercicios del lápiz 🛠️</small></p>
 
-> 🗺️ **Estás en:** 🌐 **U07 · APIs REST y HTTP** → 08 · Práctica: mini cliente de API
+> 🗺️ **Estás en:** 🌐 **UD 7 · HTTP y APIs REST** → 08 · Práctica: mini cliente de API
 
 ---
 
@@ -47,7 +47,7 @@ if __name__ == "__main__":
         resumen_usuario(datos)
 ```
 
-Observa el patrón que repite cualquier cliente real: `requests.get` → comprobar `status_code` → `resp.json()` → usar los datos. Es el mismo esqueleto del [punto 6](/ApuntesPSP/06-apis-rest-y-http/06-requests-get), ahora con errores bien delimitados.
+Observa el patrón que repite cualquier cliente real: `requests.get` → comprobar `status_code` → `resp.json()` → usar los datos. Es el mismo esqueleto del [punto 6](/ApuntesPSP/06-http-y-apis-rest/06-requests-get), ahora con errores bien delimitados.
 
 ---
 
@@ -103,7 +103,7 @@ print(f"Repos: {datos['public_repos']}")
 8. Extraemos datos['login'] → "python"
 ```
 
-Todo lo que en la U05 hacías a mano —DNS, TCP, TLS, construir la petición— lo hace `requests` en una línea. Tu única tarea es leer la respuesta.
+Todo lo que en la UD 5 hacías a mano —DNS, TCP, TLS, construir la petición— lo hace `requests` en una línea. Tu única tarea es leer la respuesta.
 
 ---
 
@@ -194,7 +194,7 @@ pedir("https://httpbin.org/status/500")                    # 500
 ## ✅ Resumen en 3 frases
 
 - Un cliente de API se reduce a tres bloques: petición, comprobación de estado y procesamiento de datos.
-- `requests` hace por ti todo el trabajo de red (DNS, TCP, TLS) que en la U05 hacías a mano con sockets.
+- `requests` hace por ti todo el trabajo de red (DNS, TCP, TLS) que en la UD 5 hacías a mano con sockets.
 - El patrón `status_code` → `json()` es la clave para que tu código no reviente ante respuestas de error.
 
 ## 🐛 Vocabulario rápido
@@ -208,4 +208,4 @@ pedir("https://httpbin.org/status/500")                    # 500
 
 ---
 
-📚 [Volver al índice de la unidad](/ApuntesPSP/06-apis-rest-y-http) · **Anterior:** [07 · requests: POST, PUT y DELETE](/ApuntesPSP/06-apis-rest-y-http/07-requests-post) · **Siguiente:** [09 · Cierre](/ApuntesPSP/06-apis-rest-y-http/09-cierre)
+📚 [Volver al índice de la unidad](/ApuntesPSP/06-http-y-apis-rest) · **Anterior:** [07 · requests: POST, PUT y DELETE](/ApuntesPSP/06-http-y-apis-rest/07-requests-post) · **Siguiente:** [09 · Cierre](/ApuntesPSP/06-http-y-apis-rest/09-cierre)

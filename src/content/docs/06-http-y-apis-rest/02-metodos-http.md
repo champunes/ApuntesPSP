@@ -5,7 +5,7 @@ description: "Los verbos de la web: leer, crear, actualizar y borrar 🚦"
 
 <p><small>Los verbos de la web: leer, crear, actualizar y borrar 🚦</small></p>
 
-> 🗺️ **Estás en:** 🌐 **U07 · APIs REST y HTTP** → 02 · Métodos HTTP
+> 🗺️ **Estás en:** 🌐 **UD 7 · HTTP y APIs REST** → 02 · Métodos HTTP
 
 ---
 
@@ -72,7 +72,7 @@ resp = requests.delete("https://miapi.com/usuarios/5")
 print(resp.status_code)  # 204 No Content
 ```
 
-El `json=` de `requests.post` convierte el diccionario Python a JSON automáticamente y lo envía en el cuerpo de la petición. Lo verás en detalle en el [punto 7](/ApuntesPSP/06-apis-rest-y-http/07-requests-post).
+El `json=` de `requests.post` convierte el diccionario Python a JSON automáticamente y lo envía en el cuerpo de la petición. Lo verás en detalle en el [punto 7](/ApuntesPSP/06-http-y-apis-rest/07-requests-post).
 
 ---
 
@@ -112,4 +112,4 @@ El `json=` de `requests.post` convierte el diccionario Python a JSON automática
 
 ---
 
-📚 [Volver al índice de la unidad](/ApuntesPSP/06-apis-rest-y-http) · **Anterior:** [01 · Web y HTTP](/ApuntesPSP/06-apis-rest-y-http/01-web-y-http) · **Siguiente:** [03 · Principios REST](/ApuntesPSP/06-apis-rest-y-http/03-principios-rest)
+📚 [Volver al índice de la unidad](/ApuntesPSP/06-http-y-apis-rest) · **Anterior:** [01 · Web y HTTP](/ApuntesPSP/06-http-y-apis-rest/01-web-y-http) · **Siguiente:** [03 · Principios REST](/ApuntesPSP/06-http-y-apis-rest/03-principios-rest)

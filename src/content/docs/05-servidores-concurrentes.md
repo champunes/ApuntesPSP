@@ -78,4 +78,4 @@ Al terminar, serás capaz de:
 ¿Ya sabes escribir servidores y solo quieres el salto a la concurrencia? Saltar al [punto 3](/ApuntesPSP/05-servidores-concurrentes/03-hilo-por-cliente) o al [punto 4](/ApuntesPSP/05-servidores-concurrentes/04-threadpoolexecutor).
 
 **📍 Primer punto:** [01 · Servidor secuencial](/ApuntesPSP/05-servidores-concurrentes/01-servidor-secuencial)
-**⏭️ Al acabar la unidad, continúa en [UD 7 · HTTP y APIs REST](/ApuntesPSP/06-apis-rest-y-http).**
+**⏭️ Al acabar la unidad, continúa en [UD 7 · HTTP y APIs REST](/ApuntesPSP/06-http-y-apis-rest).**

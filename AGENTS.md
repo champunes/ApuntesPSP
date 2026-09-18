@@ -203,7 +203,7 @@ Secciones del cierre `09-cierre.md`: ⭐ Sé el código, 🔥 Fireside Chat, �
 | UD 4 Sincronización | `03-sincronizacion.md` + carpeta | ~1.102 | Lock, Semaphore, Barrier, Condition, RLock | RA2 |
 | UD 5 Sockets TCP y UDP | `04-sockets-tcp-y-udp.md` + carpeta | ~1.359 | TCP, UDP, cliente, servidor, HTTP, NTP | RA3 |
 | UD 6 Servidores concurrentes | `05-servidores-concurrentes.md` + carpeta | ~1.029 | socketserver, ThreadPool, benchmark | RA4c-d |
-| UD 7 HTTP y APIs REST | `06-apis-rest-y-http.md` + carpeta | ~938 | REST, métodos HTTP, requests, JSON | RA4a-b |
+| UD 7 HTTP y APIs REST | `06-http-y-apis-rest.md` + carpeta | ~938 | REST, métodos HTTP, requests, JSON | RA4a-b |
 | UD 8 APIs comerciales | `07-apis-comerciales.md` + carpeta | ~998 | OpenWeatherMap, OpenAI, dotenv, rate limit | RA4a-b |
 | UD 9 Seguridad y cifrado | `08-seguridad-y-cifrado.md` + carpeta | ~1.975 | Hash, AES, RSA, firmas, cifrado híbrido | RA5 |
 | UD 10 Alta disponibilidad | `09-alta-disponibilidad.md` + carpeta | ~913 | asyncio, heartbeat, backoff, timeouts | RA4e-g |

@@ -5,11 +5,11 @@ description: Sé la petición HTTP, laboratorio real y el ring final de la unida
 
 <p><small>Sé la petición HTTP, laboratorio real y el ring final de la unidad 🧠</small></p>
 
-> 🗺️ **Estás en:** 🌐 **U07 · APIs REST y HTTP** → 09 · Cierre
+> 🗺️ **Estás en:** 🌐 **UD 7 · HTTP y APIs REST** → 09 · Cierre
 
 ---
 
-Has terminado la teoría: API, URL, métodos HTTP, principios REST, códigos de estado, JSON, `requests` con GET y con POST/PUT/DELETE, y el mini cliente completo. Este cierre es el aterrizaje: recorres lo aprendido con juegos, un laboratorio real contra una API pública con fallos intencionados y las preguntas que te harán en una entrevista. Léelo justo después del [punto 8](/ApuntesPSP/06-apis-rest-y-http/08-practica-api) y antes de abrir los boletines.
+Has terminado la teoría: API, URL, métodos HTTP, principios REST, códigos de estado, JSON, `requests` con GET y con POST/PUT/DELETE, y el mini cliente completo. Este cierre es el aterrizaje: recorres lo aprendido con juegos, un laboratorio real contra una API pública con fallos intencionados y las preguntas que te harán en una entrevista. Léelo justo después del [punto 8](/ApuntesPSP/06-http-y-apis-rest/08-practica-api) y antes de abrir los boletines.
 
 ---
 
@@ -28,7 +28,7 @@ Has terminado la teoría: API, URL, métodos HTTP, principios REST, códigos de 
 
 **Todo en ~150 ms. Sin saber qué hay en cada router del camino.**
 
-> 💡 **Ahora tú:** ¿y si en lugar de un GET el estudiante usara un POST para crear un post en JSONPlaceholder? Tu cuerpo ya no está vacío: viajas con `{"title": "foo", "body": "bar", "userId": 1}` dentro, y el servidor te responde **201 Created** con el recurso creado y su ID nuevo. Eso es lo que aprendiste en el [punto 7](/ApuntesPSP/06-apis-rest-y-http/07-requests-post).
+> 💡 **Ahora tú:** ¿y si en lugar de un GET el estudiante usara un POST para crear un post en JSONPlaceholder? Tu cuerpo ya no está vacío: viajas con `{"title": "foo", "body": "bar", "userId": 1}` dentro, y el servidor te responde **201 Created** con el recurso creado y su ID nuevo. Eso es lo que aprendiste en el [punto 7](/ApuntesPSP/06-http-y-apis-rest/07-requests-post).
 
 ---
 
@@ -105,7 +105,7 @@ Has terminado la teoría: API, URL, métodos HTTP, principios REST, códigos de 
 
 > 💡 **Nota didáctica:** JSONPlaceholder no valida métodos, así que un `GET /posts` devuelve **200** con los datos (la petición se ignora, no se crea nada). Por eso el fallo intencionado usa GitHub, que sí rechaza el método de escritura con un 404.
 
-> **Pista 1:** los métodos no son intercambiables. Crear es siempre **POST** (lo viste en el [punto 2](/ApuntesPSP/06-apis-rest-y-http/02-metodos-http)). Si usas GET para escribir, la API te lo devuelve con un 4xx.
+> **Pista 1:** los métodos no son intercambiables. Crear es siempre **POST** (lo viste en el [punto 2](/ApuntesPSP/06-http-y-apis-rest/02-metodos-http)). Si usas GET para escribir, la API te lo devuelve con un 4xx.
 >
 > **Pista 2:** si el fallo no se ve a simple vista, añade `print(resp.status_code, resp.text)` justo antes del `resp.json()`. Verás el código y el cuerpo de error en texto plano: esa es la prueba de que el problema está en el método elegido.
 
@@ -177,7 +177,7 @@ Vertical:
 4. **"Escribe en Python una petición GET con parámetros a una API y procesa la respuesta JSON."**
 5. **"¿Cómo gestionarías los errores de una petición HTTP en tu código?"**
 
-> 💡 **Cómo encararlas:** la 1 y la 4 son las "preguntas reina". Para la 1, recorre los pilares del [punto 3](/ApuntesPSP/06-apis-rest-y-http/03-principios-rest): recursos con URL, verbos HTTP, sin estado y JSON — con la analogía del camarero del [punto 1](/ApuntesPSP/06-apis-rest-y-http/01-web-y-http). Para la 4, escribe el esqueleto del [punto 6](/ApuntesPSP/06-apis-rest-y-http/06-requests-get): `params=`, `status_code`, `resp.json()`. Si sabes contarlo fluido, ya eres medio desarrollador de APIs.
+> 💡 **Cómo encararlas:** la 1 y la 4 son las "preguntas reina". Para la 1, recorre los pilares del [punto 3](/ApuntesPSP/06-http-y-apis-rest/03-principios-rest): recursos con URL, verbos HTTP, sin estado y JSON — con la analogía del camarero del [punto 1](/ApuntesPSP/06-http-y-apis-rest/01-web-y-http). Para la 4, escribe el esqueleto del [punto 6](/ApuntesPSP/06-http-y-apis-rest/06-requests-get): `params=`, `status_code`, `resp.json()`. Si sabes contarlo fluido, ya eres medio desarrollador de APIs.
 
 ---
 
@@ -185,7 +185,7 @@ Vertical:
 
 > ❓ **¿Necesito siempre una API key?**
 
-No, hay APIs públicas sin key (como la de GitHub para datos públicos). Pero la mayoría requiere autenticación. Y cuando la necesites, la mandas en la cabecera `Authorization` (nunca en la URL ni en el código): lo verás en la [U08](/ApuntesPSP/07-apis-comerciales).
+No, hay APIs públicas sin key (como la de GitHub para datos públicos). Pero la mayoría requiere autenticación. Y cuando la necesites, la mandas en la cabecera `Authorization` (nunca en la URL ni en el código): lo verás en la [UD 8](/ApuntesPSP/07-apis-comerciales).
 
 > ❓ **¿Puedo modificar datos con GET?**
 
@@ -213,7 +213,7 @@ Hoy en día, JSON gana por goleada. XML solo se usa en entornos legacy (bancos, 
 >
 > *Y ahora que sabes hablar con la web, toca llamar a las APIs de verdad: las comerciales.*
 
-**PRÓXIMAMENTE EN U08:** *APIs comerciales. OpenWeatherMap, OpenAI y las API keys que nunca, jamás, se suben a GitHub.*
+**PRÓXIMAMENTE EN UD 8:** *APIs comerciales. OpenWeatherMap, OpenAI y las API keys que nunca, jamás, se suben a GitHub.*
 
 ---
 
@@ -230,4 +230,4 @@ Hoy en día, JSON gana por goleada. XML solo se usa en entornos legacy (bancos, 
 
 ---
 
-📚 [Volver al índice de la unidad](/ApuntesPSP/06-apis-rest-y-http) · **Anterior:** [08 · Práctica: mini cliente de API](/ApuntesPSP/06-apis-rest-y-http/08-practica-api) · **Siguiente:** **[U08 · APIs Comerciales](/ApuntesPSP/07-apis-comerciales)**
+📚 [Volver al índice de la unidad](/ApuntesPSP/06-http-y-apis-rest) · **Anterior:** [08 · Práctica: mini cliente de API](/ApuntesPSP/06-http-y-apis-rest/08-practica-api) · **Siguiente:** **[UD 8 · APIs Comerciales](/ApuntesPSP/07-apis-comerciales)**

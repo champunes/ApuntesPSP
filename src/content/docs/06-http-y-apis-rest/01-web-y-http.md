@@ -5,7 +5,7 @@ description: La conversación entre tu código y el servidor 🌍
 
 <p><small>La conversación entre tu código y el servidor 🌍</small></p>
 
-> 🗺️ **Estás en:** 🌐 **U07 · APIs REST y HTTP** → 01 · Web y HTTP
+> 🗺️ **Estás en:** 🌐 **UD 7 · HTTP y APIs REST** → 01 · Web y HTTP
 
 ---
 
@@ -88,7 +88,7 @@ Date: ...
 {"login": "python", "public_repos": 42}
 ```
 
-En los próximos puntos desmontarás cada pieza: los **métodos** (GET, POST…) en el [punto 2](/ApuntesPSP/06-apis-rest-y-http/02-metodos-http), los **códigos de estado** (200, 404…) en el [punto 4](/ApuntesPSP/06-apis-rest-y-http/04-codigos-de-estado) y el **cuerpo JSON** en el [punto 5](/ApuntesPSP/06-apis-rest-y-http/05-json).
+En los próximos puntos desmontarás cada pieza: los **métodos** (GET, POST…) en el [punto 2](/ApuntesPSP/06-http-y-apis-rest/02-metodos-http), los **códigos de estado** (200, 404…) en el [punto 4](/ApuntesPSP/06-http-y-apis-rest/04-codigos-de-estado) y el **cuerpo JSON** en el [punto 5](/ApuntesPSP/06-http-y-apis-rest/05-json).
 
 ---
 
@@ -140,4 +140,4 @@ No te hace falta saber cómo cocina la cocina: solo la dirección y el menú. Es
 
 ---
 
-📚 [Volver al índice de la unidad](/ApuntesPSP/06-apis-rest-y-http) · **Siguiente:** [02 · Métodos HTTP](/ApuntesPSP/06-apis-rest-y-http/02-metodos-http)
+📚 [Volver al índice de la unidad](/ApuntesPSP/06-http-y-apis-rest) · **Siguiente:** [02 · Métodos HTTP](/ApuntesPSP/06-http-y-apis-rest/02-metodos-http)

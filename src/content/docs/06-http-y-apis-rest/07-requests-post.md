@@ -5,7 +5,7 @@ description: "Enviar datos a la API y gestionar los errores 📤"
 
 <p><small>Enviar datos a la API y gestionar los errores 📤</small></p>
 
-> 🗺️ **Estás en:** 🌐 **U07 · APIs REST y HTTP** → 07 · requests: POST, PUT y DELETE
+> 🗺️ **Estás en:** 🌐 **UD 7 · HTTP y APIs REST** → 07 · requests: POST, PUT y DELETE
 
 ---
 
@@ -13,7 +13,7 @@ description: "Enviar datos a la API y gestionar los errores 📤"
 
 > Con `requests.post`, `requests.put` y `requests.delete` **creas, reemplazas y borras recursos**: el cuerpo se envía con `json=` y la respuesta se trata igual que en el GET.
 
-Los verbos del [punto 2](/ApuntesPSP/06-apis-rest-y-http/02-metodos-http) cobran vida: `json=` convierte tu diccionario a JSON y lo pone en el cuerpo de la petición.
+Los verbos del [punto 2](/ApuntesPSP/06-http-y-apis-rest/02-metodos-http) cobran vida: `json=` convierte tu diccionario a JSON y lo pone en el cuerpo de la petición.
 
 ---
 
@@ -32,7 +32,7 @@ print(resp.status_code)     # 201 Created
 print(resp.json())          # La respuesta parseada como dict
 ```
 
-JSONPlaceholder es una API de pruebas: cada POST te devuelve el recurso creado con un ID nuevo (101, 102…). Un POST exitoso responde **201 Created** (visto en el [punto 4](/ApuntesPSP/06-apis-rest-y-http/04-codigos-de-estado)).
+JSONPlaceholder es una API de pruebas: cada POST te devuelve el recurso creado con un ID nuevo (101, 102…). Un POST exitoso responde **201 Created** (visto en el [punto 4](/ApuntesPSP/06-http-y-apis-rest/04-codigos-de-estado)).
 
 ---
 
@@ -72,7 +72,7 @@ El código de estado te confirma el resultado: en REST canónico, DELETE exitoso
 
 ## 🛡️ Gestión de errores: status_code y raise_for_status
 
-Como viste en el [punto 4](/ApuntesPSP/06-apis-rest-y-http/04-codigos-de-estado), `requests` **no lanza excepción** ante un 4xx/5xx. Dos estrategias:
+Como viste en el [punto 4](/ApuntesPSP/06-http-y-apis-rest/04-codigos-de-estado), `requests` **no lanza excepción** ante un 4xx/5xx. Dos estrategias:
 
 ```python
 import requests
@@ -172,4 +172,4 @@ try:                                                       # h) try por si falla
 
 ---
 
-📚 [Volver al índice de la unidad](/ApuntesPSP/06-apis-rest-y-http) · **Anterior:** [06 · requests: el GET](/ApuntesPSP/06-apis-rest-y-http/06-requests-get) · **Siguiente:** [08 · Práctica: mini cliente de API](/ApuntesPSP/06-apis-rest-y-http/08-practica-api)
+📚 [Volver al índice de la unidad](/ApuntesPSP/06-http-y-apis-rest) · **Anterior:** [06 · requests: el GET](/ApuntesPSP/06-http-y-apis-rest/06-requests-get) · **Siguiente:** [08 · Práctica: mini cliente de API](/ApuntesPSP/06-http-y-apis-rest/08-practica-api)

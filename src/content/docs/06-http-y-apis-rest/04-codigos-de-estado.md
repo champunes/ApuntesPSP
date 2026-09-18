@@ -5,7 +5,7 @@ description: "La señal de humo del servidor: 200, 404, 500… 🚨"
 
 <p><small>La señal de humo del servidor: 200, 404, 500… 🚨</small></p>
 
-> 🗺️ **Estás en:** 🌐 **U07 · APIs REST y HTTP** → 04 · Códigos de estado
+> 🗺️ **Estás en:** 🌐 **UD 7 · HTTP y APIs REST** → 04 · Códigos de estado
 
 ---
 
@@ -69,7 +69,7 @@ else:
     print(f"⚠️ Código inesperado: {resp.status_code}")
 ```
 
-> 💡 `requests` **no lanza excepción** cuando llega un 404 o un 500: te devuelve la respuesta con su `status_code` y `resp.ok` será `False`. Eres tú quien decide cómo tratarlo. Si quieres que una respuesta mala lance excepción, usa `resp.raise_for_status()` (lo verás en el [punto 7](/ApuntesPSP/06-apis-rest-y-http/07-requests-post)).
+> 💡 `requests` **no lanza excepción** cuando llega un 404 o un 500: te devuelve la respuesta con su `status_code` y `resp.ok` será `False`. Eres tú quien decide cómo tratarlo. Si quieres que una respuesta mala lance excepción, usa `resp.raise_for_status()` (lo verás en el [punto 7](/ApuntesPSP/06-http-y-apis-rest/07-requests-post)).
 
 ---
 
@@ -108,4 +108,4 @@ else:
 
 ---
 
-📚 [Volver al índice de la unidad](/ApuntesPSP/06-apis-rest-y-http) · **Anterior:** [03 · Principios REST](/ApuntesPSP/06-apis-rest-y-http/03-principios-rest) · **Siguiente:** [05 · JSON](/ApuntesPSP/06-apis-rest-y-http/05-json)
+📚 [Volver al índice de la unidad](/ApuntesPSP/06-http-y-apis-rest) · **Anterior:** [03 · Principios REST](/ApuntesPSP/06-http-y-apis-rest/03-principios-rest) · **Siguiente:** [05 · JSON](/ApuntesPSP/06-http-y-apis-rest/05-json)

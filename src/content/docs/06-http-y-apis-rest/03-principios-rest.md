@@ -5,13 +5,13 @@ description: Recursos, URLs semánticas y sin estado 🏛️
 
 <p><small>Recursos, URLs semánticas y sin estado 🏛️</small></p>
 
-> 🗺️ **Estás en:** 🌐 **U07 · APIs REST y HTTP** → 03 · Principios REST
+> 🗺️ **Estás en:** 🌐 **UD 7 · HTTP y APIs REST** → 03 · Principios REST
 
 ---
 
 ## 📬 La idea en una frase
 
-> **REST** (*Representational State Transfer*) es el estándar de las APIs modernas: trata las cosas del sistema como **recursos**, a cada recurso le da una **URL** y lo manipula con los **verbos HTTP** que viste en el [punto 2](/ApuntesPSP/06-apis-rest-y-http/02-metodos-http).
+> **REST** (*Representational State Transfer*) es el estándar de las APIs modernas: trata las cosas del sistema como **recursos**, a cada recurso le da una **URL** y lo manipula con los **verbos HTTP** que viste en el [punto 2](/ApuntesPSP/06-http-y-apis-rest/02-metodos-http).
 
 REST no es una tecnología ni una librería: es un conjunto de **convenciones**. Cuando las sigues, cualquiera puede usar tu API sin leer un manual de 100 páginas.
 
@@ -76,7 +76,7 @@ Dos ejemplos opuestos:
 - ✅ **RESTful**: `GET https://api.github.com/users/python` → "dame el recurso del usuario python".
 - ❌ **No RESTful**: `GET https://miapi.com/obtenerUsuario?id=5&accion=leer` → meto la acción en la URL y abuso del GET.
 
-Elegir el verbo correcto para cada operación es lo que el [punto 2](/ApuntesPSP/06-apis-rest-y-http/02-metodos-http) llamaba "hacer bien REST". Las APIs de GitHub, GitHub Search o JSONPlaceholder que usarás en esta unidad son RESTful: fíjate en cómo sus URLs son limpias y su método dice la intención.
+Elegir el verbo correcto para cada operación es lo que el [punto 2](/ApuntesPSP/06-http-y-apis-rest/02-metodos-http) llamaba "hacer bien REST". Las APIs de GitHub, GitHub Search o JSONPlaceholder que usarás en esta unidad son RESTful: fíjate en cómo sus URLs son limpias y su método dice la intención.
 
 ---
 
@@ -114,4 +114,4 @@ Elegir el verbo correcto para cada operación es lo que el [punto 2](/ApuntesPSP
 
 ---
 
-📚 [Volver al índice de la unidad](/ApuntesPSP/06-apis-rest-y-http) · **Anterior:** [02 · Métodos HTTP](/ApuntesPSP/06-apis-rest-y-http/02-metodos-http) · **Siguiente:** [04 · Códigos de estado](/ApuntesPSP/06-apis-rest-y-http/04-codigos-de-estado)
+📚 [Volver al índice de la unidad](/ApuntesPSP/06-http-y-apis-rest) · **Anterior:** [02 · Métodos HTTP](/ApuntesPSP/06-http-y-apis-rest/02-metodos-http) · **Siguiente:** [04 · Códigos de estado](/ApuntesPSP/06-http-y-apis-rest/04-codigos-de-estado)
