@@ -83,4 +83,4 @@ Al terminar, serás capaz de:
 ¿Ya tienes claves de OpenWeatherMap y OpenAI y solo necesitas consumirlas? Ve directo al [punto 3](/ApuntesPSP/07-apis-comerciales/03-openweathermap) y al [punto 4](/ApuntesPSP/07-apis-comerciales/04-openai). Si vienes de cero en APIs, no te saltes los puntos 1 y 2: la API key y el `.env` son la base de todo lo demás.
 
 **📍 Primer punto:** [01 · API Keys](/ApuntesPSP/07-apis-comerciales/01-api-keys)  
-**⏭️ Al acabar la unidad, continúa en [U09 · Hash y Cifrado Clásico](/ApuntesPSP/08-hash-y-cifrado-clasico).**
+**⏭️ Al acabar la unidad, continúa en [UD 9 · Seguridad y cifrado](/ApuntesPSP/08-seguridad-y-cifrado).**

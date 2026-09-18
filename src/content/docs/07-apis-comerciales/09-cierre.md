@@ -232,4 +232,4 @@ Solo si el código nunca va a GitHub. Mejor acostúmbrate a `.env` desde el prin
 
 ---
 
-📚 [Volver al índice de la unidad](/ApuntesPSP/07-apis-comerciales) · **Anterior:** [08 · Práctica APIs comerciales](/ApuntesPSP/07-apis-comerciales/08-practica-apis-comerciales) · **Siguiente:** **[U09 · Hash y Cifrado Clásico](/ApuntesPSP/08-hash-y-cifrado-clasico)**
+📚 [Volver al índice de la unidad](/ApuntesPSP/07-apis-comerciales) · **Anterior:** [08 · Práctica APIs comerciales](/ApuntesPSP/07-apis-comerciales/08-practica-apis-comerciales) · **Siguiente:** **[UD 9 · Seguridad y cifrado](/ApuntesPSP/08-seguridad-y-cifrado)**

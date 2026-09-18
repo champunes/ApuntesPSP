@@ -118,24 +118,14 @@ description: Apuntes de Programación de Servicios y Procesos — Python. CC BY-
     <span class="num">Unidad 9</span>
     <span class="ra">RA5</span>
   </div>
-  <a href="/ApuntesPSP/08-hash-y-cifrado-clasico" class="title-link">Hash y Cifrado Clásico</a>
-  <p class="desc">Hash, MD5, SHA, Cifrado César, principios de seguridad, esteganografía básica.</p>
-  <a href="/ApuntesPSP/08-hash-y-cifrado-clasico" class="unit-link">👉 Ver unidad 👈</a>
+  <a href="/ApuntesPSP/08-seguridad-y-cifrado" class="title-link">Seguridad y cifrado con Python</a>
+  <p class="desc">Hash, contraseñas con sal, AES, RSA, cifrado híbrido, firmas digitales, RBAC.</p>
+  <a href="/ApuntesPSP/08-seguridad-y-cifrado" class="unit-link">👉 Ver unidad 👈</a>
 </div>
 
 <div class="unit-card">
   <div class="unit-card-header">
     <span class="num">Unidad 10</span>
-    <span class="ra">RA5</span>
-  </div>
-  <a href="/ApuntesPSP/09-cifrado-moderno" class="title-link">Cifrado Moderno</a>
-  <p class="desc">AES, RSA, cifrado híbrido, firmas digitales, RBAC, <code>pycryptodome</code>.</p>
-  <a href="/ApuntesPSP/09-cifrado-moderno" class="unit-link">👉 Ver unidad 👈</a>
-</div>
-
-<div class="unit-card">
-  <div class="unit-card-header">
-    <span class="num">Unidad 11</span>
     <span class="ra">RA4e-g</span>
   </div>
   <a href="/ApuntesPSP/09-alta-disponibilidad" class="title-link">Alta disponibilidad</a>

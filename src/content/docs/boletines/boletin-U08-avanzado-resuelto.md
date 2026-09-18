@@ -21,7 +21,7 @@ print(f"SHA256 del texto:   {hash_texto}")
 print(f"¿Coinciden? {hash_archivo == hash_texto}")  # True
 ```
 
-Si `mensaje.txt` contiene exactamente `Hola mundo` (sin salto de línea extra, o con el mismo contenido exacto), el hash coincide: `ca8f60b2cc7f05837d98b208b57fb6481553fc5f1219d59618fd025002a66f5c`. Hashear un archivo en modo binario es hashear **sus bytes exactos** ([punto 3](/ApuntesPSP/08-hash-y-cifrado-clasico/03-md5-sha1-sha256)).
+Si `mensaje.txt` contiene exactamente `Hola mundo` (sin salto de línea extra, o con el mismo contenido exacto), el hash coincide: `ca8f60b2cc7f05837d98b208b57fb6481553fc5f1219d59618fd025002a66f5c`. Hashear un archivo en modo binario es hashear **sus bytes exactos** ([punto 3](/ApuntesPSP/08-seguridad-y-cifrado/03-md5-sha1-sha256)).
 
 ## 2. Cifrado César con espacios
 
@@ -60,7 +60,7 @@ def descifrar_cesar(texto, desplazamiento):
 print(descifrar_cesar("Nkrru", 2))  # Lipps
 ```
 
-Descifrar es cifrar con desplazamiento **negativo** ([punto 6](/ApuntesPSP/08-hash-y-cifrado-clasico/06-cifrado-cesar)): cada letra se mueve 2 hacia atrás. La mayúscula inicial `N` usa la base `ord('A')` y devuelve `L`; el resto, minúsculas, usan `ord('a')`. `isupper()` garantiza que el caso se preserva.
+Descifrar es cifrar con desplazamiento **negativo** ([punto 6](/ApuntesPSP/08-seguridad-y-cifrado/06-cifrado-cesar)): cada letra se mueve 2 hacia atrás. La mayúscula inicial `N` usa la base `ord('A')` y devuelve `L`; el resto, minúsculas, usan `ord('a')`. `isupper()` garantiza que el caso se preserva.
 
 ## 4. Verificador de integridad
 
@@ -78,7 +78,7 @@ else:
     print("❌ ¡Alerta! El archivo NO coincide con el oficial.")
 ```
 
-La comparación de hashes detecta **cualquier** modificación: un solo bit distinto produce un hash completamente diferente (efecto avalancha). Es la verificación de integridad del [punto 8](/ApuntesPSP/08-hash-y-cifrado-clasico/08-buenas-practicas-y-verificacion).
+La comparación de hashes detecta **cualquier** modificación: un solo bit distinto produce un hash completamente diferente (efecto avalancha). Es la verificación de integridad del [punto 8](/ApuntesPSP/08-seguridad-y-cifrado/08-buenas-practicas-y-verificacion).
 
 ## 5. Fuerza bruta César
 
@@ -102,7 +102,7 @@ for desplazamiento in range(1, 26):
         print(f"Desplazamiento {desplazamiento}: {intento}  ← ¡parece correcto!")
 ```
 
-Solo hay **25 desplazamientos posibles** ([punto 6](/ApuntesPSP/08-hash-y-cifrado-clasico/06-cifrado-cesar)). Filtrando por palabras comunes en español, el desplazamiento 5 devuelve "Hola mundo" y es el único con sentido. Se rompe en segundos.
+Solo hay **25 desplazamientos posibles** ([punto 6](/ApuntesPSP/08-seguridad-y-cifrado/06-cifrado-cesar)). Filtrando por palabras comunes en español, el desplazamiento 5 devuelve "Hola mundo" y es el único con sentido. Se rompe en segundos.
 
 ## 6. Hash con salt
 
@@ -127,7 +127,7 @@ print(f"¿Ana entra? {verificar('clave123', hash_ana)}")     # True
 print(f"¿Ana con otra? {verificar('otra', hash_ana)}")      # False
 ```
 
-Con la misma contraseña, Ana y Bob tienen **hashes distintos** gracias a sus sales únicas. El salt ocupa los 32 primeros caracteres hex (16 bytes), que se recuperan con `bytes.fromhex()` para el login ([punto 5](/ApuntesPSP/08-hash-y-cifrado-clasico/05-hash-con-sal)).
+Con la misma contraseña, Ana y Bob tienen **hashes distintos** gracias a sus sales únicas. El salt ocupa los 32 primeros caracteres hex (16 bytes), que se recuperan con `bytes.fromhex()` para el login ([punto 5](/ApuntesPSP/08-seguridad-y-cifrado/05-hash-con-sal)).
 
 ## 7. Comparación gráfica de avalancha
 
@@ -143,7 +143,7 @@ print(f"h2: {h2}")
 print(f"Caracteres diferentes: {diferentes} de {len(h1)}")
 ```
 
-La entrada cambia **una sola letra**, pero de los 64 caracteres hex suelen diferir la mitad o más (≈50%), que es el **efecto avalancha** ([punto 2](/ApuntesPSP/08-hash-y-cifrado-clasico/02-que-es-un-hash)). Ninguna parte del hash "se parece" al del texto original.
+La entrada cambia **una sola letra**, pero de los 64 caracteres hex suelen diferir la mitad o más (≈50%), que es el **efecto avalancha** ([punto 2](/ApuntesPSP/08-seguridad-y-cifrado/02-que-es-un-hash)). Ninguna parte del hash "se parece" al del texto original.
 
 ## 8. Velocidad de hashes
 
@@ -162,7 +162,7 @@ for nombre, func in (("MD5", hashlib.md5), ("SHA1", hashlib.sha1),
     print(f"{nombre}: {fin - inicio:.2f} segundos")
 ```
 
-MD5 suele ser el más rápido, SHA1 intermedio y **SHA256/SHA512 los más lentos**: más bits que procesar. Ahora bien, "más lento" es justo lo que quieres en una contraseña: al atacante le cuesta más adivinar por fuerza bruta. Nunca elijas el algoritmo por velocidad, sino por seguridad ([punto 3](/ApuntesPSP/08-hash-y-cifrado-clasico/03-md5-sha1-sha256)). El orden exacto varía según la CPU.
+MD5 suele ser el más rápido, SHA1 intermedio y **SHA256/SHA512 los más lentos**: más bits que procesar. Ahora bien, "más lento" es justo lo que quieres en una contraseña: al atacante le cuesta más adivinar por fuerza bruta. Nunca elijas el algoritmo por velocidad, sino por seguridad ([punto 3](/ApuntesPSP/08-seguridad-y-cifrado/03-md5-sha1-sha256)). El orden exacto varía según la CPU.
 
 ## 9. Mini gestor de contraseñas
 
@@ -193,4 +193,4 @@ with open("contraseñas.json", "w") as f:
     json.dump(usuarios, f, indent=2)
 ```
 
-Cada usuario se guarda como `salt.hex() + hash` en un diccionario, y se exporta a JSON con `json.dump`. Para verificar, el login extrae la sal (primeros 32 caracteres hex), la convierte con `bytes.fromhex()` y recalcula el hash ([punto 5](/ApuntesPSP/08-hash-y-cifrado-clasico/05-hash-con-sal)). Si dos usuarios comparten contraseña, sus registros JSON son **distintos**.
+Cada usuario se guarda como `salt.hex() + hash` en un diccionario, y se exporta a JSON con `json.dump`. Para verificar, el login extrae la sal (primeros 32 caracteres hex), la convierte con `bytes.fromhex()` y recalcula el hash ([punto 5](/ApuntesPSP/08-seguridad-y-cifrado/05-hash-con-sal)). Si dos usuarios comparten contraseña, sus registros JSON son **distintos**.
