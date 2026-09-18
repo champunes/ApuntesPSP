@@ -1,9 +1,9 @@
 ﻿---
-title: Boletín U05 — Avanzado (Resuelto)
+title: Boletín UD 5 — Avanzado (Resuelto)
 description: Soluciones de los ejercicios avanzados de Sockets TCP
 ---
 
-# 💪 Boletín U05 — Avanzado (Resuelto)
+# 💪 Boletín UD 5 — Avanzado (Resuelto)
 
 ---
 
@@ -221,4 +221,4 @@ Un **hilo por cliente** (`threading.Thread`) permite atender a varios a la vez. 
 
 ---
 
-📚 [Volver a la unidad](/ApuntesPSP/04-sockets-tcp) · Por resolver: [💪 Boletín U05 — Avanzado](/ApuntesPSP/boletines/boletin-u04-avanzado)
+📚 [Volver a la unidad](/ApuntesPSP/04-sockets-tcp) · Por resolver: [💪 Boletín UD 5 — Avanzado](/ApuntesPSP/boletines/boletin-u04-avanzado)

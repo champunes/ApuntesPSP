@@ -1,9 +1,9 @@
 ﻿---
-title: Boletín U06 — Inicial
+title: Boletín UD 5 — Inicial
 description: Ejercicios básicos de Sockets TCP y UDP
 ---
 
-# 📝 Boletín U06 — Inicial
+# 📝 Boletín UD 5 — Inicial
 
 > Ejercicios básicos para afianzar los conceptos de UDP (cliente, servidor, eco), TCP vs UDP y el HTTP manual de la unidad U06.
 

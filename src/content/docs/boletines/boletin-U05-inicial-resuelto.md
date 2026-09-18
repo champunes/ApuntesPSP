@@ -1,9 +1,9 @@
 ﻿---
-title: Boletín U06 — Inicial (Resuelto)
+title: Boletín UD 5 — Inicial (Resuelto)
 description: Soluciones de los ejercicios básicos de Sockets TCP y UDP
 ---
 
-# ✅ Boletín U06 — Inicial (Resuelto)
+# ✅ Boletín UD 5 — Inicial (Resuelto)
 
 ---
 

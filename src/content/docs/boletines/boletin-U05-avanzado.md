@@ -1,9 +1,9 @@
 ﻿---
-title: Boletín U06 — Avanzado
+title: Boletín UD 5 — Avanzado
 description: Ejercicios avanzados de Sockets TCP y UDP
 ---
 
-# 💪 Boletín U06 — Avanzado
+# 💪 Boletín UD 5 — Avanzado
 
 > Ejercicios que requieren aplicar los conceptos de UDP, NTP, HTTP y la comparativa TCP/UDP de forma más profunda, con programas completos.
 

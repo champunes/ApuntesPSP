@@ -1,9 +1,9 @@
 ﻿---
-title: Boletín U05 — Inicial
+title: Boletín UD 5 — Inicial
 description: Ejercicios básicos de Sockets TCP
 ---
 
-# 📝 Boletín U05 — Inicial
+# 📝 Boletín UD 5 — Inicial
 
 > Ejercicios básicos para afianzar los conceptos de sockets TCP: cliente, servidor, eco y la pareja IP/puerto de la unidad U05.
 
@@ -51,4 +51,4 @@ Crea un servidor TCP que, cuando un cliente se conecte, le devuelva la hora actu
 
 ---
 
-📚 [Volver a la unidad](/ApuntesPSP/04-sockets-tcp) · Resuelto: [✅ Boletín U05 — Inicial (Resuelto)](/ApuntesPSP/boletines/boletin-u04-inicial-resuelto)
+📚 [Volver a la unidad](/ApuntesPSP/04-sockets-tcp) · Resuelto: [✅ Boletín UD 5 — Inicial (Resuelto)](/ApuntesPSP/boletines/boletin-u04-inicial-resuelto)

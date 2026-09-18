@@ -1,9 +1,9 @@
 ﻿---
-title: Boletín U05 — Avanzado
+title: Boletín UD 5 — Avanzado
 description: Ejercicios avanzados de Sockets TCP
 ---
 
-# 💪 Boletín U05 — Avanzado
+# 💪 Boletín UD 5 — Avanzado
 
 > Ejercicios que requieren aplicar los conceptos de sockets TCP de forma más profunda, con programas completos: clientes interactivos, `select()`, timeouts y servidores multiusuario.
 
@@ -65,4 +65,4 @@ Un servidor que recibe mensajes de un cliente y los reenvía a todos los demás.
 
 ---
 
-📚 [Volver a la unidad](/ApuntesPSP/04-sockets-tcp) · Resuelto: [✅ Boletín U05 — Avanzado (Resuelto)](/ApuntesPSP/boletines/boletin-u04-avanzado-resuelto)
+📚 [Volver a la unidad](/ApuntesPSP/04-sockets-tcp) · Resuelto: [✅ Boletín UD 5 — Avanzado (Resuelto)](/ApuntesPSP/boletines/boletin-u04-avanzado-resuelto)

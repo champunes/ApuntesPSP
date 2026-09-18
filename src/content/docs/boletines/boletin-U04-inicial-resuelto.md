@@ -1,9 +1,9 @@
 ﻿---
-title: Boletín U05 — Inicial (Resuelto)
+title: Boletín UD 5 — Inicial (Resuelto)
 description: Soluciones de los ejercicios básicos de Sockets TCP
 ---
 
-# ✅ Boletín U05 — Inicial (Resuelto)
+# ✅ Boletín UD 5 — Inicial (Resuelto)
 
 ---
 
@@ -118,4 +118,4 @@ La hora se obtiene con `time.strftime("%H:%M:%S")` y se envía como bytes con `.
 
 ---
 
-📚 [Volver a la unidad](/ApuntesPSP/04-sockets-tcp) · Por resolver: [📝 Boletín U05 — Inicial](/ApuntesPSP/boletines/boletin-u04-inicial)
+📚 [Volver a la unidad](/ApuntesPSP/04-sockets-tcp) · Por resolver: [📝 Boletín UD 5 — Inicial](/ApuntesPSP/boletines/boletin-u04-inicial)
