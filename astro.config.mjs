@@ -1,7 +1,7 @@
 import { defineConfig } from 'astro/config';
 import starlight from '@astrojs/starlight';
 
-const emojis = ['🐍', '🚀', '🔀', '🔒', '🔌', '📡', '🌐', '🧪', '🔐', '🧬', '🏗️', '⏱️'];
+const emojis = ['🐍', '🚀', '🔀', '🔒', '🔌', '📡', '🌐', '🧪', '🔐', '🏗️', '☕'];
 
 const unitSlugs = [
   '00-python-basico',
@@ -14,6 +14,7 @@ const unitSlugs = [
   '08-seguridad-y-cifrado',
   '05-servidores-concurrentes',
   '09-alta-disponibilidad',
+  '10-anexo-spring-boot',
 ];
 
 const unitLabels = [
@@ -27,6 +28,7 @@ const unitLabels = [
   'Seguridad y cifrado',
   'Servidores concurrentes',
   'Alta disponibilidad',
+  'Anexo: Spring Boot',
 ];
 
 // Unidades ampliadas al estándar "libro" (índice + 9 puntos). Se activan por lote.
@@ -41,6 +43,7 @@ const unidadesExpandidas = {
   '08-seguridad-y-cifrado': true,
   '05-servidores-concurrentes': true,
   '09-alta-disponibilidad': true,
+  '10-anexo-spring-boot': true,
 };
 
 // Unidades con boletines publicados en src/content/docs/boletines/
@@ -69,6 +72,7 @@ const unitPuntos = {
   '08-seguridad-y-cifrado': ['01-principios-de-seguridad', '02-hash-y-huellas-digitales', '03-contrasenas-seguras', '04-cifrado-clasico', '05-cifrado-simetrico-aes', '06-cifrado-asimetrico-rsa', '07-firmas-digitales', '08-cifrado-hibrido-y-practica', '09-cierre'],
   '05-servidores-concurrentes': ['01-servidor-secuencial', '02-el-problema-de-la-espera', '03-hilo-por-cliente', '04-threadpoolexecutor', '05-benchmark', '06-sincronizacion-en-servidores', '07-limites-y-buenas-practicas', '08-servidor-concurrente-completo', '09-cierre'],
   '09-alta-disponibilidad': ['01-event-loop', '02-corrutinas', '03-create-task-y-gather', '04-timeouts', '05-heartbeat', '06-backoff', '07-threads-vs-asyncio', '08-disponibilidad-y-practica', '09-cierre'],
+  '10-anexo-spring-boot': ['01-java-para-python', '02-introduccion-spring-boot', '03-inyeccion-de-dependencias', '04-restcontroller-y-apis', '05-jpa-y-bases-de-datos', '06-ejemplo-completo', '07-cierre'],
 };
 
 const titleCase = (s) => s.split(' ').map((w) => w[0].toUpperCase() + w.slice(1)).join(' ');

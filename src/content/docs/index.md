@@ -133,6 +133,15 @@ description: Apuntes de Programación de Servicios y Procesos — Python. CC BY-
   <a href="/ApuntesPSP/09-alta-disponibilidad" class="unit-link">👉 Ver unidad 👈</a>
 </div>
 
+<div class="unit-card">
+  <div class="unit-card-header">
+    <span class="num">Anexo</span>
+  </div>
+  <a href="/ApuntesPSP/10-anexo-spring-boot" class="title-link">Spring Boot con Java</a>
+  <p class="desc">Del Python al ecosistema Java: Spring Boot, DI, REST, JPA.</p>
+  <a href="/ApuntesPSP/10-anexo-spring-boot" class="unit-link">👉 Ver anexo 👈</a>
+</div>
+
 </div>
 
 ## 📝 Boletines de ejercicios
