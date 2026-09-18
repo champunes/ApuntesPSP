@@ -1,9 +1,9 @@
 ﻿---
-title: Boletín U07 — Inicial
+title: Boletín UD 7 — Inicial
 description: Ejercicios básicos de APIs REST y HTTP
 ---
 
-# 📝 Boletín U07 — Inicial
+# 📝 Boletín UD 7 — Inicial
 
 > Ejercicios básicos para afianzar los conceptos de APIs REST, métodos HTTP, códigos de estado y JSON de la unidad U07.
 

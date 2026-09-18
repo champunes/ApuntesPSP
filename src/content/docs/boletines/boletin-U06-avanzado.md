@@ -1,9 +1,9 @@
 ﻿---
-title: Boletín U07 — Avanzado
+title: Boletín UD 7 — Avanzado
 description: Ejercicios avanzados de APIs REST y HTTP
 ---
 
-# 💪 Boletín U07 — Avanzado
+# 💪 Boletín UD 7 — Avanzado
 
 > Ejercicios que requieren aplicar los conceptos de APIs REST, requests y JSON de forma más profunda, con programas completos contra APIs reales.
 
