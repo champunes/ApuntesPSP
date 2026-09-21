@@ -9,7 +9,7 @@ description: Apuntes de Programación de Servicios y Procesos — Python. CC BY-
 
 <div align="center" style="margin-bottom:2rem;">
   <a href="/ApuntesPSP/01-procesos-y-subprocess" style="display:inline-block;padding:0.75rem 2rem;background:linear-gradient(135deg,#306998,#1a4060);color:#fff;border-radius:8px;text-decoration:none;font-weight:600;margin:0 0.5rem;">🚀 Empezar por la Unidad 1</a>
-  <a href="https://github.com/sergarb1/ApuntesPSP" style="display:inline-block;padding:0.75rem 2rem;background:var(--sl-color-gray-5);color:var(--sl-color-white);border-radius:8px;text-decoration:none;font-weight:600;margin:0 0.5rem;">🐙 Ver en GitHub</a>
+  <a href="https://github.com/champunes/ApuntesPSP" style="display:inline-block;padding:0.75rem 2rem;background:var(--sl-color-gray-5);color:var(--sl-color-white);border-radius:8px;text-decoration:none;font-weight:600;margin:0 0.5rem;">🐙 Ver en GitHub</a>
 </div>
 
 <div align="center">
