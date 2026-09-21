@@ -211,7 +211,7 @@ Secciones del cierre `09-cierre.md`: ⭐ Sé el código, 🔥 Fireside Chat, �
 
 **Boletines (40):** 4 por unidad en `boletines/boletin-UXX-*`: inicial (8 ejercicios), inicial-resuelto, avanzado (≥8), avanzado-resuelto. Pistas inline `**Pista:**` en los por-resolver; respuestas inline en negrita en los resueltos. El Anexo no tiene boletines.
 
-**Licencia:** CC BY-SA 4.0 — Sergi Garcia Barea
+**Licencia:** CC BY-SA 4.0 — José A. González
 
 
 <!-- headroom:rtk-instructions -->

@@ -41,7 +41,7 @@ New-Item -ItemType Directory -Path $OutDir -Force | Out-Null
 $sb = [System.Text.StringBuilder]::new()
 $null = $sb.AppendLine("---")
 $null = $sb.AppendLine("title: '$metaTitle'")
-$null = $sb.AppendLine("author: 'Sergi Garcia Barea'")
+$null = $sb.AppendLine("author: 'José Ángel González Molina'")
 $null = $sb.AppendLine("language: $metaLang")
 $null = $sb.AppendLine("---")
 $null = $sb.AppendLine("")
