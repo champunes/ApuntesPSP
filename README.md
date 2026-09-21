@@ -2,7 +2,7 @@
 
 # 📘 Apuntes PSP — Programación de Servicios y Procesos
 
-**Autor:** Sergi Garcia Barea · **Licencia:** CC BY-SA 4.0  
+**Autor:** José A. González · **Licencia:** CC BY-SA 4.0  
 
 [![GitHub Pages](https://img.shields.io/badge/🌐%20GitHub%20Pages-Online-success)](https://sergarb1.github.io/ApuntesPSP)
 [![Licencia](https://img.shields.io/badge/License-CC%20BY--SA%204.0-lightgrey)](https://creativecommons.org/licenses/by-sa/4.0/)
@@ -21,7 +21,7 @@ organizados en **10 unidades + 1 anexo**. Cada unidad se lee como un **libro**: 
 
 ## 🌐 Acceso web (GitHub Pages)
 
-👉 **[https://sergarb1.github.io/ApuntesPSP](https://sergarb1.github.io/ApuntesPSP)** 👈
+👉 **[https://champunes.github.io/ApuntesPSP](https://sergarb1.github.io/ApuntesPSP)** 👈
 
 Tema **Astro + Starlight** con buscador Pagefind, modo oscuro, diseño premium azul Python (#306998) + teal (#4ecdc4), fuente Geist Sans. Descarga PDF/EPUB desde la propia web.
 
@@ -184,24 +184,32 @@ python "TEMA 02/EJEMPLOS/cliente_tcp.py"     # Terminal 2
 
 ---
 
-## 📝 Licencia
+## 📄 Licencia y Atribución
 
-**CC BY-SA 4.0 — Sergi Garcia Barea**
+Este proyecto y sus apuntes están licenciados bajo la licencia **Creative Commons Atribución-CompartirIgual 4.0 Internacional (CC BY-SA 4.0)**.
 
-Esta obra está bajo una [Licencia Creative Commons Atribución-CompartirIgual 4.0 Internacional](https://creativecommons.org/licenses/by-sa/4.0/).
+### ✍️ Reconocimiento de Autoría y Modificaciones
+Este material incluye contenido adaptado y modificado a partir de la obra original:
+* **Adaptación y modificaciones:** José Ángel González Molina
+* **Obra original:** [Apuntes PSP — Programación de Servicios y Procesos (Python)](https://sergarb1.github.io/ApuntesPSP/)
+* **Autor original:** Sergi Garcia Barea
+* **Licencia original:** [CC BY-SA 4.0](https://creativecommons.org/licenses/by-sa/4.0/deed.es)
 
-Puedes:
-- ✅ **Compartir** — copiar y redistribuir el material en cualquier medio o formato
-- ✅ **Adaptar** — remezclar, transformar y crear a partir del material
+**Modificaciones realizadas en este repositorio:**
+* Adaptaciones del temario y contenidos para la impartición del módulo en 2º de DAM.
+* [Añade aquí de forma resumida si incluyes nuevos ejemplos, cambias la estructura de temas, etc.]
 
-Bajo las siguientes condiciones:
-- **Atribución** — Debes reconocer la autoría (Sergi Garcia Barea)
-- **Compartir Igual** — Si transformas este material, debes distribuirlo bajo la misma licencia
+[![CC BY-SA 4.0][cc-by-sa-shield]][cc-by-sa]
+
+[cc-by-sa]: http://creativecommons.org/licenses/by-sa/4.0/
+[cc-by-sa-shield]: https://img.shields.io/badge/License-CC%20BY--SA%204.0-lightgrey.svg
 
 ---
 
+*Puedes compartir y adaptar este material para cualquier propósito, siempre que reconozcas la autoría original (Sergi Garcia Barea), la autoría de esta adaptación (José Ángel González Molina) y mantengas la misma licencia CC BY-SA 4.0.*
+
 <div align="center">
   
-**Programación de Servicios y Procesos** · Curso 2025/2026
+**Programación de Servicios y Procesos** · Curso 2026/2027
 
 </div>
