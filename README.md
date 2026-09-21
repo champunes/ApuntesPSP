@@ -197,7 +197,7 @@ Este material incluye contenido adaptado y modificado a partir de la obra origin
 
 **Modificaciones realizadas en este repositorio:**
 * Adaptaciones del temario y contenidos para la impartición del módulo en 2º de DAM.
-* [Añade aquí de forma resumida si incluyes nuevos ejemplos, cambias la estructura de temas, etc.]
+* Sustitución de los scripts en Powershell para generar PDF/ePUB por unos escritos en Javascript para mayor compatibilidad multiplataforma.
 
 [![CC BY-SA 4.0][cc-by-sa-shield]][cc-by-sa]
 

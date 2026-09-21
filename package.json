@@ -11,7 +11,8 @@
     "pdf:es": "node scripts/generate-pdf.js",
     "pdf:local": "npm run pdf:es",
     "pdf:local:es": "npm run pdf:es",
-    "epub": "pwsh -NoProfile -File scripts/generate-epub.ps1",
+    "epub": "node scripts/generate-epub.js",
+    "epub:ps1": "pwsh -NoProfile -File scripts/generate-epub.ps1",
     "astro": "astro"
   },
   "dependencies": {
