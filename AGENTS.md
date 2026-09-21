@@ -44,8 +44,8 @@ PSP/
 │   ├── pdf-cover.html                   ← portada del PDF (portada.png)
 │   ├── pdf-header.html                  ← header vacío (elimina hora impresión)
 │   ├── pdf-footer.html                  ← pie con número de página + línea decorativa
-│   ├── generate-pdf.ps1                 ← genera PDF con Puppeteer + servidor local
-│   ├── generate-epub.ps1                ← genera EPUB con Pandoc
+│   ├── generate-pdf.js                  ← genera PDF con Puppeteer + servidor local (Node, multiplataforma)
+│   ├── generate-epub.js                 ← genera EPUB con Pandoc (Node, multiplataforma; requiere pandoc en el PATH)
 │   └── epub.css                         ← CSS para bloques de código en EPUB
 │
 ├── diagrams/                            ← fuentes D2 para diagramas SVG
@@ -138,8 +138,8 @@ No hay framework de testing. Se ejecuta manualmente:
 npm run dev              # Servidor local (http://localhost:4321/ApuntesPSP)
 npm run build            # Build estático en dist/
 npm run preview          # Previsualizar build
-npm run pdf:local:es     # Generar PDF desde localhost
-npm run epub             # Generar EPUB con Pandoc
+npm run pdf:local:es     # Generar PDF desde localhost (Node, multiplataforma)
+npm run epub             # Generar EPUB con Pandoc (Node, multiplataforma; requiere pandoc en el PATH)
 python "TEMA 01/EJEMPLOS/hilos.py"
 ```
 
@@ -162,11 +162,11 @@ d2 archivo.d2 ../public/diagrams/archivo.svg --pad 20
 - **Framework:** [Astro](https://astro.build/) + [Starlight](https://starlight.astro.build/) v0.41
 - **Tema:** Azul Python (#306998) + teal (#4ecdc4) + Geist Sans
 - **Buscador:** Pagefind integrado (Starlight)
-- **PDF:** `starlight-to-pdf` (Puppeteer, portada PNG desde servidor local)
-- **EPUB:** Pandoc (sintaxis coloreada con Pygments, portada PNG)
+- **PDF:** `scripts/generate-pdf.js` (Node + starlight-to-pdf/Puppeteer, multiplataforma)
+- **EPUB:** `scripts/generate-epub.js` (Node + Pandoc del sistema, multiplataforma; requiere pandoc instalado y accesible en el PATH — sintaxis coloreada con Pygments, portada PNG)
 - **Fuente:** Geist Sans (Vercel)
 - **Despliegue:** GitHub Actions → GitHub Pages (master branch)
-- **URL:** `https://sergarb1.github.io/ApuntesPSP`
+- **URL:** `https://champunes.github.io/ApuntesPSP`
 - **Portada:** `public/portada.png` (gradiente azul, generado desde SVG vía Puppeteer, usada en web, PDF y EPUB)
 - **PDF/EPUB:** generados localmente (`npm run pdf`, `npm run epub`) y commiteados al repo; Astro los copia a `dist/` durante el build para que estén disponibles en GitHub Pages
 - **.gitignore:** `public/*.png` excluye PNGs genéricos pero `!public/portada.png` lo re-incluye

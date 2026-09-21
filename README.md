@@ -4,7 +4,7 @@
 
 **Autor:** José A. González · **Licencia:** CC BY-SA 4.0  
 
-[![GitHub Pages](https://img.shields.io/badge/🌐%20GitHub%20Pages-Online-success)](https://sergarb1.github.io/ApuntesPSP)
+[![GitHub Pages](https://img.shields.io/badge/🌐%20GitHub%20Pages-Online-success)](https://champunes.github.io/ApuntesPSP)
 [![Licencia](https://img.shields.io/badge/License-CC%20BY--SA%204.0-lightgrey)](https://creativecommons.org/licenses/by-sa/4.0/)
 [![Python](https://img.shields.io/badge/Python-3.10%2F3.11-blue)](https://python.org)
 [![Astro](https://img.shields.io/badge/Astro-7.0-ff5a03)](https://astro.build)
@@ -21,7 +21,7 @@ organizados en **10 unidades + 1 anexo**. Cada unidad se lee como un **libro**: 
 
 ## 🌐 Acceso web (GitHub Pages)
 
-👉 **[https://champunes.github.io/ApuntesPSP](https://sergarb1.github.io/ApuntesPSP)** 👈
+👉 **[https://champunes.github.io/ApuntesPSP](https://champunes.github.io/ApuntesPSP)** 👈
 
 Tema **Astro + Starlight** con buscador Pagefind, modo oscuro, diseño premium azul Python (#306998) + teal (#4ecdc4), fuente Geist Sans. Descarga PDF/EPUB desde la propia web.
 
@@ -146,7 +146,7 @@ Cada push a `master` ejecuta el workflow `.github/workflows/deploy.yml` que:
 1. Construye el sitio con `npm run build` (Astro → estático)
 2. Publica con `actions/deploy-pages@v5`
 
-La web está en: **https://sergarb1.github.io/ApuntesPSP**
+La web está en: **https://champunes.github.io/ApuntesPSP**
 
 > ⚠️ Asegúrate de que en `Settings` → `Pages` la fuente sea **GitHub Actions**.
 

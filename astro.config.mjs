@@ -125,7 +125,7 @@ const boletinesSidebar = boletinesReady.length > 0
   : [];
 
 export default defineConfig({
-  site: 'https://sergarb1.github.io/ApuntesPSP',
+  site: 'https://champunes.github.io/ApuntesPSP',
   base: '/ApuntesPSP',
   integrations: [
     starlight({
@@ -140,7 +140,7 @@ export default defineConfig({
       },
       defaultLocale: 'root',
       social: [
-        { icon: 'github', label: 'GitHub', href: 'https://github.com/sergarb1/ApuntesPSP' },
+        { icon: 'github', label: 'GitHub', href: 'https://github.com/champunes/ApuntesPSP' },
       ],
       head: [
         { tag: 'meta', attrs: { name: 'theme-color', content: '#306998' } },
