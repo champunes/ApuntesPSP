@@ -19,6 +19,9 @@ pnpm-debug.log*
 # macOS-specific files
 .DS_Store
 
+# JetBrains IDEs (IntelliJ IDEA, PyCharm, WebStorm...)
+.idea/
+
 # Python
 __pycache__/
 *.pyc
