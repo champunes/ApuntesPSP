@@ -136,7 +136,7 @@ export default defineConfig({
   integrations: [
     starlight({
       title: 'Apuntes PSP',
-      description: 'Programación de Servicios y Procesos — Python. CC BY-SA 4.0 — Sergi Garcia Barea',
+      description: 'Programación de Servicios y Procesos — Python. CC BY-SA 4.0 — José A. González',
       customCss: [
         './src/styles/custom.css',
         '@fontsource/geist-sans',
