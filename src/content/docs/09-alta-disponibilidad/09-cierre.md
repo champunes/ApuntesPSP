@@ -227,7 +227,7 @@ La operación no se espera (ni a veces se ejecuta): la corrutina no hace lo que 
 >
 > *El latido confirma que el servicio sigue vivo. El timeout corta lo que se cuelga. El backoff reintenta con cabeza.*
 >
-> *El viaje ha recorrido once hitos: 🚀 Proceso, 🔀 Hilo, 🔒 Sincronización, 🔌 TCP, 📡 UDP, 🌐 API REST, 🧪 APIs comerciales, 🔐 Hash, 🧬 Cifrado, 🏗️ Servidores concurrentes y ⏱️ asyncio y Disponibilidad.*
+> *El viaje ha recorrido diez hitos: 🐍 Python, 🚀 Procesos, 🔀 Hilos, 🔒 Sincronización, 🔌 Sockets, 🏗️ Servidores, 🌐 API REST, 🧪 APIs comerciales, 🔐 Seguridad y ⏱️ Alta disponibilidad.*
 
 **Y con esto... ¡el viaje ha terminado! 🏁**
 

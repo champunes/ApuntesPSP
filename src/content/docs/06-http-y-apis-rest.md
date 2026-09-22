@@ -36,15 +36,15 @@ Al terminar, serás capaz de:
 
 | Punto | Qué aprenderás | Nivel |
 |---|---|---|
-| [01 · Web y HTTP](/ApuntesPSP/06-apis-rest-y-http/01-web-y-http) | Qué es una API, la URL y el intercambio petición/respuesta | Todos |
-| [02 · Métodos HTTP](/ApuntesPSP/06-apis-rest-y-http/02-metodos-http) | GET, POST, PUT, PATCH y DELETE: los verbos de la web y la idempotencia | Todos |
-| [03 · Principios REST](/ApuntesPSP/06-apis-rest-y-http/03-principios-rest) | Recursos, URLs semánticas, sin estado y qué significa ser RESTful | Todos |
-| [04 · Códigos de estado](/ApuntesPSP/06-apis-rest-y-http/04-codigos-de-estado) | 200, 201, 400, 401, 404, 500…: la señal de humo del servidor | Todos |
-| [05 · JSON](/ApuntesPSP/06-apis-rest-y-http/05-json) | El idioma de las APIs: dumps, loads y parse de respuestas | Todos |
-| [06 · requests: el GET](/ApuntesPSP/06-apis-rest-y-http/06-requests-get) | `requests.get`, parámetros de consulta, cabeceras y la respuesta | Todos |
-| [07 · requests: POST, PUT y DELETE](/ApuntesPSP/06-apis-rest-y-http/07-requests-post) | Crear, actualizar y borrar con `json=`, y gestión de errores | Todos |
-| [08 · Práctica: mini cliente de API](/ApuntesPSP/06-apis-rest-y-http/08-practica-api) | Sé el código, un cliente completo y los ejercicios del lápiz | Todos |
-| [09 · Cierre](/ApuntesPSP/06-apis-rest-y-http/09-cierre) | Sé la petición HTTP, Fireside, Laboratorio de tortura, Crucigrama… | Todos |
+| [01 · Web y HTTP](/ApuntesPSP/06-http-y-apis-rest/01-web-y-http) | Qué es una API, la URL y el intercambio petición/respuesta | Todos |
+| [02 · Métodos HTTP](/ApuntesPSP/06-http-y-apis-rest/02-metodos-http) | GET, POST, PUT, PATCH y DELETE: los verbos de la web y la idempotencia | Todos |
+| [03 · Principios REST](/ApuntesPSP/06-http-y-apis-rest/03-principios-rest) | Recursos, URLs semánticas, sin estado y qué significa ser RESTful | Todos |
+| [04 · Códigos de estado](/ApuntesPSP/06-http-y-apis-rest/04-codigos-de-estado) | 200, 201, 400, 401, 404, 500…: la señal de humo del servidor | Todos |
+| [05 · JSON](/ApuntesPSP/06-http-y-apis-rest/05-json) | El idioma de las APIs: dumps, loads y parse de respuestas | Todos |
+| [06 · requests: el GET](/ApuntesPSP/06-http-y-apis-rest/06-requests-get) | `requests.get`, parámetros de consulta, cabeceras y la respuesta | Todos |
+| [07 · requests: POST, PUT y DELETE](/ApuntesPSP/06-http-y-apis-rest/07-requests-post) | Crear, actualizar y borrar con `json=`, y gestión de errores | Todos |
+| [08 · Práctica: mini cliente de API](/ApuntesPSP/06-http-y-apis-rest/08-practica-api) | Sé el código, un cliente completo y los ejercicios del lápiz | Todos |
+| [09 · Cierre](/ApuntesPSP/06-http-y-apis-rest/09-cierre) | Sé la petición HTTP, Fireside, Laboratorio de tortura, Crucigrama… | Todos |
 
 > 📖 **Flujo de lectura:** los 8 primeros puntos son teoría en progresión. El 9º es el aterrizaje práctico: léelo justo después del 8º y antes de abrir los boletines.
 
@@ -72,15 +72,15 @@ Al terminar, serás capaz de:
 | a) | Utiliza APIs REST para obtener datos externos | ✅ Puntos 3, 6-8 + ⚡ Laboratorio (punto 9) |
 | b) | Gestiona peticiones HTTP y procesa respuestas JSON | ✅ Puntos 1-5 y 7 + ⚡ Laboratorio (punto 9) |
 
-> RA4c (Servidores concurrentes) y RA4d (ThreadPool) se cubren en la **UD 6 · Servidores concurrentes**. RA4e-g (asyncio, disponibilidad, comparativa) se cubren en la **U12 · Alta disponibilidad**.
+> RA4c (Servidores concurrentes) y RA4d (ThreadPool) se cubren en la **UD 6 · Servidores concurrentes**. RA4e-g (asyncio, disponibilidad, comparativa) se cubren en la **UD 10 · Alta disponibilidad**.
 
 ---
 
 ## 🚪 ¿Por dónde empiezo?
 
-¿Vienes de la U06 y dominas los sockets UDP y TCP? Perfecto, ese es el trampolín ideal: repasa la [U06 · Sockets TCP y UDP](/ApuntesPSP/05-sockets-udp-y-protocolos) para tener fresco qué es un protocolo y cómo se abre una conexión, y arranca en el [punto 1](/ApuntesPSP/06-apis-rest-y-http/01-web-y-http), que parte justo de ahí: del intercambio de mensajes entre dos máquinas a la conversación estructurada de HTTP.
+¿Vienes de la UD 5 y dominas los sockets UDP y TCP? Perfecto, ese es el trampolín ideal: repasa la [UD 5 · Sockets TCP y UDP](/ApuntesPSP/04-sockets-tcp-y-udp) para tener fresco qué es un protocolo y cómo se abre una conexión, y arranca en el [punto 1](/ApuntesPSP/06-http-y-apis-rest/01-web-y-http), que parte justo de ahí: del intercambio de mensajes entre dos máquinas a la conversación estructurada de HTTP.
 
-¿Ya sabes qué es una API y solo necesitas `requests` o el JSON? Ve directo al [punto 5](/ApuntesPSP/06-apis-rest-y-http/05-json) y al [punto 6](/ApuntesPSP/06-apis-rest-y-http/06-requests-get). Si vienes de cero en la web, no te saltes los puntos 1 a 4: URL, métodos y códigos de estado son el idioma que vas a hablar toda la unidad.
+¿Ya sabes qué es una API y solo necesitas `requests` o el JSON? Ve directo al [punto 5](/ApuntesPSP/06-http-y-apis-rest/05-json) y al [punto 6](/ApuntesPSP/06-http-y-apis-rest/06-requests-get). Si vienes de cero en la web, no te saltes los puntos 1 a 4: URL, métodos y códigos de estado son el idioma que vas a hablar toda la unidad.
 
-**📍 Primer punto:** [01 · Web y HTTP](/ApuntesPSP/06-apis-rest-y-http/01-web-y-http)  
+**📍 Primer punto:** [01 · Web y HTTP](/ApuntesPSP/06-http-y-apis-rest/01-web-y-http)  
 **⏭️ Al acabar la unidad, continúa en [U08 · APIs Comerciales](/ApuntesPSP/07-apis-comerciales).**

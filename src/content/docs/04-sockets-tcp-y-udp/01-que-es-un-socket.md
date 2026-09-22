@@ -1,9 +1,9 @@
 ﻿---
 title: 01 — Qué es un socket
-description: "IP + puerto y el punto final de toda conexión 🔌"
+description: "IP + puerto y TCP contra UDP: fiabilidad o velocidad 🔌"
 ---
 
-<p><small>IP + puerto y el punto final de toda conexión 🔌</small></p>
+<p><small>IP + puerto y TCP contra UDP: fiabilidad o velocidad 🔌</small></p>
 
 > 🗺️ **Estás en:** 🔌 **UD 5 · Sockets TCP y UDP** → 01 · Qué es un socket
 
@@ -11,7 +11,7 @@ description: "IP + puerto y el punto final de toda conexión 🔌"
 
 ## 📬 La idea en una frase
 
-> Un **socket** es el punto final de una conexión de red: la interfaz que tu programa usa para enviar y recibir datos a través de la red.
+> Un **socket** es el punto final de una conexión de red: la interfaz que tu programa usa para enviar y recibir datos a través de la red. Y según cómo hable, será **TCP** (la carta certificada) o **UDP** (el avión de papel).
 
 Piensa en una llamada telefónica (la analogía que abre esta unidad): marcas, esperas a que contesten, habláis y colgáis. Tu teléfono es el **socket**; el número que marcas es la **IP**; y la extensión a la que pides hablar es el **puerto**. Sin ese trío no hay conversación posible.
 
@@ -50,8 +50,46 @@ s = socket.socket(socket.AF_INET, socket.SOCK_STREAM)
 | `SOCK_DGRAM` | UDP (sin conexión) | |
 
 - **`AF_INET`** dice al SO que usaremos direcciones **IPv4** (`AF_INET6` para IPv6).
-- **`SOCK_STREAM`** pide un socket **TCP**, orientado a conexión: el canal fiable, ordenado y sin pérdidas que estudias en esta unidad.
-- **`SOCK_DGRAM`** (lo verás en la [UD 6](/ApuntesPSP/05-sockets-udp-y-protocolos)) es el UDP sin conexión.
+- **`SOCK_STREAM`** pide un socket **TCP**, orientado a conexión: el canal fiable, ordenado y sin pérdidas.
+- **`SOCK_DGRAM`** pide un socket **UDP**, sin conexión: datagramas sueltos que envías y olvidas.
+
+> 💡 Truco para no liarte: **D**GRAM = datagramas sueltos (**UDP**); **S**TREAM = flujo continuo (**TCP**).
+
+---
+
+## ✈️ La analogía: carta certificada contra avión de papel
+
+- **TCP** es la **carta certificada**: pagas más, el cartero te confirma la entrega, y si se pierde, se reenvía. Sabes que llegó, y en el orden correcto.
+- **UDP** es el **avión de papel** desde el balcón: lo lanzas y olvidas. Si aterriza, bien; si el viento se lo lleva, también. Pero puedes lanzar cien aviones en el tiempo que tardas en preparar una carta certificada.
+
+Esas dos filosofías definen el resto de la unidad: **fiabilidad contra velocidad**.
+
+---
+
+## ⚖️ TCP vs UDP cara a cara
+
+| Característica | TCP | UDP |
+|----------------|-----|-----|
+| Conexión | Sí (handshake) | No |
+| Entrega garantizada | Sí | No |
+| Orden | Sí | No |
+| Velocidad | Más lento | Más rápido |
+| Uso típico | Web, correo, FTP | Streaming, juegos, DNS |
+
+```
+        TCP                                    UDP
+  ┌─────────────┐                     ┌─────────────┐
+  │ SYN ──────► │                     │             │
+  │ ◄────── SYN │   handshake         │  datagrama  │  sin conexión,
+  │      + ACK  │   antes de nada     │  ──────►    │  sin confirmación
+  │ ACK ──────► │                     │             │
+  ├─────────────┤                     ├─────────────┤
+  │ dato ─────► │  confirmado         │  paquete ─► │  fuego y olvido
+  │ ◄──── ACK   │  y en orden         │    (si llega)│
+  └─────────────┘                     └─────────────┘
+```
+
+La columna de la derecha es la que te ocupará en la segunda mitad de la unidad: tres filas de "No" que, paradójicamente, son la razón de que UDP sea tan rápido.
 
 ---
 
@@ -75,6 +113,7 @@ El **SO** es la centralita: se encarga de que el paquete con tu mensaje salga de
 1. ¿Qué identifica la **IP** y qué identifica el **puerto**?
 2. ¿Qué representa `127.0.0.1` y para qué sirve?
 3. ¿Qué constante de Python crea un socket **TCP** y cuál uno **UDP**?
+4. ¿Qué garantiza TCP que UDP no garantiza? (tres cosas)
 
 <details>
 <summary>🔄 Respuestas</summary>
@@ -82,6 +121,7 @@ El **SO** es la centralita: se encarga de que el paquete con tu mensaje salga de
 1. La **IP** identifica la **máquina** en la red; el **puerto** identifica el **programa** dentro de esa máquina.
 2. Es **localhost**: tu propia máquina. Se usa para pruebas locales sin necesidad de red real.
 3. **TCP** → `socket.SOCK_STREAM`; **UDP** → `socket.SOCK_DGRAM`. Ambos con familia `AF_INET`.
+4. **Conexión** (handshake previo), **entrega garantizada** (retransmite lo perdido) y **orden**.
 
 </details>
 
@@ -89,9 +129,9 @@ El **SO** es la centralita: se encarga de que el paquete con tu mensaje salga de
 
 ## ✅ Resumen en 3 frases
 
-- Un **socket** es el punto final de una conexión de red: la interfaz para enviar y recibir datos.
-- La **IP** identifica la máquina y el **puerto** identifica el programa dentro de ella: juntos forman la dirección `(IP, puerto)`.
-- En Python se crea con `socket.socket(socket.AF_INET, socket.SOCK_STREAM)` para TCP.
+- Un **socket** es el punto final de una conexión de red: la interfaz para enviar y recibir datos; la IP identifica la máquina y el puerto el programa.
+- **TCP** garantiza conexión, entrega y orden (carta certificada); **UDP** no garantiza nada y es más rápido (avión de papel).
+- En Python se distinguen en una línea: `SOCK_STREAM` para TCP y `SOCK_DGRAM` para UDP, ambos con `AF_INET`.
 
 ## 🐛 Vocabulario rápido
 
@@ -104,7 +144,8 @@ El **SO** es la centralita: se encarga de que el paquete con tu mensaje salga de
 | SOCK_STREAM | Socket TCP orientado a conexión |
 | SOCK_DGRAM | Socket UDP sin conexión |
 | localhost | 127.0.0.1, tu propia máquina |
+| Datagrama | Paquete independiente que manda UDP |
 
 ---
 
-📚 [Volver al índice de la unidad](/ApuntesPSP/04-sockets-tcp) · **Siguiente:** [02 · Cliente TCP](/ApuntesPSP/04-sockets-tcp-y-udp/02-cliente-tcp)
+📚 [Volver al índice de la unidad](/ApuntesPSP/04-sockets-tcp-y-udp) · **Siguiente:** [02 · Cliente TCP](/ApuntesPSP/04-sockets-tcp-y-udp/02-cliente-tcp)

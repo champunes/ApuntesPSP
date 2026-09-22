@@ -1,64 +1,64 @@
 ﻿---
-title: Boletín UD 9 — Avanzado
-description: Ejercicios avanzados de Cifrado Moderno
+title: Boletín UD 10 — Avanzado
+description: Ejercicios avanzados de Alta disponibilidad
 ---
 
-# 💪 Boletín UD 9 — Avanzado
+# 💪 Boletín UD 10 — Avanzado
 
-> Ejercicios que requieren aplicar AES, RSA, firmas y cifrado híbrido de forma más profunda, con programas completos.
+> Ejercicios que requieren aplicar asyncio de forma más profunda: backoff, timeouts con respaldo, heartbeats múltiples, descargas concurrentes, servidores con latido y monitorización de varios servicios.
 
 ---
 
-## 1. Cifrado híbrido simplificado
+## 1. Backoff exponencial
 
-Genera una clave AES de 32 bytes y cifra `b"El cifrado hibrido funciona"`. Luego cifra esa clave AES con una clave RSA pública. Descifra en orden inverso y verifica el mensaje original.
+Crea una función asíncrona `conectar()` que intente conectarse 4 veces con backoff (1s, 2s, 4s, 8s). Simula el fallo lanzando `ConnectionRefusedError`. Si falla, imprime "Servicio no disponible".
 
-**Pista:** cifra el mensaje con `AES.new(clave_aes, AES.MODE_EAX)` y `encrypt_and_digest`; cifra la clave AES con `PKCS1_OAEP.new(clave.publickey()).encrypt(clave_aes)`. Para descifrar, invierte el orden: primero RSA (con la privada), luego AES (con el mismo nonce).
+**Pista:** `espera = 2 ** intento`. Envuelve cada intento en `try/except ConnectionRefusedError`, espera con `await asyncio.sleep(espera)` y pasa al siguiente.
 
-## 2. Firma alterada
+## 2. Timeout con respaldo
 
-Firma digitalmente el mensaje `"Transferencia de 500€".encode()`. Modifica UN byte de la firma y comprueba que la verificación falla con `pkcs1_15.new(...).verify(...)`.
+Crea una corrutina `lenta()` que tarde 8 segundos. Usa `asyncio.wait_for` con timeout de 5s. Si salta `TimeoutError`, ejecuta una corrutina de respaldo que devuelva "Resultado en caché".
 
-**Pista:** para modificar un byte de la firma, conviértela a `bytearray`, cambia un índice (`firma_mutada[0] ^= 0xFF`) y vuelve a bytes. La verificación debe lanzar `ValueError` o `TypeError`.
+**Pista:** `asyncio.wait_for(lenta(), timeout=5)` lanza `TimeoutError`; en el `except` haz `await respaldo()`.
 
-## 3. RBAC con permisos cifrado
+## 3. Dos heartbeats
 
-Crea un sistema RBAC con 3 roles: `admin` (cifrar, descifrar, firmar), `usuario` (cifrar, firmar), `invitado` (solo cifrar). Implementa la función `puede(usuario, accion)` y pruébala con cada rol.
+Crea dos corrutinas heartbeat: `hb_a()` imprime "💓 A" cada 3s, `hb_b()` imprime "💓 B" cada 5s. La función main las lanza con `asyncio.create_task` y espera 12 segundos.
 
-**Pista:** un diccionario `permisos = {"admin": ["cifrar", "descifrar", "firmar"], ...}` y `return accion in permisos.get(usuario["rol"], [])`. Los roles desconocidos deben devolver `False`.
+**Pista:** dos `create_task` y luego `await asyncio.sleep(12)` para que `main()` no las cancele antes de tiempo.
 
-## 4. Cifrar archivo completo
+## 4. 🎯 Web scraper asíncrono
 
-Crea un archivo de texto `mensaje.txt` con algún contenido y cifra el archivo completo con AES, guardando el resultado. Luego descifralo y comprueba que coincide.
+Descarga 5 URLs a la vez con asyncio y httpx. Compara el tiempo con una versión síncrona.
 
-**Pista:** primero crea `mensaje.txt` (p. ej. `open("mensaje.txt", "w").write("Contenido secreto")`). Abre el archivo en modo binario `"rb"` / `"wb"`. Usa `AES.MODE_EAX`, cifra con `encrypt_and_digest` y guarda `nonce + tag + cifrado`. Para descifrar, separa los tres componentes y usa `decrypt_and_verify`.
+**Pista:** usa `httpx.AsyncClient` dentro de cada corrutina. Crea una lista de tareas con `[descargar(u) for u in urls]` y ejecútalas con `asyncio.gather(*tareas)`. Mide el tiempo total con `time.time()`.
 
-## 5. RSA: cifrar mensajes largos
+## 5. 🔍 Servidor asyncio con heartbeat
 
-RSA solo cifra ~190 bytes. Intenta cifrar un mensaje de 300 bytes. ¿Qué pasa? ¿Cómo lo arreglas?
+Servidor asyncio que imprime "💓 Vivo — N conexiones" cada 5s.
 
-**Pista:** captura el `ValueError` para ver el mensaje de error. Piensa en combinar RSA con un cifrado simétrico como AES (cifrado híbrido).
+**Pista:** usa `asyncio.start_server` para el servidor TCP. Crea una corrutina `heartbeat` con un bucle infinito `while True: await asyncio.sleep(5); ...`. Lánzala con `asyncio.create_task` antes de iniciar el servidor.
 
-## 6. Intercambio de claves simulado
+## 6. ⏱ Monitorización de servidores
 
-Simula el intercambio de claves entre Ana y Bob: Ana genera RSA, Bob cifra una clave AES con RSA pública de Ana.
+3 servidores simulados. Un monitor asíncrono comprueba su estado cada 3s.
 
-**Pista:** define una clave AES de 32 bytes del lado de Bob. Bob cifra el mensaje con AES, luego cifra la clave AES con la RSA pública de Ana. Envía los 4 componentes (clave_AES_cifrada, nonce, tag, cifrado). Ana descifra en orden inverso.
+**Pista:** usa un diccionario `estados = {"Server-A": True, ...}`. Cada servidor es una corrutina que cambia su estado aleatoriamente cada ~5-15s. El monitor lee el diccionario cada 3s y reporta servidores caídos.
 
-## 7. Firma con verificación de integridad
+## 7. 🧩 Semáforo asyncio
 
-Firma un mensaje, modifica el mensaje, y muestra que la verificación falla.
+Limita a 3 descargas simultáneas usando `asyncio.Semaphore`.
 
-**Pista:** usa `SHA256.new(mensaje)` y `pkcs1_15.new(clave).sign(h)`. Después de firmar el original, crea un segundo mensaje modificado y verifícalo con la misma firma. La verificación debe lanzar `ValueError` o `TypeError`.
+**Pista:** crea `sem = asyncio.Semaphore(3)`. Dentro de la función de descarga, usa `async with sem:` para que solo 3 corrutinas puedan ejecutar el bloque a la vez. Usa `httpbin.org/delay/{n}` para simular descargas lentas.
 
-## 8. RSA vs AES benchmark
+## 8. 🎭 Timeout con fallback
 
-Mide cuánto tarda cifrar el mismo mensaje con RSA y AES. La diferencia es abismal.
+Intenta descargar de un servidor principal. Si tarda más de 2s, usa un servidor de respaldo.
 
-**Pista:** usa `time.time()` antes y después de un bucle de 100 cifrados RSA y otro de 1000 cifrados AES. Con `time.time() - t` obtienes los segundos. Multiplica por 1000 para milisegundos.
+**Pista:** envuelve la llamada a la corrutina principal con `asyncio.wait_for(descargar_principal(), timeout=2)`. Captura `asyncio.TimeoutError` y en el `except` ejecuta la corrutina de respaldo.
 
-## 9. Sistema de cifrado de extremo a extremo
+## 9. 🏗️ Chat asíncrono
 
-Simula un chat cifrado: cada usuario tiene su par RSA, y los mensajes se cifran con AES + RSA híbrido.
+Crea un servidor de chat con asyncio que reenvíe mensajes a todos los clientes conectados.
 
-**Pista:** crea una clase `Usuario` con `nombre` y `clave_rsa`. Un método `cifrar_para(mensaje, destinatario)` que genera clave AES, cifra el mensaje y la clave. Otro método `descifrar(nonce, tag, clave_aes_cifrada, cifrado)` que hace el proceso inverso.
+**Pista:** mantén un conjunto `clientes` con los objetos `writer` de cada conexión. Crea una función `broadcast(mensaje, emisor=None)` que itere sobre una copia del conjunto y envíe a todos excepto al emisor. Usa `asyncio.wait_for(reader.read(1024), timeout=60)` para detectar desconexiones.

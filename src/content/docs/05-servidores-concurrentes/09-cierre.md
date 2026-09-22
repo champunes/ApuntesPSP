@@ -220,7 +220,7 @@ ThreadPool con 100 hilos + cola de espera. O usa **asyncio** ([UD 10](/ApuntesPS
 >
 > *El servidor ya atiende a muchos. Pero 10.000 conexiones siguen esperando algo más ligero…*
 
-**PRÓXIMAMENTE EN UD 10:** *Alta disponibilidad. Sin un hilo por conexión, un solo bucle de eventos atenderá miles de clientes a la vez. El servidor concurrente se vuelve esbelto.*
+**PRÓXIMAMENTE EN UD 7:** *HTTP y APIs REST. Sin un hilo por conexión, un solo bucle de eventos atenderá miles de clientes a la vez… pero antes toca hablar el idioma de la web: peticiones, respuestas y JSON.*
 
 ---
 
@@ -233,8 +233,8 @@ ThreadPool con 100 hilos + cola de espera. O usa **asyncio** ([UD 10](/ApuntesPS
 | c) | Implementa servidores concurrentes con hilos | ✅ Hilo por cliente (puntos 3 y 8) + ⚡ Laboratorio |
 | d) | Gestiona pools de hilos (ThreadPoolExecutor) | ✅ ThreadPool y benchmark (puntos 4-5) + ⚡ Laboratorio |
 
-> RA4a-b (APIs REST y comerciales) se cubren en las **U07 y U08**. RA4e-g (asyncio, disponibilidad, comparativa de modelos) se cubren en la **UD 10 · Alta disponibilidad**.
+> RA4a-b (APIs REST y comerciales) se cubren en las **UD 7 y UD 8**. RA4e-g (asyncio, disponibilidad, comparativa de modelos) se cubren en la **UD 10 · Alta disponibilidad**.
 
 ---
 
-📚 [Volver al índice de la unidad](/ApuntesPSP/05-servidores-concurrentes) · **Anterior:** [08 · Servidor concurrente completo](/ApuntesPSP/05-servidores-concurrentes/08-servidor-concurrente-completo) · **Siguiente:** **[UD 10 · Alta disponibilidad](/ApuntesPSP/09-alta-disponibilidad)**
+📚 [Volver al índice de la unidad](/ApuntesPSP/05-servidores-concurrentes) · **Anterior:** [08 · Servidor concurrente completo](/ApuntesPSP/05-servidores-concurrentes/08-servidor-concurrente-completo) · **Siguiente:** **[UD 7 · HTTP y APIs REST](/ApuntesPSP/06-http-y-apis-rest)**

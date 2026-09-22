@@ -249,6 +249,10 @@ Pierdes acceso a todo lo cifrado con tu clave pública. Por eso se hacen **copia
 
 ---
 
+**PRÓXIMAMENTE EN UD 10:** *Alta disponibilidad. Sin un hilo por conexión, un solo bucle de eventos atenderá miles de clientes a la vez. El servidor concurrente se vuelve esbelto.*
+
+---
+
 ## ✅ Criterios de evaluación cubiertos (RA5)
 
 **RA5: Implementa mecanismos de seguridad que garanticen integridad y confidencialidad.**

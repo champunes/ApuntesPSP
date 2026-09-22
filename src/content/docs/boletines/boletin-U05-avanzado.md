@@ -1,84 +1,60 @@
 ﻿---
-title: Boletín UD 5 — Avanzado
-description: Ejercicios avanzados de Sockets TCP y UDP
+title: Boletín UD 6 — Avanzado
+description: Ejercicios avanzados de Servidores Concurrentes
 ---
 
-# 💪 Boletín UD 5 — Avanzado
+# 💪 Boletín UD 6 — Avanzado
 
-> Ejercicios que requieren aplicar los conceptos de UDP, NTP, HTTP y la comparativa TCP/UDP de forma más profunda, con programas completos.
+> Ejercicios que requieren aplicar la concurrencia de forma más profunda: timeouts, contadores sincronizados, límites de clientes, colas de espera, heartbeats y hasta un balanceador de carga.
 
 ---
 
-## 1. Cliente NTP manual
+## 1. Servidor con timeout
 
-Crea un cliente UDP que obtenga la hora actual desde `pool.ntp.org` usando el puerto 123. Envía un paquete de 48 bytes (el primero con valor `\x1b` y el resto `\0`). Extrae el timestamp de los bytes 40 a 43 con `struct.unpack('!I', ...)` y ajústalo restando 2208988800 para convertirlo a hora Unix.
+Implementa un servidor que cierre la conexión si el cliente no envía datos en 5 segundos (usa `socket.settimeout` o `select`).
 
-**Pista:** añade `s.settimeout(5)` antes del `recvfrom()`: si la respuesta se pierde (UDP), lanza una excepción en lugar de bloquearse para siempre.
+## 2. Cliente con timeout
 
-## 2. Servidor UDP multimensaje
+Crea un cliente que intente conectarse a `127.0.0.1:9999` con timeout de 2 segundos. Captura la excepción `socket.timeout` y muestra "Servidor no disponible".
 
-Crea un servidor UDP que reciba y responda a 3 mensajes consecutivos en un bucle antes de cerrarse. Cada respuesta debe incluir el número de orden: `"OK #1"`, `"OK #2"`, `"OK #3"`.
+## 3. Contador de bytes totales
 
-**Pista:** usa `for i in range(1, 4)` en lugar de `while True`: así el servidor se cierra solo tras la tercera respuesta. El `with` libera el socket al salir.
+Añade un contador global de bytes recibidos (protegido con Lock) al servidor multihilo. Cada vez que un cliente envía datos, suma los bytes y muestra el total acumulado.
 
-## 3. Cliente HTTP con parseo de cabeceras
+**Pista:** `total_bytes = 0` + `lock = threading.Lock()`. Dentro de `atender`, haz `with lock:` para hacer `total_bytes += len(datos)` y `print`. El `recv()` y `sendall()` no necesitan Lock (cada socket es independiente).
 
-Conéctate con un socket TCP a `example.com:80` y haz un GET a `/`. Una vez recibida la respuesta completa, parsea las cabeceras y muestra los valores de `Content-Type` y `Content-Length`.
+## 4. Servidor con límite de clientes
 
-**Pista:** separa cabeceras de cuerpo con `partition(b"\r\n\r\n")`. Recorre las líneas de las cabeceras buscando las que empiecen por `Content-Type:` y `Content-Length:`.
+Crea un servidor que acepte máximo 3 clientes. El cuarto recibe "Servidor completo" y se cierra.
 
-## 4. Cliente HTTP manual a `/ip`
+**Pista**: Usa una variable global `clientes_activos` protegida con `Lock`. Al aceptar un cliente, comprueba si ya se alcanzó el máximo; si es así, envía el mensaje y cierra sin incrementar el contador. Decrementa al terminar.
 
-Conéctate con un socket TCP a `httpbin.org:80` y haz un GET a `/ip`. Muestra los primeros 500 caracteres de la respuesta. Verás tu IP pública en el cuerpo.
+## 5. Prueba de carga
 
-**Pista:** envía `b"GET /ip HTTP/1.1\r\nHost: httpbin.org\r\nConnection: close\r\n\r\n"` y recibe en bucle con `recv(4096)` hasta que devuelva `b""`.
+Lanza 20 clientes simultáneos contra tu servidor y mide cuánto tardan todos en recibir respuesta.
 
-## 5. Compara TCP y UDP
+**Pista**: Usa un diccionario `resultados` compartido para guardar el tiempo de cada cliente. Cada cliente mide `time.time()` antes y después de la conexión. Lanza 20 hilos, haz `join` a todos y calcula estadísticas (total, media, exitosos).
 
-Escribe un programa que mida cuánto tarda en completar 10 intercambios de mensajes contra un servidor TCP y contra un servidor UDP en local. Compara los tiempos.
+## 6. Servidor con cola de espera
 
-**Pista:** en TCP cada intercambio exige `connect()` (handshake); en UDP basta un `sendto()` + `recvfrom()`. Mide con `time.time()` antes y después de cada bucle.
+Cuando el pool está lleno, los clientes entran en una cola. Cuando un hilo se libera, atiende al siguiente.
 
-## 6. Mini servidor web
+**Pista**: Usa `queue.Queue` para encolar las conexiones aceptadas. Crea N hilos trabajadores (daemon) que saquen elementos de la cola con `cola.get()` y atiendan al cliente. El hilo principal solo acepta y encola.
 
-Crea un servidor TCP que escuche en `127.0.0.1:8080`, acepte una conexión, lea la petición (ignorándola) y responda con `HTTP/1.1 200 OK` y un HTML con `"<h1>Hola mundo</h1>"`.
+## 7. Estado del servidor
 
-**Pista:** usa `SO_REUSEADDR` con `setsockopt()` para poder relanzar el servidor sin esperar. Abre `http://127.0.0.1:8080` en el navegador para verlo.
+Añade un endpoint especial: si el cliente envía "STATUS", el servidor responde con número de conexiones activas.
 
-## 7. Ping UDP
+**Pista**: Mantén un contador `activas` con Lock. En la función de atención, parsea el comando: si es `"STATUS"`, responde con el valor actual del contador; si no, responde `"OK"`. Incrementa al entrar, decrementa al salir.
 
-Cliente manda "PING", servidor responde "PONG". Mide cuánto tarda.
+## 8. Heartbeat en servidor
 
-**Pista:** Necesitas dos funciones (servidor y cliente) ejecutándose en paralelo. Usa `threading.Thread` con `daemon=True` para lanzar el servidor. Mide el tiempo con `time.time()` antes y después del intercambio de mensajes.
+El servidor tiene un hilo heartbeat que imprime "💓 Servidor vivo — N conexiones" cada 5s.
 
-## 8. Servidor en todas las interfaces
+**Pista**: Crea un hilo `daemon=True` con un bucle infinito que haga `time.sleep(5)` y luego imprima el estado usando el Lock para leer el contador de conexiones activas.
 
-El servidor escucha en todas las interfaces y responde a cualquiera.
+## 9. Balanceador de carga simple
 
-**Pista:** El servidor debe escuchar en `"0.0.0.0"` para aceptar conexiones de cualquier interfaz. Usa un bucle infinito con `recvfrom()` y responde con `sendto()` a la dirección de cada cliente.
+Crea un "balanceador" que recibe peticiones y las distribuye entre 2 servidores workers.
 
-> Nota: no es *broadcast* (eso exigiría `SO_BROADCAST` y enviar a `255.255.255.255`); es un servidor que escucha en todas las interfaces.
-
-## 9. HTTP desde cero con parseo
-
-Cliente HTTP manual que parsea el código de estado y las cabeceras.
-
-**Pista:** Después de recibir la respuesta HTTP completa, separa las cabeceras del cuerpo con `partition("\r\n\r\n")`. La primera línea de las cabeceras contiene el código de estado (ej: `HTTP/1.1 200 OK`).
-
-## 10. Mini navegador web
-
-Crea una función que descargue el HTML de una URL y lo guarde en un archivo.
-
-**Pista:** Extrae el host y la ruta de la URL. Conéctate al puerto 80 del host, envía un GET con `Connection: close`. Tras recibir toda la respuesta, separa el cuerpo de las cabeceras con `partition(b"\r\n\r\n")` y escribe el cuerpo a un archivo.
-
-## 11. Comparativa TCP vs UDP
-
-Mide el tiempo de 100 mensajes con TCP y con UDP en local.
-
-**Pista:** Necesitas servidores TCP y UDP separados ejecutándose en hilos. El servidor TCP requiere `accept()` por cada mensaje; el UDP solo `recvfrom()`. Mide el tiempo total para 100 intercambios en cada protocolo y compara.
-
-## 12. Servidor HTTP simple
-
-Crea un servidor TCP que entienda peticiones HTTP GET y sirva respuestas.
-
-**Pista:** Con `accept()` obtienes la conexión. Lee la petición con `recv()` y parsea la primera línea (`GET /ruta HTTP/1.1`). Según la ruta, devuelve distinto contenido HTML con cabeceras HTTP válidas incluyendo `Content-Length`.
+**Pista**: Crea dos workers en los puertos 5001 y 5002 (cada uno en su hilo). El balanceador en el puerto 5000 acepta conexiones y las reenvía al worker actual haciendo de proxy: lee del cliente, envía al worker, recibe la respuesta y la reenvía al cliente. Alterna entre workers con un índice round-robin.

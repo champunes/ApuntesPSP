@@ -26,7 +26,7 @@ datos = conn.recv(1024)  # El programa se para aquí hasta que lleguen datos
 
 Si el código se queda en esa línea, no puede atender a nadie más. El bloqueo es el enemigo. Y las respuestas posibles son dos:
 
-**Solución 1**: Hilos (TEMA 10) — caros si hay muchos clientes: cada hilo consume memoria y contexto del sistema operativo.
+**Solución 1**: Hilos (UD 6) — caros si hay muchos clientes: cada hilo consume memoria y contexto del sistema operativo.
 
 **Solución 2**: Asyncio — un solo hilo, pero cambia de tarea cuando una espera. Ningún `recv()` bloqueante, ningún `sleep()` que pare todo.
 

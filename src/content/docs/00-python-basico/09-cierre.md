@@ -331,7 +331,7 @@ Estas son preguntas típicas sobre Python básico que podrían hacerte en una en
 >
 > *El viaje apenas empieza.*
 
-**PRÓXIMAMENTE EN U02 — Procesos y Subprocess**
+**PRÓXIMAMENTE EN UD 2 — Gestión de procesos**
 
 ---
 
@@ -347,4 +347,4 @@ Estas son preguntas típicas sobre Python básico que podrían hacerte en una en
 
 ---
 
-📚 [Volver al índice de la unidad](/ApuntesPSP/00-python-basico) · **Anterior:** [08 · Módulos y avanzado](/ApuntesPSP/00-python-basico/08-modulos-y-avanzado) · **Siguiente:** **[U02 · Procesos y Subprocess](/ApuntesPSP/01-gestion-de-procesos)**
+📚 [Volver al índice de la unidad](/ApuntesPSP/00-python-basico) · **Anterior:** [08 · Módulos y avanzado](/ApuntesPSP/00-python-basico/08-modulos-y-avanzado) · **Siguiente:** **[UD 2 · Gestión de procesos](/ApuntesPSP/01-gestion-de-procesos)**

@@ -1,11 +1,11 @@
 ﻿---
 title: Boletín UD 5 — Inicial
-description: Ejercicios básicos de Sockets TCP
+description: Ejercicios básicos de Sockets TCP y UDP
 ---
 
 # 📝 Boletín UD 5 — Inicial
 
-> Ejercicios básicos para afianzar los conceptos de sockets TCP: cliente, servidor, eco y la pareja IP/puerto de la unidad U05.
+> Ejercicios básicos para afianzar los conceptos de sockets TCP y UDP: cliente, servidor, eco, la pareja IP/puerto, el HTTP manual y la comparativa de protocolos de la unidad UD 5.
 
 ---
 
@@ -17,23 +17,11 @@ Crea un servidor TCP que, cuando un cliente se conecte, le envíe "Bienvenido al
 
 Crea un cliente que se conecte a 127.0.0.1:9000, envíe "Hola" y luego espere y muestre la respuesta del servidor.
 
-## 3. Servidor contador
-
-Crea un servidor que acepte una conexión, reciba un número como texto, lo convierta a entero, lo incremente en 1 y devuelva el resultado.
-
-## 4. Servidor eco
+## 3. Servidor eco
 
 Crea un servidor TCP que acepte una conexión, reciba un mensaje y devuelva exactamente lo mismo que recibe.
 
-## 5. Cliente mínimo
-
-Crea un cliente TCP que se conecte a 127.0.0.1:9000 y envíe `b"Hola servidor"`. No necesita esperar respuesta: con `connect()` y `with` basta.
-
-## 6. Servidor mínimo
-
-Crea un servidor TCP que escuche en 127.0.0.1:9000, acepte una conexión, reciba datos y los imprima por pantalla.
-
-## 7. IP y puerto
+## 4. IP y puerto
 
 Responde por escrito:
 
@@ -43,12 +31,42 @@ c) ¿Qué constante de Python crea un socket TCP y cuál un socket UDP?
 
 **Pista:** repasa el punto 1 de la unidad: la IP identifica la **máquina**, el puerto identifica el **programa**; `127.0.0.1` es **localhost**; y los tipos de socket son `SOCK_STREAM` (TCP) y `SOCK_DGRAM` (UDP).
 
-## 8. Servidor hora
+## 5. Cliente UDP con entrada de usuario
 
-Crea un servidor TCP que, cuando un cliente se conecte, le devuelva la hora actual con formato `HH:MM:SS` y cierre la conexión.
+Crea un cliente UDP que pida un mensaje al usuario por teclado con `input()`, lo envíe a `127.0.0.1:9001` y espere una respuesta.
 
-**Pista:** usa `time.strftime("%H:%M:%S")` para obtener la hora y envía el texto con `.encode()`.
+**Pista:** UDP no tiene `connect()`: la dirección va dentro del `sendto()`, y la respuesta llega con `recvfrom()`.
+
+## 6. Servidor UDP con eco personalizado
+
+Crea un servidor UDP que escuche en `127.0.0.1:9001`. Al recibir un mensaje, responda con `"Recibido: "` seguido del mensaje original.
+
+## 7. TCP vs UDP: clasifica
+
+a) Clasifica cada aplicación como TCP o UDP y justifica brevemente:
+
+- Web (HTTP)
+- Videollamada (Zoom)
+- Correo (SMTP)
+- Juego online (Fortnite)
+- Transferencia de archivos (FTP)
+- DNS
+
+b) Completa la tabla:
+
+| Característica | TCP | UDP |
+|---|---|---|
+| Conexión | | |
+| Entrega garantizada | | |
+| Orden | | |
+| Velocidad | | |
+
+## 8. Cliente HTTP manual
+
+Conéctate con un socket TCP a `www.example.com:80`, haz un GET a `/` y muestra los primeros 500 caracteres de la respuesta.
+
+**Pista:** envía `"GET / HTTP/1.1\r\nHost: www.example.com\r\nConnection: close\r\n\r\n"` con `sendall()`. Recibe en bucle con `recv(4096)` acumulando bytes hasta que devuelva `b""`, y entonces decodifica.
 
 ---
 
-📚 [Volver a la unidad](/ApuntesPSP/04-sockets-tcp) · Resuelto: [✅ Boletín UD 5 — Inicial (Resuelto)](/ApuntesPSP/boletines/boletin-u04-inicial-resuelto)
+📚 [Volver a la unidad](/ApuntesPSP/04-sockets-tcp-y-udp) · Resuelto: [✅ Boletín UD 5 — Inicial (Resuelto)](/ApuntesPSP/boletines/boletin-u04-inicial-resuelto)

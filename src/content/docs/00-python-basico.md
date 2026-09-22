@@ -10,7 +10,7 @@ nav_order: 00
 
 ---
 
-Python es el lenguaje que da nombre al módulo y el que vas a usar en todas las unidades siguientes. Esta unidad es prerequisito: cubre todo lo que necesitas saber de Python antes de lanzarte a crear procesos, hilos y servidores. Si ya dominas variables, funciones, clases y módulos, puedes saltarla y empezar directamente por la [U02](/ApuntesPSP/01-gestion-de-procesos). Si tienes dudas, quédate aquí: cada concepto se explica con ejemplos cortos que puedes copiar y ejecutar en tu terminal.
+Python es el lenguaje que da nombre al módulo y el que vas a usar en todas las unidades siguientes. Esta unidad es prerequisito: cubre todo lo que necesitas saber de Python antes de lanzarte a crear procesos, hilos y servidores. Si ya dominas variables, funciones, clases y módulos, puedes saltarla y empezar directamente por la [UD 2](/ApuntesPSP/01-gestion-de-procesos). Si tienes dudas, quédate aquí: cada concepto se explica con ejemplos cortos que puedes copiar y ejecutar en tu terminal.
 
 Esta unidad se lee como un **libro de 9 capítulos**: los 8 primeros son teoría en progresión y el 9º aterriza todo en la práctica.
 
@@ -74,7 +74,7 @@ Esta unidad es **prerequisito** del módulo PSP. No corresponde a ningún RA dir
 | — | Crea y usa clases con atributos y métodos | ✅ Punto 7 |
 | — | Importa módulos y gestiona paquetes externos | ✅ Punto 8 |
 
-> Estos conocimientos son **necesarios** para todas las unidades del módulo (U01–U12).
+> Estos conocimientos son **necesarios** para todas las unidades del módulo (UD 1–UD 10).
 
 ---
 

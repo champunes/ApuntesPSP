@@ -13,7 +13,7 @@ description: El servidor que atiende a un cliente cada vez 🐢
 
 > Un servidor **secuencial** atiende a un cliente cada vez: `accept()` recibe una conexión, la procesa hasta el final y solo entonces vuelve a aceptar. Los demás clientes esperan en una cola invisible, aunque ya estén conectados.
 
-Es el servidor que construiste en la [UD 5 · Sockets TCP y UDP](/ApuntesPSP/04-sockets-tcp): un bucle `while True` con `accept()`. Funciona, pero tiene un límite muy claro que vamos a medir.
+Es el servidor que construiste en la [UD 5 · Sockets TCP y UDP](/ApuntesPSP/04-sockets-tcp-y-udp): un bucle `while True` con `accept()`. Funciona, pero tiene un límite muy claro que vamos a medir.
 
 ---
 

@@ -141,7 +141,7 @@ Event Loop arranca
 ## ✏️ Aprieta el lápiz
 
 1. **Asyncio básico**: Crea 3 corrutinas que esperen 1, 2 y 3 segundos. Lánzalas con `gather` y mide el tiempo total.
-2. **Servidor asyncio**: Convierte el servidor TCP del TEMA 10 a asyncio.
+2. **Servidor asyncio**: Convierte el servidor TCP de la UD 6 a asyncio.
 3. **Heartbeat**: Añade un heartbeat que imprima "💓 vivo" cada 3s mientras el servidor funciona.
 4. **Backoff**: Crea un cliente que intente conectarse 3 veces con backoff exponencial.
 5. **Monitor**: Monta el monitor de servicio con heartbeat + timeout + backoff que vigile un puerto.

@@ -12,7 +12,7 @@
 ---
 
 Apuntes del módulo de **Programación de Servicios y Procesos** (Python),  
-organizados en **11 unidades**. Cada unidad se lee como un **libro**: índice + 9 capítulos de teoría  
+organizados en **10 unidades + 1 anexo**. Cada unidad se lee como un **libro**: índice + 9 capítulos de teoría  
 + **4 boletines de ejercicios** (inicial y avanzado, con y sin solución).
 
 </div>
@@ -35,18 +35,18 @@ PSP/
 ├── package.json / astro.config.mjs       ← Config Astro + Starlight
 ├── .github/workflows/deploy.yml          ← GitHub Actions → gh-pages
 │
-├── src/content/docs/                     ← 155 archivos de apuntes (MD)
+├── src/content/docs/                     ← 149 archivos de apuntes (MD)
 │   ├── index.md                          ← Landing page con cards y descargas
-│   ├── 01-procesos-y-subprocess.md       ← Índice de la unidad (11 unidades)
-│   ├── 01-procesos-y-subprocess/         ← 9 capítulos por unidad
+│   ├── 01-gestion-de-procesos.md       ← Índice de la unidad (10 unidades + anexo)
+│   ├── 01-gestion-de-procesos/         ← 9 capítulos por unidad
 │   │   ├── 01-*.md … 08-*.md             ← Teoría en progresión
 │   │   └── 09-cierre.md                   ← Cierre práctico de la unidad
-│   ├── boletines/                        ← 44 boletines (4 × 11 unidades)
-│   │   ├── boletin-U01-inicial.md        ← 🟢 Inicial SIN resolver
-│   │   ├── boletin-U01-inicial-resuelto.md ← ✅ Inicial CON solución
-│   │   ├── boletin-U01-avanzado.md       ← 💪 Avanzado SIN resolver
-│   │   └── boletin-U01-avanzado-resuelto.md ← ⭐ Avanzado CON solución
-│   └── … hasta unidad 11
+│   ├── boletines/                        ← 40 boletines (4 × 10 unidades)
+│   │   ├── boletin-U00-inicial.md        ← 🟢 Inicial SIN resolver
+│   │   ├── boletin-U00-inicial-resuelto.md ← ✅ Inicial CON solución
+│   │   ├── boletin-U00-avanzado.md       ← 💪 Avanzado SIN resolver
+│   │   └── boletin-U00-avanzado-resuelto.md ← ⭐ Avanzado CON solución
+│   └── … hasta unidad 10 + anexo
 │
 ├── src/styles/custom.css                 ← CSS premium (gradientes, cards, animaciones)
 ├── public/
@@ -73,21 +73,21 @@ PSP/
 
 ---
 
-## 📖 Mapa Temas ↔ RAs
+## 📖 Mapa Unidades ↔ RAs
 
-| TEMA | Contenido | RA |
+| Unidad | Contenido | RA |
 |------|-----------|----|
-| **01** — Procesos y Subprocess | Procesos, subprocess.run/Popen, paralela vs distribuida | **RA1** |
-| **02** — Hilos Fundamentos | threading, join, daemon, Timer, GIL, estados del hilo | **RA2** |
-| **03** — Sincronización entre Hilos | Lock, RLock, Semaphore, Barrier, Condition, condición de carrera | **RA2** |
-| **04** — Sockets TCP | socket(), bind(), listen(), accept(), recv/send, SO_REUSEADDR | **RA3** |
-| **05** — Sockets UDP y Protocolos | UDP, servidor/cliente UDP, HTTP desde cero, NTP, TCP vs UDP | **RA3** |
-| **06** — APIs REST y HTTP | REST, GET/POST/PUT/DELETE, requests, JSON, códigos de estado | **RA4a-b** |
-| **07** — APIs Comerciales | API Key, dotenv, OpenWeatherMap, OpenAI, rate limiting, backoff | **RA4a-b** |
-| **08** — Hash y Cifrado Clásico | MD5, SHA, hash con sal, cifrado César, principios de seguridad | **RA5** |
-| **09** — Cifrado Moderno | AES, RSA, cifrado híbrido, firmas digitales, RBAC | **RA5** |
-| **10** — Servidores Concurrentes | ThreadPoolExecutor, benchmark secuencial vs hilos vs pool, servidor multihilo | **RA4c-d** |
-| **11** — Asyncio y Disponibilidad | asyncio, corrutinas, heartbeat, backoff, timeouts, threads vs asyncio | **RA4e-g** |
+| **UD 1** — Python 3 básico | Tipos, flujo, funciones, clases, módulos | Prerequisito |
+| **UD 2** — Gestión de procesos | Procesos, subprocess.run/Popen, paralela vs distribuida | **RA1** |
+| **UD 3** — Hilos y concurrencia | threading, join, daemon, Timer, GIL, estados del hilo | **RA2** |
+| **UD 4** — Sincronización | Lock, RLock, Semaphore, Barrier, Condition, condición de carrera | **RA2** |
+| **UD 5** — Sockets TCP y UDP | socket, cliente/servidor TCP y UDP, HTTP desde cero, NTP | **RA3** |
+| **UD 6** — Servidores concurrentes | ThreadPoolExecutor, benchmark, servidor multihilo | **RA4c-d** |
+| **UD 7** — HTTP y APIs REST | REST, GET/POST/PUT/DELETE, requests, JSON, códigos de estado | **RA4a-b** |
+| **UD 8** — APIs Comerciales | API Key, dotenv, OpenWeatherMap, OpenAI, rate limiting, backoff | **RA4a-b** |
+| **UD 9** — Seguridad y cifrado | MD5, SHA, sal, César, AES, RSA, firmas, RBAC | **RA5** |
+| **UD 10** — Alta disponibilidad | asyncio, corrutinas, heartbeat, backoff, timeouts | **RA4e-g** |
+| **Anexo** — Spring Boot | Del Python al ecosistema Java: DI, REST, JPA | — |
 
 ---
 
@@ -100,7 +100,7 @@ Cada unidad combina teoría y práctica con secciones dinámicas:
 | **🎭 Be the code, my friend** | Traza paso a paso del código. "Sé el hilo, sé el socket, sé el cifrado…" |
 | **🥊 El ring de los conceptos** | Diálogos comparativos → 🔥 Fireside Chat (TCP vs UDP, Lock vs Semáforo, Threads vs Asyncio) |
 | **🧩 Pool Puzzle** | Ordenar líneas de código desordenadas |
-| **⏱ Benchmark** | Comparativa de rendimiento (U10: secuencial vs hilos vs ThreadPool) |
+| **⏱ Benchmark** | Comparativa de rendimiento (UD 6: secuencial vs hilos vs ThreadPool) |
 | **❓ Preguntas tontas** | FAQ con respuestas directas y sin tecnicismos |
 | **✏️ Aprieta el lápiz** | Ejercicios incrustados en la teoría |
 | **🧠 Mini-chequeo** | Autoevaluación rápida con respuestas en `<details>` |
@@ -127,7 +127,7 @@ Los conceptos clave se ilustran con **diagramas SVG** generados con [D2](https:/
 
 ## 📦 Progresión de ejercicios por unidad
 
-Cada unidad tiene **4 boletines** (44 boletines en total) en `src/content/docs/boletines/`:
+Cada unidad tiene **4 boletines** (40 boletines en total) en `src/content/docs/boletines/`:
 
 ```
 Boletín 🟢  →  boletin-UXX-inicial.md               (inicial SIN resolver)
@@ -136,7 +136,7 @@ Boletín 💪  →  boletin-UXX-avanzado.md               (avanzado SIN resolver
 Boletín ⭐  →  boletin-UXX-avanzado-resuelto.md      (avanzado CON solución)
 ```
 
-**Total: ~180 ejercicios** repartidos en 44 boletines (≈8 iniciales + ≥8 avanzados por unidad), más los incrustados en la teoría (✏️ Aprieta el lápiz, 🧠 Mini-chequeo, ⚡ Laboratorio de tortura).
+**Total: ~160 ejercicios** repartidos en 40 boletines (≈8 iniciales + ≥8 avanzados por unidad), más los incrustados en la teoría (✏️ Aprieta el lápiz, 🧠 Mini-chequeo, ⚡ Laboratorio de tortura).
 
 ---
 

@@ -1,7 +1,7 @@
 import { defineConfig } from 'astro/config';
 import starlight from '@astrojs/starlight';
 
-const emojis = ['🐍', '🚀', '🔀', '🔒', '🔌', '📡', '🌐', '🧪', '🔐', '🏗️', '☕'];
+const emojis = ['🐍', '🚀', '🔀', '🔒', '🔌', '🏗️', '🌐', '🧪', '🔐', '⏱️', '☕'];
 
 const unitSlugs = [
   '00-python-basico',
@@ -9,10 +9,10 @@ const unitSlugs = [
   '02-hilos-y-concurrencia',
   '03-sincronizacion',
   '04-sockets-tcp-y-udp',
+  '05-servidores-concurrentes',
   '06-http-y-apis-rest',
   '07-apis-comerciales',
   '08-seguridad-y-cifrado',
-  '05-servidores-concurrentes',
   '09-alta-disponibilidad',
   '10-anexo-spring-boot',
 ];
@@ -23,10 +23,10 @@ const unitLabels = [
   'Hilos y concurrencia',
   'Sincronización',
   'Sockets TCP y UDP',
+  'Servidores concurrentes',
   'HTTP y APIs REST',
   'APIs Comerciales',
   'Seguridad y cifrado',
-  'Servidores concurrentes',
   'Alta disponibilidad',
   'Anexo: Spring Boot',
 ];
@@ -38,10 +38,10 @@ const unidadesExpandidas = {
   '02-hilos-y-concurrencia': true,
   '03-sincronizacion': true,
   '04-sockets-tcp-y-udp': true,
+  '05-servidores-concurrentes': true,
   '06-http-y-apis-rest': true,
   '07-apis-comerciales': true,
   '08-seguridad-y-cifrado': true,
-  '05-servidores-concurrentes': true,
   '09-alta-disponibilidad': true,
   '10-anexo-spring-boot': true,
 };
@@ -53,10 +53,10 @@ const boletinesReady = [
   '02-hilos-y-concurrencia',
   '03-sincronizacion',
   '04-sockets-tcp-y-udp',
+  '05-servidores-concurrentes',
   '06-http-y-apis-rest',
   '07-apis-comerciales',
   '08-seguridad-y-cifrado',
-  '05-servidores-concurrentes',
   '09-alta-disponibilidad',
 ];
 
@@ -66,7 +66,7 @@ const unitPuntos = {
   '01-gestion-de-procesos': ['01-que-es-un-proceso', '02-estados-de-un-proceso', '03-paralela-vs-distribuida', '04-subprocess-run', '05-subprocess-popen', '06-comunicacion-con-procesos', '07-compatibilidad-windows-linux', '08-procesos-en-la-practica', '09-cierre'],
   '02-hilos-y-concurrencia': ['01-de-proceso-a-hilo', '02-primer-hilo', '03-hilos-con-argumentos', '04-hilos-daemon', '05-timer', '06-gil', '07-estados-del-hilo', '08-hilos-en-la-practica', '09-cierre'],
   '03-sincronizacion': ['01-condicion-de-carrera', '02-lock', '03-rlock', '04-semaphore', '05-barrier', '06-condition', '07-productor-consumidor', '08-buenas-practicas', '09-cierre'],
-  '04-sockets-tcp-y-udp': ['01-que-es-un-socket', '02-cliente-tcp', '03-servidor-tcp', '04-ciclo-de-vida-de-la-conexion', '05-errores-y-manejo', '06-so-reuseaddr', '07-protocolos-sobre-tcp', '08-servidor-eco-completo', '09-cierre'],
+  '04-sockets-tcp-y-udp': ['01-que-es-un-socket', '02-cliente-tcp', '03-servidor-tcp', '04-ciclo-y-errores', '05-cliente-y-servidor-udp', '06-http-y-ntp', '07-cuando-usar-cada-protocolo', '08-practica-eco', '09-cierre'],
   '06-http-y-apis-rest': ['01-web-y-http', '02-metodos-http', '03-principios-rest', '04-codigos-de-estado', '05-json', '06-requests-get', '07-requests-post', '08-practica-api', '09-cierre'],
   '07-apis-comerciales': ['01-api-keys', '02-variables-de-entorno', '03-openweathermap', '04-openai', '05-rate-limiting', '06-errores-http', '07-seguridad-y-buenas-practicas', '08-practica-apis-comerciales', '09-cierre'],
   '08-seguridad-y-cifrado': ['01-principios-de-seguridad', '02-hash-y-huellas-digitales', '03-contrasenas-seguras', '04-cifrado-clasico', '05-cifrado-simetrico-aes', '06-cifrado-asimetrico-rsa', '07-firmas-digitales', '08-cifrado-hibrido-y-practica', '09-cierre'],

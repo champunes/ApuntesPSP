@@ -72,13 +72,13 @@ Al terminar, serás capaz de:
 | a) | Utiliza APIs REST para obtener datos externos | ✅ Puntos 3-5 y 8 + ⚡ Laboratorio (punto 9) |
 | b) | Gestiona peticiones HTTP y procesa respuestas JSON | ✅ Puntos 1, 5-6 y 8 + ⚡ Laboratorio (punto 9) |
 
-> RA4c (Servidores concurrentes) y RA4d (ThreadPool) se cubren en la **UD 6 · Servidores concurrentes**. RA4e-g (asyncio, disponibilidad, comparativa) se cubren en la **U12 · Alta disponibilidad**.
+> RA4c (Servidores concurrentes) y RA4d (ThreadPool) se cubren en la **UD 6 · Servidores concurrentes**. RA4e-g (asyncio, disponibilidad, comparativa) se cubren en la **UD 10 · Alta disponibilidad**.
 
 ---
 
 ## 🚪 ¿Por dónde empiezo?
 
-¿Vienes de la U07 y dominas `requests`, GET y JSON? Perfecto, ese es el trampolín ideal: repasa la [UD 7 · HTTP y APIs REST](/ApuntesPSP/06-http-y-apis-rest) para tener fresco `params=` y `resp.json()`, y arranca en el [punto 1](/ApuntesPSP/07-apis-comerciales/01-api-keys), que parte justo de ahí: de la petición con `requests` a la petición con clave.
+¿Vienes de la UD 7 y dominas `requests`, GET y JSON? Perfecto, ese es el trampolín ideal: repasa la [UD 7 · HTTP y APIs REST](/ApuntesPSP/06-http-y-apis-rest) para tener fresco `params=` y `resp.json()`, y arranca en el [punto 1](/ApuntesPSP/07-apis-comerciales/01-api-keys), que parte justo de ahí: de la petición con `requests` a la petición con clave.
 
 ¿Ya tienes claves de OpenWeatherMap y OpenAI y solo necesitas consumirlas? Ve directo al [punto 3](/ApuntesPSP/07-apis-comerciales/03-openweathermap) y al [punto 4](/ApuntesPSP/07-apis-comerciales/04-openai). Si vienes de cero en APIs, no te saltes los puntos 1 y 2: la API key y el `.env` son la base de todo lo demás.
 

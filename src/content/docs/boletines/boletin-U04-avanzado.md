@@ -1,11 +1,11 @@
 ﻿---
 title: Boletín UD 5 — Avanzado
-description: Ejercicios avanzados de Sockets TCP
+description: Ejercicios avanzados de Sockets TCP y UDP
 ---
 
 # 💪 Boletín UD 5 — Avanzado
 
-> Ejercicios que requieren aplicar los conceptos de sockets TCP de forma más profunda, con programas completos: clientes interactivos, `select()`, timeouts y servidores multiusuario.
+> Ejercicios que requieren aplicar los conceptos de sockets TCP y UDP de forma más profunda, con programas completos: clientes interactivos, `select()`, timeouts, NTP y comparativas de protocolo.
 
 ---
 
@@ -21,48 +21,68 @@ Crea un cliente que pida texto por teclado con `input()`, lo envíe al servidor 
 
 **Pista:** envuelve el `input()` + `sendall()` + `recv()` en un `while True` y rompe el bucle con `break` cuando el texto sea `"salir"`.
 
-## 3. Servidor que registra IP
-
-Crea un servidor que, al recibir una conexión, muestre la dirección IP y el puerto del cliente usando `conn.getpeername()`, y luego devuelva esos datos al cliente.
-
-**Pista:** `getpeername()` devuelve una tupla `(IP, puerto)`. Envíala convertida a texto con `str(direccion).encode()`.
-
-## 4. Servidor de mayúsculas
+## 3. Servidor de mayúsculas
 
 El cliente envía texto, el servidor lo devuelve en MAYÚSCULAS.
 
 **Pista:** recibe los datos con `recv(1024).decode()`, aplica `.upper()` y envía el resultado con `sendall(...)`.
 
-## 5. Cliente con reconexión
+## 4. Cliente con reconexión
 
 Cliente que intenta conectar, y si falla, reintenta hasta 3 veces con 2s de espera.
 
 **Pista:** envuelve `socket.connect()` en un bucle `for` con `try/except`. Captura `ConnectionRefusedError` y `socket.timeout`, espera 2s con `time.sleep(2)` y reintenta.
 
-## 6. Servidor que gestiona múltiples conexiones (sin hilos)
+## 5. Servidor que gestiona múltiples conexiones (sin hilos)
 
 Usa `select.select()` para atender a varios clientes en un solo hilo.
 
 **Pista:** configura el socket servidor como no bloqueante con `setblocking(False)`. `select.select()` te devuelve los sockets que tienen datos listos para leer. Si el socket listo es el servidor, acepta una nueva conexión; si es un cliente, recibe datos.
 
-## 7. Calculadora remota
-
-El cliente envía "5+3", el servidor calcula y responde "Resultado: 8".
-
-**Pista:** usa `eval(expr)` para evaluar la expresión recibida. Envuelve en `try/except` para capturar errores (por ejemplo, división entre cero o sintaxis inválida).
-
-## 8. Timeout personalizado
+## 6. Timeout personalizado
 
 Crea un servidor que cierre la conexión si el cliente no envía datos en 10 segundos.
 
 **Pista:** después de `accept()`, llama a `conn.settimeout(10)`. Captura `socket.timeout` y envía un mensaje de despedida antes de cerrar.
 
-## 9. Servidor de chat simple
+## 7. Cliente NTP manual
 
-Un servidor que recibe mensajes de un cliente y los reenvía a todos los demás.
+Crea un cliente UDP que obtenga la hora actual desde `pool.ntp.org` usando el puerto 123. Envía un paquete de 48 bytes (el primero con valor `\x1b` y el resto `\0`). Extrae el timestamp de los bytes 40 a 43 con `struct.unpack('!I', ...)` y ajústalo restando 2208988800 para convertirlo a hora Unix.
 
-**Pista:** mantén una lista global de conexiones. Usa un Lock al modificar la lista. Cuando un socket recibe datos, recorre la lista y reenvía con `sendall()` a todos menos al emisor. Usa un hilo por cliente con `threading.Thread`.
+**Pista:** añade `s.settimeout(5)` antes del `recvfrom()`: si la respuesta se pierde (UDP), lanza una excepción en lugar de bloquearse para siempre.
+
+## 8. Servidor UDP multimensaje
+
+Crea un servidor UDP que reciba y responda a 3 mensajes consecutivos en un bucle antes de cerrarse. Cada respuesta debe incluir el número de orden: `"OK #1"`, `"OK #2"`, `"OK #3"`.
+
+**Pista:** usa `for i in range(1, 4)` en lugar de `while True`: así el servidor se cierra solo tras la tercera respuesta. El `with` libera el socket al salir.
+
+## 9. Ping UDP
+
+Cliente manda "PING", servidor responde "PONG". Mide cuánto tarda.
+
+**Pista:** necesitas dos funciones (servidor y cliente) ejecutándose en paralelo. Usa `threading.Thread` con `daemon=True` para lanzar el servidor. Mide el tiempo con `time.time()` antes y después del intercambio de mensajes.
+
+## 10. Servidor en todas las interfaces
+
+El servidor escucha en todas las interfaces y responde a cualquiera.
+
+**Pista:** el servidor debe escuchar en `"0.0.0.0"` para aceptar conexiones de cualquier interfaz. Usa un bucle infinito con `recvfrom()` y responde con `sendto()` a la dirección de cada cliente.
+
+> Nota: no es *broadcast* (eso exigiría `SO_BROADCAST` y enviar a `255.255.255.255`); es un servidor que escucha en todas las interfaces.
+
+## 11. Compara TCP y UDP
+
+Escribe un programa que mida cuánto tarda en completar 10 intercambios de mensajes contra un servidor TCP y contra un servidor UDP en local. Compara los tiempos.
+
+**Pista:** en TCP cada intercambio exige `connect()` (handshake); en UDP basta un `sendto()` + `recvfrom()`. Mide con `time.time()` antes y después de cada bucle.
+
+## 12. Mini servidor web
+
+Crea un servidor TCP que escuche en `127.0.0.1:8080`, acepte una conexión, lea la petición (ignorándola) y responda con `HTTP/1.1 200 OK` y un HTML con `"<h1>Hola mundo</h1>"`.
+
+**Pista:** usa `SO_REUSEADDR` con `setsockopt()` para poder relanzar el servidor sin esperar. Abre `http://127.0.0.1:8080` en el navegador para verlo.
 
 ---
 
-📚 [Volver a la unidad](/ApuntesPSP/04-sockets-tcp) · Resuelto: [✅ Boletín UD 5 — Avanzado (Resuelto)](/ApuntesPSP/boletines/boletin-u04-avanzado-resuelto)
+📚 [Volver a la unidad](/ApuntesPSP/04-sockets-tcp-y-udp) · Resuelto: [✅ Boletín UD 5 — Avanzado (Resuelto)](/ApuntesPSP/boletines/boletin-u04-avanzado-resuelto)

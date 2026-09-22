@@ -41,11 +41,11 @@ Al terminar, serás capaz de:
 | [01 · Qué es un socket](/ApuntesPSP/04-sockets-tcp-y-udp/01-que-es-un-socket) | IP + puerto, TCP vs UDP, la analogía del teléfono | Todos |
 | [02 · Cliente TCP](/ApuntesPSP/04-sockets-tcp-y-udp/02-cliente-tcp) | `connect()`, `sendall()` y `recv()`: el cliente que habla primero | Todos |
 | [03 · Servidor TCP](/ApuntesPSP/04-sockets-tcp-y-udp/03-servidor-tcp) | `bind()`, `listen()` y `accept()`: el servidor que escucha | Todos |
-| [04 · Ciclo de vida de la conexión](/ApuntesPSP/04-sockets-tcp-y-udp/04-ciclo-de-vida-de-la-conexion) | Three-way handshake y cierre de la conexión TCP | Todos |
-| [05 · Errores y gestión](/ApuntesPSP/04-sockets-tcp-y-udp/05-errores-y-manejo) | `ConnectionResetError`, timeouts y `try/except` | Todos |
-| [06 · SO_REUSEADDR](/ApuntesPSP/04-sockets-tcp-y-udp/06-so-reuseaddr) | "Address already in use", TIME_WAIT y cómo evitarlo | Todos |
-| [07 · Protocolos sobre TCP](/ApuntesPSP/04-sockets-tcp-y-udp/07-protocolos-sobre-tcp) | HTTP hablado a pelo con un socket | Todos |
-| [08 · Servidor eco completo](/ApuntesPSP/04-sockets-tcp-y-udp/08-servidor-eco-completo) | Servidor + cliente eco, mano a mano TCP | Todos |
+| [04 · Ciclo de vida y errores](/ApuntesPSP/04-sockets-tcp-y-udp/04-ciclo-y-errores) | Handshake, cierre, TIME_WAIT, `SO_REUSEADDR`, timeouts | Todos |
+| [05 · Cliente y servidor UDP](/ApuntesPSP/04-sockets-tcp-y-udp/05-cliente-y-servidor-udp) | `sendto()`, `recvfrom()` y la vida real de los datagramas | Todos |
+| [06 · HTTP y NTP](/ApuntesPSP/04-sockets-tcp-y-udp/06-http-y-ntp) | HTTP hablado a pelo, byte ordering y el reloj de Internet | Todos |
+| [07 · Cuándo usar cada protocolo](/ApuntesPSP/04-sockets-tcp-y-udp/07-cuando-usar-cada-protocolo) | Criterios de decisión y casos reales: DNS, VoIP, streaming | Todos |
+| [08 · Práctica eco](/ApuntesPSP/04-sockets-tcp-y-udp/08-practica-eco) | Servidor + cliente eco en TCP y UDP, mano a mano | Todos |
 | [09 · Cierre](/ApuntesPSP/04-sockets-tcp-y-udp/09-cierre) | Sé el socket, Fireside, Laboratorio de tortura… | Todos |
 
 ---
@@ -70,13 +70,13 @@ Al terminar, serás capaz de:
 | CE | Criterio | Dónde se cubre |
 |---|---|---|
 | RA3a | Modelo de capas de red (TCP/IP) | ✅ Punto 1 |
-| RA3b | Protocolo UDP | ✅ Punto 1 |
+| RA3b | Protocolo UDP | ✅ Puntos 1 y 5 |
 | RA3c | Crea servidores TCP | ✅ Puntos 3 y 8 + ⚡ Laboratorio (punto 9) |
 | RA3d | Crea clientes TCP | ✅ Puntos 2 y 8 + ⚡ Laboratorio (punto 9) |
-| RA3e | Crea servidores y clientes UDP | ✅ Punto 1 + ⚡ Laboratorio (punto 9) |
-| RA3f | Gestiona errores de red | ✅ Punto 5 + ⚡ Laboratorio (punto 9) |
-| RA3g | Configura opciones de socket | ✅ Puntos 5 y 6 |
-| RA3h | Protocolos HTTP/NTP sobre sockets | ✅ Punto 7 |
+| RA3e | Crea servidores y clientes UDP | ✅ Punto 5 y 8 + ⚡ Laboratorio (punto 9) |
+| RA3f | Gestiona errores de red | ✅ Punto 4 + ⚡ Laboratorio (punto 9) |
+| RA3g | Configura opciones de socket | ✅ Punto 4 |
+| RA3h | Protocolos HTTP/NTP sobre sockets | ✅ Punto 6 |
 
 ---
 
@@ -84,7 +84,7 @@ Al terminar, serás capaz de:
 
 ¿Vienes de la UD 4 y dominas hilos y sincronización? Empieza por el [punto 1](/ApuntesPSP/04-sockets-tcp-y-udp/01-que-es-un-socket), que parte de cero: qué es un socket, la IP y el puerto.
 
-¿Ya sabes qué es un socket? Saltar al [punto 3](/ApuntesPSP/04-sockets-tcp-y-udp/03-servidor-tcp), al [5](/ApuntesPSP/04-sockets-tcp-y-udp/05-errores-y-manejo) o al [6](/ApuntesPSP/04-sockets-tcp-y-udp/06-so-reuseaddr).
+¿Ya sabes qué es un socket? Saltar al [punto 3](/ApuntesPSP/04-sockets-tcp-y-udp/03-servidor-tcp), al [4](/ApuntesPSP/04-sockets-tcp-y-udp/04-ciclo-y-errores) o al [5 (UDP)](/ApuntesPSP/04-sockets-tcp-y-udp/05-cliente-y-servidor-udp).
 
 **📍 Primer punto:** [01 · Qué es un socket](/ApuntesPSP/04-sockets-tcp-y-udp/01-que-es-un-socket)
 **⏭️ Al acabar la unidad, continúa en [UD 6 · Servidores concurrentes](/ApuntesPSP/05-servidores-concurrentes).**

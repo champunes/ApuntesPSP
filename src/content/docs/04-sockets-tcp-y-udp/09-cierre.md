@@ -1,15 +1,15 @@
 ﻿---
 title: "09 — Cierre: consolida lo aprendido"
-description: "Sé el socket, laboratorio TCP y el cierre de la unidad 🧠"
+description: "Sé el socket, laboratorios TCP/UDP y el cierre de la unidad 🧠"
 ---
 
-<p><small>Sé el socket, laboratorio TCP y el cierre de la unidad 🧠</small></p>
+<p><small>Sé el socket, laboratorios TCP/UDP y el cierre de la unidad 🧠</small></p>
 
 > 🗺️ **Estás en:** 🔌 **UD 5 · Sockets TCP y UDP** → 09 · Cierre
 
 ---
 
-Has terminado la teoría: socket, cliente, servidor, handshake, errores, `SO_REUSEADDR` y protocolos sobre TCP. Este cierre es el aterrizaje: recorres lo aprendido con juegos, un laboratorio real con fallos intencionados y las preguntas que te harán en una entrevista. Léelo justo después del [punto 8](/ApuntesPSP/04-sockets-tcp-y-udp/08-servidor-eco-completo) y antes de abrir los boletines.
+Has terminado la teoría: socket, cliente y servidor TCP, handshake, errores, `SO_REUSEADDR`, cliente y servidor UDP, datagramas, HTTP, NTP y cuándo usar cada protocolo. Este cierre es el aterrizaje: recorres lo aprendido con juegos, un laboratorio real con fallos intencionados y las preguntas que te harán en una entrevista. Léelo justo después del [punto 8](/ApuntesPSP/04-sockets-tcp-y-udp/08-practica-eco) y antes de abrir los boletines.
 
 ---
 
@@ -34,77 +34,89 @@ Has terminado la teoría: socket, cliente, servidor, handshake, errores, `SO_REU
 
 ---
 
-## 🔥 Fireside Chat: Servidor vs Cliente
+## 🔥 Fireside Chat: TCP vs UDP
 
-> *El ring de los conceptos: dos sockets discuten quién hace el trabajo duro.*
+> *Dos protocolos de transporte se sientan junto a la chimenea a dirimir, de una vez, quién manda.*
 
-**Servidor:** — Yo soy el que hace todo el trabajo. Escucho, acepto, atiendo... todo el peso recae sobre mí.
+**TCP:** — Yo soy el mensajero certificado. Entrego cada carta, en orden, y si se pierde, la reenvío. Pero cuesta más.
 
-**Cliente:** — ¿Trabajo dices? Yo soy el que inicia todo. Si no fuera por mí, tú estarías ahí escuchando en el puerto para siempre, como una planta.
+**UDP:** — Yo soy el lanzador de aviones de papel. Mando y olvido. Si no llega, pues no llega. Pero lanzo 100 en el tiempo que tú preparas uno.
 
-**Servidor:** — Pero tengo que gestionar múltiples conexiones, mantener el estado, no caerme... Tú solo te conectas, mandas algo y te vas.
+**TCP:** — Mis casos de uso: web (HTTP), correo (SMTP), transferencia de archivos (FTP). Todo lo que necesite fiabilidad.
 
-**Cliente:** — Y también gestiono errores: ¿y si el servidor no está? ¿y si hay timeout? ¿y si la red falla? No es tan sencillo.
+**UDP:** — Mis casos de uso: videollamadas (Zoom), juegos online (Fortnite), DNS, NTP. Prefiero velocidad antes que fiabilidad.
 
-**Servidor:** — Vale, vale. En realidad somos un equipo. Sin servidor no hay servicio, pero sin cliente no hay razón para existir.
+**TCP:** — Tengo control de congestión, retransmisión, checksums...
 
-> **Moraleja:** servidor y cliente son dos caras de la misma moneda. El protocolo (quién envía qué y cuándo) es el verdadero protagonista. En la [UD 6](/ApuntesPSP/05-sockets-udp-y-protocolos) conocerás al otro protagonista: el UDP, el avión de papel.
+**UDP:** — Yo tengo... velocidad. Y puedo añadir fiabilidad en la capa de aplicación si quiero (QUIC, por ejemplo).
+
+**TCP:** — Eres un temerario.
+
+**UDP:** — Y tú un pesado. Por eso nos complementamos.
+
+> **Moraleja:** no son rivales: son dos herramientas para dos momentos. TCP cuando el dato debe quedar intacto; UDP cuando el momento es lo valioso. Ese criterio lo dominas desde el [punto 7](/ApuntesPSP/04-sockets-tcp-y-udp/07-cuando-usar-cada-protocolo).
 
 ---
 
 ## 🕵️ ¿Quién soy?
 
 1. Soy el punto final de una conexión de red: la interfaz para enviar y recibir datos.
-2. Soy el método del cliente que estrecha la mano antes de hablar.
-3. Soy el método del servidor que se queda esperando a que alguien llame.
+2. Soy el método del cliente TCP que estrecha la mano antes de hablar.
+3. Soy el método del servidor UDP que recibe datagramas y dice de quién vienen.
 4. Soy el estado que mantiene el puerto reservado unos segundos tras cerrar.
 5. Soy la opción que evita el "Address already in use".
-6. Soy el método que devuelve al cliente exactamente lo que recibió: eco.
+6. Soy el protocolo de texto sobre TCP que mueve la web.
+7. Soy el grupo de servidores de tiempo que responde en el puerto 123.
+8. Soy el protocolo fiable que se construye encima de UDP para HTTP/3.
 
 <details>
 <summary>🔄 Respuestas</summary>
 
 1. **El socket**.
 2. **`connect()`** — dispara el three-way handshake.
-3. **`accept()`** — bloqueante, espera a un cliente.
+3. **`recvfrom()`** — devuelve `(datos, dirección)` del datagrama.
 4. **TIME_WAIT**.
 5. **`SO_REUSEADDR`**.
-6. **`conn.sendall(datos)`** — reenviar lo recibido.
+6. **HTTP**.
+7. **`pool.ntp.org`** (NTP).
+8. **QUIC**.
 
 </details>
 
 ---
 
-## 🤬 CONRAD VS EL MUNDO: "conexión reiniciada por el host"
+## 🤬 CONRAD VS EL MUNDO: "conexión reiniciada y paquetes perdidos"
 
-**CONRAD:** — "Clásico: el cliente hace `recv()` y le salta *'ConnectionResetError'*. Pues claro. Razones: 1) **El servidor se cayó** en mitad de la conversación y su SO mandó un RST. 2) **Cerraste el servidor con Ctrl+C** mientras el cliente hablaba: misma historia. 3) El cliente intentó **escribir en un socket ya cerrado** → `BrokenPipeError`. 4) O el **timeout** se te pasó: `recv()` bloqueado para siempre porque nadie respondió."
+**CONRAD:** — "Clásico TCP: el cliente hace `recv()` y le salta *'ConnectionResetError'*. Pues claro. Razones: 1) **El servidor se cayó** en mitad de la conversación y su SO mandó un RST. 2) **Cerraste el servidor con Ctrl+C** mientras el cliente hablaba: misma historia. 3) El cliente intentó **escribir en un socket ya cerrado** → `BrokenPipeError`. 4) O el **timeout** se te pasó: `recv()` bloqueado para siempre porque nadie respondió."
 
-**CONRAD:** — "Y lo mejor: *'pero yo hacía sendall y me daba error'*. ¡Pues claro! `sendall()` no avisa: es el SO quien lanza la excepción cuando la otra punta de la tubería ya no existe. Captura `ConnectionResetError` y `BrokenPipeError` por separado, como viste en el [punto 5](/ApuntesPSP/04-sockets-tcp-y-udp/05-errores-y-manejo), y tu cliente dejará de morir a lo loco."
+**CONRAD:** — "Y lo mejor: *'pero yo hacía sendall y me daba error'*. ¡Pues claro! `sendall()` no avisa: es el SO quien lanza la excepción cuando la otra punta de la tubería ya no existe. Captura `ConnectionResetError` y `BrokenPipeError` por separado, como viste en el [punto 4](/ApuntesPSP/04-sockets-tcp-y-udp/04-ciclo-y-errores), y tu cliente dejará de morir a lo loco."
 
-**CONRAD:** — "Y no me vengas con *'¿será que la red va lenta?'*. Si el servidor se reinició y volvió a arrancar, **sin `SO_REUSEADDR`** te salta *Address already in use* al instante. Tres errores, tres causas, tres soluciones: reintentos con `try/except`, `settimeout()`, y la línea mágica de `setsockopt`. A diagnosticar."
+**CONRAD:** — "Y no me vengas con *'¿será que la red va lenta?'*. Si el servidor se reinició y volvió a arrancar, **sin `SO_REUSEADDR`** te salta *Address already in use* al instante. En UDP, encima, *'el cliente hacía recvfrom y nunca llegaba nada'*: si el datagrama se perdió, `recvfrom()` se queda bloqueado **para siempre**. Un `settimeout(5)` y verás la excepción aparecer. Tres errores, tres causas, tres soluciones: reintentos con `try/except`, `settimeout()`, y `SO_REUSEADDR`. A diagnosticar."
 
 ---
 
-## ⚡ Laboratorio de tortura: cliente y servidor TCP
+## ⚡ Laboratorio de tortura: eco TCP y UDP
 
 > **Duración:** 45 minutos
 > **Herramienta:** Python 3 (`socket`, sin instalar nada) + dos terminales
 
-**Escenario:** construye un servidor eco TCP y un cliente que le mande mensajes, exactamente como en el [punto 8](/ApuntesPSP/04-sockets-tcp-y-udp/08-servidor-eco-completo).
+**Escenario:** construye los dos ecos del [punto 8](/ApuntesPSP/04-sockets-tcp-y-udp/08-practica-eco) — uno TCP, otro UDP — y rompe ambos a propósito.
 
 **Tareas paso a paso:**
 
-1. **Escribe el servidor eco** (`servidor_eco.py`): `bind()` en `127.0.0.1:9000`, `listen()`, `accept()` y un bucle que haga `recv()` y responda con `sendall(datos)`. Imprime cada mensaje con su dirección.
-2. **Escribe el cliente** (`cliente_eco.py`): pide un mensaje con `input()`, lo envía con `sendall()` y muestra la respuesta de `recv()`.
-3. **Arranca el servidor** en una terminal y **el cliente** en otra. Envía tres mensajes seguidos y comprueba que el eco funciona y que el servidor ve la dirección de cada uno.
-4. **Añade el contador**: haz que el servidor responda `"Eco #1: ..."`, `"Eco #2: ..."` llevando la cuenta de los mensajes recibidos.
-5. **Añade `settimeout(3)`** al cliente y comprueba qué pasa si cierras el servidor antes de enviar.
+1. **Escribe el servidor eco TCP** (`servidor_eco.py`): `SO_REUSEADDR`, `bind()` en `127.0.0.1:9000`, `listen()`, `accept()` y un bucle que haga `recv()` y responda con `sendall(datos)`. Imprime cada mensaje con su dirección.
+2. **Escribe el cliente TCP** (`cliente_eco.py`): pide un mensaje con `input()`, lo envía con `sendall()` y muestra la respuesta de `recv()`.
+3. **Arranca el TCP** en una terminal y el cliente en otra. Envía tres mensajes y comprueba que el eco funciona y el contador lleva la cuenta.
+4. **Repite en UDP** (puerto 9001): servidor con `bind()` + `recvfrom()` + `sendto(datos, direccion)`; cliente con `sendto()` + `recvfrom()`.
+5. **Añade `settimeout(3)`** al cliente TCP y comprueba qué pasa si cierras el servidor antes de enviar. Haz lo mismo con el cliente UDP.
 
-**Fallo intencionado:** cierra el servidor con Ctrl+C y **relánzalo al instante**. ¿Qué pasa? Sin `SO_REUSEADDR`, el `bind()` falla con *"Address already in use"* porque las conexiones anteriores siguen en **TIME_WAIT**. Añade `servidor.setsockopt(socket.SOL_SOCKET, socket.SO_REUSEADDR, 1)` antes del `bind()` y comprueba que ahora sí puedes reiniciar sin esperar.
+**Fallo intencionado TCP:** cierra el servidor con Ctrl+C y **relánzalo al instante**. ¿Qué pasa? Sin `SO_REUSEADDR`, el `bind()` falla con *"Address already in use"* porque las conexiones anteriores siguen en **TIME_WAIT**. Añade `servidor.setsockopt(socket.SOL_SOCKET, socket.SO_REUSEADDR, 1)` antes del `bind()` y comprueba que ahora sí puedes reiniciar sin esperar.
 
-> **Pista 1:** el estado TIME_WAIT es el culpable de que el puerto no se libere al instante. Con `SO_REUSEADDR` activado (como en el [punto 6](/ApuntesPSP/04-sockets-tcp-y-udp/06-so-reuseaddr)), el SO te deja reutilizar la dirección aunque queden conexiones en ese estado.
+**Fallo intencionado UDP:** en el servidor, en lugar de responder con la `direccion` que devuelve `recvfrom()`, responde a una dirección inventada: `servidor.sendto(datos, ("127.0.0.1", 9999))`. ¿Qué pasa? El cliente se queda **bloqueado para siempre** en su `recvfrom()`: el eco fue a otro puerto, donde nadie escucha. Solo el `settimeout(5)` te sacará del atolladero.
+
+> **Pista 1:** el estado TIME_WAIT es el culpable del fallo TCP. Con `SO_REUSEADDR` activado, el SO te deja reutilizar la dirección aunque queden conexiones en ese estado.
 >
-> **Pista 2:** si el cliente se queda colgado en `recv()`, ese es el síntoma clásico de "el servidor nunca respondió". Añade `cli.settimeout(3)` y verás la excepción `socket.timeout` aparecer a los 3 segundos, confirmando que la respuesta nunca llegó.
+> **Pista 2:** si un cliente se queda colgado en `recv()` o `recvfrom()`, ese es el síntoma clásico de "la respuesta nunca llegó". Añade `settimeout()` y verás la excepción `socket.timeout` a los pocos segundos, confirmando el diagnóstico.
 
 ---
 
@@ -113,30 +125,34 @@ Has terminado la teoría: socket, cliente, servidor, handshake, errores, `SO_REU
 | Logro | Cómo conseguirlo |
 |---|---|
 | 🏅 **Telefonista** | Crear el primer socket TCP con `socket(AF_INET, SOCK_STREAM)` |
-| 🏅 **Marca-Números** | Implementar un cliente con `connect()`, `sendall()` y `recv()` |
-| 🏅 **Centralita** | Implementar un servidor con `bind()`, `listen()` y `accept()` |
+| 🏅 **Marca-Números** | Implementar un cliente TCP con `connect()`, `sendall()` y `recv()` |
+| 🏅 **Centralita** | Implementar un servidor TCP con `bind()`, `listen()` y `accept()` |
 | 🏅 **Handshaker** | Explicar el three-way handshake y el cierre FIN/ACK |
-| 🏅 **Eco Master** | Montar un servidor + cliente eco en dos terminales |
 | 🏅 **Fénix TCP** | Dominar `SO_REUSEADDR` y reiniciar servidores sin error |
+| 🏅 **Avión de Papel** | Crear y enviar el primer datagrama UDP con `sendto()` |
+| 🏅 **Eco Master** | Montar un servidor + cliente eco en TCP y UDP |
+| 🏅 **Fiable o Veloz** | Explicar cuándo usar TCP y cuándo UDP con casos reales |
+| 🏅 **Navegador a pelo** | Hablar HTTP a mano con un socket TCP y leer la respuesta |
+| 🏅 **Relojero** | Obtener la hora oficial de Internet con un cliente NTP |
 
 ---
 
 ## 🧠 Atrévete a pensar
 
-1. ¿Por qué el servidor hace `accept()` y no `recv()` directamente?
+1. ¿Por qué el servidor TCP hace `accept()` y no `recv()` directamente?
 2. ¿Qué pasaría si dos programas intentan `bind()` al mismo puerto a la vez?
-3. ¿Cuándo conviene `select()` frente a un `while True` con `accept()`?
-4. ¿Por qué HTTP necesita saber cuándo acaba la respuesta si TCP ya "sabe" cuándo acaban los datos?
-5. ¿Qué diferencia hay entre cerrar con `with` y dejar el socket sin cerrar?
+3. ¿Por qué UDP puede "perder datos" y TCP no, y por qué eso es aceptable en VoIP?
+4. ¿Cómo sabe un servidor UDP a quién responder si no hay conexión?
+5. ¿Por qué NTP usa UDP aunque la hora exacta parezca "importante"?
 
 <details>
 <summary>💡 Soluciones</summary>
 
 1. Porque `accept()` **crea la conexión dedicada** para ese cliente (devuelve `conn` y su dirección). Hasta que no se acepta, no hay un canal del que leer. `recv()` se usa sobre esa `conn`, no sobre el socket servidor.
 2. El segundo `bind()` lanzaría **`OSError: Address already in use`**: un puerto es de un solo proceso a la vez (salvo `SO_REUSEADDR` para TIME_WAIT). Es la protección del SO contra dos programas pisándose.
-3. `select()` cuando quieres **atender varios sockets en un solo hilo** (esperar a varios clientes a la vez sin bloquear por uno). El `while True` con `accept()` es válido para atender de uno en uno.
-4. Porque TCP garantiza la **entrega de bytes**, pero no sabe "dónde termina un mensaje": eso es decisión del **protocolo de aplicación**. HTTP usa cabeceras con `Content-Length` y el cierre de conexión (`Connection: close`) para que el cliente sepa cuándo parar.
-5. El `with` llama a `close()` automáticamente y el SO ejecuta la **despedida FIN/ACK**. Dejarlo sin cerrar mantiene la conexión ocupada y, en los servidores, acumula sockets abiertos que se quedan en TIME_WAIT.
+3. TCP **confirma y reenvía** cada segmento; UDP no. En VoIP, un frame perdido se salta y la conversación sigue; esperar a un reenvío la congelaría. Por eso se tolera la pérdida a cambio de fluidez.
+4. Con la **dirección que entrega `recvfrom()`** (la tupla IP/puerto del cliente): cada datagrama llega con su origen pegado, y `sendto()` usa esa misma tupla para responder.
+5. Porque **no depende de un solo paquete**: NTP manda muchas peticiones y calcula la hora estadísticamente. Si una se pierde, la siguiente vale igual: la fiabilidad sale del conjunto.
 </details>
 
 ---
@@ -148,20 +164,20 @@ Horizontal:
 1. Método del cliente TCP que establece la conexión (7 letras)
 4. Paquete que inicia el three-way handshake (3 letras)
 6. Opción que evita "Address already in use" (12 letras)
-8. Método del servidor que espera un cliente (6 letras)
+8. Método del cliente UDP para enviar un datagrama (6 letras)
 
 Vertical:
-2. Método que envía todos los bytes de golpe (8 letras)
+2. Verbo HTTP para pedir un recurso (3 letras)
 3. Dirección de tu propia máquina (9 letras)
 5. Estado que mantiene el puerto reservado al cerrar (9 letras)
-7. Método de eco: reenvía lo recibido (8 letras)
+7. Puerto de los servidores NTP (3 dígitos)
 ```
 
 <details>
 <summary>📝 Soluciones</summary>
 
-**Horizontal:** 1. CONNECT, 4. SYN, 6. SOREUSEADDR, 8. ACCEPT
-**Vertical:** 2. SENDALL, 3. LOCALHOST, 5. TIMEWAIT, 7. SENDALL
+**Horizontal:** 1. CONNECT, 4. SYN, 6. SOREUSEADDR, 8. SENDTO
+**Vertical:** 2. GET, 3. LOCALHOST, 5. TIMEWAIT, 7. 123
 
 </details>
 
@@ -169,13 +185,14 @@ Vertical:
 
 ## 💬 Entrevista de trabajo
 
-1. **"¿Qué es un socket? ¿Qué papel juegan la IP y el puerto?"**
+1. **"¿Qué diferencia hay entre TCP y UDP? ¿Cuándo usarías cada uno?"**
 2. **"Escribe un servidor TCP que reciba un mensaje y lo devuelva."**
 3. **"¿Cómo funciona el three-way handshake? Explícalo con un diagrama."**
 4. **"¿Qué errores pueden ocurrir al comunicar por sockets y cómo los gestionas?"**
 5. **"¿Qué es SO_REUSEADDR y cuándo lo necesitas?"**
+6. **"¿Cómo funciona HTTP a nivel de socket? Descríbeme una petición y su respuesta."**
 
-> 💡 **Cómo encararlas:** la 2 y la 3 son las "preguntas reina". Para la 2, escribe el servidor del [punto 3](/ApuntesPSP/04-sockets-tcp-y-udp/03-servidor-tcp) sin pensarlo: `socket()` + `bind()` + `listen()` + `accept()` + `recv()` + `sendall()`. Para la 3, dibuja el SYN → SYN+ACK → ACK sobre los dos extremos y cuenta por qué hace falta el tercer mensaje. Si sabes contarlo fluido, ya eres medio desarrollador de redes.
+> 💡 **Cómo encararlas:** la 1 y la 2 son las "preguntas reina". Para la 1, repite la moraleja del [punto 7](/ApuntesPSP/04-sockets-tcp-y-udp/07-cuando-usar-cada-protocolo): fiabilidad contra velocidad, con los casos reales (web/correo → TCP; streaming/juegos/DNS → UDP). Para la 2, escribe el servidor del [punto 3](/ApuntesPSP/04-sockets-tcp-y-udp/03-servidor-tcp) sin pensarlo: `socket()` + `bind()` + `listen()` + `accept()` + `recv()` + `sendall()`. Si sabes contarlo fluido, ya eres medio desarrollador de redes.
 
 ---
 
@@ -189,21 +206,21 @@ El cliente recibe `ConnectionRefusedError`. Sin `listen()`, no hay puerto abiert
 
 Para el servidor es obligatorio (necesita un puerto fijo). Para el cliente, el SO asigna uno automáticamente.
 
-> ❓ **¿`recv(1024)` significa que solo puedo recibir 1024 bytes?**
-
-No, es el tamaño máximo del buffer. Si el mensaje es más grande, necesitas varios `recv()` y concatenar. Tú tienes que implementar el protocolo de aplicación para saber cuándo has recibido el mensaje completo.
-
 > ❓ **¿Puedo tener más de un cliente conectado a la vez?**
 
-Con el código básico, no. Solo acepta un cliente cada vez. Para múltiples clientes, mira el **TEMA 10 — Servidores Concurrentes**.
+Con el código TCP básico, no: solo acepta un cliente cada vez. Para múltiples clientes, mira la **UD 6 · Servidores concurrentes**. En UDP, en cambio, un solo servidor atiende a cualquiera sin hilos: cada datagrama trae su dirección.
 
-> ❓ **¿Qué es "127.0.0.1"?**
+> ❓ **¿UDP puede perder datos?**
 
-Es **localhost** — tu propia máquina. Perfecto para pruebas. Para que otros se conecten, usa tu IP real (ej: 192.168.1.x).
+Sí. No hay confirmación de recepción. Si pierdes un paquete, se pierde para siempre.
 
-> ❓ **¿Y si un cliente envía datos muy seguido?**
+> ❓ **¿HTTP siempre usa TCP?**
 
-TCP los encola. El servidor los recibe en orden. Pero si el cliente envía más rápido de lo que el servidor lee, el buffer se llena y el cliente se bloquea.
+Sí, HTTP/1.1 y HTTP/2 usan TCP. **HTTP/3** usa QUIC, que va sobre UDP (¡la vuelta a la tortilla!).
+
+> ❓ **¿NTP usa UDP? ¿No es importante que llegue la hora exacta?**
+
+Sí, NTP usa UDP. Pero manda muchas peticiones y calcula estadísticamente la hora correcta. Si un paquete se pierde, no pasa nada: el próximo valdrá.
 
 ---
 
@@ -215,9 +232,9 @@ TCP los encola. El servidor los recibe en orden. Pero si el cliente envía más 
 
 *El servidor se cae y renace. Esta vez, `SO_REUSEADDR` le deja volver al instante.*
 
-*Y en una terminal lejana, un `recv()` espera paciente a que el mundo le envíe algo que leer.*
+*Y en una terminal lejana, un datagrama UDP vuela sin conexión, sin confirmación, sin miedo… mientras un reloj sin átomos pregunta la hora exacta en el puerto 123.*
 
-**PRÓXIMAMENTE EN UD 6:** *Sockets UDP. La carta certificada se convierte en avión de papel: sin handshake, sin confirmación, sin orden. Y con él, HTTP hablado a pelo y el reloj de Internet (NTP).*
+**PRÓXIMAMENTE EN UD 6:** *Servidores concurrentes. Un cliente a la vez ya no basta: hilos, `select()` y `socketserver` para atender a una multitud sin caerte.*
 
 ---
 
@@ -228,13 +245,14 @@ TCP los encola. El servidor los recibe en orden. Pero si el cliente envía más 
 | CE | Criterio | Cubierto |
 |---|---|---|
 | a) | Modelo de capas de red (TCP/IP) | ✅ Punto 1 + Fireside Chat |
+| b) | Identifica tipos de sockets (TCP/UDP) | ✅ Puntos 1 y 5 |
 | c) | Crea servidores TCP | ✅ Puntos 3 y 8 + ⚡ Laboratorio de tortura |
 | d) | Crea clientes TCP | ✅ Puntos 2 y 8 + ⚡ Laboratorio de tortura |
-| f) | Gestiona errores de red | ✅ Punto 5 + ⚡ Laboratorio con fallo intencionado |
-| g) | Configura opciones de socket (SO_REUSEADDR, non-blocking) | ✅ Puntos 5 y 6 + ⚡ Laboratorio de tortura |
-
-> RA3b (UDP), RA3e (UDP servidor/cliente) y RA3h (protocolos HTTP/NTP) se cubren en la **UD 5 · Sockets TCP y UDP**.
+| e) | Implementa servidores y clientes UDP | ✅ Puntos 5 y 8 + ⚡ Laboratorio de tortura |
+| f) | Gestiona errores de red | ✅ Punto 4 + ⚡ Laboratorio con fallo intencionado |
+| g) | Configura opciones de socket (SO_REUSEADDR, non-blocking) | ✅ Punto 4 + ⚡ Laboratorio de tortura |
+| h) | Implementa protocolos de aplicación (HTTP, NTP) | ✅ Punto 6 + Cliente HTTP y NTP manuales |
 
 ---
 
-📚 [Volver al índice de la unidad](/ApuntesPSP/04-sockets-tcp) · **Anterior:** [08 · Servidor eco completo](/ApuntesPSP/04-sockets-tcp-y-udp/08-servidor-eco-completo) · **Siguiente:** **[UD 5 · Sockets TCP y UDP](/ApuntesPSP/05-sockets-udp-y-protocolos)**
+📚 [Volver al índice de la unidad](/ApuntesPSP/04-sockets-tcp-y-udp) · **Anterior:** [08 · Práctica eco](/ApuntesPSP/04-sockets-tcp-y-udp/08-practica-eco) · **Siguiente:** **[UD 6 · Servidores concurrentes](/ApuntesPSP/05-servidores-concurrentes)**

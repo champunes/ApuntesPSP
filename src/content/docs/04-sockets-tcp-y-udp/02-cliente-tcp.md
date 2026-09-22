@@ -85,7 +85,7 @@ Respuesta: Recibido: Hola servidor!
  6. close()
 ```
 
-> ⚠️ **`recv()` es bloqueante**: el programa se queda esperando hasta que lleguen datos. Si el servidor nunca responde, te quedas colgado ahí (para salir del apuro, verás los **timeouts** en el [punto 5](/ApuntesPSP/04-sockets-tcp-y-udp/05-errores-y-manejo)).
+> ⚠️ **`recv()` es bloqueante**: el programa se queda esperando hasta que lleguen datos. Si el servidor nunca responde, te quedas colgado ahí (para salir del apuro, verás los **timeouts** en el [punto 4](/ApuntesPSP/04-sockets-tcp-y-udp/04-ciclo-y-errores)).
 
 ---
 
@@ -124,4 +124,4 @@ Respuesta: Recibido: Hola servidor!
 
 ---
 
-📚 [Volver al índice de la unidad](/ApuntesPSP/04-sockets-tcp) · **Anterior:** [01 · Qué es un socket](/ApuntesPSP/04-sockets-tcp-y-udp/01-que-es-un-socket) · **Siguiente:** [03 · Servidor TCP](/ApuntesPSP/04-sockets-tcp-y-udp/03-servidor-tcp)
+📚 [Volver al índice de la unidad](/ApuntesPSP/04-sockets-tcp-y-udp) · **Anterior:** [01 · Qué es un socket](/ApuntesPSP/04-sockets-tcp-y-udp/01-que-es-un-socket) · **Siguiente:** [03 · Servidor TCP](/ApuntesPSP/04-sockets-tcp-y-udp/03-servidor-tcp)

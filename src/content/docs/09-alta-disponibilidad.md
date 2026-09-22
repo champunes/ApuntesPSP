@@ -1,5 +1,5 @@
 ﻿---
-title: U12 — asyncio y Disponibilidad
+title: UD 10 — Alta disponibilidad
 description: "Cerrar el viaje: asincronía, latidos y servicios siempre disponibles ⏱️"
 nav_order: 11
 ---
@@ -10,7 +10,7 @@ nav_order: 11
 
 > "Asyncio es como un cocinero que, mientras espera a que hierva el agua, corta verduras. En vez de quedarse mirando la olla, hace otras cosas."
 
-En la U11 construiste Servidores concurrentes con hilos: un hilo por cliente o un ThreadPool. Funcionan, pero cada hilo cuesta memoria y contexto de sistema. En esta unidad cambiarás de modelo: **asyncio**, un solo hilo que coordina miles de tareas cooperativas, y las herramientas de **disponibilidad** (heartbeat, timeouts y backoff) que mantienen un servicio vivo cuando todo falla alrededor.
+En la UD 6 construiste Servidores concurrentes con hilos: un hilo por cliente o un ThreadPool. Funcionan, pero cada hilo cuesta memoria y contexto de sistema. En esta unidad cambiarás de modelo: **asyncio**, un solo hilo que coordina miles de tareas cooperativas, y las herramientas de **disponibilidad** (heartbeat, timeouts y backoff) que mantienen un servicio vivo cuando todo falla alrededor.
 
 También aprenderás a que un servidor **nunca se cuelgue** con un cliente mudo (timeout), a que **avise** de que sigue vivo (heartbeat) y a que **reintente** con cabeza cuando un servicio se cae (backoff). El siguiente tema ya no existe: esta es la última unidad del viaje, y cierras con un servidor asyncio robusto que no se bloquea, se vigila solo y se recupera.
 
@@ -38,15 +38,15 @@ Al terminar, serás capaz de:
 
 | Punto | Qué aprenderás | Nivel |
 |---|---|---|
-| [01 · Event Loop](/ApuntesPSP/11-asyncio-y-disponibilidad/01-event-loop) | El gestor de tareas que no se bloquea nunca | Todos |
-| [02 · Corrutinas](/ApuntesPSP/11-asyncio-y-disponibilidad/02-corrutinas) | `async def`, `await` y la función que sabe esperar | Todos |
-| [03 · create_task y gather](/ApuntesPSP/11-asyncio-y-disponibilidad/03-create-task-y-gather) | Lanzar varias tareas "a la vez" de verdad | Todos |
-| [04 · Timeouts](/ApuntesPSP/11-asyncio-y-disponibilidad/04-timeouts) | `wait_for` para que nada se cuelgue para siempre | Todos |
-| [05 · Heartbeat](/ApuntesPSP/11-asyncio-y-disponibilidad/05-heartbeat) | El latido que confirma que el servicio sigue vivo | Todos |
-| [06 · Backoff](/ApuntesPSP/11-asyncio-y-disponibilidad/06-backoff) | Reintentos con espera exponencial (1, 2, 4, 8…) | Todos |
-| [07 · Threads vs asyncio](/ApuntesPSP/11-asyncio-y-disponibilidad/07-threads-vs-asyncio) | La comparativa definitiva de modelos de concurrencia | Todos |
-| [08 · Disponibilidad y práctica](/ApuntesPSP/11-asyncio-y-disponibilidad/08-disponibilidad-y-practica) | El monitor de servicio completo y Aprieta el lápiz | Todos |
-| [09 · Cierre](/ApuntesPSP/11-asyncio-y-disponibilidad/09-cierre) | Sé la corrutina, Fireside, Laboratorio de tortura… | Todos |
+| [01 · Event Loop](/ApuntesPSP/09-alta-disponibilidad/01-event-loop) | El gestor de tareas que no se bloquea nunca | Todos |
+| [02 · Corrutinas](/ApuntesPSP/09-alta-disponibilidad/02-corrutinas) | `async def`, `await` y la función que sabe esperar | Todos |
+| [03 · create_task y gather](/ApuntesPSP/09-alta-disponibilidad/03-create-task-y-gather) | Lanzar varias tareas "a la vez" de verdad | Todos |
+| [04 · Timeouts](/ApuntesPSP/09-alta-disponibilidad/04-timeouts) | `wait_for` para que nada se cuelgue para siempre | Todos |
+| [05 · Heartbeat](/ApuntesPSP/09-alta-disponibilidad/05-heartbeat) | El latido que confirma que el servicio sigue vivo | Todos |
+| [06 · Backoff](/ApuntesPSP/09-alta-disponibilidad/06-backoff) | Reintentos con espera exponencial (1, 2, 4, 8…) | Todos |
+| [07 · Threads vs asyncio](/ApuntesPSP/09-alta-disponibilidad/07-threads-vs-asyncio) | La comparativa definitiva de modelos de concurrencia | Todos |
+| [08 · Disponibilidad y práctica](/ApuntesPSP/09-alta-disponibilidad/08-disponibilidad-y-practica) | El monitor de servicio completo y Aprieta el lápiz | Todos |
+| [09 · Cierre](/ApuntesPSP/09-alta-disponibilidad/09-cierre) | Sé la corrutina, Fireside, Laboratorio de tortura… | Todos |
 
 > 📖 **Flujo de lectura:** los 8 primeros puntos son teoría en progresión. El 9º es el aterrizaje práctico: léelo justo después del 8º y antes de abrir los boletines.
 
@@ -59,10 +59,10 @@ Al terminar, serás capaz de:
 > Practica con los pares del curso: empezar siempre el resuelto para ver el estilo y luego intentar el por-resolver.
 
 <div class="ejercicio-links">
-  <a href="/ApuntesPSP/boletines/boletin-u11-inicial-resuelto" class="elink">✅ Inicial resuelto</a>
-  <a href="/ApuntesPSP/boletines/boletin-u11-inicial" class="elink">🟢 Inicial por resolver</a>
-  <a href="/ApuntesPSP/boletines/boletin-u11-avanzado-resuelto" class="elink">💪 Avanzado resuelto</a>
-  <a href="/ApuntesPSP/boletines/boletin-u11-avanzado" class="elink">⭐ Avanzado por resolver</a>
+  <a href="/ApuntesPSP/boletines/boletin-u09-inicial-resuelto" class="elink">✅ Inicial resuelto</a>
+  <a href="/ApuntesPSP/boletines/boletin-u09-inicial" class="elink">🟢 Inicial por resolver</a>
+  <a href="/ApuntesPSP/boletines/boletin-u09-avanzado-resuelto" class="elink">💪 Avanzado resuelto</a>
+  <a href="/ApuntesPSP/boletines/boletin-u09-avanzado" class="elink">⭐ Avanzado por resolver</a>
 </div>
 
 ---
@@ -83,8 +83,8 @@ Al terminar, serás capaz de:
 
 ## 🚪 ¿Por dónde empiezo?
 
-¿Vienes de la U11 y dominas los Servidores concurrentes? Perfecto, ese es el trampolín ideal: repasa la [UD 6 · Servidores concurrentes](/ApuntesPSP/05-servidores-concurrentes) para tener frescos el hilo por cliente, el ThreadPool y el problema del bloqueo, y arranca en el [punto 1](/ApuntesPSP/11-asyncio-y-disponibilidad/01-event-loop), que parte justo del problema de la espera que dejaste planteado.
+¿Vienes de la UD 9 y dominas el cifrado? Perfecto. El trampolín real, eso sí, son los servidores concurrentes: repasa la [UD 6 · Servidores concurrentes](/ApuntesPSP/05-servidores-concurrentes) para tener frescos el hilo por cliente, el ThreadPool y el problema del bloqueo, y arranca en el [punto 1](/ApuntesPSP/09-alta-disponibilidad/01-event-loop), que parte justo del problema de la espera que dejaste planteado.
 
-¿Ya sabes qué es asyncio y solo quieres la disponibilidad? Ve directo al [punto 4](/ApuntesPSP/11-asyncio-y-disponibilidad/04-timeouts) y de ahí a los puntos 5 y 6. Pero si vienes de cero, no te saltes los puntos 1 a 3: el event loop y las corrutinas son la base de todo lo demás.
+¿Ya sabes qué es asyncio y solo quieres la disponibilidad? Ve directo al [punto 4](/ApuntesPSP/09-alta-disponibilidad/04-timeouts) y de ahí a los puntos 5 y 6. Pero si vienes de cero, no te saltes los puntos 1 a 3: el event loop y las corrutinas son la base de todo lo demás.
 
-**📍 Primer punto:** [01 · Event Loop](/ApuntesPSP/11-asyncio-y-disponibilidad/01-event-loop)
+**📍 Primer punto:** [01 · Event Loop](/ApuntesPSP/09-alta-disponibilidad/01-event-loop)

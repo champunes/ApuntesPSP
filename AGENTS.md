@@ -18,17 +18,17 @@ PSP/
 │
 ├── src/
 │   ├── content.config.ts                ← configuración colección Starlight
-│   ├── content/docs/                    ← 158 archivos de apuntes (MD)
+│   ├── content/docs/                    ← 149 archivos de apuntes (MD)
 │   │   ├── index.md                     ← landing page (cards, descargas, licencia)
 │   │   ├── 01-gestion-de-procesos.md  ← índice de la unidad
 │   │   ├── 01-gestion-de-procesos/    ← 9 capítulos por unidad
 │   │   │   ├── 01-*.md … 08-*.md        ← teoría en progresión
 │   │   │   └── 09-cierre.md             ← cierre práctico de la unidad
-│   │   ├── boletines/                   ← 44 boletines (4 × 11 unidades)
-│   │   │   ├── boletin-U01-inicial.md       ← 🟢 inicial SIN resolver
-│   │   │   ├── boletin-U01-inicial-resuelto.md ← ✅ inicial CON solución
-│   │   │   ├── boletin-U01-avanzado.md       ← 💪 avanzado SIN resolver
-│   │   │   └── boletin-U01-avanzado-resuelto.md ← ⭐ avanzado CON solución
+│   │   ├── boletines/                   ← 40 boletines (4 × 10 unidades)
+│   │   │   ├── boletin-U00-inicial.md       ← 🟢 inicial SIN resolver
+│   │   │   ├── boletin-U00-inicial-resuelto.md ← ✅ inicial CON solución
+│   │   │   ├── boletin-U00-avanzado.md       ← 💪 avanzado SIN resolver
+│   │   │   └── boletin-U00-avanzado-resuelto.md ← ⭐ avanzado CON solución
 │   │   └── ... hasta unidad 10 + anexo
 │   └── styles/
 │       └── custom.css                   ← CSS premium (azul Python #306998 + teal)
@@ -173,7 +173,7 @@ d2 archivo.d2 ../public/diagrams/archivo.svg --pad 20
 
 ## Apuntes (MD por unidad)
 
-Estructura "libro" por unidad (formato replicado de ApuntesRedes): índice + 9 capítulos en subcarpeta + 4 boletines en `boletines/`. Total 158 ficheros MD (~10.000+ líneas). Cada unidad indica al final qué RAs cubre.
+Estructura "libro" por unidad (formato replicado de ApuntesRedes): índice + 9 capítulos en subcarpeta + 4 boletines en `boletines/`. Total 149 ficheros MD (~16.500 líneas). Cada unidad indica al final qué RAs cubre.
 
 Por unidad: `0X-unidad.md` (índice, ~90 líneas) → `0X-unidad/01-…-08.md` (capítulos, 110-280 líneas) + `09-cierre.md` (cierre, ~250 líneas) → `boletines/boletin-UXX-inicial[-resuelto].md` y `-avanzado[-resuelto].md`.
 
@@ -189,7 +189,7 @@ Secciones del índice:
 - ✅ **Criterios de evaluación** con columna "Dónde se cubre"
 - 🚪 **¿Por dónde empiezo?** con primer punto y enlace a la siguiente unidad
 
-Secciones del cierre `09-cierre.md`: ⭐ Sé el código, 🔥 Fireside Chat, 🕵️ ¿Quién soy?, 🤬 CONRAD VS EL MUNDO, ⚡ Laboratorio de tortura (con pistas), 🏆 Logros, 🧠 Atrévete a pensar, 🧩 Crucigrama de bits, 💬 Entrevista de trabajo, 🤷 No hay preguntas tontas, 🎬 Poscréditos ("PRÓXIMAMENTE EN UYY", salvo U11 que cierra el viaje 🏁), ✅ Criterios.
+Secciones del cierre `09-cierre.md`: ⭐ Sé el código, 🔥 Fireside Chat, 🕵️ ¿Quién soy?, 🤬 CONRAD VS EL MUNDO, ⚡ Laboratorio de tortura (con pistas), 🏆 Logros, 🧠 Atrévete a pensar, 🧩 Crucigrama de bits, 💬 Entrevista de trabajo, 🤷 No hay preguntas tontas, 🎬 Poscréditos ("PRÓXIMAMENTE EN UD X", salvo UD 10 que cierra el viaje 🏁), ✅ Criterios.
 
 **Convenciones MD:** frontmatter `title`/`description` (comillas solo si contienen `:`), sin BOM, slugs de URL en minúscula (`boletin-uXX-...`), nombres de fichero `UXX` mayúscula, enlaces internos `/ApuntesPSP/...`.
 
@@ -209,7 +209,7 @@ Secciones del cierre `09-cierre.md`: ⭐ Sé el código, 🔥 Fireside Chat, �
 | UD 10 Alta disponibilidad | `09-alta-disponibilidad.md` + carpeta | ~913 | asyncio, heartbeat, backoff, timeouts | RA4e-g |
 | Anexo Spring Boot | `10-anexo-spring-boot.md` + carpeta | ~700 | Java, Spring Boot, DI, REST, JPA | — |
 
-**Boletines (44):** 4 por unidad en `boletines/boletin-UXX-*`: inicial (8 ejercicios), inicial-resuelto, avanzado (≥8), avanzado-resuelto. Pistas inline `**Pista:**` en los por-resolver; respuestas inline en negrita en los resueltos. El Anexo no tiene boletines.
+**Boletines (40):** 4 por unidad en `boletines/boletin-UXX-*`: inicial (8 ejercicios), inicial-resuelto, avanzado (≥8), avanzado-resuelto. Pistas inline `**Pista:**` en los por-resolver; respuestas inline en negrita en los resueltos. El Anexo no tiene boletines.
 
 **Licencia:** CC BY-SA 4.0 — Sergi Garcia Barea
 

@@ -218,7 +218,7 @@ Usa `multiprocessing.Lock`, `multiprocessing.Semaphore`, etc. Son equivalentes p
 
 *La sincronización ha ganado la batalla contra el caos.*
 
-**PRÓXIMAMENTE EN U05:** *Sockets TCP. Los hilos comparten memoria y ahora saben coordinarse… pero ¿y si los procesos ni siquiera comparten memoria? Tocará hablar por la red.*
+**PRÓXIMAMENTE EN UD 5:** *Sockets TCP y UDP. Los hilos comparten memoria y ahora saben coordinarse… pero ¿y si los procesos ni siquiera comparten memoria? Tocará hablar por la red.*
 
 ---
 
@@ -236,4 +236,4 @@ Usa `multiprocessing.Lock`, `multiprocessing.Semaphore`, etc. Son equivalentes p
 
 ---
 
-📚 [Volver al índice de la unidad](/ApuntesPSP/03-sincronizacion) · **Anterior:** [08 · Buenas prácticas](/ApuntesPSP/03-sincronizacion/08-buenas-practicas) · **Siguiente:** **[UD 5 · Sockets TCP y UDP](/ApuntesPSP/04-sockets-tcp)**
+📚 [Volver al índice de la unidad](/ApuntesPSP/03-sincronizacion) · **Anterior:** [08 · Buenas prácticas](/ApuntesPSP/03-sincronizacion/08-buenas-practicas) · **Siguiente:** **[UD 5 · Sockets TCP y UDP](/ApuntesPSP/04-sockets-tcp-y-udp)**

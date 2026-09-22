@@ -108,7 +108,7 @@ with socket.socket(socket.AF_INET, socket.SOCK_STREAM) as servidor:
             conexion.sendall(b"Recibido: " + datos)
 ```
 
-> ⚠️ Con este código básico, el servidor atiende **un cliente cada vez**: si llega un segundo mientras el primero habla, se queda en la cola de `listen()`. Para atender varios a la vez necesitas hilos o `select()`: eso es el **TEMA 10 — Servidores Concurrentes**.
+> ⚠️ Con este código básico, el servidor atiende **un cliente cada vez**: si llega un segundo mientras el primero habla, se queda en la cola de `listen()`. Para atender varios a la vez necesitas hilos o `select()`: eso es la **UD 6 · Servidores concurrentes**.
 
 ---
 
@@ -188,4 +188,4 @@ with socket.socket() as srv:         # a) crear el socket
 
 ---
 
-📚 [Volver al índice de la unidad](/ApuntesPSP/04-sockets-tcp) · **Anterior:** [02 · Cliente TCP](/ApuntesPSP/04-sockets-tcp-y-udp/02-cliente-tcp) · **Siguiente:** [04 · Ciclo de vida de la conexión](/ApuntesPSP/04-sockets-tcp-y-udp/04-ciclo-de-vida-de-la-conexion)
+📚 [Volver al índice de la unidad](/ApuntesPSP/04-sockets-tcp-y-udp) · **Anterior:** [02 · Cliente TCP](/ApuntesPSP/04-sockets-tcp-y-udp/02-cliente-tcp) · **Siguiente:** [04 · Ciclo de vida y errores](/ApuntesPSP/04-sockets-tcp-y-udp/04-ciclo-y-errores)
