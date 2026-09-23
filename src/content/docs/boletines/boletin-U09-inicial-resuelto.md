@@ -1,131 +1,159 @@
 ﻿---
-title: Boletín U10 — Inicial (Resuelto)
-description: Soluciones de los ejercicios básicos de Cifrado Moderno
+title: Boletín UD 10 — Inicial (Resuelto)
+description: Soluciones de los ejercicios básicos de Alta disponibilidad
 ---
 
-# ✅ Boletín U10 — Inicial (Resuelto)
-
-> `pycryptodome` debe estar instalado: `pip install pycryptodome`.
+# ✅ Boletín UD 10 — Inicial (Resuelto)
 
 ---
 
-## 1. AES modo ECB
+## 1. Mensaje diferido
 
 ```python
-from Crypto.Cipher import AES
-from Crypto.Random import get_random_bytes
+import asyncio
 
-clave = get_random_bytes(32)
-cifrador = AES.new(clave, AES.MODE_ECB)
-texto_cifrado = cifrador.encrypt(b"0123456789ABCDEF")
-print(f"Cifrado (hex): {texto_cifrado.hex()}")
+async def preparar():
+    print("Preparando...")
+    await asyncio.sleep(2)
+    print("¡Listo!")
+
+asyncio.run(preparar())
 ```
 
-El mensaje mide **exactamente 16 bytes**, así que no hace falta padding. ECB cifra cada bloque de forma independiente (recuerda: no lo uses con datos largos o repetitivos, [punto 3](/ApuntesPSP/09-cifrado-moderno/03-modos-aes)).
+`await asyncio.sleep(2)` pausa la corrutina 2 segundos; `asyncio.run()` crea el event loop.
 
-## 2. Nonce y tag
+## 2. Saludo y despedida
 
 ```python
-from Crypto.Cipher import AES
-from Crypto.Random import get_random_bytes
+import asyncio
 
-clave = get_random_bytes(32)
-cifrador = AES.new(clave, AES.MODE_EAX)
-texto_cifrado, tag = cifrador.encrypt_and_digest(b"Hola mundo con AES")
+async def saludar():
+    await asyncio.sleep(0.5)
+    print("Hola")
 
-print(f"Longitud nonce: {len(cifrador.nonce)} bytes")
-print(f"Longitud tag:   {len(tag)} bytes")
-print(f"Longitud cifrado: {len(texto_cifrado)} bytes")
+async def despedirse():
+    await asyncio.sleep(1)
+    print("Adiós")
+
+async def main():
+    await asyncio.gather(saludar(), despedirse())
+
+asyncio.run(main())
 ```
 
-En modo EAX el **nonce** mide **16 bytes** y el **tag** también **16 bytes**. Los tres (nonce, tag y cifrado) viajan juntos; la clave no ([punto 2](/ApuntesPSP/09-cifrado-moderno/02-aes)).
+`gather` ejecuta ambas "a la vez": el total es ~1s (la más lenta), no 1.5s.
 
-## 3. RSA: exportar clave
+## 3. Temporizador
 
 ```python
-from Crypto.PublicKey import RSA
+import asyncio
 
-clave = RSA.generate(2048)
-publica = clave.publickey().export_key().decode()
+async def tic():
+    for i in range(4):
+        print("tic")
+        await asyncio.sleep(2)
 
-print(f"Primeros 40: {publica[:40]}")
-print(f"Últimos 40:  {publica[-40:]}")
+asyncio.run(tic())
 ```
 
-```
-Primeros 40: -----BEGIN PUBLIC KEY-----
-Últimos 40:  -----END PUBLIC KEY-----
-```
+4 "tic" espaciados 2 segundos. Un `asyncio.sleep` dentro de un `for`.
 
-La clave pública en formato **PEM** se puede compartir con cualquiera. La privada NO.
-
-## 4. AES: cifrar mensaje
+## 4. Corrutina que devuelve
 
 ```python
-from Crypto.Cipher import AES
-from Crypto.Random import get_random_bytes
+import asyncio
 
-clave = get_random_bytes(32)
-cifrador = AES.new(clave, AES.MODE_EAX)
-texto_cifrado, tag = cifrador.encrypt_and_digest(b"Hola AES")
-print(f"Cifrado: {texto_cifrado.hex()}")
+async def sumar(a, b):
+    await asyncio.sleep(1)
+    return a + b
+
+async def main():
+    resultado = await sumar(3, 4)
+    print(resultado)
+
+asyncio.run(main())
 ```
 
-`encrypt_and_digest` devuelve el texto cifrado y el **tag** de integridad de una vez.
+Para obtener el valor hace falta `await`: sin él tendrías un objeto corrutina, no el resultado.
 
-## 5. AES: descifrar
+## 5. Tres tareas a la vez
 
 ```python
-cifrador2 = AES.new(clave, AES.MODE_EAX, nonce=cifrador.nonce)
-original = cifrador2.decrypt(texto_cifrado)
-print(f"Original: {original.decode()}")
+import asyncio, time
+
+async def tarea(nombre, segundos):
+    await asyncio.sleep(segundos)
+    print(f"  {nombre} terminó")
+
+async def main():
+    inicio = time.time()
+    await asyncio.gather(
+        tarea("A", 1), tarea("B", 2), tarea("C", 3)
+    )
+    print(f"Tiempo total: {time.time() - inicio:.2f}s")
+
+asyncio.run(main())
 ```
 
-Necesitas la **misma clave** y el **mismo nonce** para descifrar ([punto 2](/ApuntesPSP/09-cifrado-moderno/02-aes)).
+**~3 segundos**, el de la tarea más lenta. `gather` las lanza concurrentemente: los tiempos no se suman.
 
-## 6. RSA: generar claves
+## 6. Tarea en segundo plano
 
 ```python
-from Crypto.PublicKey import RSA
+import asyncio
 
-clave = RSA.generate(2048)
-print(clave.publickey().export_key().decode()[:50] + "...")
+async def contar():
+    for i in range(1, 5):
+        print(f"  contar: {i}")
+        await asyncio.sleep(0.5)
+
+async def main():
+    asyncio.create_task(contar())   # en segundo plano
+    await asyncio.sleep(1)
+    print("main sigue")
+
+asyncio.run(main())
 ```
 
-```
------BEGIN PUBLIC KEY-----
-MIIBIjANBgkqhkiG9w0BAQEFAAOCAQ8AMIIBCgKCAQEA...
-```
+`contar()` se ejecuta "en segundo plano": mientras `main()` espera su segundo, la tarea cuenta. Se ve la alternancia de las dos corrutinas en el event loop.
 
-La clave pública se puede compartir. La privada NO.
-
-## 7. Simétrico vs asimétrico
-
-a) El simétrico usa **una sola clave** (misma para cifrar y descifrar). El asimétrico usa **dos**: pública + privada.
-
-b) Con la clave **pública de Bob**. Solo su clave privada puede descifrarlo.
-
-c) Por su **límite de tamaño** (~190 bytes con claves de 2048 bits) y su **velocidad** (~1 MB/s). Para volúmenes grandes se usa AES (o el cifrado híbrido del [punto 6](/ApuntesPSP/09-cifrado-moderno/06-cifrado-hibrido)).
-
-## 8. AES: cifrar y descifrar completo
+## 7. Heartbeat básico
 
 ```python
-from Crypto.Cipher import AES
-from Crypto.Random import get_random_bytes
+import asyncio
 
-clave = get_random_bytes(32)
-mensaje = b"El cifrado simetrico es rapido"
+async def heartbeat():
+    while True:
+        print("💓 vivo")
+        await asyncio.sleep(2)
 
-cifrador = AES.new(clave, AES.MODE_EAX)
-texto_cifrado, tag = cifrador.encrypt_and_digest(mensaje)
+async def main():
+    asyncio.create_task(heartbeat())
+    await asyncio.sleep(5)
+    print("main terminó")
 
-print(f"Nonce: {cifrador.nonce.hex()}")
-print(f"Tag:   {tag.hex()}")
-print(f"Cifrado: {texto_cifrado.hex()}")
-
-descifrador = AES.new(clave, AES.MODE_EAX, nonce=cifrador.nonce)
-original = descifrador.decrypt(texto_cifrado)
-print(f"Original: {original.decode()}")
+asyncio.run(main())
 ```
 
-El nonce y el tag se envían junto al cifrado; el receptor los usa con la misma clave para descifrar y verificar la integridad ([punto 2](/ApuntesPSP/09-cifrado-moderno/02-aes)).
+`create_task` lanza el latido en segundo plano; `main()` espera 5s y lo deja latir tres veces antes de terminar. Si `main()` no esperara, la tarea moriría con él.
+
+## 8. Timeout básico
+
+```python
+import asyncio
+
+async def lenta():
+    await asyncio.sleep(8)
+    return "Hecho"
+
+async def main():
+    try:
+        r = await asyncio.wait_for(lenta(), timeout=3)
+        print(r)
+    except asyncio.TimeoutError:
+        print("Timeout!")
+
+asyncio.run(main())
+```
+
+`wait_for` corta a los 3s: salta `asyncio.TimeoutError`, la corrutina `lenta()` se cancela y el programa imprime "Timeout!".

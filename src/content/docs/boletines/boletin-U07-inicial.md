@@ -1,11 +1,11 @@
-﻿---
-title: Boletín U08 — Inicial
+---
+title: Boletín UD 8 — Inicial
 description: Ejercicios básicos de APIs Comerciales
 ---
 
-# 📝 Boletín U08 — Inicial
+# 📝 Boletín UD 8 — Inicial
 
-> Ejercicios básicos para afianzar los conceptos de API keys, variables de entorno, OpenWeatherMap y errores HTTP de la unidad U08.
+> Ejercicios básicos para afianzar los conceptos de API keys, variables de entorno, OpenWeatherMap y errores HTTP de la unidad UD 8.
 
 ---
 

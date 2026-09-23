@@ -5,7 +5,7 @@ description: Sé la petición con API key, laboratorio real y el ring final de l
 
 <p><small>Sé la petición con API key, laboratorio real y el ring final de la unidad 🧠</small></p>
 
-> 🗺️ **Estás en:** 🧪 **U08 · APIs Comerciales** → 09 · Cierre
+> 🗺️ **Estás en:** 🧪 **UD 8 · APIs Comerciales** → 09 · Cierre
 
 ---
 
@@ -215,7 +215,7 @@ Solo si el código nunca va a GitHub. Mejor acostúmbrate a `.env` desde el prin
 >
 > *Y las claves se quedaron en el `.env`, lejos de GitHub, donde deben vivir.*
 
-**PRÓXIMAMENTE EN U09:** *hash y cifrado clásico. Las contraseñas que no se pueden leer: MD5, SHA y el viejo cifrado César.*
+**PRÓXIMAMENTE EN UD 9:** *Seguridad y cifrado. Las contraseñas que no se pueden leer: hash, AES, RSA y las firmas digitales.*
 
 ---
 
@@ -228,8 +228,8 @@ Solo si el código nunca va a GitHub. Mejor acostúmbrate a `.env` desde el prin
 | a) | Utiliza APIs REST para obtener datos externos | ✅ Puntos 3-5 y 8 + ⚡ Laboratorio de tortura |
 | b) | Gestiona peticiones HTTP y procesa respuestas JSON | ✅ Puntos 1, 5-6 y 8 + ⚡ Laboratorio de tortura |
 
-> RA4c (servidores concurrentes) y RA4d (ThreadPool) se cubren en la **U11 · Servidores Concurrentes**. RA4e-g (asyncio, disponibilidad, comparativa) se cubren en la **U12 · asyncio y disponibilidad**.
+> RA4c (Servidores concurrentes) y RA4d (ThreadPool) se cubren en la **UD 6 · Servidores concurrentes**. RA4e-g (asyncio, disponibilidad, comparativa) se cubren en la **UD 10 · Alta disponibilidad**.
 
 ---
 
-📚 [Volver al índice de la unidad](/ApuntesPSP/07-apis-comerciales) · **Anterior:** [08 · Práctica APIs comerciales](/ApuntesPSP/07-apis-comerciales/08-practica-apis-comerciales) · **Siguiente:** **[U09 · Hash y Cifrado Clásico](/ApuntesPSP/08-hash-y-cifrado-clasico)**
+📚 [Volver al índice de la unidad](/ApuntesPSP/07-apis-comerciales) · **Anterior:** [08 · Práctica APIs comerciales](/ApuntesPSP/07-apis-comerciales/08-practica-apis-comerciales) · **Siguiente:** **[UD 9 · Seguridad y cifrado](/ApuntesPSP/08-seguridad-y-cifrado)**

@@ -11,7 +11,7 @@ description: if, for, while, range, try/except e iteradores 🔀
 
 ## 📬 La idea en una frase
 
-> El control de flujo decide **qué código se ejecuta y cuándo**. Las tres estructuras básicas son la condición (`if`), la iteración (`for` y `while`) y el manejo de errores (`try/except`).
+> El control de flujo decide **qué código se ejecuta y cuándo**. Las tres estructuras básicas son la condición (`if`), la iteración (`for` y `while`) y la gestión de errores (`try/except`).
 
 Sin control de flujo, todo programa sería una lista lineal de instrucciones. Con él, tu programa puede tomar decisiones, repetir tareas y sobrevivir a los errores.
 

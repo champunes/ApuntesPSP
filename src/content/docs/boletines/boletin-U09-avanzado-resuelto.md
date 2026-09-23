@@ -1,308 +1,269 @@
 ﻿---
-title: Boletín U10 — Avanzado (Resuelto)
-description: Soluciones de los ejercicios avanzados de Cifrado Moderno
+title: Boletín UD 10 — Avanzado (Resuelto)
+description: Soluciones de los ejercicios avanzados de Alta disponibilidad
 ---
 
-# 💪 Boletín U10 — Avanzado (Resuelto)
+# 💪 Boletín UD 10 — Avanzado (Resuelto)
 
 ---
 
-## 1. Cifrado híbrido simplificado
+## 1. Backoff exponencial
 
 ```python
-from Crypto.PublicKey import RSA
-from Crypto.Cipher import AES, PKCS1_OAEP
-from Crypto.Random import get_random_bytes
+import asyncio
 
-clave_bob = RSA.generate(2048)
+async def conectar(intentos=4):
+    for i in range(intentos):
+        espera = 2 ** i                 # 1, 2, 4, 8
+        try:
+            print(f"Intento {i+1}...")
+            raise ConnectionRefusedError # Simular error
+        except ConnectionRefusedError:
+            print(f"  Fallo: espero {espera}s")
+            await asyncio.sleep(espera)
+    print("Servicio no disponible")
 
-# Bob genera clave AES y cifra el mensaje
-clave_aes = get_random_bytes(32)
-cifrador_aes = AES.new(clave_aes, AES.MODE_EAX)
-cifrado, tag = cifrador_aes.encrypt_and_digest(b"El cifrado hibrido funciona")
-
-# La clave AES viaja protegida por la RSA pública de Bob
-clave_aes_cifrada = PKCS1_OAEP.new(clave_bob.publickey()).encrypt(clave_aes)
-
-# Descifrado en orden inverso: primero RSA, luego AES
-clave_aes_recibida = PKCS1_OAEP.new(clave_bob).decrypt(clave_aes_cifrada)
-original = AES.new(clave_aes_recibida, AES.MODE_EAX, nonce=cifrador_aes.nonce).decrypt(cifrado)
-print(f"Mensaje original: {original.decode()}")
+asyncio.run(conectar())
 ```
 
-```
-Mensaje original: El cifrado hibrido funciona
-```
+Backoff exponencial: 1s, 2s, 4s, 8s. El último intento falla y se imprime "Servicio no disponible".
 
-RSA reparte la clave AES (32 bytes) y AES cifra el mensaje completo. El orden de descifrado es el inverso al de cifrado ([punto 6](/ApuntesPSP/09-cifrado-moderno/06-cifrado-hibrido)).
-
-## 2. Firma alterada
+## 2. Timeout con respaldo
 
 ```python
-from Crypto.Signature import pkcs1_15
-from Crypto.Hash import SHA256
-from Crypto.PublicKey import RSA
+import asyncio
 
-clave = RSA.generate(2048)
-mensaje = "Transferencia de 500€".encode()
+async def lenta():
+    await asyncio.sleep(8)
+    return "Resultado real"
 
-h = SHA256.new(mensaje)
-firma = pkcs1_15.new(clave).sign(h)
+async def respaldo():
+    return "Resultado en caché"
 
-# Modificamos UN byte de la firma
-firma_mutada = bytearray(firma)
-firma_mutada[0] ^= 0xFF
-firma_mutada = bytes(firma_mutada)
+async def main():
+    try:
+        r = await asyncio.wait_for(lenta(), timeout=5)
+        print(r)
+    except asyncio.TimeoutError:
+        r = await respaldo()
+        print(r)
 
-try:
-    pkcs1_15.new(clave.publickey()).verify(h, firma_mutada)
-    print("✅ Firma válida")
-except (ValueError, TypeError):
-    print("❌ Firma inválida — la firma fue alterada")
+asyncio.run(main())
 ```
 
-```
-❌ Firma inválida — la firma fue alterada
-```
+A los 5s salta `TimeoutError`; el `except` ejecuta la corrutina de respaldo que devuelve "Resultado en caché".
 
-La firma depende del hash y de la clave: **un solo byte distinto** la invalida por completo ([punto 5](/ApuntesPSP/09-cifrado-moderno/05-firmas-digitales)).
-
-## 3. RBAC con permisos cifrado
+## 3. Dos heartbeats
 
 ```python
-permisos = {
-    "admin":    ["cifrar", "descifrar", "firmar"],
-    "usuario":  ["cifrar", "firmar"],
-    "invitado": ["cifrar"],
-}
+import asyncio
 
-def puede(usuario, accion):
-    return accion in permisos.get(usuario["rol"], [])
+async def hb_a():
+    while True:
+        print("💓 A")
+        await asyncio.sleep(3)
 
-print(puede({"rol": "admin"}, "descifrar"))    # True
-print(puede({"rol": "usuario"}, "descifrar"))  # False
-print(puede({"rol": "usuario"}, "firmar"))     # True
-print(puede({"rol": "invitado"}, "firmar"))    # False
-print(puede({"rol": "invitado"}, "cifrar"))    # True
+async def hb_b():
+    while True:
+        print("💓 B")
+        await asyncio.sleep(5)
+
+async def main():
+    asyncio.create_task(hb_a())
+    asyncio.create_task(hb_b())
+    await asyncio.sleep(12)   # da tiempo a que latan
+    print("main terminó")
+
+asyncio.run(main())
 ```
 
-```
-True
-False
-True
-False
-True
-```
+Los dos latidos se ejecutan en segundo plano; `main()` espera 12s (A late 4 veces, B unas 3). Sin ese `await`, las tareas se cancelarían al acabar `main()`.
 
-Cada rol tiene su paquete de permisos; `puede` comprueba si la acción está en el del rol ([punto 7](/ApuntesPSP/09-cifrado-moderno/07-rbac-y-roles)). `permisos.get(usuario["rol"], [])` devuelve lista vacía para roles desconocidos: por defecto, nada permitido.
-
-## 4. Cifrar archivo completo
+## 4. 🎯 Web scraper asíncrono
 
 ```python
-from Crypto.Cipher import AES
-from Crypto.Random import get_random_bytes
+import asyncio, httpx, time
 
-clave = get_random_bytes(32)
+URLS = ["https://httpbin.org/get"] * 5
 
-# 0. Creamos el archivo a cifrar (si no existe)
-with open("mensaje.txt", "w") as f:
-    f.write("Contenido secreto del proyecto")
+async def descargar(url):
+    async with httpx.AsyncClient() as cliente:
+        r = await cliente.get(url)
+        return r.status_code
 
-# Cifrar el archivo
-with open("mensaje.txt", "rb") as f:
-    contenido = f.read()
+async def main_async():
+    tareas = [descargar(u) for u in URLS]
+    resultados = await asyncio.gather(*tareas)
+    print("Resultados:", resultados)
 
-cifrador = AES.new(clave, AES.MODE_EAX)
-cifrado, tag = cifrador.encrypt_and_digest(contenido)
-
-with open("mensaje.cifrado", "wb") as f:
-    f.write(cifrador.nonce + tag + cifrado)      # nonce + tag + cifrado
-
-# Descifrar
-with open("mensaje.cifrado", "rb") as f:
-    paquete = f.read()
-
-nonce = paquete[:16]
-tag = paquete[16:32]
-cifrado_recibido = paquete[32:]
-
-descifrador = AES.new(clave, AES.MODE_EAX, nonce=nonce)
-original = descifrador.decrypt_and_verify(cifrado_recibido, tag)
-print(f"Archivo descifrado: {original.decode()}")
-```
-
-Se guardan los tres componentes juntos (`nonce + tag + cifrado`) y al descifrar se **separan por sus longitudes** (16 y 16 bytes). `decrypt_and_verify` además comprueba que el archivo no fue manipulado.
-
-## 5. RSA: cifrar mensajes largos
-
-```python
-from Crypto.PublicKey import RSA
-from Crypto.Cipher import PKCS1_OAEP
-
-clave = RSA.generate(2048)
-mensaje_largo = b"x" * 300   # 300 bytes
-
-cifrador = PKCS1_OAEP.new(clave.publickey())
-try:
-    cifrador.encrypt(mensaje_largo)
-except ValueError as e:
-    print(f"❌ Error: {e}")
-```
-
-```
-❌ Error: Plaintext is too long.
-```
-
-**El problema:** RSA con claves de 2048 bits solo admite ~190 bytes de mensaje.
-
-**La solución (cifrado híbrido):** no cifres el mensaje con RSA; cifra la clave AES con RSA y el mensaje con AES:
-
-```python
-from Crypto.Cipher import AES, PKCS1_OAEP
-from Crypto.Random import get_random_bytes
-
-clave_aes = get_random_bytes(32)
-cifrador_aes = AES.new(clave_aes, AES.MODE_EAX)
-cifrado, tag = cifrador_aes.encrypt_and_digest(mensaje_largo)
-clave_aes_cifrada = PKCS1_OAEP.new(clave.publickey()).encrypt(clave_aes)
-
-clave_aes_recibida = PKCS1_OAEP.new(clave).decrypt(clave_aes_cifrada)
-original = AES.new(clave_aes_recibida, AES.MODE_EAX, nonce=cifrador_aes.nonce).decrypt(cifrado)
-print(f"Longitud del original: {len(original)} bytes")
-```
-
-```
-Longitud del original: 300 bytes
-```
-
-Así cualquier mensaje cabe, sea cual sea su tamaño ([punto 6](/ApuntesPSP/09-cifrado-moderno/06-cifrado-hibrido)).
-
-## 6. Intercambio de claves simulado
-
-```python
-from Crypto.PublicKey import RSA
-from Crypto.Cipher import AES, PKCS1_OAEP
-from Crypto.Random import get_random_bytes
-
-# Ana genera su par RSA
-clave_ana = RSA.generate(2048)
-
-# Bob cifra con la RSA pública de Ana
-clave_aes = get_random_bytes(32)
-mensaje = b"Mensaje para Ana"
-cifrador_aes = AES.new(clave_aes, AES.MODE_EAX)
-cifrado, tag = cifrador_aes.encrypt_and_digest(mensaje)
-clave_aes_cifrada = PKCS1_OAEP.new(clave_ana.publickey()).encrypt(clave_aes)
-
-# Se envían los 4 componentes
-# Ana descifra en orden inverso
-clave_aes_recibida = PKCS1_OAEP.new(clave_ana).decrypt(clave_aes_cifrada)
-original = AES.new(clave_aes_recibida, AES.MODE_EAX, nonce=cifrador_aes.nonce).decrypt(cifrado)
-print(f"Ana recibe: {original.decode()}")
-```
-
-```
-Ana recibe: Mensaje para Ana
-```
-
-Los 4 componentes que viajan son `(clave_AES_cifrada, nonce, tag, cifrado)`. Ana usa su **clave privada** para extraer la clave AES y luego descifra con ella ([punto 6](/ApuntesPSP/09-cifrado-moderno/06-cifrado-hibrido)).
-
-## 7. Firma con verificación de integridad
-
-```python
-from Crypto.Signature import pkcs1_15
-from Crypto.Hash import SHA256
-from Crypto.PublicKey import RSA
-
-clave = RSA.generate(2048)
-mensaje = b"Este mensaje es de Ana"
-
-# Firmar el original
-h = SHA256.new(mensaje)
-firma = pkcs1_15.new(clave).sign(h)
-
-# Mensaje MODIFICADO después de firmar
-mensaje_tocado = b"Este mensaje es de Ana pero lo cambie"
-
-try:
-    pkcs1_15.new(clave.publickey()).verify(SHA256.new(mensaje_tocado), firma)
-    print("✅ Firma válida")
-except (ValueError, TypeError):
-    print("❌ Firma inválida — el mensaje fue manipulado")
-```
-
-```
-❌ Firma inválida — el mensaje fue manipulado
-```
-
-La firma se calcula sobre el **hash del mensaje original**. Si el mensaje cambia un solo byte, el hash es distinto y la verificación falla: la firma detecta cualquier modificación ([punto 5](/ApuntesPSP/09-cifrado-moderno/05-firmas-digitales)).
-
-## 8. RSA vs AES benchmark
-
-```python
-from Crypto.PublicKey import RSA
-from Crypto.Cipher import AES, PKCS1_OAEP
-from Crypto.Random import get_random_bytes
-import time
-
-clave_rsa = RSA.generate(2048)
-clave_aes = get_random_bytes(32)
-mensaje = b"Rendimiento de cifrado"
-
-cifrador_rsa = PKCS1_OAEP.new(clave_rsa.publickey())
-cifrador_aes = AES.new(clave_aes, AES.MODE_EAX)
-
-# 100 cifrados RSA
 inicio = time.time()
-for _ in range(100):
-    cifrador_rsa.encrypt(mensaje[:16])
-rsa_ms = (time.time() - inicio) * 1000
+asyncio.run(main_async())
+print(f"Versión asíncrona: {time.time() - inicio:.2f}s")
 
-# 1000 cifrados AES
+# Versión síncrona equivalente para comparar:
 inicio = time.time()
-for _ in range(1000):
-    cifrador_aes.encrypt(mensaje)
-aes_ms = (time.time() - inicio) * 1000
-
-print(f"100 cifrados RSA:  {rsa_ms:.1f} ms")
-print(f"1000 cifrados AES: {aes_ms:.1f} ms")
+with httpx.Client() as cliente:
+    for u in URLS:
+        cliente.get(u)
+print(f"Versión síncrona:   {time.time() - inicio:.2f}s")
 ```
 
-La diferencia es **abismal**: cifrar 10 veces más mensajes con AES tarda una fracción de lo que tarda RSA con solo 100. Por eso AES va para el volumen y RSA solo para repartir la clave ([punto 1](/ApuntesPSP/09-cifrado-moderno/01-cifrado-simetrico-vs-asimetrico)).
+`gather(*tareas)` lanza las 5 descargas a la vez: la versión asíncrona tarda lo que la más lenta, la síncrona la suma de todas.
 
-## 9. Sistema de cifrado de extremo a extremo
+## 5. 🔍 Servidor asyncio con heartbeat
 
 ```python
-from Crypto.PublicKey import RSA
-from Crypto.Cipher import AES, PKCS1_OAEP
-from Crypto.Random import get_random_bytes
+import asyncio
 
-class Usuario:
-    def __init__(self, nombre):
-        self.nombre = nombre
-        self.clave_rsa = RSA.generate(2048)
+conexiones = 0
 
-    def cifrar_para(self, mensaje, destinatario):
-        clave_aes = get_random_bytes(32)
-        cifrador_aes = AES.new(clave_aes, AES.MODE_EAX)
-        cifrado, tag = cifrador_aes.encrypt_and_digest(mensaje.encode())
-        clave_aes_cifrada = PKCS1_OAEP.new(destinatario.clave_rsa.publickey()).encrypt(clave_aes)
-        return cifrador_aes.nonce, tag, clave_aes_cifrada, cifrado
+async def atender(reader, writer):
+    global conexiones
+    conexiones += 1
+    datos = await reader.read(1024)
+    writer.write(b"OK: " + datos)
+    await writer.drain()
+    writer.close()
+    await writer.wait_closed()
+    conexiones -= 1
 
-    def descifrar(self, nonce, tag, clave_aes_cifrada, cifrado):
-        clave_aes = PKCS1_OAEP.new(self.clave_rsa).decrypt(clave_aes_cifrada)
-        original = AES.new(clave_aes, AES.MODE_EAX, nonce=nonce).decrypt_and_verify(cifrado, tag)
-        return original.decode()
+async def heartbeat():
+    while True:
+        print(f"💓 Vivo — {conexiones} conexiones")
+        await asyncio.sleep(5)
 
-ana = Usuario("Ana")
-bob = Usuario("Bob")
+async def main():
+    asyncio.create_task(heartbeat())          # latido en segundo plano
+    servidor = await asyncio.start_server(atender, "127.0.0.1", 5000)
+    print("🚀 Servidor ASYNCIO en 127.0.0.1:5000")
+    async with servidor:
+        await servidor.serve_forever()
 
-nonce, tag, clave_aes_cifrada, cifrado = ana.cifrar_para("Hola Bob, quedamos a las 8", bob)
-print(f"Bob recibe: {bob.descifrar(nonce, tag, clave_aes_cifrada, cifrado)}")
+asyncio.run(main())
 ```
 
-```
-Bob recibe: Hola Bob, quedamos a las 8
+`create_task(heartbeat())` lanza el latido antes de aceptar conexiones. Cada 5s imprime "💓 Vivo — N conexiones". Se mata con Ctrl+C.
+
+## 6. ⏱ Monitorización de servidores
+
+```python
+import asyncio, random
+
+estados = {"Server-A": True, "Server-B": True, "Server-C": True}
+
+async def servidor_simulado(nombre):
+    """Cambia su estado aleatoriamente cada 5-15s."""
+    while True:
+        await asyncio.sleep(random.randint(5, 15))
+        estados[nombre] = random.choice([True, False])
+        print(f"  [{nombre}] cambia a {'ARRIBA' if estados[nombre] else 'CAÍDO'}")
+
+async def monitor():
+    while True:
+        await asyncio.sleep(3)
+        caidos = [n for n, ok in estados.items() if not ok]
+        if caidos:
+            print(f"🩺 Caídos: {', '.join(caidos)}")
+        else:
+            print("🩺 Todo en pie")
+
+async def main():
+    for nombre in estados:
+        asyncio.create_task(servidor_simulado(nombre))
+    await monitor()          # el monitor corre para siempre
+
+asyncio.run(main())
 ```
 
-`cifrar_para` cifra el mensaje con AES y protege la clave AES con la **pública del destinatario**. `descifrar` invierte el proceso usando la **privada del propio usuario** y verifica el tag. Es el esquema del [punto 8](/ApuntesPSP/09-cifrado-moderno/08-practica-sistema-seguro): cada usuario guarda su privada y solo él puede descifrar lo que le envían.
+Cada servidor simulado cambia su estado de forma aleatoria; el monitor lee el diccionario cada 3s y reporta los caídos. Es el heartbeat del [punto 8](/ApuntesPSP/09-alta-disponibilidad/08-disponibilidad-y-practica) aplicado a varios servicios a la vez.
+
+## 7. 🧩 Semáforo asyncio
+
+```python
+import asyncio, httpx, time
+
+sem = asyncio.Semaphore(3)          # solo 3 a la vez
+
+async def descargar(n):
+    async with sem:                 # reserva un hueco del semáforo
+        async with httpx.AsyncClient() as cliente:
+            r = await cliente.get(f"https://httpbin.org/delay/{n}")
+            return r.status_code
+
+async def main():
+    tareas = [descargar(n) for n in range(1, 7)]   # 6 descargas
+    resultados = await asyncio.gather(*tareas)
+    print("Resultados:", resultados)
+
+inicio = time.time()
+asyncio.run(main())
+print(f"Tiempo total: {time.time() - inicio:.2f}s")
+```
+
+`async with sem:` garantiza que como máximo 3 corrutinas ejecutan el bloque a la vez; las otras 3 esperan su turno.
+
+## 8. 🎭 Timeout con fallback
+
+```python
+import asyncio
+
+async def descargar_principal():
+    await asyncio.sleep(5)          # servidor lento
+    return "Datos del principal"
+
+async def descargar_respaldo():
+    await asyncio.sleep(1)
+    return "Datos del respaldo"
+
+async def main():
+    try:
+        r = await asyncio.wait_for(descargar_principal(), timeout=2)
+    except asyncio.TimeoutError:
+        r = await descargar_respaldo()
+    print(r)
+
+asyncio.run(main())
+```
+
+A los 2s salta `TimeoutError` y el `except` ejecuta la corrutina de respaldo. La disponibilidad gana: siempre se devuelve una respuesta, aunque venga del servidor de backup.
+
+## 9. 🏗️ Chat asíncrono
+
+```python
+import asyncio
+
+clientes = set()
+
+async def broadcast(mensaje, emisor=None):
+    for writer in list(clientes):       # copia: permite eliminar al iterar
+        if writer != emisor:
+            writer.write(mensaje)
+            await writer.drain()
+
+async def gestionar(reader, writer):
+    clientes.add(writer)
+    print(f"Cliente conectado ({len(clientes)} en total)")
+    try:
+        while True:
+            try:
+                datos = await asyncio.wait_for(reader.read(1024), timeout=60)
+            except asyncio.TimeoutError:
+                break                    # desconexión silenciosa
+            if not datos:
+                break
+            await broadcast(b"[" + writer.get_extra_info("peername")[0].encode() + b"] " + datos, emisor=writer)
+    finally:
+        clientes.discard(writer)
+        writer.close()
+        await writer.wait_closed()
+
+async def main():
+    servidor = await asyncio.start_server(gestionar, "127.0.0.1", 6000)
+    print("💬 Chat ASYNCIO en 127.0.0.1:6000")
+    async with servidor:
+        await servidor.serve_forever()
+
+asyncio.run(main())
+```
+
+`broadcast` reenvía a todos los clientes menos al emisor. `wait_for(..., timeout=60)` detecta desconexiones: si un cliente no envía nada en 60s, se cierra su conexión y se quita del conjunto.

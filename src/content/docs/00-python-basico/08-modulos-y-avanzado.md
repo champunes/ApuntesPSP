@@ -94,7 +94,7 @@ En proyectos reales, se guarda la lista de dependencias en un archivo `requireme
 
 ```
 requests==2.28.0
-pycryptodome==3.19.0
+cryptography==3.19.0
 openai==1.0.0
 ```
 

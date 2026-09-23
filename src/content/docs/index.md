@@ -1,4 +1,4 @@
----
+﻿---
 title: Inicio
 description: Apuntes de Programación de Servicios y Procesos — Python. CC BY-SA 4.0 — José A. González
 ---

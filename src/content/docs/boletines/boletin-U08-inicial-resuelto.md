@@ -1,9 +1,11 @@
 ﻿---
-title: Boletín U09 — Inicial (Resuelto)
-description: Soluciones de los ejercicios básicos de Hash y Cifrado Clásico
+title: Boletín UD 9 — Inicial (Resuelto)
+description: Soluciones de los ejercicios básicos de Seguridad y cifrado
 ---
 
-# ✅ Boletín U09 — Inicial (Resuelto)
+# ✅ Boletín UD 9 — Inicial (Resuelto)
+
+> Los ejercicios 6 y 7 necesitan `pycryptodome`: `pip install pycryptodome`.
 
 ---
 
@@ -27,23 +29,7 @@ print(hashlib.md5("Python es genial".encode()).hexdigest())
 
 MD5 devuelve **32 caracteres** hexadecimales (128 bits).
 
-## 3. Compara "Hola" vs "hola"
-
-```python
-import hashlib
-h1 = hashlib.sha256(b"Hola").hexdigest()
-h2 = hashlib.sha256(b"hola").hexdigest()
-print(f"Hola:  {h1}")
-print(f"hola:  {h2}")
-print(f"¿Iguales? {h1 == h2}")
-```
-
-- `Hola` → `e633f4fc79badea1dc5db970cf397c8248bac47cc3acf9915ba60b5d76b0e88f`
-- `hola` → `b221d9dbb083a7f33428d7c2a3c3198ae925614d70210e28716ccaa7cd4ddb79`
-
-Son **diferentes**: aunque solo cambia la mayúscula por la minúscula, el hash cambia por completo. Es el **efecto avalancha** ([punto 2](/ApuntesPSP/08-hash-y-cifrado-clasico/02-que-es-un-hash)).
-
-## 4. Longitud de los hashes de "Hola mundo"
+## 3. Longitud de los hashes de "Hola mundo"
 
 ```python
 import hashlib
@@ -55,23 +41,7 @@ print(f"SHA256: {len(hashlib.sha256(texto).hexdigest())} chars (256 bits)")
 
 MD5 → **32**, SHA1 → **40**, SHA256 → **64** caracteres hexadecimales. La longitud es **fija** para cada algoritmo, da igual el tamaño de la entrada.
 
-## 5. Hash de un archivo simple
-
-```python
-import hashlib
-
-with open("mensaje.txt", "rb") as f:
-    hash_archivo = hashlib.sha256(f.read()).hexdigest()
-print(f"SHA256 del archivo: {hash_archivo}")
-
-hash_texto = hashlib.sha256(b"Hola mundo").hexdigest()
-print(f"SHA256 del texto:   {hash_texto}")
-print(f"¿Coinciden? {hash_archivo == hash_texto}")  # True
-```
-
-Si el archivo contiene exactamente `Hola mundo`, ambos coinciden: `ca8f60b2cc7f05837d98b208b57fb6481553fc5f1219d59618fd025002a66f5c`. La clave es abrirlo en **modo binario** `"rb"`.
-
-## 6. Cifrado César sencillo
+## 4. Cifrado César sencillo
 
 ```python
 def cifrar_cesar(texto, desplazamiento):
@@ -89,28 +59,7 @@ print(cifrar_cesar("Hola", 3))  # "Krod"
 
 Cada letra avanza 3 posiciones: **H→K, o→r, l→o, a→d**. Resultado: **Krod**.
 
-## 7. Descifrar un César dado
-
-```python
-def cifrar_cesar(texto, desplazamiento):
-    resultado = ""
-    for caracter in texto:
-        if caracter.isalpha():
-            base = ord('A') if caracter.isupper() else ord('a')
-            resultado += chr((ord(caracter) - base + desplazamiento) % 26 + base)
-        else:
-            resultado += caracter
-    return resultado
-
-def descifrar_cesar(texto, desplazamiento):
-    return cifrar_cesar(texto, -desplazamiento)
-
-print(descifrar_cesar("Krod", 3))  # "Hola"
-```
-
-Descifrar es cifrar con desplazamiento **negativo** ([punto 6](/ApuntesPSP/08-hash-y-cifrado-clasico/06-cifrado-cesar)): `"Krod"` con -3 devuelve `"Hola"`.
-
-## 8. Determinismo del hash
+## 5. Determinismo del hash
 
 ```python
 import hashlib
@@ -121,4 +70,56 @@ print(f"Segunda:  {h2}")
 print(f"¿Iguales? {h1 == h2}")  # True
 ```
 
-Son **iguales**: el hash es **determinista** ([punto 2](/ApuntesPSP/08-hash-y-cifrado-clasico/02-que-es-un-hash)). Misma entrada → mismo hash, siempre. Esa propiedad es la que hace posible el login por comparación de hashes del [punto 4](/ApuntesPSP/08-hash-y-cifrado-clasico/04-hash-de-contrasenas).
+Son **iguales**: el hash es **determinista** ([punto 2](/ApuntesPSP/08-seguridad-y-cifrado/02-hash-y-huellas-digitales)). Misma entrada → mismo hash, siempre. Esa propiedad es la que hace posible el login por comparación de hashes del [punto 4](/ApuntesPSP/08-seguridad-y-cifrado/03-contrasenas-seguras).
+
+## 6. Nonce y tag
+
+```python
+from Crypto.Cipher import AES
+from Crypto.Random import get_random_bytes
+
+clave = get_random_bytes(32)
+cifrador = AES.new(clave, AES.MODE_EAX)
+texto_cifrado, tag = cifrador.encrypt_and_digest(b"Hola mundo con AES")
+
+print(f"Longitud nonce: {len(cifrador.nonce)} bytes")
+print(f"Longitud tag:   {len(tag)} bytes")
+print(f"Longitud cifrado: {len(texto_cifrado)} bytes")
+```
+
+En modo EAX el **nonce** mide **16 bytes** y el **tag** también **16 bytes**. Los tres (nonce, tag y cifrado) viajan juntos; la clave no ([punto 2](/ApuntesPSP/08-seguridad-y-cifrado/05-cifrado-simetrico-aes)).
+
+## 7. AES: cifrar y descifrar completo
+
+```python
+from Crypto.Cipher import AES
+from Crypto.Random import get_random_bytes
+
+clave = get_random_bytes(32)
+mensaje = b"El cifrado simetrico es rapido"
+
+cifrador = AES.new(clave, AES.MODE_EAX)
+texto_cifrado, tag = cifrador.encrypt_and_digest(mensaje)
+
+print(f"Nonce: {cifrador.nonce.hex()}")
+print(f"Tag:   {tag.hex()}")
+print(f"Cifrado: {texto_cifrado.hex()}")
+
+descifrador = AES.new(clave, AES.MODE_EAX, nonce=cifrador.nonce)
+original = descifrador.decrypt(texto_cifrado)
+print(f"Original: {original.decode()}")
+```
+
+El nonce y el tag se envían junto al cifrado; el receptor los usa con la misma clave para descifrar y verificar la integridad ([punto 2](/ApuntesPSP/08-seguridad-y-cifrado/05-cifrado-simetrico-aes)).
+
+## 8. Simétrico vs asimétrico
+
+a) El simétrico usa **una sola clave** (misma para cifrar y descifrar). El asimétrico usa **dos**: pública + privada.
+
+b) Con la clave **pública de Bob**. Solo su clave privada puede descifrarlo.
+
+c) Por su **límite de tamaño** (~190 bytes con claves de 2048 bits) y su **velocidad** (~1 MB/s). Para volúmenes grandes se usa AES (o el cifrado híbrido del [punto 6](/ApuntesPSP/08-seguridad-y-cifrado/08-cifrado-hibrido-y-practica)).
+
+---
+
+📚 [Volver a la unidad](/ApuntesPSP/08-seguridad-y-cifrado) · Por resolver: [📝 Boletín UD 9 — Inicial](/ApuntesPSP/boletines/boletin-u08-inicial)

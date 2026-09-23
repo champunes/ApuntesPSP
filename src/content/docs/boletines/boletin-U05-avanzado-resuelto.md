@@ -1,312 +1,301 @@
 ﻿---
-title: Boletín U06 — Avanzado (Resuelto)
-description: Soluciones de los ejercicios avanzados de Sockets UDP y Protocolos
+title: Boletín UD 6 — Avanzado (Resuelto)
+description: Soluciones de los ejercicios avanzados de Servidores concurrentes
 ---
 
-# 💪 Boletín U06 — Avanzado (Resuelto)
+# 💪 Boletín UD 6 — Avanzado (Resuelto)
 
 ---
 
-## 1. Cliente NTP manual
-
-```python
-import socket, struct, time
-
-def hora_ntp():
-    with socket.socket(socket.AF_INET, socket.SOCK_DGRAM) as s:
-        s.settimeout(5)
-        # Paquete NTP: 48 bytes, modo cliente
-        paquete = b'\x1b' + 47 * b'\0'
-        s.sendto(paquete, ("pool.ntp.org", 123))
-        datos, _ = s.recvfrom(1024)
-
-    # El timestamp está en los bytes 40-43
-    t = struct.unpack('!I', datos[40:44])[0]
-    # Ajustar época NTP (1900) a Unix (1970)
-    return t - 2208988800
-
-hora = hora_ntp()
-print(f"Hora NTP oficial: {time.ctime(hora)}")
-```
-
-El `settimeout(5)` evita que el `recvfrom()` se quede bloqueado si el datagrama de respuesta se pierde (muy UDP). El timestamp se desempaqueta de los bytes 40-43 con `struct.unpack('!I', ...)` y se ajusta restando **2208988800** segundos de época.
-
-## 2. Servidor UDP multimensaje
-
-```python
-import socket
-with socket.socket(socket.AF_INET, socket.SOCK_DGRAM) as srv:
-    srv.bind(("127.0.0.1", 9001))
-    for i in range(1, 4):
-        datos, direccion = srv.recvfrom(1024)
-        print(f"Mensaje {i} de {direccion}: {datos.decode()}")
-        srv.sendto(f"OK #{i}".encode(), direccion)
-```
-
-Con `for i in range(1, 4)` el servidor responde a 3 mensajes y se cierra solo al salir del bucle (el `with` libera el socket). Cada respuesta lleva su número de orden.
-
-## 3. Cliente HTTP con parseo de cabeceras
-
-```python
-import socket
-
-with socket.socket() as s:
-    s.connect(("example.com", 80))
-    s.sendall(b"GET / HTTP/1.1\r\nHost: example.com\r\nConnection: close\r\n\r\n")
-    resp = b""
-    while True:
-        d = s.recv(4096)
-        if not d:
-            break
-        resp += d
-
-cabeceras, _, cuerpo = resp.decode(errors="replace").partition("\r\n\r\n")
-for linea in cabeceras.split("\r\n"):
-    if linea.startswith(("Content-Type:", "Content-Length:")):
-        print(linea)
-```
-
-`partition("\r\n\r\n")` separa las cabeceras del cuerpo. Buscando las líneas que empiezan por `Content-Type:` y `Content-Length:` extraes justo los dos valores que pide el ejercicio.
-
-## 4. Cliente HTTP manual a `/ip`
-
-```python
-import socket
-with socket.socket() as s:
-    s.connect(("httpbin.org", 80))
-    s.sendall(b"GET /ip HTTP/1.1\r\nHost: httpbin.org\r\nConnection: close\r\n\r\n")
-    resp = b""
-    while True:
-        d = s.recv(4096)
-        if not d: break
-        resp += d
-    print(resp.decode()[:500])
-```
-
-HTTP es texto sobre TCP. Mandas una petición y recibes una respuesta: en el cuerpo de `/ip` viene tu IP pública en JSON.
-
-## 5. Compara TCP y UDP
-
-```python
-import socket, time
-def test_tcp():
-    t = time.time()
-    for _ in range(10):
-        with socket.socket() as s:
-            s.connect(("127.0.0.1", 9000))
-            s.send(b"x")
-            s.recv(1024)
-    return time.time() - t
-def test_udp():
-    t = time.time()
-    for _ in range(10):
-        with socket.socket(socket.AF_INET, socket.SOCK_DGRAM) as s:
-            s.sendto(b"x", ("127.0.0.1", 9001))
-            s.recvfrom(1024)
-    return time.time() - t
-print(f"TCP: {test_tcp():.3f}s")
-print(f"UDP: {test_udp():.3f}s")
-```
-
-UDP suele ser más rápido porque no tiene handshake: cada intercambio TCP paga un `connect()` (three-way handshake) que UDP se ahorra.
-
-> ⚠️ Necesitas un servidor **TCP en el 9000** y un servidor **UDP en el 9001** en marcha (p. ej. los de los ejercicios 1 y 2). Sin ellos, TCP lanza `ConnectionRefusedError` y UDP se queda esperando una respuesta que nadie envía.
-
-## 6. Mini servidor web
-
-```python
-import socket
-with socket.socket() as srv:
-    srv.setsockopt(socket.SOL_SOCKET, socket.SO_REUSEADDR, 1)
-    srv.bind(("127.0.0.1", 8080))
-    srv.listen()
-    conn, addr = srv.accept()
-    with conn:
-        conn.recv(1024)  # Leer petición (la ignoramos)
-        respuesta = "HTTP/1.1 200 OK\r\nContent-Type: text/html\r\n\r\n<h1>Hola mundo</h1>"
-        conn.sendall(respuesta.encode())
-```
-
-Abre http://127.0.0.1:8080 en tu navegador y verás "Hola mundo". El `SO_REUSEADDR` te permite relanzar el servidor sin esperar a que el puerto se libere.
-
-## 7. Ping UDP
-
-```python
-import socket, time, threading
-
-def servidor():
-    with socket.socket(socket.AF_INET, socket.SOCK_DGRAM) as srv:
-        srv.bind(("127.0.0.1", 9001))
-        datos, direccion = srv.recvfrom(1024)
-        srv.sendto(b"PONG", direccion)
-
-threading.Thread(target=servidor, daemon=True).start()
-
-with socket.socket(socket.AF_INET, socket.SOCK_DGRAM) as cli:
-    inicio = time.time()
-    cli.sendto(b"PING", ("127.0.0.1", 9001))
-    datos, _ = cli.recvfrom(1024)
-    fin = time.time()
-
-print(f"PONG recibido en {fin - inicio:.4f} segundos")
-```
-
-El servidor se ejecuta en un hilo `daemon` mientras el cliente mide el tiempo de ida y vuelta. Ese tiempo es el **RTT** (round-trip time), la métrica de latencia de las redes.
-
-## 8. Servidor en todas las interfaces
-
-```python
-import socket
-
-with socket.socket(socket.AF_INET, socket.SOCK_DGRAM) as servidor:
-    servidor.bind(("0.0.0.0", 9001))
-    print("Servidor escuchando en todas las interfaces...")
-    while True:
-        datos, direccion = servidor.recvfrom(1024)
-        print(f"Datagrama de {direccion}: {datos.decode()}")
-        servidor.sendto(b"Recibido!", direccion)
-```
-
-`"0.0.0.0"` significa "cualquier interfaz": el servidor acepta datagramas de cualquier cliente. El bucle infinito atiende a todos los que lleguen, uno tras otro, respondiendo con la dirección de cada uno. No es *broadcast* (eso exigiría `SO_BROADCAST` + envío a `255.255.255.255`), sino un servidor en todas las interfaces.
-
-## 9. HTTP desde cero con parseo
-
-```python
-import socket
-
-with socket.socket() as s:
-    s.connect(("example.com", 80))
-    s.sendall(b"GET / HTTP/1.1\r\nHost: example.com\r\nConnection: close\r\n\r\n")
-    respuesta = b""
-    while True:
-        d = s.recv(4096)
-        if not d: break
-        respuesta += d
-
-texto = respuesta.decode(errors="replace")
-cabeceras, _, cuerpo = texto.partition("\r\n\r\n")
-lineas = cabeceras.split("\r\n")
-print(f"Código de estado: {lineas[0]}")
-for linea in lineas[1:]:
-    print(f"  {linea}")
-print(f"Cuerpo: {len(cuerpo)} caracteres")
-```
-
-`partition("\r\n\r\n")` separa cabeceras del cuerpo: la **primera línea** de las cabeceras es el código de estado (`HTTP/1.1 200 OK`), y el resto son las cabeceras `Nombre: valor`.
-
-## 10. Mini navegador web
-
-```python
-import socket
-
-def descargar_html(url):
-    host = url.split("/", 1)[0]                      # "www.example.com"
-    ruta = "/" + url.split("/", 1)[1] if "/" in url else "/"
-
-    with socket.socket() as s:
-        s.connect((host, 80))
-        s.sendall(f"GET {ruta} HTTP/1.1\r\nHost: {host}\r\nConnection: close\r\n\r\n".encode())
-        respuesta = b""
-        while True:
-            d = s.recv(4096)
-            if not d:
-                break
-            respuesta += d
-
-    cabeceras, _, cuerpo = respuesta.partition(b"\r\n\r\n")
-    return cuerpo.decode(errors="replace")
-
-html = descargar_html("www.example.com/")
-with open("pagina.html", "w", encoding="utf-8") as f:
-    f.write(html)
-print(f"Guardados {len(html)} caracteres de HTML en pagina.html")
-```
-
-Se extrae el **host** (la parte antes de la primera `/`) y la **ruta** (el resto). Tras recibir toda la respuesta, `partition(b"\r\n\r\n")` separa cabeceras del cuerpo y solo se guarda el cuerpo en el archivo.
-
-## 11. Comparativa TCP vs UDP (100 mensajes)
-
-```python
-import socket, time, threading
-
-def servidor_tcp():
-    with socket.socket() as srv:
-        srv.setsockopt(socket.SOL_SOCKET, socket.SO_REUSEADDR, 1)
-        srv.bind(("127.0.0.1", 9000))
-        srv.listen()
-        for _ in range(100):
-            conn, _ = srv.accept()
-            with conn:
-                conn.recv(1024)
-                conn.send(b"x")
-
-def servidor_udp():
-    with socket.socket(socket.AF_INET, socket.SOCK_DGRAM) as srv:
-        srv.bind(("127.0.0.1", 9001))
-        for _ in range(100):
-            datos, direccion = srv.recvfrom(1024)
-            srv.sendto(datos, direccion)
-
-threading.Thread(target=servidor_tcp, daemon=True).start()
-threading.Thread(target=servidor_udp, daemon=True).start()
-time.sleep(0.2)  # dar tiempo a que arranquen los servidores
-
-def test_tcp():
-    t = time.time()
-    for _ in range(100):
-        with socket.socket() as s:
-            s.connect(("127.0.0.1", 9000))
-            s.send(b"x")
-            s.recv(1024)
-    return time.time() - t
-
-def test_udp():
-    t = time.time()
-    for _ in range(100):
-        with socket.socket(socket.AF_INET, socket.SOCK_DGRAM) as s:
-            s.sendto(b"x", ("127.0.0.1", 9001))
-            s.recvfrom(1024)
-    return time.time() - t
-
-print(f"TCP: {test_tcp():.3f}s")
-print(f"UDP: {test_udp():.3f}s")
-```
-
-Ambos servidores se ejecutan en hilos mientras el cliente mide 100 intercambios. El servidor TCP exige `accept()` por cada conexión (handshake incluido); el UDP solo `recvfrom()` + `sendto()`. La diferencia de tiempo es el coste de la fiabilidad de TCP.
-
-## 12. Servidor HTTP simple
+## 1. Servidor con timeout
 
 ```python
 import socket
 
 with socket.socket() as srv:
     srv.setsockopt(socket.SOL_SOCKET, socket.SO_REUSEADDR, 1)
-    srv.bind(("127.0.0.1", 8080))
+    srv.bind(("127.0.0.1", 5000))
     srv.listen()
-    print("Servidor HTTP escuchando en http://127.0.0.1:8080")
+    print("🕐 Servidor con timeout de 5 segundos")
     while True:
         conn, addr = srv.accept()
+        conn.settimeout(5)          # ⏰ 5 segundos máximos para recv
         with conn:
-            peticion = conn.recv(1024).decode(errors="replace")
-            primera_linea = peticion.split("\r\n")[0]
-            partes = primera_linea.split(" ")
-            ruta = partes[1] if len(partes) > 1 else "/"
-            print(f"Petición de {addr}: {primera_linea}")
-
-            if ruta == "/":
-                cuerpo, estado = "<h1>Bienvenido a mi servidor</h1>", "200 OK"
-            elif ruta == "/acerca":
-                cuerpo, estado = "<h1>Sobre este servidor</h1>", "200 OK"
-            else:
-                cuerpo, estado = "<h1>404 — Página no encontrada</h1>", "404 Not Found"
-
-            respuesta = (
-                f"HTTP/1.1 {estado}\r\n"
-                "Content-Type: text/html\r\n"
-                f"Content-Length: {len(cuerpo.encode())}\r\n"
-                "\r\n" + cuerpo
-            )
-            conn.sendall(respuesta.encode())
+            try:
+                datos = conn.recv(1024)
+                print(f"  Recibido de {addr}: {datos.decode()}")
+            except socket.timeout:
+                print(f"  ⏰ {addr} no envió nada en 5s → cierro conexión")
 ```
 
-Se lee la primera línea de la petición (`GET /ruta HTTP/1.1`) y se extrae la **ruta** (segunda palabra). Según la ruta se sirve distinto HTML con su código de estado (`200 OK` o `404 Not Found`) y la cabecera `Content-Length` con el tamaño exacto del cuerpo.
+`conn.settimeout(5)` limita el `recv()`: si el cliente no envía datos en 5 segundos, salta `socket.timeout` y el `with conn:` cierra el socket ([punto 7](/ApuntesPSP/05-servidores-concurrentes/07-limites-y-buenas-practicas)). Un cliente mudo ya no cuelga un hilo para siempre.
+
+## 2. Cliente con timeout
+
+```python
+import socket
+
+try:
+    with socket.socket() as s:
+        s.settimeout(2)              # ⏰ 2 segundos para conectar y recibir
+        s.connect(("127.0.0.1", 9999))
+        s.sendall(b"ping")
+        print(s.recv(1024))
+except (socket.timeout, ConnectionRefusedError):
+    print("Servidor no disponible")
+```
+
+Al conectar a un puerto en el que nada escucha, o al no recibir respuesta, se captura `socket.timeout` (Windows) o `ConnectionRefusedError` (Linux) y se muestra "Servidor no disponible" en lugar de un fallo sin control.
+
+## 3. Contador de bytes totales
+
+```python
+import socket, threading
+
+total_bytes = 0
+lock = threading.Lock()
+
+def atender(conn, addr):
+    global total_bytes
+    with conn:
+        datos = conn.recv(1024)
+    with lock:                                  # 🔒 actualización atómica
+        total_bytes += len(datos)
+        print(f"  {addr} envió {len(datos)} bytes — Total: {total_bytes}")
+
+with socket.socket() as srv:
+    srv.setsockopt(socket.SOL_SOCKET, socket.SO_REUSEADDR, 1)
+    srv.bind(("127.0.0.1", 5000))
+    srv.listen()
+    while True:
+        conn, addr = srv.accept()
+        threading.Thread(target=atender, args=(conn, addr)).start()
+```
+
+El `recv()` queda **fuera** del Lock (cada socket es independiente) y solo la suma al contador global entra en `with lock:`: así varios hilos suman bytes sin condición de carrera ([punto 6](/ApuntesPSP/05-servidores-concurrentes/06-sincronizacion-en-servidores)).
+
+## 4. Servidor con límite de clientes
+
+```python
+import socket, threading
+
+MAX_CLIENTES = 3
+clientes_activos = 0
+lock = threading.Lock()
+
+def atender(conn, addr):
+    global clientes_activos
+    with conn:
+        conn.recv(1024)
+        conn.sendall(b"OK")
+    with lock:
+        clientes_activos -= 1
+
+with socket.socket() as srv:
+    srv.setsockopt(socket.SOL_SOCKET, socket.SO_REUSEADDR, 1)
+    srv.bind(("127.0.0.1", 5000))
+    srv.listen()
+    print(f"🚦 Máximo {MAX_CLIENTES} clientes a la vez")
+    while True:
+        conn, addr = srv.accept()
+        with lock:
+            if clientes_activos >= MAX_CLIENTES:
+                try:
+                    conn.sendall(b"Servidor completo")
+                    conn.shutdown(socket.SHUT_WR)   # asegura que el mensaje llega
+                except (ConnectionResetError, BrokenPipeError):
+                    pass
+                conn.close()
+                print(f"  ❌ {addr} rechazado: servidor completo")
+                continue
+            clientes_activos += 1
+        threading.Thread(target=atender, args=(conn, addr)).start()
+```
+
+Al aceptar se comprueba el máximo bajo `with lock:`. El cuarto cliente recibe `"Servidor completo"` y se cierra **sin incrementar** el contador; los que entran lo decrementan al terminar.
+
+> ⚠️ La garantía de "máximo 3" es real mientras los clientes **mantienen la conexión abierta** (el contador no baja). Si los clientes conectan, envían y cierran muy rápido, el cuarto puede colarse porque los primeros ya decrementaron antes de que llegue; para un aforo estricto, el contador debe reflejar conexiones activas sostenidas.
+
+## 5. Prueba de carga
+
+```python
+import socket, threading, time
+
+resultados = {}
+lock = threading.Lock()
+
+def cliente(id):
+    inicio = time.time()
+    try:
+        with socket.socket() as s:
+            s.connect(("127.0.0.1", 5000))
+            s.sendall(b"ping")
+            s.recv(1024)
+        exito = True
+    except Exception:
+        exito = False
+    fin = time.time()
+    with lock:
+        resultados[id] = (exito, fin - inicio)
+
+hilos = [threading.Thread(target=cliente, args=(i,)) for i in range(20)]
+for h in hilos: h.start()
+for h in hilos: h.join()
+
+exitosos = sum(1 for ok, _ in resultados.values() if ok)
+tiempos = [t for ok, t in resultados.values() if ok]
+media = sum(tiempos) / len(tiempos) if tiempos else 0
+print(f"Exitosos: {exitosos}/20 | Total: {sum(tiempos):.2f}s | Media: {media:.2f}s")
+```
+
+Cada cliente guarda su resultado (éxito + duración) en un diccionario compartido protegido por Lock. Tras `join()` a todos, se calculan las estadísticas: es el **benchmark** del [punto 5](/ApuntesPSP/05-servidores-concurrentes/05-benchmark) llevado a 20 clientes.
+
+## 6. Servidor con cola de espera
+
+```python
+import socket, threading, queue
+
+COLA = queue.Queue()
+
+def atender():
+    while True:
+        conn, addr = COLA.get()          # 🔔 espera a que haya trabajo
+        with conn:
+            datos = conn.recv(1024)
+            conn.sendall(b"OK: " + datos)
+            print(f"  Atendido {addr}")
+        COLA.task_done()
+
+N_TRABAJADORES = 3
+for _ in range(N_TRABAJADORES):
+    threading.Thread(target=atender, daemon=True).start()
+
+with socket.socket() as srv:
+    srv.setsockopt(socket.SOL_SOCKET, socket.SO_REUSEADDR, 1)
+    srv.bind(("127.0.0.1", 5000))
+    srv.listen()
+    print("🔔 Cola de espera con 3 trabajadores")
+    while True:
+        conn, addr = srv.accept()
+        COLA.put((conn, addr))           # 📦 encola la conexión
+```
+
+El hilo principal solo **acepta y encola**. Los N trabajadores (daemon) sacan conexiones con `COLA.get()` y las atienden: es un ThreadPool hecho a mano con `queue.Queue`, el mecanismo interno de los pools del [punto 4](/ApuntesPSP/05-servidores-concurrentes/04-threadpoolexecutor).
+
+## 7. Estado del servidor
+
+```python
+import socket, threading
+
+activas = 0
+lock = threading.Lock()
+
+def atender(conn, addr):
+    global activas
+    with conn:
+        comando = conn.recv(1024).decode().strip()
+        if comando == "STATUS":
+            with lock:
+                conn.sendall(f"Activas: {activas}".encode())
+        else:
+            conn.sendall(b"OK")
+    with lock:
+        activas -= 1
+
+with socket.socket() as srv:
+    srv.setsockopt(socket.SOL_SOCKET, socket.SO_REUSEADDR, 1)
+    srv.bind(("127.0.0.1", 5000))
+    srv.listen()
+    while True:
+        conn, addr = srv.accept()
+        with lock:
+            activas += 1
+        threading.Thread(target=atender, args=(conn, addr)).start()
+```
+
+Un cliente que envíe `"STATUS"` recibe el número de conexiones activas (el resto recibe `"OK"`). El contador se incrementa al aceptar y se decrementa al salir, siempre bajo Lock.
+
+## 8. Heartbeat en servidor
+
+```python
+import socket, threading, time
+
+activas = 0
+lock = threading.Lock()
+
+def heartbeat():
+    while True:
+        time.sleep(5)
+        with lock:
+            print(f"💓 Servidor vivo — {activas} conexiones")
+
+threading.Thread(target=heartbeat, daemon=True).start()
+
+def atender(conn, addr):
+    global activas
+    with lock:
+        activas += 1
+    with conn:
+        conn.recv(1024)
+        conn.sendall(b"OK")
+    with lock:
+        activas -= 1
+
+with socket.socket() as srv:
+    srv.setsockopt(socket.SOL_SOCKET, socket.SO_REUSEADDR, 1)
+    srv.bind(("127.0.0.1", 5000))
+    srv.listen()
+    while True:
+        conn, addr = srv.accept()
+        threading.Thread(target=atender, args=(conn, addr)).start()
+```
+
+El hilo heartbeat es **daemon** (muere con el servidor) y cada 5s imprime el estado leyendo el contador bajo Lock. Es la semilla del *heartbeat* de disponibilidad que ampliarás en la [UD 10 · asyncio](/ApuntesPSP/09-alta-disponibilidad).
+
+## 9. Balanceador de carga simple
+
+```python
+import socket, threading
+
+PUERTOS_WORKERS = [5001, 5002]
+indice = 0
+
+def worker(puerto):
+    with socket.socket() as srv:
+        srv.setsockopt(socket.SOL_SOCKET, socket.SO_REUSEADDR, 1)
+        srv.bind(("127.0.0.1", puerto))
+        srv.listen()
+        print(f"  ⚙️  Worker escuchando en {puerto}")
+        while True:
+            conn, addr = srv.accept()
+            with conn:
+                datos = conn.recv(1024)
+                conn.sendall(f"Worker-{puerto}: ".encode() + datos)
+
+for puerto in PUERTOS_WORKERS:
+    threading.Thread(target=worker, args=(puerto,), daemon=True).start()
+
+def balanceador():
+    global indice
+    with socket.socket() as srv:
+        srv.setsockopt(socket.SOL_SOCKET, socket.SO_REUSEADDR, 1)
+        srv.bind(("127.0.0.1", 5000))
+        srv.listen()
+        print("⚖️  Balanceador en 127.0.0.1:5000 (round-robin)")
+        while True:
+            conn, addr = srv.accept()
+            puerto = PUERTOS_WORKERS[indice % len(PUERTOS_WORKERS)]
+            indice += 1
+            with conn:
+                datos = conn.recv(1024)
+                with socket.socket() as worker_s:
+                    worker_s.connect(("127.0.0.1", puerto))
+                    worker_s.sendall(datos)
+                    respuesta = worker_s.recv(1024)
+                conn.sendall(respuesta)
+            print(f"  {addr} → worker {puerto}")
+
+balanceador()
+```
+
+El balanceador (puerto 5000) hace de **proxy**: lee del cliente, reenvía al worker elegido por **round-robin** (`indice % 2`), recibe su respuesta y la devuelve al cliente. Los workers 5001 y 5002 son servidores normales, cada uno en su hilo. Los clientes que envíen varias peticiones verán cómo se alterna la respuesta `Worker-5001`/`Worker-5002`.

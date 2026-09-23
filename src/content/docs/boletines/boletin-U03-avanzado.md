@@ -1,9 +1,9 @@
 ﻿---
-title: Boletín U04 — Avanzado
-description: Ejercicios avanzados de Sincronización entre Hilos
+title: Boletín UD 4 — Avanzado
+description: Ejercicios avanzados de Sincronización
 ---
 
-# 💪 Boletín U04 — Avanzado
+# 💪 Boletín UD 4 — Avanzado
 
 > Ejercicios que requieren aplicar los conceptos de sincronización de forma más profunda, con programas completos y varios mecanismos a la vez.
 

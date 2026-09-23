@@ -5,7 +5,7 @@ description: "401, 403, 429, 500: el servidor te está hablando ⚠️"
 
 <p><small>401, 403, 429, 500: el servidor te está hablando ⚠️</small></p>
 
-> 🗺️ **Estás en:** 🧪 **U08 · APIs Comerciales** → 06 · Errores HTTP
+> 🗺️ **Estás en:** 🧪 **UD 8 · APIs Comerciales** → 06 · Errores HTTP
 
 ---
 
@@ -31,7 +31,7 @@ Estos son los códigos que una API comercial te va a devolver en la vida real:
 | `500` | Internal Server Error | El servidor de la API está tocado |
 | `503` | Service Unavailable | La API está de mantenimiento o caída |
 
-> 💡 La regla mnemotécnica de la U07 sigue valiendo: los **4xx** son tu culpa (mira la URL, la key o los parámetros), los **5xx** son del servidor.
+> 💡 La regla mnemotécnica de la UD 7 sigue valiendo: los **4xx** son tu culpa (mira la URL, la key o los parámetros), los **5xx** son del servidor.
 
 ---
 

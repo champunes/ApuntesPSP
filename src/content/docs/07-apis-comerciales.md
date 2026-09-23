@@ -10,7 +10,7 @@ nav_order: 07
 
 *En la U07 consumiste APIs públicas y gratuitas: sin clave, sin límites, sin miedo. Ahora toca el mundo real: las APIs comerciales te dan una **API key**, te limitan las peticiones, se caen y tienes que gestionar sus errores como un adulto.*
 
-En esta unidad consumirás dos de las APIs más usadas del planeta: **OpenWeatherMap** para el tiempo y **OpenAI** para el cerebro artificial. Aprenderás a guardar tus claves con seguridad en variables de entorno, a gestionar rate limits y errores HTTP con elegancia, y a construir un programa completo que habla de verdad con ambas. Todo lo que viste en la [U07 · APIs REST y HTTP](/ApuntesPSP/06-apis-rest-y-http) —GET, JSON, `requests`— se viste aquí de traje de gala.
+En esta unidad consumirás dos de las APIs más usadas del planeta: **OpenWeatherMap** para el tiempo y **OpenAI** para el cerebro artificial. Aprenderás a guardar tus claves con seguridad en variables de entorno, a gestionar rate limits y errores HTTP con elegancia, y a construir un programa completo que habla de verdad con ambas. Todo lo que viste en la [UD 7 · HTTP y APIs REST](/ApuntesPSP/06-http-y-apis-rest) —GET, JSON, `requests`— se viste aquí de traje de gala.
 
 Esta unidad se lee como un **libro de 9 capítulos**: los 8 primeros son teoría en progresión y el 9º aterriza todo en la práctica.
 
@@ -72,15 +72,15 @@ Al terminar, serás capaz de:
 | a) | Utiliza APIs REST para obtener datos externos | ✅ Puntos 3-5 y 8 + ⚡ Laboratorio (punto 9) |
 | b) | Gestiona peticiones HTTP y procesa respuestas JSON | ✅ Puntos 1, 5-6 y 8 + ⚡ Laboratorio (punto 9) |
 
-> RA4c (servidores concurrentes) y RA4d (ThreadPool) se cubren en la **U11 · Servidores Concurrentes**. RA4e-g (asyncio, disponibilidad, comparativa) se cubren en la **U12 · asyncio y disponibilidad**.
+> RA4c (Servidores concurrentes) y RA4d (ThreadPool) se cubren en la **UD 6 · Servidores concurrentes**. RA4e-g (asyncio, disponibilidad, comparativa) se cubren en la **UD 10 · Alta disponibilidad**.
 
 ---
 
 ## 🚪 ¿Por dónde empiezo?
 
-¿Vienes de la U07 y dominas `requests`, GET y JSON? Perfecto, ese es el trampolín ideal: repasa la [U07 · APIs REST y HTTP](/ApuntesPSP/06-apis-rest-y-http) para tener fresco `params=` y `resp.json()`, y arranca en el [punto 1](/ApuntesPSP/07-apis-comerciales/01-api-keys), que parte justo de ahí: de la petición con `requests` a la petición con clave.
+¿Vienes de la UD 7 y dominas `requests`, GET y JSON? Perfecto, ese es el trampolín ideal: repasa la [UD 7 · HTTP y APIs REST](/ApuntesPSP/06-http-y-apis-rest) para tener fresco `params=` y `resp.json()`, y arranca en el [punto 1](/ApuntesPSP/07-apis-comerciales/01-api-keys), que parte justo de ahí: de la petición con `requests` a la petición con clave.
 
 ¿Ya tienes claves de OpenWeatherMap y OpenAI y solo necesitas consumirlas? Ve directo al [punto 3](/ApuntesPSP/07-apis-comerciales/03-openweathermap) y al [punto 4](/ApuntesPSP/07-apis-comerciales/04-openai). Si vienes de cero en APIs, no te saltes los puntos 1 y 2: la API key y el `.env` son la base de todo lo demás.
 
 **📍 Primer punto:** [01 · API Keys](/ApuntesPSP/07-apis-comerciales/01-api-keys)  
-**⏭️ Al acabar la unidad, continúa en [U09 · Hash y Cifrado Clásico](/ApuntesPSP/08-hash-y-cifrado-clasico).**
+**⏭️ Al acabar la unidad, continúa en [UD 9 · Seguridad y cifrado](/ApuntesPSP/08-seguridad-y-cifrado).**

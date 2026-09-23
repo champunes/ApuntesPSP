@@ -1,9 +1,9 @@
 ﻿---
-title: Boletín U03 — Avanzado (Resuelto)
+title: Boletín UD 3 — Avanzado (Resuelto)
 description: Soluciones de los ejercicios avanzados de Hilos Fundamentos
 ---
 
-# 💪 Boletín U03 — Avanzado (Resuelto)
+# 💪 Boletín UD 3 — Avanzado (Resuelto)
 
 ---
 
@@ -174,7 +174,7 @@ Salida:
 El resultado del hilo es: 42
 ```
 
-Las funciones de los hilos **no tienen `return`**. Para "devolver" un valor se usa una **lista compartida** (la memoria compartida del [punto 1](/ApuntesPSP/02-hilos-fundamentos/01-de-proceso-a-hilo)): el hilo hace `append`, y tras `join()` el principal lee el valor con seguridad, porque ya sabe que el hilo ha terminado.
+Las funciones de los hilos **no tienen `return`**. Para "devolver" un valor se usa una **lista compartida** (la memoria compartida del [punto 1](/ApuntesPSP/02-hilos-y-concurrencia/01-de-proceso-a-hilo)): el hilo hace `append`, y tras `join()` el principal lee el valor con seguridad, porque ya sabe que el hilo ha terminado.
 
 ## 8. ⏱ Timer con repetición
 
@@ -202,7 +202,7 @@ Salida parecida a:
 Programa principal terminando...
 ```
 
-El `Timer` normal solo dispara **una vez** ([punto 5](/ApuntesPSP/02-hilos-fundamentos/05-timer)). Para repetirlo, la propia función crea y lanza otro `Timer` al final: recursividad. Así cada tick programa el siguiente. El principal decide cuándo parar: ponemos cada Timer como **daemon** (`t.daemon = True`) para que, al terminar el principal, los ticks pendientes mueran con él y el programa no se quede esperando.
+El `Timer` normal solo dispara **una vez** ([punto 5](/ApuntesPSP/02-hilos-y-concurrencia/05-timer)). Para repetirlo, la propia función crea y lanza otro `Timer` al final: recursividad. Así cada tick programa el siguiente. El principal decide cuándo parar: ponemos cada Timer como **daemon** (`t.daemon = True`) para que, al terminar el principal, los ticks pendientes mueran con él y el programa no se quede esperando.
 
 ## 9. 🏗️ Pool de hilos manual
 
@@ -276,7 +276,7 @@ time.sleep(3)
 print("Programa termina — el daemon muere")
 ```
 
-El daemon imprime "tic" cada segundo y se **mata al salir** del programa principal ([punto 4](/ApuntesPSP/02-hilos-fundamentos/04-hilos-daemon)). Si fuera no-daemon con su `while True`, el programa jamás terminaría.
+El daemon imprime "tic" cada segundo y se **mata al salir** del programa principal ([punto 4](/ApuntesPSP/02-hilos-y-concurrencia/04-hilos-daemon)). Si fuera no-daemon con su `while True`, el programa jamás terminaría.
 
 **Bonus 3 — Timer**
 
@@ -290,4 +290,4 @@ t = threading.Timer(4.0, despierta)
 t.start()
 ```
 
-Timer ejecuta **UNA SOLA vez** después del retardo de 4 segundos ([punto 5](/ApuntesPSP/02-hilos-fundamentos/05-timer)). No se repite; para repetirlo, la función debe reprogramarse (ejercicio 8).
+Timer ejecuta **UNA SOLA vez** después del retardo de 4 segundos ([punto 5](/ApuntesPSP/02-hilos-y-concurrencia/05-timer)). No se repite; para repetirlo, la función debe reprogramarse (ejercicio 8).

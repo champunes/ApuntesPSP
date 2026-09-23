@@ -1,62 +1,50 @@
 ﻿---
-title: Boletín U06 — Inicial
-description: Ejercicios básicos de Sockets UDP y Protocolos
+title: Boletín UD 6 — Inicial
+description: Ejercicios básicos de Servidores Concurrentes
 ---
 
-# 📝 Boletín U06 — Inicial
+# 📝 Boletín UD 6 — Inicial
 
-> Ejercicios básicos para afianzar los conceptos de UDP (cliente, servidor, eco), TCP vs UDP y el HTTP manual de la unidad U06.
+> Ejercicios básicos para afianzar los conceptos de servidores concurrentes: sockets TCP, el servidor secuencial y sus límites, y el salto a los hilos.
 
 ---
 
-## 1. Cliente UDP con entrada de usuario
+## 1. Servidor eco básico
 
-Crea un cliente UDP que pida un mensaje al usuario por teclado con `input()`, lo envíe a `127.0.0.1:9001` y espere una respuesta.
+Crea un servidor TCP que reciba datos de un cliente y los devuelva exactamente igual (eco). Sin bucle, atiende un solo cliente y termina.
 
-## 2. Servidor UDP con eco personalizado
+## 2. Servidor eco con bucle
 
-Crea un servidor UDP que escuche en `127.0.0.1:9001`. Al recibir un mensaje, responda con `"Recibido: "` seguido del mensaje original.
+Modifica el servidor anterior para que acepte clientes en un bucle infinito, dando eco a cada uno.
 
-## 3. Servidor UDP contador
+## 3. Cliente eco
 
-Crea un servidor UDP que lleve la cuenta de cuántos mensajes ha recibido. Al responder, incluya el número de mensaje (ej: `"Mensaje #1"`, `"Mensaje #2"`).
+Crea un cliente TCP que se conecte al servidor, envíe `b"Hola eco"` y muestre la respuesta recibida.
 
-**Pista:** declara un contador fuera del bucle `while True:` e increméntalo en cada `recvfrom()`. La respuesta se construye con un f-string.
+## 4. Servidor secuencial
 
-## 4. Cliente UDP mínimo
+Crea un servidor TCP que atienda a **un solo cliente** y termine: `accept()`, recibe, responde `b"OK"` y cierra.
 
-Crea un cliente UDP que envíe `b"Hola UDP"` a `127.0.0.1:9001`. No necesitas esperar respuesta: con `sendto()` y `with` basta.
+**Pista:** es la versión mínima del servidor secuencial: `with socket.socket() as srv:` → `bind(("127.0.0.1", 5000))` → `listen()` → `accept()` → `with conn:` → `recv()` y `sendall(b"OK")`.
 
-## 5. Servidor UDP mínimo
+## 5. Servidor multihilo
 
-Crea un servidor UDP que escuche en `127.0.0.1:9001`, reciba un datagrama y lo imprima con la dirección de quien lo envió.
+Convierte el servidor anterior en uno **multihilo**: dentro de un `while True`, cada cliente que acepte se atiende en su propio `threading.Thread`.
 
-## 6. Servidor UDP eco
+**Pista:** define `def atender(conn, addr):` con el eco, y en el bucle lanza `threading.Thread(target=atender, args=(conn, addr)).start()`. El bucle vuelve al `accept()` al instante.
 
-Crea un servidor UDP que escuche en `127.0.0.1:9001` y devuelva al cliente **lo mismo** que recibe.
+## 6. Cliente con respuesta
 
-## 7. TCP vs UDP: clasifica
+Crea un cliente TCP que se conecte al servidor, envíe `b"Hola"` y muestre por pantalla la respuesta que reciba.
 
-a) Clasifica cada aplicación como TCP o UDP y justifica brevemente:
+## 7. Servidor con ThreadPoolExecutor
 
-- Web (HTTP)
-- Videollamada (Zoom)
-- Correo (SMTP)
-- Juego online (Fortnite)
-- Transferencia de archivos (FTP)
-- DNS
+Implementa un servidor TCP que use `concurrent.futures.ThreadPoolExecutor` con **3 hilos** (`max_workers=3`). Responde `b"OK"` a cada cliente.
 
-b) Completa la tabla:
+**Pista:** `with socket.socket() as srv, ThreadPoolExecutor(max_workers=3) as pool:` y en el bucle `pool.submit(atender, conn, addr)`. Con 3 hilos, el 4º cliente espera en cola.
 
-| Característica | TCP | UDP |
-|---|---|---|
-| Conexión | | |
-| Entrega garantizada | | |
-| Orden | | |
-| Velocidad | | |
+## 8. Lanzador de 5 clientes
 
-## 8. Cliente HTTP manual
+Crea un script que lance **5 clientes simultáneos** contra `127.0.0.1:5000`, cada uno enviando `f"Soy {id}"`, y muestre la respuesta de cada uno.
 
-Conéctate con un socket TCP a `www.example.com:80`, haz un GET a `/` y muestra los primeros 500 caracteres de la respuesta.
-
-**Pista:** envía `"GET / HTTP/1.1\r\nHost: www.example.com\r\nConnection: close\r\n\r\n"` con `sendall()`. Recibe en bucle con `recv(4096)` acumulando bytes hasta que devuelva `b""`, y entonces decodifica.
+**Pista:** haz una lista de hilos `[threading.Thread(target=cliente, args=(i,)) for i in range(5)]`, lánzalos con `h.start()` y espera a todos con `h.join()`. La función `cliente(id)` conecta, envía y muestra `s.recv(1024).decode()`.

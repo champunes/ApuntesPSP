@@ -1,11 +1,11 @@
-﻿---
-title: Boletín U03 — Avanzado
+---
+title: Boletín UD 3 — Avanzado
 description: Ejercicios avanzados de Hilos Fundamentos
 ---
 
-# 💪 Boletín U03 — Avanzado
+# 💪 Boletín UD 3 — Avanzado
 
-> Ejercicios que requieren aplicar los conceptos de hilos de la unidad U03 de forma más profunda: esperas con timeout, introspección, banderas de parada y timers que se repiten.
+> Ejercicios que requieren aplicar los conceptos de hilos de la unidad UD 3 de forma más profunda: esperas con timeout, introspección, banderas de parada y timers que se repiten.
 
 ---
 

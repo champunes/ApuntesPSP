@@ -5,7 +5,7 @@ description: "Nunca subas tus claves: python-dotenv y el .env 🔒"
 
 <p><small>Nunca subas tus claves: python-dotenv y el .env 🔒</small></p>
 
-> 🗺️ **Estás en:** 🧪 **U08 · APIs Comerciales** → 02 · Variables de entorno
+> 🗺️ **Estás en:** 🧪 **UD 8 · APIs Comerciales** → 02 · Variables de entorno
 
 ---
 

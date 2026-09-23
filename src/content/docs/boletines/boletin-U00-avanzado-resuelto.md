@@ -1,9 +1,9 @@
-﻿---
-title: Boletín U02 — Avanzado (Resuelto)
+---
+title: Boletín UD 1 — Avanzado (Resuelto)
 description: Soluciones de los ejercicios avanzados de Python 3
 ---
 
-# ✅ Boletín U02 — Avanzado (Resuelto)
+# ✅ Boletín UD 1 — Avanzado (Resuelto)
 
 ---
 

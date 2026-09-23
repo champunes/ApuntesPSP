@@ -1,9 +1,9 @@
 ﻿---
-title: Boletín U04 — Inicial (Resuelto)
-description: Soluciones de los ejercicios básicos de Sincronización entre Hilos
+title: Boletín UD 4 — Inicial (Resuelto)
+description: Soluciones de los ejercicios básicos de Sincronización
 ---
 
-# ✅ Boletín U04 — Inicial (Resuelto)
+# ✅ Boletín UD 4 — Inicial (Resuelto)
 
 ---
 
@@ -52,7 +52,7 @@ def función_externa():
 función_externa()
 ```
 
-`función_interna` adquiere el mismo `RLock` que `función_externa` ya tiene puesto. Con un `Lock` normal sería un **deadlock** (el hilo se espera a sí mismo); con `RLock` no hay problema ([punto 3](/ApuntesPSP/03-sincronizacion-entre-hilos/03-rlock)).
+`función_interna` adquiere el mismo `RLock` que `función_externa` ya tiene puesto. Con un `Lock` normal sería un **deadlock** (el hilo se espera a sí mismo); con `RLock` no hay problema ([punto 3](/ApuntesPSP/03-sincronizacion/03-rlock)).
 
 ## 3. Semáforo con timeout
 
@@ -74,7 +74,7 @@ for h in hilos: h.start()
 for h in hilos: h.join()
 ```
 
-Solo 2 hilos entran a la vez; los que no consiguen entrar en 1 segundo muestran **"timeout"** y se van en lugar de esperar eternamente ([punto 4](/ApuntesPSP/03-sincronizacion-entre-hilos/04-semaphore)).
+Solo 2 hilos entran a la vez; los que no consiguen entrar en 1 segundo muestran **"timeout"** y se van en lugar de esperar eternamente ([punto 4](/ApuntesPSP/03-sincronizacion/04-semaphore)).
 
 ## 4. Carrera sin Lock
 
@@ -100,7 +100,7 @@ for h in hilos:
 print(contador)  # ❌ Casi nunca será 10000
 ```
 
-Sin Lock, hay condición de carrera. El valor casi siempre será **< 10000** y variará en cada ejecución ([punto 1](/ApuntesPSP/03-sincronizacion-entre-hilos/01-condicion-de-carrera)). En Python 3.13+ el `+=` en una línea casi nunca se interrumpe; pasando la suma por una función y forzando el cambio de hilo con `setswitchinterval`, la carrera se vuelve visible.
+Sin Lock, hay condición de carrera. El valor casi siempre será **< 10000** y variará en cada ejecución ([punto 1](/ApuntesPSP/03-sincronizacion/01-condicion-de-carrera)). En Python 3.13+ el `+=` en una línea casi nunca se interrumpe; pasando la suma por una función y forzando el cambio de hilo con `setswitchinterval`, la carrera se vuelve visible.
 
 ## 5. Contador protegido con Lock
 
@@ -121,7 +121,7 @@ for h in hilos:
 print(contador)  # ✅ 2000
 ```
 
-`with lock:` garantiza exclusión mutua: el "leer → sumar → escribir" ocurre de principio a fin sin que se cuele el otro hilo ([punto 2](/ApuntesPSP/03-sincronizacion-entre-hilos/02-lock)).
+`with lock:` garantiza exclusión mutua: el "leer → sumar → escribir" ocurre de principio a fin sin que se cuele el otro hilo ([punto 2](/ApuntesPSP/03-sincronizacion/02-lock)).
 
 ## 6. Sección crítica con sleep
 
@@ -165,7 +165,7 @@ for h in hilos:
     h.join()
 ```
 
-Solo 2 hilos entran a la vez. Los demás esperan hasta que un puesto se libera ([punto 4](/ApuntesPSP/03-sincronizacion-entre-hilos/04-semaphore)).
+Solo 2 hilos entran a la vez. Los demás esperan hasta que un puesto se libera ([punto 4](/ApuntesPSP/03-sincronizacion/04-semaphore)).
 
 ## 8. Barrera de 3
 
@@ -184,4 +184,4 @@ for h in hilos:
     h.join()
 ```
 
-Todos imprimen "preparado" antes de que nadie "salga": la barrera no deja cruzar hasta que los 3 han llegado ([punto 5](/ApuntesPSP/03-sincronizacion-entre-hilos/05-barrier)).
+Todos imprimen "preparado" antes de que nadie "salga": la barrera no deja cruzar hasta que los 3 han llegado ([punto 5](/ApuntesPSP/03-sincronizacion/05-barrier)).

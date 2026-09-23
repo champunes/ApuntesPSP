@@ -1,9 +1,9 @@
 ﻿---
-title: Boletín U02 — Inicial (Resuelto)
-description: Soluciones de los ejercicios básicos de Procesos y Subprocess
+title: Boletín UD 2 — Inicial (Resuelto)
+description: Soluciones de los ejercicios básicos de Gestión de procesos
 ---
 
-# ✅ Boletín U02 — Inicial (Resuelto)
+# ✅ Boletín UD 2 — Inicial (Resuelto)
 
 ---
 
@@ -16,7 +16,7 @@ resultado = subprocess.run(["dir"], capture_output=True, text=True, shell=True)
 print(resultado.stdout)
 ```
 
-En Linux: `subprocess.run(["ls"])`. En Windows, `dir` es un comando interno del shell, por eso `shell=True` ([punto 7](/ApuntesPSP/01-procesos-y-subprocess/07-compatibilidad-windows-linux)).
+En Linux: `subprocess.run(["ls"])`. En Windows, `dir` es un comando interno del shell, por eso `shell=True` ([punto 7](/ApuntesPSP/01-gestion-de-procesos/07-compatibilidad-windows-linux)).
 
 ## 2. Saber el nombre del equipo
 
@@ -51,7 +51,7 @@ import os
 print(f"Mi PID es {os.getpid()}")
 ```
 
-`os.getpid()` devuelve el identificador único del proceso actual: el **PID** ([punto 1](/ApuntesPSP/01-procesos-y-subprocess/01-que-es-un-proceso)).
+`os.getpid()` devuelve el identificador único del proceso actual: el **PID** ([punto 1](/ApuntesPSP/01-gestion-de-procesos/01-que-es-un-proceso)).
 
 ## 5. Versión de Python
 
@@ -81,7 +81,7 @@ notepad.terminate()
 
 **NUEVO → LISTO → EJECUCIÓN → BLOQUEADO → TERMINADO**
 
-El orden correcto: el proceso **nace** (NUEVO), espera su turno de CPU (**LISTO**), la CPU lo ejecuta (**EJECUCIÓN**), puede quedarse esperando un recurso (**BLOQUEADO**) y finalmente **termina**. Repasa el [punto 2](/ApuntesPSP/01-procesos-y-subprocess/02-estados-de-un-proceso).
+El orden correcto: el proceso **nace** (NUEVO), espera su turno de CPU (**LISTO**), la CPU lo ejecuta (**EJECUCIÓN**), puede quedarse esperando un recurso (**BLOQUEADO**) y finalmente **termina**. Repasa el [punto 2](/ApuntesPSP/01-gestion-de-procesos/02-estados-de-un-proceso).
 
 ## 8. Ping con timeout
 
