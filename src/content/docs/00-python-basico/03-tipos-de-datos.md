@@ -141,7 +141,7 @@ Un string se puede tratar como una lista de caracteres (los índices empiezan en
 
 ```python
 "Hola"[0]    # => 'H'
-"Hola"[-1]   # => 'o'  (el último carácter)
+"Hola"[-1]   # => 'a'  (el último carácter)
 ```
 
 ### Formato de strings
