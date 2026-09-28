@@ -182,7 +182,7 @@ def main():
 
     indice_md = [
         "% Índice — Apuntes PSP",
-        "% Sergi Garcia Barea",
+        "% José A. González",
         "% 26 de septiembre de 2026",
         "",
         "Apuntes de Programación de Servicios y Procesos exportados a DOCX: "
