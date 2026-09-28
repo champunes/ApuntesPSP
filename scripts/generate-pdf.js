@@ -40,6 +40,7 @@ async function main() {
         '--footer', 'scripts/pdf-footer.html',
         '--header', 'scripts/pdf-header.html',
         '--preceding-html', 'scripts/pdf-cover.html',
+        '--contents-links', 'internal',
         '--print-bg',
         '--timeout', '600000'
     ];
