@@ -3,17 +3,17 @@ param($OutDir = "public/epub")
 $ErrorActionPreference = "Stop"
 
 $unitSlugs = @(
-  "00-python-basico",
-  "01-gestion-de-procesos",
-  "02-hilos-y-concurrencia",
-  "03-sincronizacion",
-  "04-sockets-tcp-y-udp",
-  "05-servidores-concurrentes",
-  "06-http-y-apis-rest",
-  "07-apis-comerciales",
-  "08-seguridad-y-cifrado",
-  "09-alta-disponibilidad",
-  "10-spring-boot"
+  "01-python-basico",
+  "02-gestion-de-procesos",
+  "03-hilos-y-concurrencia",
+  "04-sincronizacion",
+  "05-sockets-tcp-y-udp",
+  "06-servidores-concurrentes",
+  "07-http-y-apis-rest",
+  "08-apis-comerciales",
+  "09-seguridad-y-cifrado",
+  "10-alta-disponibilidad",
+  "11-spring-boot"
 )
 
 $boletinesCodes = @(

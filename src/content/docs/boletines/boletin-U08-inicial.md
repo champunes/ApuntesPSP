@@ -1,58 +1,48 @@
-﻿---
-title: Boletín UD 9 — Inicial
-description: Ejercicios básicos de Seguridad y cifrado
+---
+title: Boletín UD 8 — Inicial
+description: Ejercicios básicos de APIs Comerciales
 ---
 
-# 📝 Boletín UD 9 — Inicial
+# 📝 Boletín UD 8 — Inicial
 
-> Ejercicios básicos para afianzar los conceptos de hash (MD5, SHA), César y el cifrado moderno (AES, RSA) de la unidad UD 9.
-
----
-
-## 1. SHA1 de tu nombre
-
-Calcula el hash SHA1 de tu nombre (en minúsculas) usando `hashlib.sha1()`. Muestra el resultado en hexadecimal con `.hexdigest()`.
-
-**Pista:** recuerda que `hashlib` espera bytes: escribe tu nombre como `b"sergi"` o con `.encode()`.
-
-## 2. MD5 de una frase
-
-Calcula el hash MD5 de la frase `"Python es genial"`. Muestra el resultado en hexadecimal.
-
-## 3. Longitud de los hashes de "Hola mundo"
-
-Calcula MD5, SHA1 y SHA256 de `"Hola mundo"` y escribe cuántos caracteres hexadecimales devuelve cada uno.
-
-## 4. Cifrado César sencillo
-
-Implementa una función `cifrar_cesar(texto, desplazamiento)` y cifra `"Hola"` con desplazamiento 3. ¿Qué texto obtienes?
-
-## 5. Determinismo del hash
-
-Calcula dos veces el SHA256 de `"clave123"` y compáralos. ¿Son iguales? ¿Qué propiedad del hash te lo garantiza?
-
-**Pista:** un hash es **determinista**: misma entrada → mismo hash, siempre.
-
-## 6. Nonce y tag
-
-Cifra `b"Hola mundo con AES"` usando AES modo EAX (librería `pycryptodome`). Imprime por pantalla las longitudes del nonce y del tag (en bytes).
-
-**Pista:** `cifrador.nonce` y `tag` son objetos bytes: `len(cifrador.nonce)` y `len(tag)`. El nonce del modo EAX suele medir 16 bytes.
-
-## 7. AES: cifrar y descifrar completo
-
-Cifra `b"El cifrado simetrico es rapido"` con AES (EAX), y descifralo a continuación. Muestra el nonce, el tag y el mensaje original.
-
-**Pista:** usa `encrypt_and_digest` para cifrar y `AES.new(clave, AES.MODE_EAX, nonce=cifrador.nonce).decrypt(texto_cifrado)` para descifrar.
-
-## 8. Simétrico vs asimétrico
-
-Responde razonadamente:
-
-a) ¿Cuántas claves usa el cifrado simétrico? ¿Y el asimétrico?
-b) ¿Con qué clave cifras un mensaje para que solo Bob lo lea?
-c) ¿Por qué RSA no sirve para cifrar un archivo grande?
+> Ejercicios básicos para afianzar los conceptos de API keys, variables de entorno, OpenWeatherMap y errores HTTP de la unidad UD 8.
 
 ---
 
-📚 [Volver a la unidad](/ApuntesPSP/08-seguridad-y-cifrado) · Resuelto: [✅ Boletín UD 9 — Inicial (Resuelto)](/ApuntesPSP/boletines/boletin-u08-inicial-resuelto)
+## 1. Humedad actual
+
+Usa OpenWeatherMap para obtener el clima de tu ciudad. Muestra la humedad (`humidity`) del campo `main`.
+
+## 2. Descripción del clima
+
+Del mismo JSON, muestra la descripción del tiempo (campo `description` dentro de `weather`).
+
+## 3. Temperatura mínima y máxima
+
+Muestra la temperatura mínima (`temp_min`) y máxima (`temp_max`) del pronóstico actual de tu ciudad.
+
+## 4. Temperatura y sensación térmica
+
+Muestra la temperatura actual (`temp`) y la sensación térmica (`feels_like`) de tu ciudad en grados centígrados.
+
+**Pista:** recuerda el parámetro `units=metric` para que la API devuelva grados en lugar de kelvin.
+
+## 5. Error 401
+
+Haz una petición a OpenWeatherMap con una API key falsa (`appid="falsa"`). ¿Qué código de estado devuelve?
+
+## 6. ¿Dónde va la API key?
+
+a) ¿En qué parámetro de la query string espera OpenWeatherMap la clave?
+b) ¿En qué cabecera y con qué esquema espera OpenAI la clave?
+
+## 7. Clave desde el `.env`
+
+Crea un archivo `.env` con `OPENWEATHER_API_KEY=test123`. Usa `python-dotenv` para cargarlo y muestra la clave con `os.getenv`.
+
+**Pista:** `load_dotenv()` primero, `os.getenv("OPENWEATHER_API_KEY")` después.
+
+## 8. Protege el repo
+
+a) Escribe la línea del `.gitignore` que evita subir el archivo `.env` a git.
+b) ¿Qué devuelve `os.getenv("MI_CLAVE")` si la variable no existe?

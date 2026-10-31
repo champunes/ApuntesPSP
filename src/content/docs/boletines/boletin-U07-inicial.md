@@ -1,48 +1,64 @@
 ---
-title: Boletín UD 8 — Inicial
-description: Ejercicios básicos de APIs Comerciales
+title: Boletín UD 7 — Inicial
+description: Ejercicios básicos de APIs REST y HTTP
 ---
 
-# 📝 Boletín UD 8 — Inicial
+# 📝 Boletín UD 7 — Inicial
 
-> Ejercicios básicos para afianzar los conceptos de API keys, variables de entorno, OpenWeatherMap y errores HTTP de la unidad UD 8.
+> Ejercicios básicos para afianzar los conceptos de APIs REST, métodos HTTP, códigos de estado y JSON de la unidad UD 7.
 
 ---
 
-## 1. Humedad actual
+## 1. GET a JSONPlaceholder
 
-Usa OpenWeatherMap para obtener el clima de tu ciudad. Muestra la humedad (`humidity`) del campo `main`.
+Usa `requests.get` para obtener el post con ID 1 de `https://jsonplaceholder.typicode.com/posts/1`. Muestra el `status_code`.
 
-## 2. Descripción del clima
+## 2. Título del post
 
-Del mismo JSON, muestra la descripción del tiempo (campo `description` dentro de `weather`).
+Del ejercicio anterior, muestra el campo `"title"` del post obtenido usando `resp.json()`.
 
-## 3. Temperatura mínima y máxima
+## 3. Contar usuarios
 
-Muestra la temperatura mínima (`temp_min`) y máxima (`temp_max`) del pronóstico actual de tu ciudad.
+Haz GET a `https://jsonplaceholder.typicode.com/users` y muestra cuántos usuarios hay (la longitud de la lista).
 
-## 4. Temperatura y sensación térmica
+**Pista:** `resp.json()` devuelve una lista de diccionarios; su longitud es el número de usuarios.
 
-Muestra la temperatura actual (`temp`) y la sensación térmica (`feels_like`) de tu ciudad en grados centígrados.
+## 4. GET a GitHub
 
-**Pista:** recuerda el parámetro `units=metric` para que la API devuelva grados en lugar de kelvin.
+Usa `requests.get` para obtener los datos del usuario `python` de `https://api.github.com/users/python`. Muestra el `status_code`.
 
-## 5. Error 401
+## 5. Mostrar JSON
 
-Haz una petición a OpenWeatherMap con una API key falsa (`appid="falsa"`). ¿Qué código de estado devuelve?
+Del ejercicio anterior, muestra la respuesta completa con `print(resp.json())`.
 
-## 6. ¿Dónde va la API key?
+## 6. Nombre real
 
-a) ¿En qué parámetro de la query string espera OpenWeatherMap la clave?
-b) ¿En qué cabecera y con qué esquema espera OpenAI la clave?
+Del mismo usuario, muestra el campo `"name"` (su nombre real) accediendo al diccionario.
 
-## 7. Clave desde el `.env`
+## 7. Métodos HTTP
 
-Crea un archivo `.env` con `OPENWEATHER_API_KEY=test123`. Usa `python-dotenv` para cargarlo y muestra la clave con `os.getenv`.
+Relaciona cada método HTTP con su operación CRUD y su uso:
 
-**Pista:** `load_dotenv()` primero, `os.getenv("OPENWEATHER_API_KEY")` después.
+| Método | Operación CRUD | Uso |
+|---|---|---|
+| GET | ___ | ___ |
+| POST | ___ | ___ |
+| PUT | ___ | ___ |
+| PATCH | ___ | ___ |
+| DELETE | ___ | ___ |
 
-## 8. Protege el repo
+**Pista:** CRUD = Create, Read, Update, Delete. Recuerda que PUT reemplaza el recurso completo y PATCH solo una parte.
 
-a) Escribe la línea del `.gitignore` que evita subir el archivo `.env` a git.
-b) ¿Qué devuelve `os.getenv("MI_CLAVE")` si la variable no existe?
+## 8. Códigos de estado
+
+Completa el significado de estos códigos de estado HTTP:
+
+a) 200 → ___
+b) 201 → ___
+c) 204 → ___
+d) 400 → ___
+e) 401 → ___
+f) 404 → ___
+g) 500 → ___
+
+**Pista:** 2xx es éxito, 4xx es error del cliente, 5xx es error del servidor.

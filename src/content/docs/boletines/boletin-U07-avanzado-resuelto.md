@@ -1,296 +1,154 @@
 ﻿---
-title: Boletín UD 8 — Avanzado (Resuelto)
-description: Soluciones de los ejercicios avanzados de APIs Comerciales
+title: Boletín UD 7 — Avanzado (Resuelto)
+description: Soluciones de los ejercicios avanzados de APIs REST y HTTP
 ---
 
-# 💪 Boletín UD 8 — Avanzado (Resuelto)
+# 💪 Boletín UD 7 — Avanzado (Resuelto)
 
 ---
 
-## 1. Clima con .env para dos ciudades
+## 1. PUT para actualizar
 
 ```python
 import requests
-from dotenv import load_dotenv
-import os
-
-load_dotenv()
-API_KEY = os.getenv("OPENWEATHER_API_KEY")
-
-
-def clima(ciudad):
-    params = {"q": ciudad, "appid": API_KEY, "units": "metric", "lang": "es"}
-    datos = requests.get("https://api.openweathermap.org/data/2.5/weather",
-                         params=params).json()
-    return datos["main"]["temp"]
-
-
-t1 = clima("Madrid")
-t2 = clima("Barcelona")
-print(f"Madrid: {t1}°C | Barcelona: {t2}°C")
-print("Gana Madrid" if t1 > t2 else "Gana Barcelona")
-```
-
-La función devuelve la temperatura y el programa compara las dos llamadas. La clave nunca está en el código: viene del `.env`.
-
-## 2. GPT con temperatura creativa
-
-```python
-from openai import OpenAI
-from dotenv import load_dotenv
-import os
-
-load_dotenv()
-cliente = OpenAI(api_key=os.getenv("OPENAI_API_KEY"))
-
-resp = cliente.chat.completions.create(
-    model="gpt-4o-mini",
-    messages=[{"role": "user", "content": "Cuenta una historia corta sobre Python."}],
-    temperature=0.9,   # más creativo
-    max_tokens=200
+resp = requests.put(
+    "https://jsonplaceholder.typicode.com/posts/1",
+    json={"title": "nuevo titulo", "body": "nuevo cuerpo", "userId": 1}
 )
-print(resp.choices[0].message.content)
+print(resp.status_code)            # 200 OK
+print(resp.json()["title"])        # "nuevo titulo"
 ```
 
-`temperature=0.9` da respuestas más creativas y variadas; `temperature=0` sería literal y repetitivo.
+`requests.put` con `json=` reemplaza el recurso **completo**. PUT es **idempotente**: repetirlo deja el recurso en el mismo estado.
 
-## 3. Capturar errores HTTP
+## 2. DELETE un recurso
+
+```python
+import requests
+resp = requests.delete("https://jsonplaceholder.typicode.com/posts/1")
+print(resp.status_code)            # 200 OK
+```
+
+JSONPlaceholder responde **200** con cuerpo vacío. En REST canónico, un borrado exitoso devuelve **204 No Content** (sin cuerpo que leer). DELETE también es **idempotente**: da igual cuántas veces lo llames, el recurso ya no está.
+
+## 3. HEAD request
+
+```python
+import requests
+resp = requests.head("https://api.github.com")
+print(resp.headers["Content-Type"])            # "application/json; charset=utf-8"
+print(resp.headers["X-RateLimit-Remaining"])   # 60
+```
+
+`requests.head` solo pide **cabeceras**, sin cuerpo: es barato y sirve para comprobar que una API responde o consultar los límites de tasa.
+
+## 4. 🎯 Info de usuario de GitHub
+
+```python
+import requests
+datos = requests.get("https://api.github.com/users/python").json()
+
+print(f"Nombre: {datos['name']}")
+print(f"Bio: {datos['bio']}")
+print(f"Repos públicos: {datos['public_repos']}")
+print(f"Seguidores: {datos['followers']}")
+print(f"Creado: {datos['created_at']}")
+```
+
+`resp.json()` te da el dict completo y cada campo se accede por su clave (`name`, `bio`, `public_repos`, `followers`, `created_at`).
+
+## 5. 🔍 Buscador de repositorios
+
+```python
+import requests
+params = {"q": "python stars:>1000", "sort": "stars", "per_page": 5}
+resp = requests.get("https://api.github.com/search/repositories", params=params)
+
+for repo in resp.json()["items"]:
+    print(repo["full_name"], "★", repo["stargazers_count"])
+```
+
+`params` construye la query string automáticamente. La búsqueda devuelve `items`, una lista de repositorios, y de cada uno sacas `full_name` y `stargazers_count`.
+
+## 6. 🧩 API con paginación
+
+```python
+import requests
+repos = []
+
+for page in (1, 2):
+    params = {"page": page, "per_page": 10}
+    resp = requests.get("https://api.github.com/users/python/repos", params=params)
+    repos.extend(resp.json())
+
+print(f"Repos obtenidos: {len(repos)}")   # 20
+for repo in repos:
+    print(repo["name"])
+```
+
+Con `page` y `per_page` recorres la paginación: cada petición devuelve 10 repos y `extend()` los acumula en la lista. Es la técnica que usan los clientes reales para traer conjuntos completos.
+
+## 7. 🎭 POST y respuesta
 
 ```python
 import requests
 
-for codigo in (404, 500):
-    try:
-        resp = requests.get(f"https://httpbin.org/status/{codigo}")
-        resp.raise_for_status()
-    except requests.exceptions.HTTPError as e:
-        print(f"❌ Error {e.response.status_code} en {e.request.url}")
+nuevo = {"title": "Hola API", "body": "Probando POST", "userId": 1}
+resp = requests.post("https://jsonplaceholder.typicode.com/posts", json=nuevo)
+print(resp.status_code)          # 201 Created
+print("ID:", resp.json()["id"])  # 101
+
+verificacion = requests.get("https://jsonplaceholder.typicode.com/posts/101")
+print(verificacion.json()["title"])   # "Hola API"
 ```
 
-`raise_for_status()` lanza una `HTTPError` para cualquier 4xx/5xx, y `e.response.status_code` te dice qué código ha sido.
+El POST devuelve **201 Created** con el recurso creado (ID 101). El GET posterior a ese ID confirma que la creación ha sido real.
 
-## 4. Comprobación de claves
-
-```python
-from dotenv import load_dotenv
-import os
-
-load_dotenv()
-
-API_KEY = os.getenv("OPENWEATHER_API_KEY")
-if not API_KEY:
-    raise ValueError("❌ Falta OPENWEATHER_API_KEY en .env")
-print("Clave cargada correctamente")
-```
-
-Si la variable no existe, `os.getenv` devuelve `None` y el programa muere con un mensaje claro **antes** de hacer ninguna petición con clave vacía.
-
-## 5. Chat con GPT y rol system
+## 8. ⏱ Tiempo de respuesta
 
 ```python
-from openai import OpenAI
-from dotenv import load_dotenv
-import os
+import requests, time
 
-load_dotenv()
-cliente = OpenAI(api_key=os.getenv("OPENAI_API_KEY"))
-
-resp = cliente.chat.completions.create(
-    model="gpt-4o-mini",
-    messages=[
-        {"role": "system", "content": "Eres un profesor de Python divertido."},
-        {"role": "user", "content": "¿Qué es Python?"}
-    ]
-)
-print(resp.choices[0].message.content)
-```
-
-El mensaje `system` define el **carácter y las reglas** del asistente; el `user` lleva la pregunta.
-
-## 6. Timeout
-
-```python
-import requests
-
-try:
-    resp = requests.get("https://192.0.2.1", timeout=3)
-except requests.exceptions.Timeout:
-    print("Timeout — el servidor no responde")
-```
-
-192.0.2.1 es una IP de test que nunca responde. El `timeout=3` hace que `requests` aborte a los 3 segundos y lanza `requests.exceptions.Timeout`.
-
-## 7. 🎯 Pronóstico extendido
-
-```python
-import requests
-from dotenv import load_dotenv
-import os
-
-load_dotenv()
-API_KEY = os.getenv("OPENWEATHER_API_KEY")
-
-params = {
-    "q": "Sevilla",
-    "appid": API_KEY,
-    "units": "metric",
-    "lang": "es"
+apis = {
+    "GitHub": "https://api.github.com",
+    "JSONPlaceholder": "https://jsonplaceholder.typicode.com/posts/1",
+    "httpbin": "https://httpbin.org/get",
+    "ReqRes": "https://reqres.in/api/users/1",
+    "OpenNotify": "http://api.open-notify.org/iss-now.json",
 }
-datos = requests.get("https://api.openweathermap.org/data/2.5/forecast",
-                     params=params).json()
 
-for i in range(0, len(datos["list"]), 8):  # cada 8 elementos = 1 día
-    dia = datos["list"][i]
-    fecha = dia["dt_txt"][:10]
-    temp = dia["main"]["temp"]
-    desc = dia["weather"][0]["description"]
-    print(f"{fecha}: {temp}°C — {desc}")
+for nombre, url in apis.items():
+    inicio = time.time()
+    requests.get(url)
+    fin = time.time()
+    ms = (fin - inicio) * 1000
+    print(f"{nombre}: {ms:.0f} ms")
 ```
 
-El endpoint `/forecast` devuelve datos cada 3 horas: 24 ÷ 3 = **8 intervalos por día**. Saltando de 8 en 8 obtienes un dato por día del pronóstico de 5 días.
+`time.time()` antes y después de cada `requests.get()` te da los milisegundos. La más rápida cambia según la red del momento, pero siempre es la que menos distancia recorre y mejor responde. Es la comparativa que luego usarás en la [UD 10](/ApuntesPSP/10-alta-disponibilidad) con asyncio.
 
-## 8. 🔍 Múltiples ciudades
+## 9. 🏗️ Cliente de API con caché
 
 ```python
 import requests, time
-from dotenv import load_dotenv
-import os
 
-load_dotenv()
-API_KEY = os.getenv("OPENWEATHER_API_KEY")
+cache = {}
+TTL = 60  # segundos de vida de cada entrada
 
-ciudades = ["Madrid", "Barcelona", "Sevilla", "Valencia", "Bilbao"]
+def obtener(url):
+    ahora = time.time()
+    if url in cache:
+        dato, timestamp = cache[url]
+        if ahora - timestamp < TTL:
+            print(f"📦 Desde caché: {url}")
+            return dato
+    print(f"🌐 Petición real: {url}")
+    dato = requests.get(url).json()
+    cache[url] = (dato, ahora)
+    return dato
 
-for ciudad in ciudades:
-    params = {"q": ciudad, "appid": API_KEY, "units": "metric", "lang": "es"}
-    datos = requests.get("https://api.openweathermap.org/data/2.5/weather",
-                         params=params).json()
-    print(f"{datos['name']}: {datos['main']['temp']}°C — "
-          f"{datos['weather'][0]['description']}")
-    time.sleep(0.2)  # respiro entre peticiones: evita el rate limit
+print(obtener("https://jsonplaceholder.typicode.com/posts/1"))
+print(obtener("https://jsonplaceholder.typicode.com/posts/1"))  # 📦 Desde caché
 ```
 
-El `time.sleep(0.2)` espacia las peticiones para no disparar el límite de 60/min del plan gratis.
-
-## 9. 🧩 GPT: explicador automático
-
-```python
-from openai import OpenAI
-from dotenv import load_dotenv
-import os
-
-load_dotenv()
-cliente = OpenAI(api_key=os.getenv("OPENAI_API_KEY"))
-
-conceptos = ["Lock", "Semaphore", "Barrier"]
-
-for concepto in conceptos:
-    resp = cliente.chat.completions.create(
-        model="gpt-4o-mini",
-        messages=[{"role": "user",
-                   "content": f"Explica qué es {concepto} en 2 frases."}],
-        max_tokens=60
-    )
-    print(f"{concepto}: {resp.choices[0].message.content}\n")
-```
-
-Se itera sobre la lista de conceptos y cada uno recibe una pregunta con `max_tokens` corto para limitar la longitud (y el coste).
-
-## 10. 🎭 Conversación con contexto
-
-```python
-from openai import OpenAI
-from dotenv import load_dotenv
-import os
-
-load_dotenv()
-cliente = OpenAI(api_key=os.getenv("OPENAI_API_KEY"))
-
-mensajes = [{"role": "system", "content": "Eres un tutor de Python."}]
-
-while True:
-    pregunta = input("Tú: ")
-    if pregunta.lower() == "salir":
-        break
-
-    mensajes.append({"role": "user", "content": pregunta})
-
-    resp = cliente.chat.completions.create(
-        model="gpt-4o-mini",
-        messages=mensajes,
-        max_tokens=150
-    )
-
-    respuesta = resp.choices[0].message.content
-    print(f"GPT: {respuesta}")
-    mensajes.append({"role": "assistant", "content": respuesta})
-```
-
-La lista `mensajes` acumula cada turno (`user` → `assistant` → `user` → …): así el modelo "recuerda" lo hablado. El mensaje `system` inicial fija el rol del tutor.
-
-## 11. ⏱ Monitor de uptime
-
-```python
-import requests, time
-from dotenv import load_dotenv
-import os
-
-load_dotenv()
-API_KEY = os.getenv("OPENWEATHER_API_KEY")
-
-URL = "https://api.openweathermap.org/data/2.5/weather"
-params = {"q": "Sevilla", "appid": API_KEY, "units": "metric"}
-
-fallos = 0
-MAX_FALLOS = 3
-
-while True:
-    try:
-        resp = requests.get(URL, params=params, timeout=5)
-        if resp.status_code == 200:
-            print("✅ La API responde OK")
-            fallos = 0
-        else:
-            print(f"⚠️ Respuesta inesperada: {resp.status_code}")
-            fallos += 1
-    except requests.exceptions.RequestException as e:
-        print(f"❌ Error: {e}")
-        fallos += 1
-
-    if fallos >= MAX_FALLOS:
-        print("🚨 ALERTA: la API lleva 3 fallos seguidos")
-        fallos = 0
-
-    time.sleep(30)  # comprobamos cada 30 segundos
-```
-
-El contador `fallos` se incrementa con cada error y se **reinicia** al obtener un 200. Cuando llega a 3, salta la alerta. Este es el esqueleto de los monitores de disponibilidad que verás en la UD 10 con asyncio.
-
-## 12. 🏗️ Agregador de APIs
-
-```python
-import requests
-
-def resumen():
-    resultado = {}
-
-    usuario = requests.get("https://api.github.com/users/python").json()
-    resultado["login"] = usuario["login"]
-    resultado["repos"] = usuario["public_repos"]
-
-    posts = requests.get("https://jsonplaceholder.typicode.com/posts").json()
-    resultado["posts_publicados"] = len(posts)
-
-    ip = requests.get("https://httpbin.org/ip").json()
-    resultado["mi_ip"] = ip["origin"]
-
-    return resultado
-
-info = resumen()
-print(f"👤 Usuario: {info['login']}")
-print(f"📦 Repos públicos: {info['repos']}")
-print(f"📝 Posts en JSONPlaceholder: {info['posts_publicados']}")
-print(f"🖥️ Mi IP (según httpbin): {info['mi_ip']}")
-```
-
-Cada API aporta una clave distinta al diccionario: GitHub los datos de usuario, JSONPlaceholder el conteo de posts y httpbin la IP. Una función centraliza las tres llamadas y combina lo relevante en un solo resumen.
+El diccionario usa la **URL como clave** y guarda `(dato, timestamp)`. Antes de pedir, se comprueba si la URL está en caché y si su timestamp sigue dentro del TTL. La segunda llamada no sale a la red: responde al instante desde el diccionario.

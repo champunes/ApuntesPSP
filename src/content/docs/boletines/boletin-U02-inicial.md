@@ -1,46 +1,48 @@
 ---
-title: Boletín UD 3 — Inicial
-description: Ejercicios básicos de Hilos Fundamentos
+title: Boletín UD 2 — Inicial
+description: Ejercicios básicos de Gestión de procesos
 ---
 
-# 📝 Boletín UD 3 — Inicial
+# 📝 Boletín UD 2 — Inicial
 
-> Ejercicios básicos para afianzar los conceptos de hilos de la unidad UD 3: crear, lanzar, esperar, pasar argumentos y nombrar hilos.
+> Ejercicios básicos para afianzar los conceptos de procesos, `subprocess.run`, `subprocess.Popen` y estados de la unidad UD 2.
 
 ---
 
-## 1. Hilo que cuenta
+## 1. Listar el directorio actual
 
-Crea un hilo que ejecute una función que cuente del 1 al 5 imprimiendo cada número. Lánzalo con `start()` y espera con `join()`.
+Crea un programa que use `subprocess.run` para ejecutar el comando `dir` (Windows) o `ls` (Linux) y muestre la salida completa por pantalla.
 
-## 2. Múltiples hilos con retardo
+## 2. Saber el nombre del equipo
 
-Crea 3 hilos que impriman su número (1, 2, 3) y luego duerman 1 segundo con `time.sleep(1)`. Lánzalos todos y espera a que terminen.
+Usa `subprocess.run` con el comando `hostname` para capturar y mostrar el nombre de tu máquina.
 
-## 3. Hilo con argumento
+## 3. Abrir la calculadora
 
-Crea una función que reciba un nombre como argumento e imprima "Hola, {nombre}". Lanza un hilo pasándole el argumento con `args=("Ana",)`.
+Usa `subprocess.Popen` para abrir la calculadora (`calc.exe`). El programa debe mostrar el PID, esperar 2 segundos y cerrarla con `terminate()`.
 
-**Pista:** recuerda la coma final de la tupla: `args=("Ana",)`. Sin la coma, `args="Ana"` no es una tupla: Python itera el string y pasa un argumento por carácter (3 en `'Ana'`), así que la función recibe demasiados argumentos → `TypeError`.
+## 4. Mi primer PID
 
-## 4. Hilo que saluda
+Crea un programa que imprima su propio PID con `os.getpid()`.
 
-Crea un hilo que ejecute una función que imprima "Hola desde un hilo". Usa `threading.Thread`, `start()` y `join()`.
+## 5. Versión de Python
 
-## 5. Dos hilos en paralelo
+Usa `subprocess.run` para ejecutar `python --version` con `capture_output=True` y `text=True`, y muestra la salida limpia (sin saltos de línea).
 
-Crea dos funciones `hilo_a()` y `hilo_b()`, cada una con un bucle que imprima su nombre 3 veces. Lanza los dos hilos y observa cómo se entremezclan los mensajes.
+**Pista:** `resultado.stdout.strip()` te deja la salida limpia.
 
-## 6. Hilo con nombre
+## 6. Abrir el bloc de notas y esperar
 
-Crea una función que imprima `f"Soy {threading.current_thread().name}"`. Lánzala en un hilo con `name="MiHilo"`.
+Usa `subprocess.Popen` para abrir `notepad.exe`, muestra su PID, espera 3 segundos y ciérralo con `terminate()`.
 
-## 7. Esperando con join()
+## 7. Ordena el ciclo de vida
 
-Crea un hilo que imprima "Empezando", duerma 3 segundos y termine imprimiendo "Terminado". En el programa principal, después de `start()`, espera con `join()` y luego imprime "El programa terminó". Comprueba el orden de las tres salidas.
+Ordena los siguientes estados de un proceso en el orden correcto de su ciclo de vida: `EJECUCIÓN`, `NUEVO`, `TERMINADO`, `BLOQUEADO`, `LISTO`.
 
-## 8. Varios hilos con nombre y argumentos
+**Pista:** el proceso nace, luego espera su turno de CPU, se ejecuta, puede quedarse esperando un recurso y finalmente muere. Repasa el [punto 2](/ApuntesPSP/02-gestion-de-procesos/02-estados-de-un-proceso).
 
-Crea 3 hilos en un bucle, cada uno con `name = "hilo-" + str(n)` y que reciba su número como argumento para imprimir `"hilo-N trabajando"`. Lanza todos y espera a todos.
+## 8. Ping con timeout
 
-**Pista:** usa una lista por comprensión para crear los 3 hilos y luego dos bucles: `for h in hilos: h.start()` y `for h in hilos: h.join()`.
+Lanza `ping 8.8.8.8 -n 3` (Windows) o `ping -c 3 8.8.8.8` (Linux) con `timeout=3` y captura la excepción si se excede el tiempo.
+
+**Pista:** envuelve `subprocess.run` en un `try/except` y captura `subprocess.TimeoutExpired`. Si tu conexión es rápida, prueba con `timeout=1`.

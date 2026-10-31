@@ -16,22 +16,21 @@ const META_TITLE = 'Apuntes PSP - Programacion de Servicios y Procesos';
 const META_LANG = 'es';
 
 const unitSlugs = [
-    '00-python-basico',
-    '01-procesos-y-subprocess',
-    '02-hilos-fundamentos',
-    '03-sincronizacion-entre-hilos',
-    '04-sockets-tcp',
-    '05-sockets-udp-y-protocolos',
-    '06-apis-rest-y-http',
-    '07-apis-comerciales',
-    '08-hash-y-cifrado-clasico',
-    '09-cifrado-moderno',
-    '10-servidores-concurrentes',
-    '11-asyncio-y-disponibilidad',
+    '01-python-basico',
+    '02-gestion-de-procesos',
+    '03-hilos-y-concurrencia',
+    '04-sincronizacion',
+    '05-sockets-tcp-y-udp',
+    '06-servidores-concurrentes',
+    '07-http-y-apis-rest',
+    '08-apis-comerciales',
+    '09-seguridad-y-cifrado',
+    '10-alta-disponibilidad',
+    '11-spring-boot',
 ];
 
 const boletinesCodes = [
-    '00', '01', '02', '03', '04', '05', '06',
+    '01', '02', '03', '04', '05', '06',
     '07', '08', '09', '10', '11',
 ];
 

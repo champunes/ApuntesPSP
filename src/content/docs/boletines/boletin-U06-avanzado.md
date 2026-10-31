@@ -1,62 +1,60 @@
 ﻿---
-title: Boletín UD 7 — Avanzado
-description: Ejercicios avanzados de APIs REST y HTTP
+title: Boletín UD 6 — Avanzado
+description: Ejercicios avanzados de Servidores Concurrentes
 ---
 
-# 💪 Boletín UD 7 — Avanzado
+# 💪 Boletín UD 6 — Avanzado
 
-> Ejercicios que requieren aplicar los conceptos de APIs REST, requests y JSON de forma más profunda, con programas completos contra APIs reales.
+> Ejercicios que requieren aplicar la concurrencia de forma más profunda: timeouts, contadores sincronizados, límites de clientes, colas de espera, heartbeats y hasta un balanceador de carga.
 
 ---
 
-## 1. PUT para actualizar
+## 1. Servidor con timeout
 
-Haz PUT a `https://jsonplaceholder.typicode.com/posts/1` con `json={"title": "nuevo titulo", "body": "nuevo cuerpo", "userId": 1}`. Muestra el código de estado y el título actualizado.
+Implementa un servidor que cierre la conexión si el cliente no envía datos en 5 segundos (usa `socket.settimeout` o `select`).
 
-**Pista:** `requests.put` con `json=` reemplaza el recurso completo. El título actualizado está en `resp.json()["title"]`.
+## 2. Cliente con timeout
 
-## 2. DELETE un recurso
+Crea un cliente que intente conectarse a `127.0.0.1:9999` con timeout de 2 segundos. Captura la excepción `socket.timeout` y muestra "Servidor no disponible".
 
-Haz DELETE a `https://jsonplaceholder.typicode.com/posts/1`. ¿Qué código de estado devuelve un borrado exitoso?
+## 3. Contador de bytes totales
 
-## 3. HEAD request
+Añade un contador global de bytes recibidos (protegido con Lock) al servidor multihilo. Cada vez que un cliente envía datos, suma los bytes y muestra el total acumulado.
 
-Usa `requests.head()` para pedir solo las cabeceras de `https://api.github.com`. Muestra los valores de `Content-Type` y `X-RateLimit-Remaining` de las cabeceras.
+**Pista:** `total_bytes = 0` + `lock = threading.Lock()`. Dentro de `atender`, haz `with lock:` para hacer `total_bytes += len(datos)` y `print`. El `recv()` y `sendall()` no necesitan Lock (cada socket es independiente).
 
-**Pista:** `requests.head` no devuelve cuerpo, solo cabeceras. Accede a ellas con `resp.headers["Content-Type"]`.
+## 4. Servidor con límite de clientes
 
-## 4. 🎯 Info de usuario de GitHub
+Crea un servidor que acepte máximo 3 clientes. El cuarto recibe "Servidor completo" y se cierra.
 
-Obtén los datos del usuario "python" y muestra: nombre, bio, repos públicos, seguidores, fecha de creación.
+**Pista**: Usa una variable global `clientes_activos` protegida con `Lock`. Al aceptar un cliente, comprueba si ya se alcanzó el máximo; si es así, envía el mensaje y cierra sin incrementar el contador. Decrementa al terminar.
 
-**Pista**: La API de GitHub (`https://api.github.com/users/python`) devuelve un JSON con campos como `name`, `bio`, `public_repos`, `followers` y `created_at`. Usa `resp.json()` para acceder a cada campo.
+## 5. Prueba de carga
 
-## 5. 🔍 Buscador de repositorios
+Lanza 20 clientes simultáneos contra tu servidor y mide cuánto tardan todos en recibir respuesta.
 
-Busca repositorios de Python con más de 1000 estrellas. Muestra nombre y estrellas.
+**Pista**: Usa un diccionario `resultados` compartido para guardar el tiempo de cada cliente. Cada cliente mide `time.time()` antes y después de la conexión. Lanza 20 hilos, haz `join` a todos y calcula estadísticas (total, media, exitosos).
 
-**Pista**: La API de búsqueda de GitHub (`/search/repositories`) acepta `q` como parámetro. Usa `"python stars:>1000"` para filtrar. Ordena por `stars` con `sort=stars` y limita a 5 resultados con `per_page=5`.
+## 6. Servidor con cola de espera
 
-## 6. 🧩 API con paginación
+Cuando el pool está lleno, los clientes entran en una cola. Cuando un hilo se libera, atiende al siguiente.
 
-La API de GitHub página los resultados. Obtén los primeros 20 repos del usuario "python" (2 páginas de 10).
+**Pista**: Usa `queue.Queue` para encolar las conexiones aceptadas. Crea N hilos trabajadores (daemon) que saquen elementos de la cola con `cola.get()` y atiendan al cliente. El hilo principal solo acepta y encola.
 
-**Pista**: Usa los parámetros `page` y `per_page` en cada petición a `https://api.github.com/users/{usuario}/repos`. Itera sobre las páginas que necesites y acumula los resultados en una lista.
+## 7. Estado del servidor
 
-## 7. 🎭 POST y respuesta
+Añade un endpoint especial: si el cliente envía "STATUS", el servidor responde con número de conexiones activas.
 
-Crea un post en JSONPlaceholder, luego haz GET para verificarlo.
+**Pista**: Mantén un contador `activas` con Lock. En la función de atención, parsea el comando: si es `"STATUS"`, responde con el valor actual del contador; si no, responde `"OK"`. Incrementa al entrar, decrementa al salir.
 
-**Pista**: JSONPlaceholder es una API de pruebas. El POST devuelve el recurso creado con un ID (101). Luego puedes hacer GET a `https://jsonplaceholder.typicode.com/posts/101` para verificar la creación.
+## 8. Heartbeat en servidor
 
-## 8. ⏱ Tiempo de respuesta
+El servidor tiene un hilo heartbeat que imprime "💓 Servidor vivo — N conexiones" cada 5s.
 
-Mide el tiempo de respuesta de 5 APIs distintas. ¿Cuál es más rápida?
+**Pista**: Crea un hilo `daemon=True` con un bucle infinito que haga `time.sleep(5)` y luego imprima el estado usando el Lock para leer el contador de conexiones activas.
 
-**Pista**: Mide el tiempo con `time.time()` antes y después de cada `requests.get()`. Prueba varias APIs gratuitas (GitHub, JSONPlaceholder, httpbin, ReqRes) y compara los tiempos en milisegundos.
+## 9. Balanceador de carga simple
 
-## 9. 🏗️ Cliente de API con caché
+Crea un "balanceador" que recibe peticiones y las distribuye entre 2 servidores workers.
 
-Crea un cliente que cachee respuestas en un diccionario para no repetir peticiones.
-
-**Pista**: Usa un diccionario global donde la clave sea la URL. Guarda el dato y el timestamp. Antes de hacer una petición, comprueba si la URL está en caché y si el tiempo transcurrido desde que se guardó es menor al TTL.
+**Pista**: Crea dos workers en los puertos 5001 y 5002 (cada uno en su hilo). El balanceador en el puerto 5000 acepta conexiones y las reenvía al worker actual haciendo de proxy: lee del cliente, envía al worker, recibe la respuesta y la reenvía al cliente. Alterna entre workers con un índice round-robin.

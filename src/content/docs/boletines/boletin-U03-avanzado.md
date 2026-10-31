@@ -1,58 +1,64 @@
-﻿---
-title: Boletín UD 4 — Avanzado
-description: Ejercicios avanzados de Sincronización
+---
+title: Boletín UD 3 — Avanzado
+description: Ejercicios avanzados de Hilos Fundamentos
 ---
 
-# 💪 Boletín UD 4 — Avanzado
+# 💪 Boletín UD 3 — Avanzado
 
-> Ejercicios que requieren aplicar los conceptos de sincronización de forma más profunda, con programas completos y varios mecanismos a la vez.
+> Ejercicios que requieren aplicar los conceptos de hilos de la unidad UD 3 de forma más profunda: esperas con timeout, introspección, banderas de parada y timers que se repiten.
 
 ---
 
-## 1. Condition con notify_all
+## 1. Join con timeout
 
-Crea 3 hilos consumidores que esperen en una `Condition`. Un hilo productor añade 3 elementos y usa `notify_all()` para despertar a todos los consumidores a la vez.
+Crea un hilo que duerma 5 segundos. En el hilo principal, usa `join(timeout=2)` y comprueba con `is_alive()` si el hilo sigue ejecutándose después del timeout.
 
-## 2. Deadlock entre dos hilos
+**Pista:** `h.join(2)` devuelve `None` cuando termina a tiempo y también cuando expira. Para saber si sigue vivo después del timeout, pregunta con `h.is_alive()` justo después del `join`.
 
-Crea 2 hilos y 2 locks (A y B). El hilo 1 adquiere A luego B. El hilo 2 adquiere B luego A. Añade `time.sleep(0.1)` entre adquisiciones para provocar el deadlock.
+## 2. Listar hilos activos
 
-## 3. Semáforo con recursos limitados
+Crea 3 hilos que hagan tareas distintas. Usa `threading.enumerate()` para listar todos los hilos activos y muestra sus nombres.
 
-Simula 3 impresoras compartidas. Crea 6 hilos que necesiten una impresora para imprimir (simulado con sleep). Usa `Semaphore(3)` para que solo 3 impriman a la vez.
+**Pista:** `threading.enumerate()` devuelve una lista de objetos Thread. Itera sobre ella y muestra `.name`. Recuerda que el hilo principal (main) también aparece en la lista.
 
-## 4. 🎯 Banco con cuentas compartidas
+## 3. Identificar el hilo actual
 
-Dos hilos: uno ingresa dinero, otro retira. Usa Lock para evitar saldo negativo.
+Crea una función que muestre `threading.current_thread().name`, `threading.current_thread().ident` y `threading.current_thread().daemon`. Ejecútala desde el hilo principal y desde un hilo secundario.
 
-**Pista:** Usa un Lock global. Cada hilo lo adquiere con `with lock:` antes de modificar el saldo. El hilo retirador debe comprobar `if saldo >= cantidad` antes de restar.
+**Pista:** para ejecutar la función desde ambos sitios, llámala directamente en el principal y también como `target` de un `threading.Thread`.
 
-## 5. 🔍 Semáforo con timeout
+## 4. 🎯 Carrera de mensajes
 
-Crea un semáforo donde los hilos esperen máximo 2s. Si no entran, se van.
+Crea 5 hilos, cada uno imprime su nombre 10 veces. Observa el orden impredecible.
 
-**Pista:** `semaforo.acquire(blocking=True, timeout=2)` devuelve `True` si consiguió el recurso, o `False` si pasaron los 2 segundos. Úsalo para decidir si el hilo entra o se rinde.
+**Pista:** usa una lista por comprensión para crear los 5 hilos. Lanza todos con un bucle `for h in hilos: h.start()` y espera con `for h in hilos: h.join()`. El orden de salida cambiará en cada ejecución.
 
-## 6. 🧩 Barrera con fases múltiples
+## 5. 🔍 Simular descarga con progreso
 
-Crea 3 hilos que trabajen en 3 fases. La fase siguiente no empieza hasta que todos terminan la anterior.
+Crea un hilo que descargue (simulado con sleep) y muestre progreso cada 25%.
 
-**Pista:** Coloca `barrera.wait()` justo después del trabajo de cada fase. Así ningún hilo avanza a la siguiente fase hasta que todos han llegado al `wait()`.
+**Pista:** dentro de la función, itera con `range(0, 101, 25)`, usa `time.sleep(0.5)` para simular el tiempo de descarga e imprime el porcentaje en cada paso.
 
-## 7. 🎭 Condition con timeout
+## 6. 🧩 Detener hilo con bandera
 
-Un productor que produce cada 3s, consumidor que espera máximo 2s. Si no hay producto, se va.
+Crea un hilo infinito que se detenga cuando pulses Enter.
 
-**Pista:** `cond.wait(timeout=2)` devuelve `False` si el tiempo expiró sin ser notificado. Úsalo para que el consumidor salga si el productor tarda demasiado.
+**Pista:** declara una variable booleana global `ejecutando = True`. El hilo comprueba la variable en un `while ejecutando:`. Desde el principal, usa `input()` para esperar Enter y luego cambia `ejecutando = False`.
 
-## 8. ⏱ Deadlock provocado y solución
+## 7. 🎭 Hilo que devuelve un valor
 
-Crea un deadlock con 2 hilos y 2 locks. Luego arréglalo adquiriendo los locks en el mismo orden.
+Usa una variable compartida para que un hilo devuelva un resultado al principal.
 
-**Pista:** El deadlock ocurre cuando el hilo A toma lock1 y espera lock2, mientras B toma lock2 y espera lock1. La solución: ambos hilos adquieren los locks en el mismo orden (lock1 → lock2).
+**Pista:** los hilos no tienen `return`. Usa una lista compartida como contenedor: el hilo guarda el resultado con `lista.append(valor)` y el principal lo lee tras `hilo.join()`.
 
-## 9. 🏗️ Productor-Consumidor múltiple
+## 8. ⏱ Timer con repetición
 
-2 productores y 3 consumidores compitiendo por un buffer de tamaño 5.
+El Timer normal solo se dispara una vez. Crea un timer que se repita cada 2 segundos usando recursividad.
 
-**Pista:** Usa `queue.Queue(maxsize=5)` como buffer compartido: es thread-safe y no necesita Lock. Los productores llaman a `put()` y los consumidores a `get()`.
+**Pista:** dentro de la función que ejecuta el Timer, crea otro `threading.Timer(2.0, funcion).start()` al final. Así la función se programa a sí misma de nuevo. Ojo: si el programa no termina, pon el Timer como daemon (`t.daemon = True` **antes** de `t.start()`) para que muera con el principal.
+
+## 9. 🏗️ Pool de hilos manual
+
+Crea un "pool" manual con una cola de tareas. 2 hilos cogen tareas de la cola y las ejecutan.
+
+**Pista:** usa `queue.Queue` (thread-safe) para las tareas. Los trabajadores ejecutan un bucle llamando a `cola.get()`. Al terminar cada tarea llaman a `cola.task_done()`. El principal espera con `cola.join()`. Crea los workers como `daemon=True` para que no bloqueen la salida, o usa un valor centinela (`None`) en la cola para que terminen ordenadamente.

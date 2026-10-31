@@ -1,371 +1,296 @@
 ﻿---
-title: Boletín UD 9 — Avanzado (Resuelto)
-description: Soluciones de los ejercicios avanzados de Seguridad y cifrado
+title: Boletín UD 8 — Avanzado (Resuelto)
+description: Soluciones de los ejercicios avanzados de APIs Comerciales
 ---
 
-# 💪 Boletín UD 9 — Avanzado (Resuelto)
-
-> Los ejercicios 5-12 necesitan `pycryptodome`: `pip install pycryptodome`.
+# 💪 Boletín UD 8 — Avanzado (Resuelto)
 
 ---
 
-## 1. Cifrado César con espacios
+## 1. Clima con .env para dos ciudades
 
 ```python
-def cifrar_cesar(texto, desplazamiento):
-    resultado = ""
-    for caracter in texto:
-        if caracter.isalpha():
-            base = ord('A') if caracter.isupper() else ord('a')
-            resultado += chr((ord(caracter) - base + desplazamiento) % 26 + base)
-        else:
-            resultado += caracter
-    return resultado
+import requests
+from dotenv import load_dotenv
+import os
 
-print(cifrar_cesar("Hola mundo", 5))  # Mtqf rzsit
+load_dotenv()
+API_KEY = os.getenv("OPENWEATHER_API_KEY")
+
+
+def clima(ciudad):
+    params = {"q": ciudad, "appid": API_KEY, "units": "metric", "lang": "es"}
+    datos = requests.get("https://api.openweathermap.org/data/2.5/weather",
+                         params=params).json()
+    return datos["main"]["temp"]
+
+
+t1 = clima("Madrid")
+t2 = clima("Barcelona")
+print(f"Madrid: {t1}°C | Barcelona: {t2}°C")
+print("Gana Madrid" if t1 > t2 else "Gana Barcelona")
 ```
 
-El espacio no es una letra (`isalpha()` es `False`), así que se añade tal cual. Las letras avanzan 5 posiciones: **Hola → Mtqf**, **mundo → rzsit**. Resultado: **Mtqf rzsit**.
+La función devuelve la temperatura y el programa compara las dos llamadas. La clave nunca está en el código: viene del `.env`.
 
-## 2. Fuerza bruta César
+## 2. GPT con temperatura creativa
 
 ```python
-def descifrar_cesar(texto, desplazamiento):
-    resultado = ""
-    for caracter in texto:
-        if caracter.isalpha():
-            base = ord('A') if caracter.isupper() else ord('a')
-            resultado += chr((ord(caracter) - base - desplazamiento) % 26 + base)
-        else:
-            resultado += caracter
-    return resultado
+from openai import OpenAI
+from dotenv import load_dotenv
+import os
 
-palabras = {"hola", "mundo", "python", "clave", "secreto"}
+load_dotenv()
+cliente = OpenAI(api_key=os.getenv("OPENAI_API_KEY"))
 
-cifrado = "Mtqf rzsit"  # "Hola mundo" con desplazamiento 5
-for desplazamiento in range(1, 26):
-    intento = descifrar_cesar(cifrado, desplazamiento)
-    if any(p in intento.lower() for p in palabras):
-        print(f"Desplazamiento {desplazamiento}: {intento}  ← ¡parece correcto!")
+resp = cliente.chat.completions.create(
+    model="gpt-4o-mini",
+    messages=[{"role": "user", "content": "Cuenta una historia corta sobre Python."}],
+    temperature=0.9,   # más creativo
+    max_tokens=200
+)
+print(resp.choices[0].message.content)
 ```
 
-Solo hay **25 desplazamientos posibles** ([punto 6](/ApuntesPSP/08-seguridad-y-cifrado/04-cifrado-clasico)). Filtrando por palabras comunes en español, el desplazamiento 5 devuelve "Hola mundo" y es el único con sentido. Se rompe en segundos.
+`temperature=0.9` da respuestas más creativas y variadas; `temperature=0` sería literal y repetitivo.
 
-## 3. Hash con salt
+## 3. Capturar errores HTTP
 
 ```python
-import hashlib, os
+import requests
 
-def registrar_con_salt(contraseña):
-    salt = os.urandom(16)                                   # 🧂 16 bytes nuevos cada vez
-    hash_contra = hashlib.sha256(salt + contraseña.encode()).hexdigest()
-    return salt.hex() + hash_contra                          # sal + hash juntos
-
-def verificar(contraseña, almacenado):
-    salt = bytes.fromhex(almacenado[:32])                   # 🧂 recuperamos la sal
-    hash_original = almacenado[32:]
-    hash_intento = hashlib.sha256(salt + contraseña.encode()).hexdigest()
-    return hash_intento == hash_original
-
-hash_ana = registrar_con_salt("clave123")
-hash_bob = registrar_con_salt("clave123")
-print(f"¿Hashes iguales? {hash_ana == hash_bob}")           # False
-print(f"¿Ana entra? {verificar('clave123', hash_ana)}")     # True
-print(f"¿Ana con otra? {verificar('otra', hash_ana)}")      # False
+for codigo in (404, 500):
+    try:
+        resp = requests.get(f"https://httpbin.org/status/{codigo}")
+        resp.raise_for_status()
+    except requests.exceptions.HTTPError as e:
+        print(f"❌ Error {e.response.status_code} en {e.request.url}")
 ```
 
-Con la misma contraseña, Ana y Bob tienen **hashes distintos** gracias a sus sales únicas. El salt ocupa los 32 primeros caracteres hex (16 bytes), que se recuperan con `bytes.fromhex()` para el login ([punto 5](/ApuntesPSP/08-seguridad-y-cifrado/03-contrasenas-seguras)).
+`raise_for_status()` lanza una `HTTPError` para cualquier 4xx/5xx, y `e.response.status_code` te dice qué código ha sido.
 
-## 4. Mini gestor de contraseñas
+## 4. Comprobación de claves
 
 ```python
-import hashlib, os, json
+from dotenv import load_dotenv
+import os
 
-usuarios = {}
+load_dotenv()
 
-def registrar(usuario, contraseña):
-    salt = os.urandom(16)
-    hash_contra = hashlib.sha256(salt + contraseña.encode()).hexdigest()
-    usuarios[usuario] = salt.hex() + hash_contra
-
-def login(usuario, contraseña):
-    almacenado = usuarios[usuario]
-    salt = bytes.fromhex(almacenado[:32])
-    hash_original = almacenado[32:]
-    hash_intento = hashlib.sha256(salt + contraseña.encode()).hexdigest()
-    return hash_intento == hash_original
-
-registrar("Ana", "clave123")
-registrar("Bob", "clave123")
-print(f"Ana login correcto: {login('Ana', 'clave123')}")     # True
-print(f"Ana login fallido:  {login('Ana', 'otra')}")        # False
-print(f"Hashes distintos:   {usuarios['Ana'] != usuarios['Bob']}")  # True
-
-with open("contraseñas.json", "w") as f:
-    json.dump(usuarios, f, indent=2)
+API_KEY = os.getenv("OPENWEATHER_API_KEY")
+if not API_KEY:
+    raise ValueError("❌ Falta OPENWEATHER_API_KEY en .env")
+print("Clave cargada correctamente")
 ```
 
-Cada usuario se guarda como `salt.hex() + hash` en un diccionario, y se exporta a JSON con `json.dump`. Para verificar, el login extrae la sal (primeros 32 caracteres hex), la convierte con `bytes.fromhex()` y recalcula el hash ([punto 5](/ApuntesPSP/08-seguridad-y-cifrado/03-contrasenas-seguras)). Si dos usuarios comparten contraseña, sus registros JSON son **distintos**.
+Si la variable no existe, `os.getenv` devuelve `None` y el programa muere con un mensaje claro **antes** de hacer ninguna petición con clave vacía.
 
-## 5. Cifrado híbrido simplificado
+## 5. Chat con GPT y rol system
 
 ```python
-from Crypto.PublicKey import RSA
-from Crypto.Cipher import AES, PKCS1_OAEP
-from Crypto.Random import get_random_bytes
+from openai import OpenAI
+from dotenv import load_dotenv
+import os
 
-clave_bob = RSA.generate(2048)
+load_dotenv()
+cliente = OpenAI(api_key=os.getenv("OPENAI_API_KEY"))
 
-clave_aes = get_random_bytes(32)
-cifrador_aes = AES.new(clave_aes, AES.MODE_EAX)
-cifrado, tag = cifrador_aes.encrypt_and_digest(b"El cifrado hibrido funciona")
-
-clave_aes_cifrada = PKCS1_OAEP.new(clave_bob.publickey()).encrypt(clave_aes)
-
-clave_aes_recibida = PKCS1_OAEP.new(clave_bob).decrypt(clave_aes_cifrada)
-original = AES.new(clave_aes_recibida, AES.MODE_EAX, nonce=cifrador_aes.nonce).decrypt(cifrado)
-print(f"Mensaje original: {original.decode()}")
+resp = cliente.chat.completions.create(
+    model="gpt-4o-mini",
+    messages=[
+        {"role": "system", "content": "Eres un profesor de Python divertido."},
+        {"role": "user", "content": "¿Qué es Python?"}
+    ]
+)
+print(resp.choices[0].message.content)
 ```
 
-```
-Mensaje original: El cifrado hibrido funciona
-```
+El mensaje `system` define el **carácter y las reglas** del asistente; el `user` lleva la pregunta.
 
-RSA reparte la clave AES (32 bytes) y AES cifra el mensaje completo. El orden de descifrado es el inverso al de cifrado ([punto 6](/ApuntesPSP/08-seguridad-y-cifrado/08-cifrado-hibrido-y-practica)).
-
-## 6. Firma alterada
+## 6. Timeout
 
 ```python
-from Crypto.Signature import pkcs1_15
-from Crypto.Hash import SHA256
-from Crypto.PublicKey import RSA
-
-clave = RSA.generate(2048)
-mensaje = "Transferencia de 500€".encode()
-
-h = SHA256.new(mensaje)
-firma = pkcs1_15.new(clave).sign(h)
-
-firma_mutada = bytearray(firma)
-firma_mutada[0] ^= 0xFF
-firma_mutada = bytes(firma_mutada)
+import requests
 
 try:
-    pkcs1_15.new(clave.publickey()).verify(h, firma_mutada)
-    print("✅ Firma válida")
-except (ValueError, TypeError):
-    print("❌ Firma inválida — la firma fue alterada")
+    resp = requests.get("https://192.0.2.1", timeout=3)
+except requests.exceptions.Timeout:
+    print("Timeout — el servidor no responde")
 ```
 
-```
-❌ Firma inválida — la firma fue alterada
-```
+192.0.2.1 es una IP de test que nunca responde. El `timeout=3` hace que `requests` aborte a los 3 segundos y lanza `requests.exceptions.Timeout`.
 
-La firma depende del hash y de la clave: **un solo byte distinto** la invalida por completo ([punto 5](/ApuntesPSP/08-seguridad-y-cifrado/07-firmas-digitales)).
-
-## 7. RBAC con permisos cifrado
+## 7. 🎯 Pronóstico extendido
 
 ```python
-permisos = {
-    "admin":    ["cifrar", "descifrar", "firmar"],
-    "usuario":  ["cifrar", "firmar"],
-    "invitado": ["cifrar"],
+import requests
+from dotenv import load_dotenv
+import os
+
+load_dotenv()
+API_KEY = os.getenv("OPENWEATHER_API_KEY")
+
+params = {
+    "q": "Sevilla",
+    "appid": API_KEY,
+    "units": "metric",
+    "lang": "es"
 }
+datos = requests.get("https://api.openweathermap.org/data/2.5/forecast",
+                     params=params).json()
 
-def puede(usuario, accion):
-    return accion in permisos.get(usuario["rol"], [])
-
-print(puede({"rol": "admin"}, "descifrar"))    # True
-print(puede({"rol": "usuario"}, "descifrar"))  # False
-print(puede({"rol": "usuario"}, "firmar"))     # True
-print(puede({"rol": "invitado"}, "firmar"))    # False
-print(puede({"rol": "invitado"}, "cifrar"))    # True
+for i in range(0, len(datos["list"]), 8):  # cada 8 elementos = 1 día
+    dia = datos["list"][i]
+    fecha = dia["dt_txt"][:10]
+    temp = dia["main"]["temp"]
+    desc = dia["weather"][0]["description"]
+    print(f"{fecha}: {temp}°C — {desc}")
 ```
 
-```
-True
-False
-True
-False
-True
-```
+El endpoint `/forecast` devuelve datos cada 3 horas: 24 ÷ 3 = **8 intervalos por día**. Saltando de 8 en 8 obtienes un dato por día del pronóstico de 5 días.
 
-Cada rol tiene su paquete de permisos; `puede` comprueba si la acción está en el del rol ([punto 7](/ApuntesPSP/08-seguridad-y-cifrado/08-cifrado-hibrido-y-practica)). `permisos.get(usuario["rol"], [])` devuelve lista vacía para roles desconocidos: por defecto, nada permitido.
-
-## 8. Cifrar archivo completo
+## 8. 🔍 Múltiples ciudades
 
 ```python
-from Crypto.Cipher import AES
-from Crypto.Random import get_random_bytes
+import requests, time
+from dotenv import load_dotenv
+import os
 
-clave = get_random_bytes(32)
+load_dotenv()
+API_KEY = os.getenv("OPENWEATHER_API_KEY")
 
-with open("mensaje.txt", "w") as f:
-    f.write("Contenido secreto del proyecto")
+ciudades = ["Madrid", "Barcelona", "Sevilla", "Valencia", "Bilbao"]
 
-with open("mensaje.txt", "rb") as f:
-    contenido = f.read()
-
-cifrador = AES.new(clave, AES.MODE_EAX)
-cifrado, tag = cifrador.encrypt_and_digest(contenido)
-
-with open("mensaje.cifrado", "wb") as f:
-    f.write(cifrador.nonce + tag + cifrado)      # nonce + tag + cifrado
-
-with open("mensaje.cifrado", "rb") as f:
-    paquete = f.read()
-
-nonce = paquete[:16]
-tag = paquete[16:32]
-cifrado_recibido = paquete[32:]
-
-descifrador = AES.new(clave, AES.MODE_EAX, nonce=nonce)
-original = descifrador.decrypt_and_verify(cifrado_recibido, tag)
-print(f"Archivo descifrado: {original.decode()}")
+for ciudad in ciudades:
+    params = {"q": ciudad, "appid": API_KEY, "units": "metric", "lang": "es"}
+    datos = requests.get("https://api.openweathermap.org/data/2.5/weather",
+                         params=params).json()
+    print(f"{datos['name']}: {datos['main']['temp']}°C — "
+          f"{datos['weather'][0]['description']}")
+    time.sleep(0.2)  # respiro entre peticiones: evita el rate limit
 ```
 
-Se guardan los tres componentes juntos (`nonce + tag + cifrado`) y al descifrar se **separan por sus longitudes** (16 y 16 bytes). `decrypt_and_verify` además comprueba que el archivo no fue manipulado.
+El `time.sleep(0.2)` espacia las peticiones para no disparar el límite de 60/min del plan gratis.
 
-## 9. RSA: cifrar mensajes largos
+## 9. 🧩 GPT: explicador automático
 
 ```python
-from Crypto.PublicKey import RSA
-from Crypto.Cipher import PKCS1_OAEP
+from openai import OpenAI
+from dotenv import load_dotenv
+import os
 
-clave = RSA.generate(2048)
-mensaje_largo = b"x" * 300   # 300 bytes
+load_dotenv()
+cliente = OpenAI(api_key=os.getenv("OPENAI_API_KEY"))
 
-cifrador = PKCS1_OAEP.new(clave.publickey())
-try:
-    cifrador.encrypt(mensaje_largo)
-except ValueError as e:
-    print(f"❌ Error: {e}")
+conceptos = ["Lock", "Semaphore", "Barrier"]
+
+for concepto in conceptos:
+    resp = cliente.chat.completions.create(
+        model="gpt-4o-mini",
+        messages=[{"role": "user",
+                   "content": f"Explica qué es {concepto} en 2 frases."}],
+        max_tokens=60
+    )
+    print(f"{concepto}: {resp.choices[0].message.content}\n")
 ```
 
-```
-❌ Error: Plaintext is too long.
-```
+Se itera sobre la lista de conceptos y cada uno recibe una pregunta con `max_tokens` corto para limitar la longitud (y el coste).
 
-**El problema:** RSA con claves de 2048 bits solo admite ~190 bytes de mensaje.
-
-**La solución (cifrado híbrido):** no cifres el mensaje con RSA; cifra la clave AES con RSA y el mensaje con AES:
+## 10. 🎭 Conversación con contexto
 
 ```python
-from Crypto.Cipher import AES, PKCS1_OAEP
-from Crypto.Random import get_random_bytes
+from openai import OpenAI
+from dotenv import load_dotenv
+import os
 
-clave_aes = get_random_bytes(32)
-cifrador_aes = AES.new(clave_aes, AES.MODE_EAX)
-cifrado, tag = cifrador_aes.encrypt_and_digest(mensaje_largo)
-clave_aes_cifrada = PKCS1_OAEP.new(clave.publickey()).encrypt(clave_aes)
+load_dotenv()
+cliente = OpenAI(api_key=os.getenv("OPENAI_API_KEY"))
 
-clave_aes_recibida = PKCS1_OAEP.new(clave).decrypt(clave_aes_cifrada)
-original = AES.new(clave_aes_recibida, AES.MODE_EAX, nonce=cifrador_aes.nonce).decrypt(cifrado)
-print(f"Longitud del original: {len(original)} bytes")
+mensajes = [{"role": "system", "content": "Eres un tutor de Python."}]
+
+while True:
+    pregunta = input("Tú: ")
+    if pregunta.lower() == "salir":
+        break
+
+    mensajes.append({"role": "user", "content": pregunta})
+
+    resp = cliente.chat.completions.create(
+        model="gpt-4o-mini",
+        messages=mensajes,
+        max_tokens=150
+    )
+
+    respuesta = resp.choices[0].message.content
+    print(f"GPT: {respuesta}")
+    mensajes.append({"role": "assistant", "content": respuesta})
 ```
 
-```
-Longitud del original: 300 bytes
-```
+La lista `mensajes` acumula cada turno (`user` → `assistant` → `user` → …): así el modelo "recuerda" lo hablado. El mensaje `system` inicial fija el rol del tutor.
 
-Así cualquier mensaje cabe, sea cual sea su tamaño ([punto 6](/ApuntesPSP/08-seguridad-y-cifrado/08-cifrado-hibrido-y-practica)).
-
-## 10. Firma con verificación de integridad
+## 11. ⏱ Monitor de uptime
 
 ```python
-from Crypto.Signature import pkcs1_15
-from Crypto.Hash import SHA256
-from Crypto.PublicKey import RSA
+import requests, time
+from dotenv import load_dotenv
+import os
 
-clave = RSA.generate(2048)
-mensaje = b"Este mensaje es de Ana"
+load_dotenv()
+API_KEY = os.getenv("OPENWEATHER_API_KEY")
 
-h = SHA256.new(mensaje)
-firma = pkcs1_15.new(clave).sign(h)
+URL = "https://api.openweathermap.org/data/2.5/weather"
+params = {"q": "Sevilla", "appid": API_KEY, "units": "metric"}
 
-mensaje_tocado = b"Este mensaje es de Ana pero lo cambie"
+fallos = 0
+MAX_FALLOS = 3
 
-try:
-    pkcs1_15.new(clave.publickey()).verify(SHA256.new(mensaje_tocado), firma)
-    print("✅ Firma válida")
-except (ValueError, TypeError):
-    print("❌ Firma inválida — el mensaje fue manipulado")
+while True:
+    try:
+        resp = requests.get(URL, params=params, timeout=5)
+        if resp.status_code == 200:
+            print("✅ La API responde OK")
+            fallos = 0
+        else:
+            print(f"⚠️ Respuesta inesperada: {resp.status_code}")
+            fallos += 1
+    except requests.exceptions.RequestException as e:
+        print(f"❌ Error: {e}")
+        fallos += 1
+
+    if fallos >= MAX_FALLOS:
+        print("🚨 ALERTA: la API lleva 3 fallos seguidos")
+        fallos = 0
+
+    time.sleep(30)  # comprobamos cada 30 segundos
 ```
 
-```
-❌ Firma inválida — el mensaje fue manipulado
-```
+El contador `fallos` se incrementa con cada error y se **reinicia** al obtener un 200. Cuando llega a 3, salta la alerta. Este es el esqueleto de los monitores de disponibilidad que verás en la UD 10 con asyncio.
 
-La firma se calcula sobre el **hash del mensaje original**. Si el mensaje cambia un solo byte, el hash es distinto y la verificación falla: la firma detecta cualquier modificación ([punto 5](/ApuntesPSP/08-seguridad-y-cifrado/07-firmas-digitales)).
-
-## 11. RSA vs AES benchmark
+## 12. 🏗️ Agregador de APIs
 
 ```python
-from Crypto.PublicKey import RSA
-from Crypto.Cipher import AES, PKCS1_OAEP
-from Crypto.Random import get_random_bytes
-import time
+import requests
 
-clave_rsa = RSA.generate(2048)
-clave_aes = get_random_bytes(32)
-mensaje = b"Rendimiento de cifrado"
+def resumen():
+    resultado = {}
 
-cifrador_rsa = PKCS1_OAEP.new(clave_rsa.publickey())
-cifrador_aes = AES.new(clave_aes, AES.MODE_EAX)
+    usuario = requests.get("https://api.github.com/users/python").json()
+    resultado["login"] = usuario["login"]
+    resultado["repos"] = usuario["public_repos"]
 
-inicio = time.time()
-for _ in range(100):
-    cifrador_rsa.encrypt(mensaje[:16])
-rsa_ms = (time.time() - inicio) * 1000
+    posts = requests.get("https://jsonplaceholder.typicode.com/posts").json()
+    resultado["posts_publicados"] = len(posts)
 
-inicio = time.time()
-for _ in range(1000):
-    cifrador_aes.encrypt(mensaje)
-aes_ms = (time.time() - inicio) * 1000
+    ip = requests.get("https://httpbin.org/ip").json()
+    resultado["mi_ip"] = ip["origin"]
 
-print(f"100 cifrados RSA:  {rsa_ms:.1f} ms")
-print(f"1000 cifrados AES: {aes_ms:.1f} ms")
+    return resultado
+
+info = resumen()
+print(f"👤 Usuario: {info['login']}")
+print(f"📦 Repos públicos: {info['repos']}")
+print(f"📝 Posts en JSONPlaceholder: {info['posts_publicados']}")
+print(f"🖥️ Mi IP (según httpbin): {info['mi_ip']}")
 ```
 
-La diferencia es **abismal**: cifrar 10 veces más mensajes con AES tarda una fracción de lo que tarda RSA con solo 100. Por eso AES va para el volumen y RSA solo para repartir la clave ([punto 1](/ApuntesPSP/08-seguridad-y-cifrado/05-cifrado-simetrico-aes)).
-
-## 12. Sistema de cifrado de extremo a extremo
-
-```python
-from Crypto.PublicKey import RSA
-from Crypto.Cipher import AES, PKCS1_OAEP
-from Crypto.Random import get_random_bytes
-
-class Usuario:
-    def __init__(self, nombre):
-        self.nombre = nombre
-        self.clave_rsa = RSA.generate(2048)
-
-    def cifrar_para(self, mensaje, destinatario):
-        clave_aes = get_random_bytes(32)
-        cifrador_aes = AES.new(clave_aes, AES.MODE_EAX)
-        cifrado, tag = cifrador_aes.encrypt_and_digest(mensaje.encode())
-        clave_aes_cifrada = PKCS1_OAEP.new(destinatario.clave_rsa.publickey()).encrypt(clave_aes)
-        return cifrador_aes.nonce, tag, clave_aes_cifrada, cifrado
-
-    def descifrar(self, nonce, tag, clave_aes_cifrada, cifrado):
-        clave_aes = PKCS1_OAEP.new(self.clave_rsa).decrypt(clave_aes_cifrada)
-        original = AES.new(clave_aes, AES.MODE_EAX, nonce=nonce).decrypt_and_verify(cifrado, tag)
-        return original.decode()
-
-ana = Usuario("Ana")
-bob = Usuario("Bob")
-
-nonce, tag, clave_aes_cifrada, cifrado = ana.cifrar_para("Hola Bob, quedamos a las 8", bob)
-print(f"Bob recibe: {bob.descifrar(nonce, tag, clave_aes_cifrada, cifrado)}")
-```
-
-```
-Bob recibe: Hola Bob, quedamos a las 8
-```
-
-`cifrar_para` cifra el mensaje con AES y protege la clave AES con la **pública del destinatario**. `descifrar` invierte el proceso usando la **privada del propio usuario** y verifica el tag. Es el esquema del [punto 8](/ApuntesPSP/08-seguridad-y-cifrado/08-cifrado-hibrido-y-practica): cada usuario guarda su privada y solo él puede descifrar lo que le envían.
-
----
-
-📚 [Volver a la unidad](/ApuntesPSP/08-seguridad-y-cifrado) · Por resolver: [💪 Boletín UD 9 — Avanzado](/ApuntesPSP/boletines/boletin-u08-avanzado)
+Cada API aporta una clave distinta al diccionario: GitHub los datos de usuario, JSONPlaceholder el conteo de posts y httpbin la IP. Una función centraliza las tres llamadas y combina lo relevante en un solo resumen.

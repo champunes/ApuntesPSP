@@ -1,293 +1,161 @@
 ﻿---
-title: Boletín UD 3 — Avanzado (Resuelto)
-description: Soluciones de los ejercicios avanzados de Hilos Fundamentos
+title: Boletín UD 2 — Avanzado (Resuelto)
+description: Soluciones de los ejercicios avanzados de Gestión de procesos
 ---
 
-# 💪 Boletín UD 3 — Avanzado (Resuelto)
+# 💪 Boletín UD 2 — Avanzado (Resuelto)
 
 ---
 
-## 1. Join con timeout
+## 1. Filtrar ipconfig
 
 ```python
-import threading, time
+import subprocess
 
-def lento():
-    print("Hilo empezando")
-    time.sleep(5)
-    print("Hilo terminó")
-
-h = threading.Thread(target=lento)
-h.start()
-h.join(timeout=2)
-print(f"¿Sigue vivo tras el timeout? {h.is_alive()}")
+resultado = subprocess.run(["ipconfig"], capture_output=True, text=True)
+lineas = resultado.stdout.split("\n")
+for linea in lineas:
+    if "IPv4" in linea:
+        print(linea.strip())
 ```
 
-Salida:
-```
-Hilo empezando
-¿Sigue vivo tras el timeout? True
-Hilo terminó
-```
+`subprocess.run` captura toda la salida de `ipconfig`; `split("\n")` la divide en líneas y el filtro con `in` deja solo las de "IPv4".
 
-`join(timeout=2)` espera como máximo 2 segundos: al expirar, el hilo **sigue vivo** (duerme hasta los 5s) y el principal continúa. Como es no-daemon, el programa no termina hasta que el hilo acaba su sueño.
-
-## 2. Listar hilos activos
+## 2. Comprobar si un programa existe
 
 ```python
-import threading, time
+import subprocess
 
-def tarea(n):
+resultado = subprocess.run(["where", "python"], capture_output=True, text=True)
+print(f"Código de retorno: {resultado.returncode}")
+if resultado.returncode == 0:
+    print(f"Python encontrado en: {resultado.stdout.strip()}")
+else:
+    print("Python NO está en el PATH")
+```
+
+En Linux usarías `["which", "python"]`. El código de retorno **0** indica que `where`/`which` lo encontró; distinto de 0, no.
+
+## 3. Abrir el navegador
+
+```python
+import subprocess
+
+# Windows: start es interno del shell, necesita shell=True
+subprocess.run(["start", "http://localhost:4321"], shell=True)
+
+# Linux / macOS:
+# subprocess.run(["xdg-open", "http://localhost:4321"])
+```
+
+`start` no es un ejecutable real: es un comando interno de `cmd`, por eso usa `shell=True`. `xdg-open` sí es un ejecutable real en Linux ([punto 7](/ApuntesPSP/02-gestion-de-procesos/07-compatibilidad-windows-linux)).
+
+## 4. Lanzador múltiple
+
+```python
+import subprocess, time
+
+programas = [
+    ("Bloc de notas", subprocess.Popen(["notepad.exe"])),
+    ("Calculadora", subprocess.Popen(["calc.exe"])),
+    ("Paint", subprocess.Popen(["mspaint.exe"])),
+]
+
+for nombre, proceso in programas:
+    print(f"{nombre} → PID {proceso.pid}")
+
+time.sleep(5)
+
+for nombre, proceso in programas:
+    proceso.terminate()
+    print(f"Cerrando {nombre}...")
+
+print("Todos terminados 🏁")
+```
+
+Guardamos cada objeto `Popen` en una tupla con su nombre. Recorremos la lista para mostrar PIDs y, a los 5 segundos, para terminarlos todos con `terminate()`.
+
+## 5. Captura de ping
+
+```python
+import subprocess
+
+resultado = subprocess.run(["ping", "8.8.8.8", "-n", "5"], capture_output=True, text=True)
+for linea in resultado.stdout.split("\n"):
+    if "tiempo" in linea.lower() or "time" in linea.lower():
+        print(linea)
+```
+
+`split("\n")` divide la salida y el filtro busca las líneas con "tiempo" (Windows en español) o "time" (sistemas en inglés). `.lower()` cubre ambas.
+
+## 6. PID del padre
+
+```python
+import os
+
+print(f"Mi PID es {os.getpid()}")
+print(f"El PID de mi padre es {os.getppid()}")
+```
+
+`os.getpid()` devuelve tu PID; `os.getppid()` el del proceso que te lanzó (normalmente tu terminal o el IDE).
+
+## 7. Comunicación en dos direcciones
+
+```python
+import subprocess
+
+proceso = subprocess.Popen(
+    ["python", "-c", "print(input().upper())"],
+    stdin=subprocess.PIPE,
+    stdout=subprocess.PIPE,
+    text=True
+)
+
+salida, _ = proceso.communicate(input="hola mundo")
+print(f"El proceso respondió: {salida.strip()}")
+# → "HOLA MUNDO"
+```
+
+`communicate(input="hola mundo")` escribe en el stdin del hijo, espera su fin y devuelve `(stdout, stderr)`. El hijo ejecuta `print(input().upper())` ([punto 6](/ApuntesPSP/02-gestion-de-procesos/06-comunicacion-con-procesos)).
+
+## 8. Timeout con reintentos
+
+```python
+import subprocess
+
+def ejecutar_con_reintentos(comando, intentos=3, timeout=3):
+    for intento in range(1, intentos + 1):
+        try:
+            resultado = subprocess.run(comando, capture_output=True,
+                                       text=True, timeout=timeout, check=False)
+            if resultado.returncode == 0:
+                print(f"✅ Éxito en el intento {intento}")
+                return resultado
+            print(f"Intento {intento}: código {resultado.returncode}")
+        except subprocess.TimeoutExpired:
+            print(f"Intento {intento}: se agotó el tiempo")
+    raise TimeoutError(f"El comando {comando} falló tras {intentos} intentos")
+
+try:
+    resultado = ejecutar_con_reintentos(["ping", "8.8.8.8", "-n", "3"])
+except TimeoutError as e:
+    print(f"❌ {e}")
+```
+
+Cada intento usa `timeout=3` y `check=False`; se captura `TimeoutExpired` y se vuelve a intentar hasta 3 veces. Si nada funciona, se lanza una excepción propia.
+
+## 9. Mini monitor de procesos
+
+```python
+import subprocess, time
+
+proceso = subprocess.Popen(["notepad.exe"])
+
+while proceso.poll() is None:
+    print(f"El proceso (PID {proceso.pid}) sigue vivo...")
     time.sleep(1)
-    print(f"{threading.current_thread().name} terminó")
 
-hilos = [threading.Thread(target=tarea, args=(i,), name="hilo-" + str(i))
-         for i in range(1, 4)]
-
-for h in hilos:
-    h.start()
-
-print("Hilos activos:")
-for h in threading.enumerate():
-    print(f"  {h.name}")
-
-for h in hilos:
-    h.join()
+print(f"El proceso terminó con código {proceso.poll()}")
 ```
 
-`threading.enumerate()` devuelve la lista de todos los hilos vivos, **incluido el principal** (`MainThread`). Justo tras el `start()` de los tres, la lista contiene 4 entradas: `MainThread`, `hilo-1`, `hilo-2` y `hilo-3`.
-
-## 3. Identificar el hilo actual
-
-```python
-import threading
-
-def mostrar():
-    h = threading.current_thread()
-    print(f"name: {h.name} | ident: {h.ident} | daemon: {h.daemon}")
-
-mostrar()  # desde el hilo principal
-
-h = threading.Thread(target=mostrar, name="secundario")
-h.start()
-h.join()
-```
-
-Salida parecida a:
-```
-name: MainThread | ident: 14600 | daemon: False
-name: secundario | ident: 14601 | daemon: False
-```
-
-La misma función devuelve datos distintos según quién la ejecute: `current_thread()` es el objeto Thread que se está ejecutando en ese momento. El `ident` es un número único mientras el hilo vive.
-
-## 4. 🎯 Carrera de mensajes
-
-```python
-import threading
-
-def mensaje(nombre):
-    for i in range(1, 11):
-        print(f"{nombre}: mensaje {i}")
-
-hilos = [threading.Thread(target=mensaje, args=(f"hilo-{n}",))
-         for n in range(1, 6)]
-
-for h in hilos:
-    h.start()
-for h in hilos:
-    h.join()
-```
-
-Cinco hilos imprimiendo 10 mensajes cada uno: la salida es un caos predecible en el desorden. El orden exacto cambia en cada ejecución porque lo decide el scheduler del sistema operativo. Solo está garantizado que los 50 mensajes salgan (y que el programa espere gracias a los `join()`).
-
-## 5. 🔍 Simular descarga con progreso
-
-```python
-import threading, time
-
-def descargar(archivo):
-    for porcentaje in range(0, 101, 25):
-        print(f"{archivo}: {porcentaje}%")
-        time.sleep(0.5)
-
-h = threading.Thread(target=descargar, args=("libro.pdf",))
-h.start()
-h.join()
-```
-
-Salida:
-```
-libro.pdf: 0%
-libro.pdf: 25%
-libro.pdf: 50%
-libro.pdf: 75%
-libro.pdf: 100%
-```
-
-El progreso avanza en saltos de 25% (`range(0, 101, 25)`) con medio segundo de espera por paso: una descarga simulada de 2 segundos en total.
-
-## 6. 🧩 Detener hilo con bandera
-
-```python
-import threading, time
-
-ejecutando = True
-
-def infinito():
-    while ejecutando:
-        print("trabajando...")
-        time.sleep(0.5)
-    print("Hilo detenido por bandera")
-
-h = threading.Thread(target=infinito)
-h.start()
-
-input("Pulsa Enter para detener...")
-ejecutando = False
-h.join()
-print("Programa terminado")
-```
-
-Los hilos no se matan desde fuera (no hay `hilo.kill()`). La forma correcta es una **variable bandera** que el hilo comprueba en cada vuelta de su bucle: al pulsar Enter, el principal pone `ejecutando = False` y el hilo sale del bucle y termina ordenadamente.
-
-## 7. 🎭 Hilo que devuelve un valor
-
-```python
-import threading, time
-
-resultado = []
-
-def calcular():
-    time.sleep(1)
-    valor = 6 * 7
-    resultado.append(valor)
-
-h = threading.Thread(target=calcular)
-h.start()
-h.join()
-print(f"El resultado del hilo es: {resultado[0]}")
-```
-
-Salida:
-```
-El resultado del hilo es: 42
-```
-
-Las funciones de los hilos **no tienen `return`**. Para "devolver" un valor se usa una **lista compartida** (la memoria compartida del [punto 1](/ApuntesPSP/02-hilos-y-concurrencia/01-de-proceso-a-hilo)): el hilo hace `append`, y tras `join()` el principal lee el valor con seguridad, porque ya sabe que el hilo ha terminado.
-
-## 8. ⏱ Timer con repetición
-
-```python
-import threading, time
-
-def tic():
-    print(f"⏰ {time.strftime('%H:%M:%S')}")
-    t = threading.Timer(2.0, tic)   # se reprograma a sí misma
-    t.daemon = True                 # daemon: muere con el principal
-    t.start()
-
-tic()
-
-time.sleep(6)   # el principal deja correr unos cuantos ticks
-print("Programa principal terminando...")
-```
-
-Salida parecida a:
-```
-⏰ 14:35:00
-⏰ 14:35:02
-⏰ 14:35:04
-⏰ 14:35:06
-Programa principal terminando...
-```
-
-El `Timer` normal solo dispara **una vez** ([punto 5](/ApuntesPSP/02-hilos-y-concurrencia/05-timer)). Para repetirlo, la propia función crea y lanza otro `Timer` al final: recursividad. Así cada tick programa el siguiente. El principal decide cuándo parar: ponemos cada Timer como **daemon** (`t.daemon = True`) para que, al terminar el principal, los ticks pendientes mueran con él y el programa no se quede esperando.
-
-## 9. 🏗️ Pool de hilos manual
-
-```python
-import threading, queue, time
-
-def trabajador():
-    while True:
-        tarea = cola.get()
-        if tarea is None:          # centinela: fin de trabajo
-            break
-        print(f"{threading.current_thread().name} hace: {tarea}")
-        time.sleep(0.5)
-        cola.task_done()
-
-cola = queue.Queue()
-for t in ["tarea-1", "tarea-2", "tarea-3", "tarea-4"]:
-    cola.put(t)
-
-workers = [threading.Thread(target=trabajador, name="worker-" + str(i))
-           for i in range(1, 3)]
-for w in workers:
-    w.start()
-
-cola.join()                 # espera a que las 4 tareas se marquen como hechas
-for w in workers:
-    cola.put(None)          # enviamos el centinela a cada worker
-for w in workers:
-    w.join()
-
-print("Todas las tareas terminadas")
-```
-
-`queue.Queue` es **thread-safe**: varios hilos pueden hacer `get()` sin corromper la cola. Dos workers compiten por las 4 tareas (las cogen en cuanto están libres, por eso la repartición puede variar). El principal espera con `cola.join()` y, al terminar, envía `None` (centinela) para que cada worker salga del bucle ordenadamente, sin dejar hilos colgados.
-
-## 🎁 Bonus: tres clásicos resueltos
-
-Tres casos que suelen aparecer en exámenes con su solución completa.
-
-**Bonus 1 — join() o no join()**
-
-```python
-import threading, time
-
-def lento():
-    for i in range(5):
-        print(i)
-        time.sleep(1)
-
-h = threading.Thread(target=lento)
-h.start()
-# Sin join() → el programa principal no espera
-print("Fin del programa principal")
-```
-
-Sin `join()`, el programa principal no espera: su último `print` aparece mientras el hilo sigue contando. El programa en sí no puede terminar hasta que el hilo (no daemon) acabe, pero el orden de salida queda a merced del scheduler.
-
-**Bonus 2 — Hilo daemon**
-
-```python
-import threading, time
-
-def tic():
-    while True:
-        print("tic")
-        time.sleep(1)
-
-h = threading.Thread(target=tic, daemon=True)
-h.start()
-time.sleep(3)
-print("Programa termina — el daemon muere")
-```
-
-El daemon imprime "tic" cada segundo y se **mata al salir** del programa principal ([punto 4](/ApuntesPSP/02-hilos-y-concurrencia/04-hilos-daemon)). Si fuera no-daemon con su `while True`, el programa jamás terminaría.
-
-**Bonus 3 — Timer**
-
-```python
-import threading
-
-def despierta():
-    print("¡Despierta!")
-
-t = threading.Timer(4.0, despierta)
-t.start()
-```
-
-Timer ejecuta **UNA SOLA vez** después del retardo de 4 segundos ([punto 5](/ApuntesPSP/02-hilos-y-concurrencia/05-timer)). No se repite; para repetirlo, la función debe reprogramarse (ejercicio 8).
+`proc.poll()` devuelve `None` mientras el proceso vive y su código de retorno cuando termina. El bucle `while proc.poll() is None` vigila cada segundo hasta que muere.

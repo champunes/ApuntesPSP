@@ -1,187 +1,155 @@
 ﻿---
-title: Boletín UD 4 — Inicial (Resuelto)
-description: Soluciones de los ejercicios básicos de Sincronización
+title: Boletín UD 3 — Inicial (Resuelto)
+description: Soluciones de los ejercicios básicos de Hilos Fundamentos
 ---
 
-# ✅ Boletín UD 4 — Inicial (Resuelto)
+# ✅ Boletín UD 3 — Inicial (Resuelto)
 
 ---
 
-## 1. Lock protege una lista
+## 1. Hilo que cuenta
 
 ```python
 import threading
 
-lista = []
-lock = threading.Lock()
+def contar():
+    for i in range(1, 6):
+        print(i)
 
-def añadir(letra):
-    global lista
-    for _ in range(5):
-        with lock:
-            lista.append(letra)
+h = threading.Thread(target=contar)
+h.start()
+h.join()
+```
 
-h1 = threading.Thread(target=añadir, args=("A",))
-h2 = threading.Thread(target=añadir, args=("B",))
+Salida: `1 2 3 4 5`. La función cuenta del 1 al 5, se lanza con `start()` y se espera con `join()`.
+
+## 2. Múltiples hilos con retardo
+
+```python
+import threading, time
+
+def numero(n):
+    print(f"Hilo {n} empieza")
+    time.sleep(1)
+    print(f"Hilo {n} termina")
+
+hilos = [threading.Thread(target=numero, args=(i,)) for i in range(1, 4)]
+for h in hilos:
+    h.start()
+for h in hilos:
+    h.join()
+```
+
+Los tres hilos se lanzan a la vez y duermen su segundo **en paralelo**: todo el lote acaba en ~1 segundo, no en 3. Los mensajes se entremezclan sin orden garantizado.
+
+## 3. Hilo con argumento
+
+```python
+import threading
+
+def saludar(nombre):
+    print(f"Hola, {nombre}")
+
+h = threading.Thread(target=saludar, args=("Ana",))
+h.start()
+h.join()
+```
+
+Salida: `Hola, Ana`. La coma final de `("Ana",)` convierte el valor en una tupla de un elemento, que es lo que espera `args=`.
+
+## 4. Hilo que saluda
+
+```python
+import threading
+
+def saludar():
+    print("Hola desde un hilo")
+
+h = threading.Thread(target=saludar)
+h.start()
+h.join()
+```
+
+Nunca olvides `start()` para lanzar y `join()` para esperar.
+
+## 5. Dos hilos en paralelo
+
+```python
+import threading
+
+def hilo_a():
+    for _ in range(3):
+        print("Hilo A")
+
+def hilo_b():
+    for _ in range(3):
+        print("Hilo B")
+
+h1 = threading.Thread(target=hilo_a)
+h2 = threading.Thread(target=hilo_b)
 h1.start()
 h2.start()
 h1.join()
 h2.join()
-
-print(lista)
 ```
 
-Sin el `Lock`, los `append` se mezclarían (por ejemplo, `AABABB...`). Con `with lock:`, cada añadido es atómico y al final hay **5 A y 5 B** sin mezclas.
+Los prints se entremezclarán. El orden no está garantizado.
 
-## 2. RLock básico
+## 6. Hilo con nombre
 
 ```python
 import threading
 
-rlock = threading.RLock()
+def mostrar():
+    print(f"Soy {threading.current_thread().name}")
 
-def función_interna():
-    with rlock:
-        print("🔹 Función interna: lock adquirido")
-
-def función_externa():
-    with rlock:
-        print("🔸 Función externa: lock adquirido")
-        función_interna()   # mismo hilo → RLock lo permite
-
-función_externa()
+h = threading.Thread(target=mostrar, name="MiHilo")
+h.start()
+h.join()
 ```
 
-`función_interna` adquiere el mismo `RLock` que `función_externa` ya tiene puesto. Con un `Lock` normal sería un **deadlock** (el hilo se espera a sí mismo); con `RLock` no hay problema ([punto 3](/ApuntesPSP/03-sincronizacion/03-rlock)).
+`current_thread().name` funciona desde dentro del hilo.
 
-## 3. Semáforo con timeout
+## 7. Esperando con join()
 
 ```python
 import threading, time
 
-semaforo = threading.Semaphore(2)
+def tarea():
+    print("Empezando")
+    time.sleep(3)
+    print("Terminado")
 
-def entrar(id):
-    if semaforo.acquire(timeout=1):
-        print(f"Hilo-{id}: DENTRO")
-        time.sleep(2)   # ocupa el semáforo más tiempo que el timeout
-        semaforo.release()
-    else:
-        print(f"Hilo-{id}: timeout")
-
-hilos = [threading.Thread(target=entrar, args=(i,)) for i in range(4)]
-for h in hilos: h.start()
-for h in hilos: h.join()
+h = threading.Thread(target=tarea)
+h.start()
+h.join()
+print("El programa terminó")
 ```
 
-Solo 2 hilos entran a la vez; los que no consiguen entrar en 1 segundo muestran **"timeout"** y se van en lugar de esperar eternamente ([punto 4](/ApuntesPSP/03-sincronizacion/04-semaphore)).
-
-## 4. Carrera sin Lock
-
-```python
-import threading, sys
-
-contador = 0
-sys.setswitchinterval(1e-6)   # fuerza cambios de hilo frecuentes
-
-def sumar(c):
-    return c + 1
-
-def inc():
-    global contador
-    for _ in range(5000):
-        contador = sumar(contador)   # leer-sumar-escribir vía función
-
-hilos = [threading.Thread(target=inc) for _ in range(2)]
-for h in hilos:
-    h.start()
-for h in hilos:
-    h.join()
-print(contador)  # ❌ Casi nunca será 10000
+Salida:
+```
+Empezando
+Terminado
+El programa terminó
 ```
 
-Sin Lock, hay condición de carrera. El valor casi siempre será **< 10000** y variará en cada ejecución ([punto 1](/ApuntesPSP/03-sincronizacion/01-condicion-de-carrera)). En Python 3.13+ el `+=` en una línea casi nunca se interrumpe; pasando la suma por una función y forzando el cambio de hilo con `setswitchinterval`, la carrera se vuelve visible.
+Sin `join()`, el "El programa terminó" podría salir antes que "Terminado" (o incluso antes que "Empezando", según el scheduler). Con `join()`, el orden es garantizado.
 
-## 5. Contador protegido con Lock
+## 8. Varios hilos con nombre y argumentos
 
 ```python
 import threading
-contador = 0
-lock = threading.Lock()
-def inc():
-    global contador
-    for _ in range(1000):
-        with lock:
-            contador += 1
-hilos = [threading.Thread(target=inc) for _ in range(2)]
-for h in hilos:
-    h.start()
-for h in hilos:
-    h.join()
-print(contador)  # ✅ 2000
-```
 
-`with lock:` garantiza exclusión mutua: el "leer → sumar → escribir" ocurre de principio a fin sin que se cuele el otro hilo ([punto 2](/ApuntesPSP/03-sincronizacion/02-lock)).
+def trabajar(n):
+    print(f"hilo-{n} trabajando")
 
-## 6. Sección crítica con sleep
+hilos = [threading.Thread(target=trabajar, args=(n,), name="hilo-" + str(n))
+         for n in range(1, 4)]
 
-```python
-import threading, time
-
-total = 0
-lock = threading.Lock()
-
-def trabajar():
-    global total
-    for _ in range(20):
-        with lock:
-            total += 10
-        time.sleep(0.1)
-
-hilos = [threading.Thread(target=trabajar) for _ in range(3)]
-for h in hilos: h.start()
-for h in hilos: h.join()
-
-print(f"Total: {total}")  # ✅ 600 (3 hilos × 20 × 10)
-```
-
-El `Lock` protege la sección crítica (`total += 10`); el `sleep` ocurre fuera para no bloquear a los demás.
-
-## 7. Semáforo simple
-
-```python
-import threading, time
-s = threading.Semaphore(2)
-def entrar(id):
-    print(f"{id} espera")
-    with s:
-        print(f"  → {id} dentro")
-        time.sleep(1)
-    print(f"  ← {id} sale")
-hilos = [threading.Thread(target=entrar, args=(i,)) for i in range(4)]
 for h in hilos:
     h.start()
 for h in hilos:
     h.join()
 ```
 
-Solo 2 hilos entran a la vez. Los demás esperan hasta que un puesto se libera ([punto 4](/ApuntesPSP/03-sincronizacion/04-semaphore)).
-
-## 8. Barrera de 3
-
-```python
-import threading, time
-b = threading.Barrier(3)
-def corredor(id):
-    time.sleep(id)
-    print(f"  {id} preparado")
-    b.wait()
-    print(f"🏁 {id} salió")
-hilos = [threading.Thread(target=corredor, args=(i,)) for i in range(3)]
-for h in hilos:
-    h.start()
-for h in hilos:
-    h.join()
-```
-
-Todos imprimen "preparado" antes de que nadie "salga": la barrera no deja cruzar hasta que los 3 han llegado ([punto 5](/ApuntesPSP/03-sincronizacion/05-barrier)).
+Cada hilo lleva su nombre (`hilo-1`, `hilo-2`, `hilo-3`) y recibe su número como argumento. Los mensajes se entremezclan, pero el orden de lanzamiento y espera es correcto gracias a los dos bucles.

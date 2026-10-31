@@ -1,80 +1,62 @@
 ﻿---
-title: Boletín UD 8 — Avanzado
-description: Ejercicios avanzados de APIs Comerciales
+title: Boletín UD 7 — Avanzado
+description: Ejercicios avanzados de APIs REST y HTTP
 ---
 
-# 💪 Boletín UD 8 — Avanzado
+# 💪 Boletín UD 7 — Avanzado
 
-> Ejercicios que requieren aplicar los conceptos de APIs comerciales, variables de entorno, rate limits y OpenAI de forma más profunda, con programas completos contra APIs reales.
+> Ejercicios que requieren aplicar los conceptos de APIs REST, requests y JSON de forma más profunda, con programas completos contra APIs reales.
 
 ---
 
-## 1. Clima con .env para dos ciudades
+## 1. PUT para actualizar
 
-Carga tu API key de OpenWeatherMap desde un archivo `.env` con `python-dotenv`. Obtén el clima de dos ciudades distintas y compara sus temperaturas.
+Haz PUT a `https://jsonplaceholder.typicode.com/posts/1` con `json={"title": "nuevo titulo", "body": "nuevo cuerpo", "userId": 1}`. Muestra el código de estado y el título actualizado.
 
-**Pista:** `load_dotenv()` + `os.getenv("OPENWEATHER_API_KEY")`. Escribe una función `clima(ciudad)` y llámala dos veces, guardando la temperatura de cada una para compararlas.
+**Pista:** `requests.put` con `json=` reemplaza el recurso completo. El título actualizado está en `resp.json()["title"]`.
 
-## 2. GPT con temperatura creativa
+## 2. DELETE un recurso
 
-Usa la API de OpenAI para pedir una historia corta sobre Python. Ajusta el parámetro `temperature=0.9` para obtener una respuesta más creativa.
+Haz DELETE a `https://jsonplaceholder.typicode.com/posts/1`. ¿Qué código de estado devuelve un borrado exitoso?
 
-**Pista:** en `cliente.chat.completions.create(...)`, además de `model` y `messages`, pasa `temperature=0.9` y un `max_tokens` razonable para que la historia no se corte.
+## 3. HEAD request
 
-## 3. Capturar errores HTTP
+Usa `requests.head()` para pedir solo las cabeceras de `https://api.github.com`. Muestra los valores de `Content-Type` y `X-RateLimit-Remaining` de las cabeceras.
 
-Haz una petición a `https://httpbin.org/status/404` y otra a `https://httpbin.org/status/500`. Captura los errores usando `raise_for_status()` dentro de un bloque try/except.
+**Pista:** `requests.head` no devuelve cuerpo, solo cabeceras. Accede a ellas con `resp.headers["Content-Type"]`.
 
-**Pista:** dentro del `except requests.exceptions.HTTPError as e`, puedes leer `e.response.status_code` para saber qué código ha fallado.
+## 4. 🎯 Info de usuario de GitHub
 
-## 4. Comprobación de claves
+Obtén los datos del usuario "python" y muestra: nombre, bio, repos públicos, seguidores, fecha de creación.
 
-Carga el `.env` y comprueba que `OPENWEATHER_API_KEY` existe. Si no existe, lanza un error claro con `raise ValueError`.
+**Pista**: La API de GitHub (`https://api.github.com/users/python`) devuelve un JSON con campos como `name`, `bio`, `public_repos`, `followers` y `created_at`. Usa `resp.json()` para acceder a cada campo.
 
-**Pista:** `os.getenv` devuelve `None` si la variable falta: esa es la condición para lanzar el error.
+## 5. 🔍 Buscador de repositorios
 
-## 5. Chat con GPT y rol system
+Busca repositorios de Python con más de 1000 estrellas. Muestra nombre y estrellas.
 
-Pregunta a GPT-4o-mini "¿Qué es Python?" usando un mensaje `system` que diga "Eres un profesor de Python divertido" antes del mensaje `user`.
+**Pista**: La API de búsqueda de GitHub (`/search/repositories`) acepta `q` como parámetro. Usa `"python stars:>1000"` para filtrar. Ordena por `stars` con `sort=stars` y limita a 5 resultados con `per_page=5`.
 
-## 6. Timeout
+## 6. 🧩 API con paginación
 
-Haz una petición a `https://192.0.2.1` con `timeout=3` y captura la excepción de timeout.
+La API de GitHub página los resultados. Obtén los primeros 20 repos del usuario "python" (2 páginas de 10).
 
-**Pista:** `192.0.2.1` es una IP de test que nunca responde. La excepción es `requests.exceptions.Timeout`.
+**Pista**: Usa los parámetros `page` y `per_page` en cada petición a `https://api.github.com/users/{usuario}/repos`. Itera sobre las páginas que necesites y acumula los resultados en una lista.
 
-## 7. 🎯 Pronóstico extendido
+## 7. 🎭 POST y respuesta
 
-Usa OpenWeatherMap para obtener el pronóstico de 5 días de tu ciudad.
+Crea un post en JSONPlaceholder, luego haz GET para verificarlo.
 
-**Pista**: OpenWeatherMap tiene un endpoint `/forecast` que devuelve datos cada 3 horas. Usa `lang=es` para descripciones en español. Para obtener un dato por día, salta 8 elementos (24 horas ÷ 3 horas = 8 intervalos).
+**Pista**: JSONPlaceholder es una API de pruebas. El POST devuelve el recurso creado con un ID (101). Luego puedes hacer GET a `https://jsonplaceholder.typicode.com/posts/101` para verificar la creación.
 
-## 8. 🔍 Múltiples ciudades
+## 8. ⏱ Tiempo de respuesta
 
-Obtén el clima de 5 ciudades a la vez usando un solo bucle.
+Mide el tiempo de respuesta de 5 APIs distintas. ¿Cuál es más rápida?
 
-**Pista**: Itera sobre una lista de ciudades y haz una petición a OpenWeatherMap por cada una. Añade `time.sleep(0.2)` entre peticiones para evitar el rate limit. Cada respuesta contiene `main.temp` y `weather[0].description`.
+**Pista**: Mide el tiempo con `time.time()` antes y después de cada `requests.get()`. Prueba varias APIs gratuitas (GitHub, JSONPlaceholder, httpbin, ReqRes) y compara los tiempos en milisegundos.
 
-## 9. 🧩 GPT: explicador automático
+## 9. 🏗️ Cliente de API con caché
 
-Pregunta a GPT-4o-mini que explique 3 conceptos de Python: Lock, Semaphore, Barrier.
+Crea un cliente que cachee respuestas en un diccionario para no repetir peticiones.
 
-**Pista**: La API de chat de OpenAI recibe una lista de mensajes. Puedes iterar sobre una lista de conceptos y pedir una explicación corta para cada uno, limitando la respuesta con `max_tokens`.
-
-## 10. 🎭 Conversación con contexto
-
-Chat con GPT que recuerda el historial de la conversación.
-
-**Pista**: Mantén una lista `mensajes` que acumule cada interacción. Empieza con un mensaje `{"role": "system"}` para definir el rol. En cada turno, añade el mensaje del usuario y la respuesta del asistente para mantener el contexto.
-
-## 11. ⏱ Monitor de uptime
-
-Comprueba cada 30s si una API responde. Si falla 3 veces seguidas, alerta.
-
-**Pista**: Un bucle infinito con `time.sleep(30)` dentro. Un contador de fallos consecutivos se incrementa en cada error y se reinicia al obtener una respuesta OK. Cuando supere el máximo, muestra una alerta.
-
-## 12. 🏗️ Agregador de APIs
-
-Llama a 3 APIs distintas y combina sus respuestas en un solo resumen.
-
-**Pista**: Define una función que llame a varias APIs y guarde los datos relevantes en un diccionario. Cada API aporta una clave diferente. Usa GitHub para datos de usuario, JSONPlaceholder para el conteo de posts y httpbin para la IP.
+**Pista**: Usa un diccionario global donde la clave sea la URL. Guarda el dato y el timestamp. Antes de hacer una petición, comprueba si la URL está en caché y si el tiempo transcurrido desde que se guardó es menor al TTL.

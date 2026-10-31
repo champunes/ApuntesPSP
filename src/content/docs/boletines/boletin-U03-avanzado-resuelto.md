@@ -1,269 +1,293 @@
 ﻿---
-title: Boletín UD 4 — Avanzado (Resuelto)
-description: Soluciones de los ejercicios avanzados de Sincronización
+title: Boletín UD 3 — Avanzado (Resuelto)
+description: Soluciones de los ejercicios avanzados de Hilos Fundamentos
 ---
 
-# 💪 Boletín UD 4 — Avanzado (Resuelto)
+# 💪 Boletín UD 3 — Avanzado (Resuelto)
 
 ---
 
-## 1. Condition con notify_all
+## 1. Join con timeout
 
 ```python
 import threading, time
 
-cola = []
-condition = threading.Condition()
+def lento():
+    print("Hilo empezando")
+    time.sleep(5)
+    print("Hilo terminó")
 
-def consumidor(id):
-    for _ in range(1):
-        with condition:
-            while not cola:
-                condition.wait()
-            item = cola.pop(0)
-            print(f"  🍽️ Consumidor-{id} procesó: {item}")
+h = threading.Thread(target=lento)
+h.start()
+h.join(timeout=2)
+print(f"¿Sigue vivo tras el timeout? {h.is_alive()}")
+```
 
-def productor():
-    for i in range(3):
-        with condition:
-            cola.append(f"item-{i}")
-            print(f"📦 Producido: item-{i}")
-            condition.notify_all()   # despierta a los 3 consumidores
+Salida:
+```
+Hilo empezando
+¿Sigue vivo tras el timeout? True
+Hilo terminó
+```
+
+`join(timeout=2)` espera como máximo 2 segundos: al expirar, el hilo **sigue vivo** (duerme hasta los 5s) y el principal continúa. Como es no-daemon, el programa no termina hasta que el hilo acaba su sueño.
+
+## 2. Listar hilos activos
+
+```python
+import threading, time
+
+def tarea(n):
+    time.sleep(1)
+    print(f"{threading.current_thread().name} terminó")
+
+hilos = [threading.Thread(target=tarea, args=(i,), name="hilo-" + str(i))
+         for i in range(1, 4)]
+
+for h in hilos:
+    h.start()
+
+print("Hilos activos:")
+for h in threading.enumerate():
+    print(f"  {h.name}")
+
+for h in hilos:
+    h.join()
+```
+
+`threading.enumerate()` devuelve la lista de todos los hilos vivos, **incluido el principal** (`MainThread`). Justo tras el `start()` de los tres, la lista contiene 4 entradas: `MainThread`, `hilo-1`, `hilo-2` y `hilo-3`.
+
+## 3. Identificar el hilo actual
+
+```python
+import threading
+
+def mostrar():
+    h = threading.current_thread()
+    print(f"name: {h.name} | ident: {h.ident} | daemon: {h.daemon}")
+
+mostrar()  # desde el hilo principal
+
+h = threading.Thread(target=mostrar, name="secundario")
+h.start()
+h.join()
+```
+
+Salida parecida a:
+```
+name: MainThread | ident: 14600 | daemon: False
+name: secundario | ident: 14601 | daemon: False
+```
+
+La misma función devuelve datos distintos según quién la ejecute: `current_thread()` es el objeto Thread que se está ejecutando en ese momento. El `ident` es un número único mientras el hilo vive.
+
+## 4. 🎯 Carrera de mensajes
+
+```python
+import threading
+
+def mensaje(nombre):
+    for i in range(1, 11):
+        print(f"{nombre}: mensaje {i}")
+
+hilos = [threading.Thread(target=mensaje, args=(f"hilo-{n}",))
+         for n in range(1, 6)]
+
+for h in hilos:
+    h.start()
+for h in hilos:
+    h.join()
+```
+
+Cinco hilos imprimiendo 10 mensajes cada uno: la salida es un caos predecible en el desorden. El orden exacto cambia en cada ejecución porque lo decide el scheduler del sistema operativo. Solo está garantizado que los 50 mensajes salgan (y que el programa espere gracias a los `join()`).
+
+## 5. 🔍 Simular descarga con progreso
+
+```python
+import threading, time
+
+def descargar(archivo):
+    for porcentaje in range(0, 101, 25):
+        print(f"{archivo}: {porcentaje}%")
         time.sleep(0.5)
 
-hilos = [threading.Thread(target=consumidor, args=(i,)) for i in range(3)]
-hilos.append(threading.Thread(target=productor))
-for h in hilos: h.start()
-for h in hilos: h.join()
+h = threading.Thread(target=descargar, args=("libro.pdf",))
+h.start()
+h.join()
 ```
 
-Con 3 consumidores esperando, `notify_all()` los despierta a **todos**; si usáramos `notify()` solo despertaría a uno y los demás podrían quedarse dormidos ([punto 6](/ApuntesPSP/03-sincronizacion/06-condition)).
+Salida:
+```
+libro.pdf: 0%
+libro.pdf: 25%
+libro.pdf: 50%
+libro.pdf: 75%
+libro.pdf: 100%
+```
 
-## 2. Deadlock entre dos hilos
+El progreso avanza en saltos de 25% (`range(0, 101, 25)`) con medio segundo de espera por paso: una descarga simulada de 2 segundos en total.
+
+## 6. 🧩 Detener hilo con bandera
 
 ```python
 import threading, time
 
-lockA = threading.Lock()
-lockB = threading.Lock()
+ejecutando = True
 
-def hilo_1():
-    with lockA:
-        time.sleep(0.1)
-        with lockB:   # espera a que el hilo 2 libere B
-            print("Hilo 1 trabajando")
+def infinito():
+    while ejecutando:
+        print("trabajando...")
+        time.sleep(0.5)
+    print("Hilo detenido por bandera")
 
-def hilo_2():
-    with lockB:
-        time.sleep(0.1)
-        with lockA:   # espera a que el hilo 1 libere A
-            print("Hilo 2 trabajando")
+h = threading.Thread(target=infinito)
+h.start()
 
-h1 = threading.Thread(target=hilo_1)
-h2 = threading.Thread(target=hilo_2)
-h1.start(); h2.start()
-h1.join(); h2.join()  # ❌ nunca termina: deadlock
+input("Pulsa Enter para detener...")
+ejecutando = False
+h.join()
+print("Programa terminado")
 ```
 
-El hilo 1 tiene A y espera B; el hilo 2 tiene B y espera A. **Ningún `print` sale nunca** y el programa se queda colgado ([punto 8](/ApuntesPSP/03-sincronizacion/08-buenas-practicas)).
+Los hilos no se matan desde fuera (no hay `hilo.kill()`). La forma correcta es una **variable bandera** que el hilo comprueba en cada vuelta de su bucle: al pulsar Enter, el principal pone `ejecutando = False` y el hilo sale del bucle y termina ordenadamente.
 
-## 3. Semáforo con recursos limitados
+## 7. 🎭 Hilo que devuelve un valor
 
 ```python
 import threading, time
 
-impresoras = threading.Semaphore(3)
+resultado = []
 
-def imprimir(id):
-    with impresoras:
-        print(f"🖨️ Imprimiendo documento-{id}...")
-        time.sleep(2)
-        print(f"  ✅ Documento-{id} impreso")
+def calcular():
+    time.sleep(1)
+    valor = 6 * 7
+    resultado.append(valor)
 
-hilos = [threading.Thread(target=imprimir, args=(i,)) for i in range(6)]
-for h in hilos: h.start()
-for h in hilos: h.join()
+h = threading.Thread(target=calcular)
+h.start()
+h.join()
+print(f"El resultado del hilo es: {resultado[0]}")
 ```
 
-Con `Semaphore(3)` nunca hay más de **3 documentos imprimiendo a la vez**, aunque haya 6 hilos esperando ([punto 4](/ApuntesPSP/03-sincronizacion/04-semaphore)).
-
-## 4. 🎯 Banco con cuentas compartidas
-
-```python
-import threading, time, random
-
-saldo = 100
-lock = threading.Lock()
-
-def ingresar():
-    global saldo
-    for _ in range(5):
-        with lock:
-            cantidad = random.randint(10, 50)
-            saldo += cantidad
-            print(f"➕ Ingreso {cantidad} € → saldo {saldo} €")
-        time.sleep(random.random())
-
-def retirar():
-    global saldo
-    for _ in range(5):
-        with lock:
-            cantidad = random.randint(10, 50)
-            if saldo >= cantidad:
-                saldo -= cantidad
-                print(f"➖ Retiro {cantidad} € → saldo {saldo} €")
-            else:
-                print(f"❌ Saldo insuficiente ({saldo} €) para retirar {cantidad} €")
-        time.sleep(random.random())
-
-h1 = threading.Thread(target=ingresar)
-h2 = threading.Thread(target=retirar)
-h1.start(); h2.start()
-h1.join(); h2.join()
-print(f"Saldo final: {saldo} €")
+Salida:
+```
+El resultado del hilo es: 42
 ```
 
-El `Lock` global evita que ingreso y retiro se pisen; el retirador comprueba `saldo >= cantidad` **dentro** del lock antes de restar, así el saldo **nunca es negativo**.
+Las funciones de los hilos **no tienen `return`**. Para "devolver" un valor se usa una **lista compartida** (la memoria compartida del [punto 1](/ApuntesPSP/03-hilos-y-concurrencia/01-de-proceso-a-hilo)): el hilo hace `append`, y tras `join()` el principal lee el valor con seguridad, porque ya sabe que el hilo ha terminado.
 
-## 5. 🔍 Semáforo con timeout
+## 8. ⏱ Timer con repetición
 
 ```python
 import threading, time
 
-semaforo = threading.Semaphore(2)
+def tic():
+    print(f"⏰ {time.strftime('%H:%M:%S')}")
+    t = threading.Timer(2.0, tic)   # se reprograma a sí misma
+    t.daemon = True                 # daemon: muere con el principal
+    t.start()
 
-def tarea(id):
-    if semaforo.acquire(blocking=True, timeout=2):
-        print(f"Hilo-{id}: entró")
-        time.sleep(3)
-        semaforo.release()
-    else:
-        print(f"Hilo-{id}: se rinde (timeout 2s)")
+tic()
 
-hilos = [threading.Thread(target=tarea, args=(i,)) for i in range(4)]
-for h in hilos: h.start()
-for h in hilos: h.join()
+time.sleep(6)   # el principal deja correr unos cuantos ticks
+print("Programa principal terminando...")
 ```
 
-Con `timeout=2`, los hilos que no consiguen entrar en 2 segundos **se rinden** (devuelve `False`) en vez de bloquearse para siempre. Los primeros 2 entran; el resto abandona.
+Salida parecida a:
+```
+⏰ 14:35:00
+⏰ 14:35:02
+⏰ 14:35:04
+⏰ 14:35:06
+Programa principal terminando...
+```
 
-## 6. 🧩 Barrera con fases múltiples
+El `Timer` normal solo dispara **una vez** ([punto 5](/ApuntesPSP/03-hilos-y-concurrencia/05-timer)). Para repetirlo, la propia función crea y lanza otro `Timer` al final: recursividad. Así cada tick programa el siguiente. El principal decide cuándo parar: ponemos cada Timer como **daemon** (`t.daemon = True`) para que, al terminar el principal, los ticks pendientes mueran con él y el programa no se quede esperando.
+
+## 9. 🏗️ Pool de hilos manual
+
+```python
+import threading, queue, time
+
+def trabajador():
+    while True:
+        tarea = cola.get()
+        if tarea is None:          # centinela: fin de trabajo
+            break
+        print(f"{threading.current_thread().name} hace: {tarea}")
+        time.sleep(0.5)
+        cola.task_done()
+
+cola = queue.Queue()
+for t in ["tarea-1", "tarea-2", "tarea-3", "tarea-4"]:
+    cola.put(t)
+
+workers = [threading.Thread(target=trabajador, name="worker-" + str(i))
+           for i in range(1, 3)]
+for w in workers:
+    w.start()
+
+cola.join()                 # espera a que las 4 tareas se marquen como hechas
+for w in workers:
+    cola.put(None)          # enviamos el centinela a cada worker
+for w in workers:
+    w.join()
+
+print("Todas las tareas terminadas")
+```
+
+`queue.Queue` es **thread-safe**: varios hilos pueden hacer `get()` sin corromper la cola. Dos workers compiten por las 4 tareas (las cogen en cuanto están libres, por eso la repartición puede variar). El principal espera con `cola.join()` y, al terminar, envía `None` (centinela) para que cada worker salga del bucle ordenadamente, sin dejar hilos colgados.
+
+## 🎁 Bonus: tres clásicos resueltos
+
+Tres casos que suelen aparecer en exámenes con su solución completa.
+
+**Bonus 1 — join() o no join()**
 
 ```python
 import threading, time
 
-barrera = threading.Barrier(3)
+def lento():
+    for i in range(5):
+        print(i)
+        time.sleep(1)
 
-def trabajador(id):
-    for fase in range(3):
-        print(f"  🧮 Hilo-{id}: trabajando en fase {fase+1}")
-        time.sleep(id * 0.3)   # cada hilo tarda distinto
-        barrera.wait()         # nadie pasa a la siguiente fase hasta que llegan los 3
-        print(f"  🏁 Hilo-{id}: fase {fase+1} completada")
-
-hilos = [threading.Thread(target=trabajador, args=(i,)) for i in range(3)]
-for h in hilos: h.start()
-for h in hilos: h.join()
+h = threading.Thread(target=lento)
+h.start()
+# Sin join() → el programa principal no espera
+print("Fin del programa principal")
 ```
 
-Los `barrera.wait()` después de cada fase garantizan que **ningún hilo empieza la fase N+1** hasta que los 3 terminaron la fase N ([punto 5](/ApuntesPSP/03-sincronizacion/05-barrier)).
+Sin `join()`, el programa principal no espera: su último `print` aparece mientras el hilo sigue contando. El programa en sí no puede terminar hasta que el hilo (no daemon) acabe, pero el orden de salida queda a merced del scheduler.
 
-## 7. 🎭 Condition con timeout
+**Bonus 2 — Hilo daemon**
 
 ```python
 import threading, time
 
-cola = []
-condition = threading.Condition()
+def tic():
+    while True:
+        print("tic")
+        time.sleep(1)
 
-def productor():
-    for _ in range(2):
-        time.sleep(3)              # produce cada 3 segundos
-        with condition:
-            cola.append("producto")
-            print("📦 Producido (cada 3s)")
-            condition.notify()
-
-def consumidor():
-    for _ in range(2):
-        with condition:
-            if not condition.wait(timeout=2):   # espera máximo 2s
-                print("  ⏳ timeout: el consumidor se va")
-            elif cola:
-                print(f"  🍽️ Consumido: {cola.pop(0)}")
-
-h1 = threading.Thread(target=productor)
-h2 = threading.Thread(target=consumidor)
-h1.start(); h2.start()
-h1.join(); h2.join()
+h = threading.Thread(target=tic, daemon=True)
+h.start()
+time.sleep(3)
+print("Programa termina — el daemon muere")
 ```
 
-`wait(timeout=2)` devuelve `False` si expiran los 2 segundos sin notificación: el consumidor **se va** en lugar de esperar los 3 segundos del productor. Devuelve `True` si le avisan a tiempo.
+El daemon imprime "tic" cada segundo y se **mata al salir** del programa principal ([punto 4](/ApuntesPSP/03-hilos-y-concurrencia/04-hilos-daemon)). Si fuera no-daemon con su `while True`, el programa jamás terminaría.
 
-## 8. ⏱ Deadlock provocado y solución
-
-**Provocación (deadlock):**
+**Bonus 3 — Timer**
 
 ```python
-import threading, time
+import threading
 
-lock1 = threading.Lock()
-lock2 = threading.Lock()
+def despierta():
+    print("¡Despierta!")
 
-def hilo_a():
-    with lock1:
-        time.sleep(0.1)
-        with lock2:
-            print("A: trabajando")
-
-def hilo_b():
-    with lock2:          # ❌ orden invertido
-        time.sleep(0.1)
-        with lock1:
-            print("B: trabajando")
-
-h1 = threading.Thread(target=hilo_a)
-h2 = threading.Thread(target=hilo_b)
-h1.start(); h2.start()
-h1.join(); h2.join()   # se queda colgado
+t = threading.Timer(4.0, despierta)
+t.start()
 ```
 
-**Solución (mismo orden de locks):**
-
-```python
-def hilo_b():
-    with lock1:          # ✅ mismo orden que A: lock1 → lock2
-        time.sleep(0.1)
-        with lock2:
-            print("B: trabajando")
-```
-
-Adquiriendo los locks **siempre en el mismo orden** (`lock1 → lock2`), es imposible que un hilo tenga lock2 esperando lock1 mientras otro tiene lock1 esperando lock2. El programa termina correctamente ([punto 8](/ApuntesPSP/03-sincronizacion/08-buenas-practicas)).
-
-## 9. 🏗️ Productor-Consumidor múltiple
-
-```python
-import threading, time, random, queue
-
-buffer = queue.Queue(maxsize=5)
-
-def productor(id):
-    for _ in range(4):
-        item = f"p{id}-{random.randint(1, 100)}"
-        buffer.put(item)            # thread-safe, no necesita Lock
-        print(f"📦 P{id} produjo: {item} (buffer {buffer.qsize()}/5)")
-        time.sleep(random.random())
-
-def consumidor(id):
-    for _ in range(2):
-        item = buffer.get()         # thread-safe
-        print(f"  🍽️ C{id} consumió: {item} (buffer {buffer.qsize()}/5)")
-        time.sleep(random.random())
-
-hilos = [threading.Thread(target=productor, args=(i,)) for i in range(2)]
-hilos += [threading.Thread(target=consumidor, args=(i,)) for i in range(3)]
-for h in hilos: h.start()
-for h in hilos: h.join()
-```
-
-`queue.Queue(maxsize=5)` es **thread-safe**: `put()` y `get()` ya están sincronizadas internamente. Con `maxsize=5`, si el buffer se llena, los productores esperan; si se vacía, los consumidores esperan. Sin locks a mano ([punto 7](/ApuntesPSP/03-sincronizacion/07-productor-consumidor)).
+Timer ejecuta **UNA SOLA vez** después del retardo de 4 segundos ([punto 5](/ApuntesPSP/03-hilos-y-concurrencia/05-timer)). No se repite; para repetirlo, la función debe reprogramarse (ejercicio 8).

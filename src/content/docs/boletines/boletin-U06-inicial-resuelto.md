@@ -1,89 +1,134 @@
 ﻿---
-title: Boletín UD 7 — Inicial (Resuelto)
-description: Soluciones de los ejercicios básicos de APIs REST y HTTP
+title: Boletín UD 6 — Inicial (Resuelto)
+description: Soluciones de los ejercicios básicos de Servidores concurrentes
 ---
 
-# ✅ Boletín UD 7 — Inicial (Resuelto)
+# ✅ Boletín UD 6 — Inicial (Resuelto)
 
 ---
 
-## 1. GET a JSONPlaceholder
+## 1. Servidor eco básico
 
 ```python
-import requests
-resp = requests.get("https://jsonplaceholder.typicode.com/posts/1")
-print(resp.status_code)  # 200
+import socket
+with socket.socket() as srv:
+    srv.setsockopt(socket.SOL_SOCKET, socket.SO_REUSEADDR, 1)
+    srv.bind(("127.0.0.1", 5000))
+    srv.listen()
+    conn, addr = srv.accept()
+    with conn:
+        datos = conn.recv(1024)
+        conn.sendall(datos)  # eco: devuelve exactamente lo recibido
 ```
 
-`requests.get` no lanza excepción ante errores: el código de estado te lo dice `resp.status_code`.
+Solo atiende **UN cliente** y termina. `with conn:` cierra el socket al salir.
 
-## 2. Título del post
+## 2. Servidor eco con bucle
 
 ```python
-import requests
-resp = requests.get("https://jsonplaceholder.typicode.com/posts/1")
-print(resp.json()["title"])
+import socket
+with socket.socket() as srv:
+    srv.setsockopt(socket.SOL_SOCKET, socket.SO_REUSEADDR, 1)
+    srv.bind(("127.0.0.1", 5000))
+    srv.listen()
+    while True:
+        conn, addr = srv.accept()
+        with conn:
+            datos = conn.recv(1024)
+            conn.sendall(datos)  # eco
 ```
 
-`resp.json()` convierte el cuerpo JSON a un **dict** de Python, y con `["title"]` accedes al campo.
+Clientes uno tras otro. Si uno tarda, los demás esperan: es el servidor secuencial del [punto 1](/ApuntesPSP/06-servidores-concurrentes/01-servidor-secuencial).
 
-## 3. Contar usuarios
+## 3. Cliente eco
 
 ```python
-import requests
-resp = requests.get("https://jsonplaceholder.typicode.com/users")
-usuarios = resp.json()
-print(f"Hay {len(usuarios)} usuarios")  # 10
+import socket
+with socket.socket() as s:
+    s.connect(("127.0.0.1", 5000))
+    s.sendall(b"Hola eco")
+    print(s.recv(1024).decode())
 ```
 
-Cuando la respuesta es una lista de recursos, `resp.json()` devuelve una **lista** de diccionarios y `len()` cuenta los elementos.
+Se conecta, envía `b"Hola eco"` y muestra la respuesta del servidor (el mismo mensaje, de vuelta).
 
-## 4. GET a GitHub
+## 4. Servidor secuencial
 
 ```python
-import requests
-resp = requests.get("https://api.github.com/users/python")
-print(resp.status_code)  # 200
+import socket
+with socket.socket() as srv:
+    srv.setsockopt(socket.SOL_SOCKET, socket.SO_REUSEADDR, 1)
+    srv.bind(("127.0.0.1", 5000))
+    srv.listen()
+    conn, addr = srv.accept()
+    with conn:
+        datos = conn.recv(1024)
+        conn.sendall(b"OK")
 ```
 
-## 5. Mostrar JSON
+Solo atiende UN cliente y termina: `accept()` una vez, responde `b"OK"` y cierra.
+
+## 5. Servidor multihilo
 
 ```python
-import requests
-resp = requests.get("https://api.github.com/users/python")
-print(resp.json())
+import socket, threading
+def atender(conn, addr):
+    with conn:
+        conn.recv(1024)
+        conn.sendall(b"OK")
+with socket.socket() as srv:
+    srv.setsockopt(socket.SOL_SOCKET, socket.SO_REUSEADDR, 1)
+    srv.bind(("127.0.0.1", 5000))
+    srv.listen()
+    while True:
+        conn, addr = srv.accept()
+        threading.Thread(target=atender, args=(conn, addr)).start()
 ```
 
-`resp.json()` convierte el JSON a diccionario Python.
+Cada cliente en su propio hilo. Todos se atienden en paralelo ([punto 3](/ApuntesPSP/06-servidores-concurrentes/03-hilo-por-cliente)).
 
-## 6. Nombre real
+## 6. Cliente con respuesta
 
 ```python
-import requests
-datos = requests.get("https://api.github.com/users/python").json()
-print(datos["name"])  # "Python"
+import socket
+with socket.socket() as s:
+    s.connect(("127.0.0.1", 5000))
+    s.sendall(b"Hola")
+    print(s.recv(1024).decode())
 ```
 
-Encadenas `requests.get(...).json()` para ir directo al dict, y con `datos["name"]` sacas el nombre real.
+Muestra por pantalla la respuesta del servidor. Con el servidor multihilo del ejercicio 5, recibiría `OK`.
 
-## 7. Métodos HTTP
+## 7. Servidor con ThreadPoolExecutor
 
-| Método | Operación CRUD | Uso |
-|---|---|---|
-| GET | **Read** | Obtener datos (sin cuerpo) |
-| POST | **Create** | Crear recurso (con cuerpo) |
-| PUT | **Update** | Reemplazar el recurso completo |
-| PATCH | **Update** | Actualizar solo una parte |
-| DELETE | **Delete** | Borrar el recurso |
+```python
+import socket, concurrent.futures
+def atender(conn, addr):
+    with conn:
+        conn.recv(1024)
+        conn.sendall(b"OK")
+with socket.socket() as srv, concurrent.futures.ThreadPoolExecutor(3) as pool:
+    srv.bind(("127.0.0.1", 5000))
+    srv.listen()
+    while True:
+        conn, addr = srv.accept()
+        pool.submit(atender, conn, addr)
+```
 
-## 8. Códigos de estado
+Máximo **3 hilos**. Los clientes adicionales esperan en cola ([punto 4](/ApuntesPSP/06-servidores-concurrentes/04-threadpoolexecutor)).
 
-a) 200 → **OK** (GET exitoso)
-b) 201 → **Created** (POST exitoso, recurso creado)
-c) 204 → **No Content** (DELETE exitoso)
-d) 400 → **Bad Request** (enviaste datos incorrectos)
-e) 401 → **Unauthorized** (falta autenticación)
-f) 404 → **Not Found** (el recurso no existe)
-g) 500 → **Internal Server Error** (error del servidor)
+## 8. Lanzador de 5 clientes
 
-> Los **2xx** son éxito, los **4xx** son error del cliente (tuyo) y los **5xx** son error del servidor.
+```python
+import socket, threading
+def cliente(id):
+    with socket.socket() as s:
+        s.connect(("127.0.0.1", 5000))
+        s.sendall(f"Soy {id}".encode())
+        print(s.recv(1024).decode())
+hilos = [threading.Thread(target=cliente, args=(i,)) for i in range(5)]
+for h in hilos: h.start()
+for h in hilos: h.join()
+```
+
+Lanza **5 clientes a la vez** contra el servidor. El `join()` espera a que terminen todos antes de acabar el script.

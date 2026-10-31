@@ -1,125 +1,97 @@
 ﻿---
-title: Boletín UD 9 — Inicial (Resuelto)
-description: Soluciones de los ejercicios básicos de Seguridad y cifrado
+title: Boletín UD 8 — Inicial (Resuelto)
+description: Soluciones de los ejercicios básicos de APIs Comerciales
 ---
 
-# ✅ Boletín UD 9 — Inicial (Resuelto)
+# ✅ Boletín UD 8 — Inicial (Resuelto)
 
-> Los ejercicios 6 y 7 necesitan `pycryptodome`: `pip install pycryptodome`.
-
----
-
-## 1. SHA1 de tu nombre
-
-```python
-import hashlib
-print(hashlib.sha1(b"sergi").hexdigest())
-# 52a431556910f83a3d65e1e7c3772f5d44011eb3
-```
-
-Con tu nombre (en minúsculas), por ejemplo `b"ana"`, obtendrías su hash SHA1 de **40 caracteres** hexadecimales (160 bits).
-
-## 2. MD5 de una frase
-
-```python
-import hashlib
-print(hashlib.md5("Python es genial".encode()).hexdigest())
-# 1bdf047b34a4890934fc36d12b464f2c
-```
-
-MD5 devuelve **32 caracteres** hexadecimales (128 bits).
-
-## 3. Longitud de los hashes de "Hola mundo"
-
-```python
-import hashlib
-texto = b"Hola mundo"
-print(f"MD5:    {len(hashlib.md5(texto).hexdigest())} chars (128 bits)")
-print(f"SHA1:   {len(hashlib.sha1(texto).hexdigest())} chars (160 bits)")
-print(f"SHA256: {len(hashlib.sha256(texto).hexdigest())} chars (256 bits)")
-```
-
-MD5 → **32**, SHA1 → **40**, SHA256 → **64** caracteres hexadecimales. La longitud es **fija** para cada algoritmo, da igual el tamaño de la entrada.
-
-## 4. Cifrado César sencillo
-
-```python
-def cifrar_cesar(texto, desplazamiento):
-    resultado = ""
-    for caracter in texto:
-        if caracter.isalpha():
-            base = ord('A') if caracter.isupper() else ord('a')
-            resultado += chr((ord(caracter) - base + desplazamiento) % 26 + base)
-        else:
-            resultado += caracter
-    return resultado
-
-print(cifrar_cesar("Hola", 3))  # "Krod"
-```
-
-Cada letra avanza 3 posiciones: **H→K, o→r, l→o, a→d**. Resultado: **Krod**.
-
-## 5. Determinismo del hash
-
-```python
-import hashlib
-h1 = hashlib.sha256(b"clave123").hexdigest()
-h2 = hashlib.sha256(b"clave123").hexdigest()
-print(f"Primera:  {h1}")
-print(f"Segunda:  {h2}")
-print(f"¿Iguales? {h1 == h2}")  # True
-```
-
-Son **iguales**: el hash es **determinista** ([punto 2](/ApuntesPSP/08-seguridad-y-cifrado/02-hash-y-huellas-digitales)). Misma entrada → mismo hash, siempre. Esa propiedad es la que hace posible el login por comparación de hashes del [punto 4](/ApuntesPSP/08-seguridad-y-cifrado/03-contrasenas-seguras).
-
-## 6. Nonce y tag
-
-```python
-from Crypto.Cipher import AES
-from Crypto.Random import get_random_bytes
-
-clave = get_random_bytes(32)
-cifrador = AES.new(clave, AES.MODE_EAX)
-texto_cifrado, tag = cifrador.encrypt_and_digest(b"Hola mundo con AES")
-
-print(f"Longitud nonce: {len(cifrador.nonce)} bytes")
-print(f"Longitud tag:   {len(tag)} bytes")
-print(f"Longitud cifrado: {len(texto_cifrado)} bytes")
-```
-
-En modo EAX el **nonce** mide **16 bytes** y el **tag** también **16 bytes**. Los tres (nonce, tag y cifrado) viajan juntos; la clave no ([punto 2](/ApuntesPSP/08-seguridad-y-cifrado/05-cifrado-simetrico-aes)).
-
-## 7. AES: cifrar y descifrar completo
-
-```python
-from Crypto.Cipher import AES
-from Crypto.Random import get_random_bytes
-
-clave = get_random_bytes(32)
-mensaje = b"El cifrado simetrico es rapido"
-
-cifrador = AES.new(clave, AES.MODE_EAX)
-texto_cifrado, tag = cifrador.encrypt_and_digest(mensaje)
-
-print(f"Nonce: {cifrador.nonce.hex()}")
-print(f"Tag:   {tag.hex()}")
-print(f"Cifrado: {texto_cifrado.hex()}")
-
-descifrador = AES.new(clave, AES.MODE_EAX, nonce=cifrador.nonce)
-original = descifrador.decrypt(texto_cifrado)
-print(f"Original: {original.decode()}")
-```
-
-El nonce y el tag se envían junto al cifrado; el receptor los usa con la misma clave para descifrar y verificar la integridad ([punto 2](/ApuntesPSP/08-seguridad-y-cifrado/05-cifrado-simetrico-aes)).
-
-## 8. Simétrico vs asimétrico
-
-a) El simétrico usa **una sola clave** (misma para cifrar y descifrar). El asimétrico usa **dos**: pública + privada.
-
-b) Con la clave **pública de Bob**. Solo su clave privada puede descifrarlo.
-
-c) Por su **límite de tamaño** (~190 bytes con claves de 2048 bits) y su **velocidad** (~1 MB/s). Para volúmenes grandes se usa AES (o el cifrado híbrido del [punto 6](/ApuntesPSP/08-seguridad-y-cifrado/08-cifrado-hibrido-y-practica)).
+> ⚠️ **Sobre las claves:** por claridad, estas soluciones usan `API_KEY = "TU_API_KEY"` como marcador para centrarse en el parseo de la respuesta. Recuerda la regla de oro de la unidad: en un programa real la clave **nunca va en el código**, se lee de un `.env` con `load_dotenv()` + `os.getenv` (punto 2) y el `.env` va en `.gitignore` (punto 1).
 
 ---
 
-📚 [Volver a la unidad](/ApuntesPSP/08-seguridad-y-cifrado) · Por resolver: [📝 Boletín UD 9 — Inicial](/ApuntesPSP/boletines/boletin-u08-inicial)
+## 1. Humedad actual
+
+```python
+import requests
+API_KEY = "TU_API_KEY"
+params = {"q": "Sevilla", "appid": API_KEY, "units": "metric"}
+resp = requests.get("https://api.openweathermap.org/data/2.5/weather", params=params)
+print(f"Humedad: {resp.json()['main']['humidity']}%")
+```
+
+Necesitas una API key real de OpenWeatherMap (gratuita). Con `units=metric` la temperatura viene en grados.
+
+## 2. Descripción del clima
+
+```python
+import requests
+API_KEY = "TU_API_KEY"
+params = {"q": "Sevilla", "appid": API_KEY, "units": "metric", "lang": "es"}
+datos = requests.get("https://api.openweathermap.org/data/2.5/weather", params=params).json()
+print(datos["weather"][0]["description"])
+```
+
+`weather` es una **lista**: el `[0]` coge la condición principal y `description` es su texto.
+
+## 3. Temperatura mínima y máxima
+
+```python
+import requests
+API_KEY = "TU_API_KEY"
+params = {"q": "Sevilla", "appid": API_KEY, "units": "metric"}
+datos = requests.get("https://api.openweathermap.org/data/2.5/weather", params=params).json()
+print(f"Mínima: {datos['main']['temp_min']}°C")
+print(f"Máxima: {datos['main']['temp_max']}°C")
+```
+
+`main` contiene `temp`, `temp_min`, `temp_max`, `feels_like` y `humidity`.
+
+## 4. Temperatura y sensación térmica
+
+```python
+import requests
+API_KEY = "TU_API_KEY"
+params = {"q": "Madrid", "appid": API_KEY, "units": "metric"}
+datos = requests.get("https://api.openweathermap.org/data/2.5/weather", params=params).json()
+print(f"Temperatura: {datos['main']['temp']}°C")
+print(f"Sensación: {datos['main']['feels_like']}°C")
+```
+
+## 5. Error 401
+
+```python
+import requests
+resp = requests.get("https://api.openweathermap.org/data/2.5/weather",
+                    params={"q": "Sevilla", "appid": "falsa", "units": "metric"})
+print(resp.status_code)  # 401
+```
+
+API key incorrecta → **401 Unauthorized**: el servidor no te reconoce y rechaza la petición.
+
+## 6. ¿Dónde va la API key?
+
+a) En el parámetro **`appid`** de la query string: `?q=Sevilla&appid=TU_API_KEY`.
+b) En la cabecera **`Authorization`** con el esquema **`Bearer`**: `Authorization: Bearer TU_API_KEY`.
+
+## 7. Clave desde el `.env`
+
+```python
+from dotenv import load_dotenv
+import os
+
+load_dotenv()
+print(os.getenv("OPENWEATHER_API_KEY"))  # "test123"
+```
+
+El `.env` debe contener la línea `OPENWEATHER_API_KEY=test123`. `load_dotenv()` carga el archivo y `os.getenv` lee el valor.
+
+## 8. Protege el repo
+
+a) En el `.gitignore`:
+```
+.env
+```
+
+b) `os.getenv("MI_CLAVE")` devuelve **`None`** si la variable no existe. Por eso conviene comprobarlo y lanzar un `raise ValueError` con un mensaje claro.
+
+> Los **4xx** son error del cliente (tu clave, tu URL, tus parámetros): el 401 es el típico cuando la API key es mala.

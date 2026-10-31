@@ -1,46 +1,46 @@
-﻿---
-title: Boletín UD 4 — Inicial
-description: Ejercicios básicos de Sincronización
+---
+title: Boletín UD 3 — Inicial
+description: Ejercicios básicos de Hilos Fundamentos
 ---
 
-# 📝 Boletín UD 4 — Inicial
+# 📝 Boletín UD 3 — Inicial
 
-> Ejercicios básicos para afianzar los conceptos de sincronización: condición de carrera, Lock, RLock, semáforo y barrera.
+> Ejercicios básicos para afianzar los conceptos de hilos de la unidad UD 3: crear, lanzar, esperar, pasar argumentos y nombrar hilos.
 
 ---
 
-## 1. Lock protege una lista
+## 1. Hilo que cuenta
 
-Crea 2 hilos que añadan elementos a una lista compartida. Uno añade "A" 5 veces, el otro "B" 5 veces. Usa un `Lock` para evitar mezclas.
+Crea un hilo que ejecute una función que cuente del 1 al 5 imprimiendo cada número. Lánzalo con `start()` y espera con `join()`.
 
-## 2. RLock básico
+## 2. Múltiples hilos con retardo
 
-Crea una función que adquiera un `RLock` dos veces desde el mismo hilo (llamando a otra función que también lo adquiera). Comprueba que no se produce deadlock.
+Crea 3 hilos que impriman su número (1, 2, 3) y luego duerman 1 segundo con `time.sleep(1)`. Lánzalos todos y espera a que terminen.
 
-## 3. Semáforo con timeout
+## 3. Hilo con argumento
 
-Crea un `Semaphore(2)` y lanza 4 hilos que intenten entrar. Cada hilo espera como máximo 1 segundo con `acquire(timeout=1)`. Los que no consigan entrar deben mostrar "timeout".
+Crea una función que reciba un nombre como argumento e imprima "Hola, {nombre}". Lanza un hilo pasándole el argumento con `args=("Ana",)`.
 
-**Pista:** `acquire(timeout=1)` devuelve `True` si consiguió el recurso y `False` si pasó el segundo. Usa ese `True`/`False` para decidir si el hilo entra o muestra "timeout". Ojo: el trabajo dentro del semáforo (el `sleep`) debe durar **más** que el timeout; si dura exactamente 1 segundo, el margen desaparece y todos entran.
+**Pista:** recuerda la coma final de la tupla: `args=("Ana",)`. Sin la coma, `args="Ana"` no es una tupla: Python itera el string y pasa un argumento por carácter (3 en `'Ana'`), así que la función recibe demasiados argumentos → `TypeError`.
 
-## 4. Carrera sin Lock
+## 4. Hilo que saluda
 
-Crea 2 hilos que incrementen un contador compartido 5000 veces cada uno **sin** usar Lock. Ejecuta el programa varias veces y anota los resultados.
+Crea un hilo que ejecute una función que imprima "Hola desde un hilo". Usa `threading.Thread`, `start()` y `join()`.
 
-**Pista:** para que la condición de carrera sea visible, pasa la suma por una función (`contador = sumar(contador)`) y añade `sys.setswitchinterval(1e-6)` al principio. Así el contador casi nunca será 10000: `contador += 1` no es atómico (leer → sumar → escribir) y el planificador puede cortar entre pasos.
+## 5. Dos hilos en paralelo
 
-## 5. Contador protegido con Lock
+Crea dos funciones `hilo_a()` y `hilo_b()`, cada una con un bucle que imprima su nombre 3 veces. Lanza los dos hilos y observa cómo se entremezclan los mensajes.
 
-Repite el ejercicio 4 pero protege el incremento con `lock = threading.Lock()` y `with lock:`. ¿Qué valor obtienes ahora?
+## 6. Hilo con nombre
 
-## 6. Sección crítica con sleep
+Crea una función que imprima `f"Soy {threading.current_thread().name}"`. Lánzala en un hilo con `name="MiHilo"`.
 
-Crea una variable compartida `total = 0` y 3 hilos que hagan `total += 10` y luego `time.sleep(0.1)` repetido 20 veces. Protege la sección con un `Lock` y comprueba que al final `total` vale 600.
+## 7. Esperando con join()
 
-## 7. Semáforo simple
+Crea un hilo que imprima "Empezando", duerma 3 segundos y termine imprimiendo "Terminado". En el programa principal, después de `start()`, espera con `join()` y luego imprime "El programa terminó". Comprueba el orden de las tres salidas.
 
-Crea un `Semaphore(2)` y lanza 4 hilos que simulen entrar en un recurso (imprime "entra", duerme 1 segundo, imprime "sale"). Comprueba que solo 2 hilos están dentro a la vez.
+## 8. Varios hilos con nombre y argumentos
 
-## 8. Barrera de 3
+Crea 3 hilos en un bucle, cada uno con `name = "hilo-" + str(n)` y que reciba su número como argumento para imprimir `"hilo-N trabajando"`. Lanza todos y espera a todos.
 
-Crea 3 hilos que simulen corredores: cada uno se prepara (duerme un tiempo distinto) y después espera en una `Barrier(3)`. Imprime "🏁 salió" cuando cruzan. Comprueba que los 3 salen a la vez.
+**Pista:** usa una lista por comprensión para crear los 3 hilos y luego dos bucles: `for h in hilos: h.start()` y `for h in hilos: h.join()`.

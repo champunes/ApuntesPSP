@@ -37,15 +37,15 @@ PSP/
 │
 ├── src/content/docs/                     ← 155 archivos de apuntes (MD)
 │   ├── index.md                          ← Landing page con cards y descargas
-│   ├── 01-gestion-de-procesos.md       ← Índice de la unidad (11 unidades)
-│   ├── 01-gestion-de-procesos/         ← 9 capítulos por unidad
+│   ├── 02-gestion-de-procesos.md       ← Índice de la unidad (11 unidades)
+│   ├── 02-gestion-de-procesos/         ← 9 capítulos por unidad
 │   │   ├── 01-*.md … 08-*.md             ← Teoría en progresión
 │   │   └── 09-cierre.md                   ← Cierre práctico de la unidad
 │   ├── boletines/                        ← 44 boletines (4 × 11 unidades)
-│   │   ├── boletin-U00-inicial.md        ← 🟢 Inicial SIN resolver
-│   │   ├── boletin-U00-inicial-resuelto.md ← ✅ Inicial CON solución
-│   │   ├── boletin-U00-avanzado.md       ← 💪 Avanzado SIN resolver
-│   │   └── boletin-U00-avanzado-resuelto.md ← ⭐ Avanzado CON solución
+│   │   ├── boletin-U01-inicial.md        ← 🟢 Inicial SIN resolver
+│   │   ├── boletin-U01-inicial-resuelto.md ← ✅ Inicial CON solución
+│   │   ├── boletin-U01-avanzado.md       ← 💪 Avanzado SIN resolver
+│   │   └── boletin-U01-avanzado-resuelto.md ← ⭐ Avanzado CON solución
 │   └── … hasta unidad 11
 │
 ├── src/styles/custom.css                 ← CSS premium (gradientes, cards, animaciones)

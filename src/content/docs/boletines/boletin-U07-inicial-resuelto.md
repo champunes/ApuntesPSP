@@ -1,97 +1,89 @@
 ﻿---
-title: Boletín UD 8 — Inicial (Resuelto)
-description: Soluciones de los ejercicios básicos de APIs Comerciales
+title: Boletín UD 7 — Inicial (Resuelto)
+description: Soluciones de los ejercicios básicos de APIs REST y HTTP
 ---
 
-# ✅ Boletín UD 8 — Inicial (Resuelto)
-
-> ⚠️ **Sobre las claves:** por claridad, estas soluciones usan `API_KEY = "TU_API_KEY"` como marcador para centrarse en el parseo de la respuesta. Recuerda la regla de oro de la unidad: en un programa real la clave **nunca va en el código**, se lee de un `.env` con `load_dotenv()` + `os.getenv` (punto 2) y el `.env` va en `.gitignore` (punto 1).
+# ✅ Boletín UD 7 — Inicial (Resuelto)
 
 ---
 
-## 1. Humedad actual
+## 1. GET a JSONPlaceholder
 
 ```python
 import requests
-API_KEY = "TU_API_KEY"
-params = {"q": "Sevilla", "appid": API_KEY, "units": "metric"}
-resp = requests.get("https://api.openweathermap.org/data/2.5/weather", params=params)
-print(f"Humedad: {resp.json()['main']['humidity']}%")
+resp = requests.get("https://jsonplaceholder.typicode.com/posts/1")
+print(resp.status_code)  # 200
 ```
 
-Necesitas una API key real de OpenWeatherMap (gratuita). Con `units=metric` la temperatura viene en grados.
+`requests.get` no lanza excepción ante errores: el código de estado te lo dice `resp.status_code`.
 
-## 2. Descripción del clima
+## 2. Título del post
 
 ```python
 import requests
-API_KEY = "TU_API_KEY"
-params = {"q": "Sevilla", "appid": API_KEY, "units": "metric", "lang": "es"}
-datos = requests.get("https://api.openweathermap.org/data/2.5/weather", params=params).json()
-print(datos["weather"][0]["description"])
+resp = requests.get("https://jsonplaceholder.typicode.com/posts/1")
+print(resp.json()["title"])
 ```
 
-`weather` es una **lista**: el `[0]` coge la condición principal y `description` es su texto.
+`resp.json()` convierte el cuerpo JSON a un **dict** de Python, y con `["title"]` accedes al campo.
 
-## 3. Temperatura mínima y máxima
+## 3. Contar usuarios
 
 ```python
 import requests
-API_KEY = "TU_API_KEY"
-params = {"q": "Sevilla", "appid": API_KEY, "units": "metric"}
-datos = requests.get("https://api.openweathermap.org/data/2.5/weather", params=params).json()
-print(f"Mínima: {datos['main']['temp_min']}°C")
-print(f"Máxima: {datos['main']['temp_max']}°C")
+resp = requests.get("https://jsonplaceholder.typicode.com/users")
+usuarios = resp.json()
+print(f"Hay {len(usuarios)} usuarios")  # 10
 ```
 
-`main` contiene `temp`, `temp_min`, `temp_max`, `feels_like` y `humidity`.
+Cuando la respuesta es una lista de recursos, `resp.json()` devuelve una **lista** de diccionarios y `len()` cuenta los elementos.
 
-## 4. Temperatura y sensación térmica
+## 4. GET a GitHub
 
 ```python
 import requests
-API_KEY = "TU_API_KEY"
-params = {"q": "Madrid", "appid": API_KEY, "units": "metric"}
-datos = requests.get("https://api.openweathermap.org/data/2.5/weather", params=params).json()
-print(f"Temperatura: {datos['main']['temp']}°C")
-print(f"Sensación: {datos['main']['feels_like']}°C")
+resp = requests.get("https://api.github.com/users/python")
+print(resp.status_code)  # 200
 ```
 
-## 5. Error 401
+## 5. Mostrar JSON
 
 ```python
 import requests
-resp = requests.get("https://api.openweathermap.org/data/2.5/weather",
-                    params={"q": "Sevilla", "appid": "falsa", "units": "metric"})
-print(resp.status_code)  # 401
+resp = requests.get("https://api.github.com/users/python")
+print(resp.json())
 ```
 
-API key incorrecta → **401 Unauthorized**: el servidor no te reconoce y rechaza la petición.
+`resp.json()` convierte el JSON a diccionario Python.
 
-## 6. ¿Dónde va la API key?
-
-a) En el parámetro **`appid`** de la query string: `?q=Sevilla&appid=TU_API_KEY`.
-b) En la cabecera **`Authorization`** con el esquema **`Bearer`**: `Authorization: Bearer TU_API_KEY`.
-
-## 7. Clave desde el `.env`
+## 6. Nombre real
 
 ```python
-from dotenv import load_dotenv
-import os
-
-load_dotenv()
-print(os.getenv("OPENWEATHER_API_KEY"))  # "test123"
+import requests
+datos = requests.get("https://api.github.com/users/python").json()
+print(datos["name"])  # "Python"
 ```
 
-El `.env` debe contener la línea `OPENWEATHER_API_KEY=test123`. `load_dotenv()` carga el archivo y `os.getenv` lee el valor.
+Encadenas `requests.get(...).json()` para ir directo al dict, y con `datos["name"]` sacas el nombre real.
 
-## 8. Protege el repo
+## 7. Métodos HTTP
 
-a) En el `.gitignore`:
-```
-.env
-```
+| Método | Operación CRUD | Uso |
+|---|---|---|
+| GET | **Read** | Obtener datos (sin cuerpo) |
+| POST | **Create** | Crear recurso (con cuerpo) |
+| PUT | **Update** | Reemplazar el recurso completo |
+| PATCH | **Update** | Actualizar solo una parte |
+| DELETE | **Delete** | Borrar el recurso |
 
-b) `os.getenv("MI_CLAVE")` devuelve **`None`** si la variable no existe. Por eso conviene comprobarlo y lanzar un `raise ValueError` con un mensaje claro.
+## 8. Códigos de estado
 
-> Los **4xx** son error del cliente (tu clave, tu URL, tus parámetros): el 401 es el típico cuando la API key es mala.
+a) 200 → **OK** (GET exitoso)
+b) 201 → **Created** (POST exitoso, recurso creado)
+c) 204 → **No Content** (DELETE exitoso)
+d) 400 → **Bad Request** (enviaste datos incorrectos)
+e) 401 → **Unauthorized** (falta autenticación)
+f) 404 → **Not Found** (el recurso no existe)
+g) 500 → **Internal Server Error** (error del servidor)
+
+> Los **2xx** son éxito, los **4xx** son error del cliente (tuyo) y los **5xx** son error del servidor.

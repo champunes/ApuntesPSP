@@ -1,134 +1,134 @@
 ﻿---
-title: Boletín UD 6 — Inicial (Resuelto)
-description: Soluciones de los ejercicios básicos de Servidores concurrentes
+title: Boletín UD 5 — Inicial (Resuelto)
+description: Soluciones de los ejercicios básicos de Sockets TCP y UDP
 ---
 
-# ✅ Boletín UD 6 — Inicial (Resuelto)
+# ✅ Boletín UD 5 — Inicial (Resuelto)
 
 ---
 
-## 1. Servidor eco básico
+## 1. Servidor saludo
+
+```python
+import socket
+with socket.socket(socket.AF_INET, socket.SOCK_STREAM) as srv:
+    srv.bind(("127.0.0.1", 9000))
+    srv.listen()
+    conn, addr = srv.accept()
+    with conn:
+        conn.sendall(b"Bienvenido al servidor")
+```
+
+`accept()` espera un cliente (bloqueante). Al salir del `with`, la conexión se cierra solo.
+
+## 2. Cliente que envía y recibe
+
+```python
+import socket
+with socket.socket(socket.AF_INET, socket.SOCK_STREAM) as cli:
+    cli.connect(("127.0.0.1", 9000))
+    cli.sendall(b"Hola")
+    respuesta = cli.recv(1024)
+    print(f"Respuesta: {respuesta.decode()}")
+```
+
+`connect()` lanza `ConnectionRefusedError` si no hay servidor.
+
+## 3. Servidor eco
 
 ```python
 import socket
 with socket.socket() as srv:
     srv.setsockopt(socket.SOL_SOCKET, socket.SO_REUSEADDR, 1)
-    srv.bind(("127.0.0.1", 5000))
+    srv.bind(("127.0.0.1", 9000))
     srv.listen()
     conn, addr = srv.accept()
     with conn:
         datos = conn.recv(1024)
-        conn.sendall(datos)  # eco: devuelve exactamente lo recibido
+        conn.sendall(datos)  # Eco
 ```
 
-Solo atiende **UN cliente** y termina. `with conn:` cierra el socket al salir.
+Devuelve exactamente lo mismo que recibe.
 
-## 2. Servidor eco con bucle
+## 4. IP y puerto
+
+a) La **IP** identifica la **máquina** en la red; el **puerto** identifica el **programa** dentro de esa máquina.
+
+b) **`127.0.0.1`** es **localhost**: tu propia máquina. Se usa para probar sin red real.
+
+c) **TCP** → `socket.SOCK_STREAM`; **UDP** → `socket.SOCK_DGRAM`. Ambos con familia `AF_INET`.
+
+## 5. Cliente UDP con entrada de usuario
 
 ```python
 import socket
-with socket.socket() as srv:
-    srv.setsockopt(socket.SOL_SOCKET, socket.SO_REUSEADDR, 1)
-    srv.bind(("127.0.0.1", 5000))
-    srv.listen()
+
+HOST = "127.0.0.1"
+PORT = 9001
+
+mensaje = input("Escribe tu mensaje: ")
+with socket.socket(socket.AF_INET, socket.SOCK_DGRAM) as cliente:
+    cliente.sendto(mensaje.encode(), (HOST, PORT))
+    datos, _ = cliente.recvfrom(1024)
+    print(f"Respuesta: {datos.decode()}")
+```
+
+El cliente UDP no tiene `connect()`: la dirección va dentro del `sendto()`, y la respuesta llega con `recvfrom()`.
+
+## 6. Servidor UDP con eco personalizado
+
+```python
+import socket
+
+with socket.socket(socket.AF_INET, socket.SOCK_DGRAM) as srv:
+    srv.bind(("127.0.0.1", 9001))
+    datos, direccion = srv.recvfrom(1024)
+    print(f"Recibido de {direccion}: {datos.decode()}")
+    srv.sendto(f"Recibido: {datos.decode()}".encode(), direccion)
+```
+
+Se responde con la **dirección** que devuelve `recvfrom()`: sin ella no hay forma de contestar en UDP.
+
+## 7. TCP vs UDP: clasifica
+
+a) **TCP:** Web (HTTP), Correo (SMTP), Transferencia de archivos (FTP) → el dato debe llegar **completo y en orden**. **UDP:** Videollamada (Zoom), Juego online (Fortnite), DNS → la **velocidad** importa más; perder un paquete se tolera o se repite.
+
+b)
+
+| Característica | TCP | UDP |
+|---|---|---|
+| Conexión | **Sí (handshake)** | **No** |
+| Entrega garantizada | **Sí** | **No** |
+| Orden | **Sí** | **No** |
+| Velocidad | **Más lento** | **Más rápido** |
+
+## 8. Cliente HTTP manual
+
+```python
+import socket
+
+with socket.socket(socket.AF_INET, socket.SOCK_STREAM) as s:
+    s.connect(("www.example.com", 80))
+    peticion = (
+        "GET / HTTP/1.1\r\n"
+        "Host: www.example.com\r\n"
+        "Connection: close\r\n"
+        "\r\n"
+    )
+    s.sendall(peticion.encode())
+
+    respuesta = b""
     while True:
-        conn, addr = srv.accept()
-        with conn:
-            datos = conn.recv(1024)
-            conn.sendall(datos)  # eco
+        datos = s.recv(4096)
+        if not datos:
+            break
+        respuesta += datos
+
+print(respuesta.decode()[:500])
 ```
 
-Clientes uno tras otro. Si uno tarda, los demás esperan: es el servidor secuencial del [punto 1](/ApuntesPSP/05-servidores-concurrentes/01-servidor-secuencial).
+HTTP es texto sobre TCP: mandas una petición con `sendall()` y recibes la respuesta en trozos hasta que `recv()` devuelve `b""` (el servidor cerró la conexión gracias a `Connection: close`).
 
-## 3. Cliente eco
+---
 
-```python
-import socket
-with socket.socket() as s:
-    s.connect(("127.0.0.1", 5000))
-    s.sendall(b"Hola eco")
-    print(s.recv(1024).decode())
-```
-
-Se conecta, envía `b"Hola eco"` y muestra la respuesta del servidor (el mismo mensaje, de vuelta).
-
-## 4. Servidor secuencial
-
-```python
-import socket
-with socket.socket() as srv:
-    srv.setsockopt(socket.SOL_SOCKET, socket.SO_REUSEADDR, 1)
-    srv.bind(("127.0.0.1", 5000))
-    srv.listen()
-    conn, addr = srv.accept()
-    with conn:
-        datos = conn.recv(1024)
-        conn.sendall(b"OK")
-```
-
-Solo atiende UN cliente y termina: `accept()` una vez, responde `b"OK"` y cierra.
-
-## 5. Servidor multihilo
-
-```python
-import socket, threading
-def atender(conn, addr):
-    with conn:
-        conn.recv(1024)
-        conn.sendall(b"OK")
-with socket.socket() as srv:
-    srv.setsockopt(socket.SOL_SOCKET, socket.SO_REUSEADDR, 1)
-    srv.bind(("127.0.0.1", 5000))
-    srv.listen()
-    while True:
-        conn, addr = srv.accept()
-        threading.Thread(target=atender, args=(conn, addr)).start()
-```
-
-Cada cliente en su propio hilo. Todos se atienden en paralelo ([punto 3](/ApuntesPSP/05-servidores-concurrentes/03-hilo-por-cliente)).
-
-## 6. Cliente con respuesta
-
-```python
-import socket
-with socket.socket() as s:
-    s.connect(("127.0.0.1", 5000))
-    s.sendall(b"Hola")
-    print(s.recv(1024).decode())
-```
-
-Muestra por pantalla la respuesta del servidor. Con el servidor multihilo del ejercicio 5, recibiría `OK`.
-
-## 7. Servidor con ThreadPoolExecutor
-
-```python
-import socket, concurrent.futures
-def atender(conn, addr):
-    with conn:
-        conn.recv(1024)
-        conn.sendall(b"OK")
-with socket.socket() as srv, concurrent.futures.ThreadPoolExecutor(3) as pool:
-    srv.bind(("127.0.0.1", 5000))
-    srv.listen()
-    while True:
-        conn, addr = srv.accept()
-        pool.submit(atender, conn, addr)
-```
-
-Máximo **3 hilos**. Los clientes adicionales esperan en cola ([punto 4](/ApuntesPSP/05-servidores-concurrentes/04-threadpoolexecutor)).
-
-## 8. Lanzador de 5 clientes
-
-```python
-import socket, threading
-def cliente(id):
-    with socket.socket() as s:
-        s.connect(("127.0.0.1", 5000))
-        s.sendall(f"Soy {id}".encode())
-        print(s.recv(1024).decode())
-hilos = [threading.Thread(target=cliente, args=(i,)) for i in range(5)]
-for h in hilos: h.start()
-for h in hilos: h.join()
-```
-
-Lanza **5 clientes a la vez** contra el servidor. El `join()` espera a que terminen todos antes de acabar el script.
+📚 [Volver a la unidad](/ApuntesPSP/05-sockets-tcp-y-udp) · Por resolver: [📝 Boletín UD 5 — Inicial](/ApuntesPSP/boletines/boletin-u05-inicial)

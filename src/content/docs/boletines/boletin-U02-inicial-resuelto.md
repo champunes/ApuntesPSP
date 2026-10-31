@@ -1,155 +1,99 @@
 ﻿---
-title: Boletín UD 3 — Inicial (Resuelto)
-description: Soluciones de los ejercicios básicos de Hilos Fundamentos
+title: Boletín UD 2 — Inicial (Resuelto)
+description: Soluciones de los ejercicios básicos de Gestión de procesos
 ---
 
-# ✅ Boletín UD 3 — Inicial (Resuelto)
+# ✅ Boletín UD 2 — Inicial (Resuelto)
 
 ---
 
-## 1. Hilo que cuenta
+## 1. Listar el directorio actual
 
 ```python
-import threading
+import subprocess
 
-def contar():
-    for i in range(1, 6):
-        print(i)
-
-h = threading.Thread(target=contar)
-h.start()
-h.join()
+resultado = subprocess.run(["dir"], capture_output=True, text=True, shell=True)
+print(resultado.stdout)
 ```
 
-Salida: `1 2 3 4 5`. La función cuenta del 1 al 5, se lanza con `start()` y se espera con `join()`.
+En Linux: `subprocess.run(["ls"])`. En Windows, `dir` es un comando interno del shell, por eso `shell=True` ([punto 7](/ApuntesPSP/02-gestion-de-procesos/07-compatibilidad-windows-linux)).
 
-## 2. Múltiples hilos con retardo
+## 2. Saber el nombre del equipo
 
 ```python
-import threading, time
+import subprocess
 
-def numero(n):
-    print(f"Hilo {n} empieza")
-    time.sleep(1)
-    print(f"Hilo {n} termina")
-
-hilos = [threading.Thread(target=numero, args=(i,)) for i in range(1, 4)]
-for h in hilos:
-    h.start()
-for h in hilos:
-    h.join()
+resultado = subprocess.run(["hostname"], capture_output=True, text=True)
+print(f"El nombre del equipo es {resultado.stdout.strip()}")
 ```
 
-Los tres hilos se lanzan a la vez y duermen su segundo **en paralelo**: todo el lote acaba en ~1 segundo, no en 3. Los mensajes se entremezclan sin orden garantizado.
+`capture_output=True` captura la salida de `hostname` y `text=True` la devuelve como string.
 
-## 3. Hilo con argumento
+## 3. Abrir la calculadora
 
 ```python
-import threading
+import subprocess, time
 
-def saludar(nombre):
-    print(f"Hola, {nombre}")
-
-h = threading.Thread(target=saludar, args=("Ana",))
-h.start()
-h.join()
+calc = subprocess.Popen(["calc.exe"])
+print(f"Calculadora lanzada con PID {calc.pid}")
+time.sleep(2)
+calc.terminate()
+print("Calculadora cerrada")
 ```
 
-Salida: `Hola, Ana`. La coma final de `("Ana",)` convierte el valor en una tupla de un elemento, que es lo que espera `args=`.
+`Popen` no espera: el programa muestra el PID, espera 2 segundos y cierra con `terminate()`.
 
-## 4. Hilo que saluda
+## 4. Mi primer PID
 
 ```python
-import threading
+import os
 
-def saludar():
-    print("Hola desde un hilo")
-
-h = threading.Thread(target=saludar)
-h.start()
-h.join()
+print(f"Mi PID es {os.getpid()}")
 ```
 
-Nunca olvides `start()` para lanzar y `join()` para esperar.
+`os.getpid()` devuelve el identificador único del proceso actual: el **PID** ([punto 1](/ApuntesPSP/02-gestion-de-procesos/01-que-es-un-proceso)).
 
-## 5. Dos hilos en paralelo
+## 5. Versión de Python
 
 ```python
-import threading
+import subprocess
 
-def hilo_a():
-    for _ in range(3):
-        print("Hilo A")
-
-def hilo_b():
-    for _ in range(3):
-        print("Hilo B")
-
-h1 = threading.Thread(target=hilo_a)
-h2 = threading.Thread(target=hilo_b)
-h1.start()
-h2.start()
-h1.join()
-h2.join()
+resultado = subprocess.run(["python", "--version"], capture_output=True, text=True)
+print(resultado.stdout.strip())
 ```
 
-Los prints se entremezclarán. El orden no está garantizado.
+`capture_output=True` captura la salida. `text=True` la devuelve como string. `.strip()` elimina el salto de línea final.
 
-## 6. Hilo con nombre
+## 6. Abrir el bloc de notas y esperar
 
 ```python
-import threading
+import subprocess, time
 
-def mostrar():
-    print(f"Soy {threading.current_thread().name}")
-
-h = threading.Thread(target=mostrar, name="MiHilo")
-h.start()
-h.join()
+notepad = subprocess.Popen(["notepad.exe"])
+print(f"PID: {notepad.pid}")
+time.sleep(3)
+notepad.terminate()
 ```
 
-`current_thread().name` funciona desde dentro del hilo.
+`Popen` no espera. `terminate()` envía señal de cierre.
 
-## 7. Esperando con join()
+## 7. Ordena el ciclo de vida
+
+**NUEVO → LISTO → EJECUCIÓN → BLOQUEADO → TERMINADO**
+
+El orden correcto: el proceso **nace** (NUEVO), espera su turno de CPU (**LISTO**), la CPU lo ejecuta (**EJECUCIÓN**), puede quedarse esperando un recurso (**BLOQUEADO**) y finalmente **termina**. Repasa el [punto 2](/ApuntesPSP/02-gestion-de-procesos/02-estados-de-un-proceso).
+
+## 8. Ping con timeout
 
 ```python
-import threading, time
+import subprocess
 
-def tarea():
-    print("Empezando")
-    time.sleep(3)
-    print("Terminado")
-
-h = threading.Thread(target=tarea)
-h.start()
-h.join()
-print("El programa terminó")
+try:
+    resultado = subprocess.run(["ping", "8.8.8.8", "-n", "3"],
+                               capture_output=True, text=True, timeout=3)
+    print(resultado.stdout)
+except subprocess.TimeoutExpired:
+    print("El ping tardó demasiado")
 ```
 
-Salida:
-```
-Empezando
-Terminado
-El programa terminó
-```
-
-Sin `join()`, el "El programa terminó" podría salir antes que "Terminado" (o incluso antes que "Empezando", según el scheduler). Con `join()`, el orden es garantizado.
-
-## 8. Varios hilos con nombre y argumentos
-
-```python
-import threading
-
-def trabajar(n):
-    print(f"hilo-{n} trabajando")
-
-hilos = [threading.Thread(target=trabajar, args=(n,), name="hilo-" + str(n))
-         for n in range(1, 4)]
-
-for h in hilos:
-    h.start()
-for h in hilos:
-    h.join()
-```
-
-Cada hilo lleva su nombre (`hilo-1`, `hilo-2`, `hilo-3`) y recibe su número como argumento. Los mensajes se entremezclan, pero el orden de lanzamiento y espera es correcto gracias a los dos bucles.
+En Linux usa `["ping", "-c", "3", "8.8.8.8"]`. `timeout` lanza `TimeoutExpired` si excede.

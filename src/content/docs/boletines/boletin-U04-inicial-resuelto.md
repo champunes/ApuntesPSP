@@ -1,134 +1,187 @@
 ﻿---
-title: Boletín UD 5 — Inicial (Resuelto)
-description: Soluciones de los ejercicios básicos de Sockets TCP y UDP
+title: Boletín UD 4 — Inicial (Resuelto)
+description: Soluciones de los ejercicios básicos de Sincronización
 ---
 
-# ✅ Boletín UD 5 — Inicial (Resuelto)
-
----
-
-## 1. Servidor saludo
-
-```python
-import socket
-with socket.socket(socket.AF_INET, socket.SOCK_STREAM) as srv:
-    srv.bind(("127.0.0.1", 9000))
-    srv.listen()
-    conn, addr = srv.accept()
-    with conn:
-        conn.sendall(b"Bienvenido al servidor")
-```
-
-`accept()` espera un cliente (bloqueante). Al salir del `with`, la conexión se cierra solo.
-
-## 2. Cliente que envía y recibe
-
-```python
-import socket
-with socket.socket(socket.AF_INET, socket.SOCK_STREAM) as cli:
-    cli.connect(("127.0.0.1", 9000))
-    cli.sendall(b"Hola")
-    respuesta = cli.recv(1024)
-    print(f"Respuesta: {respuesta.decode()}")
-```
-
-`connect()` lanza `ConnectionRefusedError` si no hay servidor.
-
-## 3. Servidor eco
-
-```python
-import socket
-with socket.socket() as srv:
-    srv.setsockopt(socket.SOL_SOCKET, socket.SO_REUSEADDR, 1)
-    srv.bind(("127.0.0.1", 9000))
-    srv.listen()
-    conn, addr = srv.accept()
-    with conn:
-        datos = conn.recv(1024)
-        conn.sendall(datos)  # Eco
-```
-
-Devuelve exactamente lo mismo que recibe.
-
-## 4. IP y puerto
-
-a) La **IP** identifica la **máquina** en la red; el **puerto** identifica el **programa** dentro de esa máquina.
-
-b) **`127.0.0.1`** es **localhost**: tu propia máquina. Se usa para probar sin red real.
-
-c) **TCP** → `socket.SOCK_STREAM`; **UDP** → `socket.SOCK_DGRAM`. Ambos con familia `AF_INET`.
-
-## 5. Cliente UDP con entrada de usuario
-
-```python
-import socket
-
-HOST = "127.0.0.1"
-PORT = 9001
-
-mensaje = input("Escribe tu mensaje: ")
-with socket.socket(socket.AF_INET, socket.SOCK_DGRAM) as cliente:
-    cliente.sendto(mensaje.encode(), (HOST, PORT))
-    datos, _ = cliente.recvfrom(1024)
-    print(f"Respuesta: {datos.decode()}")
-```
-
-El cliente UDP no tiene `connect()`: la dirección va dentro del `sendto()`, y la respuesta llega con `recvfrom()`.
-
-## 6. Servidor UDP con eco personalizado
-
-```python
-import socket
-
-with socket.socket(socket.AF_INET, socket.SOCK_DGRAM) as srv:
-    srv.bind(("127.0.0.1", 9001))
-    datos, direccion = srv.recvfrom(1024)
-    print(f"Recibido de {direccion}: {datos.decode()}")
-    srv.sendto(f"Recibido: {datos.decode()}".encode(), direccion)
-```
-
-Se responde con la **dirección** que devuelve `recvfrom()`: sin ella no hay forma de contestar en UDP.
-
-## 7. TCP vs UDP: clasifica
-
-a) **TCP:** Web (HTTP), Correo (SMTP), Transferencia de archivos (FTP) → el dato debe llegar **completo y en orden**. **UDP:** Videollamada (Zoom), Juego online (Fortnite), DNS → la **velocidad** importa más; perder un paquete se tolera o se repite.
-
-b)
-
-| Característica | TCP | UDP |
-|---|---|---|
-| Conexión | **Sí (handshake)** | **No** |
-| Entrega garantizada | **Sí** | **No** |
-| Orden | **Sí** | **No** |
-| Velocidad | **Más lento** | **Más rápido** |
-
-## 8. Cliente HTTP manual
-
-```python
-import socket
-
-with socket.socket(socket.AF_INET, socket.SOCK_STREAM) as s:
-    s.connect(("www.example.com", 80))
-    peticion = (
-        "GET / HTTP/1.1\r\n"
-        "Host: www.example.com\r\n"
-        "Connection: close\r\n"
-        "\r\n"
-    )
-    s.sendall(peticion.encode())
-
-    respuesta = b""
-    while True:
-        datos = s.recv(4096)
-        if not datos:
-            break
-        respuesta += datos
-
-print(respuesta.decode()[:500])
-```
-
-HTTP es texto sobre TCP: mandas una petición con `sendall()` y recibes la respuesta en trozos hasta que `recv()` devuelve `b""` (el servidor cerró la conexión gracias a `Connection: close`).
+# ✅ Boletín UD 4 — Inicial (Resuelto)
 
 ---
 
-📚 [Volver a la unidad](/ApuntesPSP/04-sockets-tcp-y-udp) · Por resolver: [📝 Boletín UD 5 — Inicial](/ApuntesPSP/boletines/boletin-u04-inicial)
+## 1. Lock protege una lista
+
+```python
+import threading
+
+lista = []
+lock = threading.Lock()
+
+def añadir(letra):
+    global lista
+    for _ in range(5):
+        with lock:
+            lista.append(letra)
+
+h1 = threading.Thread(target=añadir, args=("A",))
+h2 = threading.Thread(target=añadir, args=("B",))
+h1.start()
+h2.start()
+h1.join()
+h2.join()
+
+print(lista)
+```
+
+Sin el `Lock`, los `append` se mezclarían (por ejemplo, `AABABB...`). Con `with lock:`, cada añadido es atómico y al final hay **5 A y 5 B** sin mezclas.
+
+## 2. RLock básico
+
+```python
+import threading
+
+rlock = threading.RLock()
+
+def función_interna():
+    with rlock:
+        print("🔹 Función interna: lock adquirido")
+
+def función_externa():
+    with rlock:
+        print("🔸 Función externa: lock adquirido")
+        función_interna()   # mismo hilo → RLock lo permite
+
+función_externa()
+```
+
+`función_interna` adquiere el mismo `RLock` que `función_externa` ya tiene puesto. Con un `Lock` normal sería un **deadlock** (el hilo se espera a sí mismo); con `RLock` no hay problema ([punto 3](/ApuntesPSP/04-sincronizacion/03-rlock)).
+
+## 3. Semáforo con timeout
+
+```python
+import threading, time
+
+semaforo = threading.Semaphore(2)
+
+def entrar(id):
+    if semaforo.acquire(timeout=1):
+        print(f"Hilo-{id}: DENTRO")
+        time.sleep(2)   # ocupa el semáforo más tiempo que el timeout
+        semaforo.release()
+    else:
+        print(f"Hilo-{id}: timeout")
+
+hilos = [threading.Thread(target=entrar, args=(i,)) for i in range(4)]
+for h in hilos: h.start()
+for h in hilos: h.join()
+```
+
+Solo 2 hilos entran a la vez; los que no consiguen entrar en 1 segundo muestran **"timeout"** y se van en lugar de esperar eternamente ([punto 4](/ApuntesPSP/04-sincronizacion/04-semaphore)).
+
+## 4. Carrera sin Lock
+
+```python
+import threading, sys
+
+contador = 0
+sys.setswitchinterval(1e-6)   # fuerza cambios de hilo frecuentes
+
+def sumar(c):
+    return c + 1
+
+def inc():
+    global contador
+    for _ in range(5000):
+        contador = sumar(contador)   # leer-sumar-escribir vía función
+
+hilos = [threading.Thread(target=inc) for _ in range(2)]
+for h in hilos:
+    h.start()
+for h in hilos:
+    h.join()
+print(contador)  # ❌ Casi nunca será 10000
+```
+
+Sin Lock, hay condición de carrera. El valor casi siempre será **< 10000** y variará en cada ejecución ([punto 1](/ApuntesPSP/04-sincronizacion/01-condicion-de-carrera)). En Python 3.13+ el `+=` en una línea casi nunca se interrumpe; pasando la suma por una función y forzando el cambio de hilo con `setswitchinterval`, la carrera se vuelve visible.
+
+## 5. Contador protegido con Lock
+
+```python
+import threading
+contador = 0
+lock = threading.Lock()
+def inc():
+    global contador
+    for _ in range(1000):
+        with lock:
+            contador += 1
+hilos = [threading.Thread(target=inc) for _ in range(2)]
+for h in hilos:
+    h.start()
+for h in hilos:
+    h.join()
+print(contador)  # ✅ 2000
+```
+
+`with lock:` garantiza exclusión mutua: el "leer → sumar → escribir" ocurre de principio a fin sin que se cuele el otro hilo ([punto 2](/ApuntesPSP/04-sincronizacion/02-lock)).
+
+## 6. Sección crítica con sleep
+
+```python
+import threading, time
+
+total = 0
+lock = threading.Lock()
+
+def trabajar():
+    global total
+    for _ in range(20):
+        with lock:
+            total += 10
+        time.sleep(0.1)
+
+hilos = [threading.Thread(target=trabajar) for _ in range(3)]
+for h in hilos: h.start()
+for h in hilos: h.join()
+
+print(f"Total: {total}")  # ✅ 600 (3 hilos × 20 × 10)
+```
+
+El `Lock` protege la sección crítica (`total += 10`); el `sleep` ocurre fuera para no bloquear a los demás.
+
+## 7. Semáforo simple
+
+```python
+import threading, time
+s = threading.Semaphore(2)
+def entrar(id):
+    print(f"{id} espera")
+    with s:
+        print(f"  → {id} dentro")
+        time.sleep(1)
+    print(f"  ← {id} sale")
+hilos = [threading.Thread(target=entrar, args=(i,)) for i in range(4)]
+for h in hilos:
+    h.start()
+for h in hilos:
+    h.join()
+```
+
+Solo 2 hilos entran a la vez. Los demás esperan hasta que un puesto se libera ([punto 4](/ApuntesPSP/04-sincronizacion/04-semaphore)).
+
+## 8. Barrera de 3
+
+```python
+import threading, time
+b = threading.Barrier(3)
+def corredor(id):
+    time.sleep(id)
+    print(f"  {id} preparado")
+    b.wait()
+    print(f"🏁 {id} salió")
+hilos = [threading.Thread(target=corredor, args=(i,)) for i in range(3)]
+for h in hilos:
+    h.start()
+for h in hilos:
+    h.join()
+```
+
+Todos imprimen "preparado" antes de que nadie "salga": la barrera no deja cruzar hasta que los 3 han llegado ([punto 5](/ApuntesPSP/04-sincronizacion/05-barrier)).

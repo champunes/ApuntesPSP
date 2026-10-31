@@ -1,48 +1,91 @@
 ---
-title: Boletín UD 2 — Inicial
-description: Ejercicios básicos de Gestión de procesos
+title: Boletín UD 1 — Inicial
+description: Ejercicios básicos de Python 3
 ---
 
-# 📝 Boletín UD 2 — Inicial
+# 📝 Boletín UD 1 — Inicial
 
-> Ejercicios básicos para afianzar los conceptos de procesos, `subprocess.run`, `subprocess.Popen` y estados de la unidad UD 2.
+> Ejercicios básicos para afianzar los conceptos de comentarios, tipos de datos, variables, colecciones, control de flujo, funciones y clases de la unidad UD 1.
 
 ---
 
-## 1. Listar el directorio actual
+## 1. Hola mundo con f-string
 
-Crea un programa que use `subprocess.run` para ejecutar el comando `dir` (Windows) o `ls` (Linux) y muestre la salida completa por pantalla.
+Crea un programa que pida tu nombre con `input()` y salude usando un f-string:
 
-## 2. Saber el nombre del equipo
+```
+¿Cómo te llamas? Ana
+Hola, Ana. ¡Bienvenido a Python!
+```
 
-Usa `subprocess.run` con el comando `hostname` para capturar y mostrar el nombre de tu máquina.
+## 2. Calculadora básica
 
-## 3. Abrir la calculadora
+Crea un programa que pida dos números y muestre su suma, resta, multiplicación y división. Muestra el resultado de cada operación con un f-string.
 
-Usa `subprocess.Popen` para abrir la calculadora (`calc.exe`). El programa debe mostrar el PID, esperar 2 segundos y cerrarla con `terminate()`.
+**Pista:** usa `float(input("Dame un número: "))` para que acepte decimales.
 
-## 4. Mi primer PID
+## 3. Par o impar
 
-Crea un programa que imprima su propio PID con `os.getpid()`.
+Pide un número entero al usuario y dice si es par o impar usando el operador `%`.
 
-## 5. Versión de Python
+```
+Dame un número: 7
+7 es impar
+```
 
-Usa `subprocess.run` para ejecutar `python --version` con `capture_output=True` y `text=True`, y muestra la salida limpia (sin saltos de línea).
+## 4. Tabla de multiplicar
 
-**Pista:** `resultado.stdout.strip()` te deja la salida limpia.
+Pide un número y muestra su tabla de multiplicar del 1 al 10.
 
-## 6. Abrir el bloc de notas y esperar
+```
+Dame un número: 5
+5 x 1 = 5
+5 x 2 = 10
+...
+5 x 10 = 50
+```
 
-Usa `subprocess.Popen` para abrir `notepad.exe`, muestra su PID, espera 3 segundos y ciérralo con `terminate()`.
+**Pista:** usa un bucle `for` con `range(1, 11)`.
 
-## 7. Ordena el ciclo de vida
+## 5. Invertir una cadena
 
-Ordena los siguientes estados de un proceso en el orden correcto de su ciclo de vida: `EJECUCIÓN`, `NUEVO`, `TERMINADO`, `BLOQUEADO`, `LISTO`.
+Crea un programa que pida una cadena de texto y la muestre al revés.
 
-**Pista:** el proceso nace, luego espera su turno de CPU, se ejecuta, puede quedarse esperando un recurso y finalmente muere. Repasa el [punto 2](/ApuntesPSP/01-gestion-de-procesos/02-estados-de-un-proceso).
+```
+Dame una cadena: hola
+La cadena invertida es: aloh
+```
 
-## 8. Ping con timeout
+**Pista:** en Python, `"cadena"[::-1]` invierte una cadena.
 
-Lanza `ping 8.8.8.8 -n 3` (Windows) o `ping -c 3 8.8.8.8` (Linux) con `timeout=3` y captura la excepción si se excede el tiempo.
+## 6. Lista de la compra
 
-**Pista:** envuelve `subprocess.run` en un `try/except` y captura `subprocess.TimeoutExpired`. Si tu conexión es rápida, prueba con `timeout=1`.
+Crea un programa con un menú que permita:
+1. Añadir un producto a una lista
+2. Ver todos los productos
+3. Eliminar un producto
+4. Salir
+
+Usa un bucle `while True` y `input()` para el menú.
+
+## 7. Diccionario de alumnos
+
+Crea un diccionario donde las claves sean nombres de alumnos y los valores sean sus notas. El programa debe:
+1. Añadir un alumno con su nota
+2. Buscar la nota de un alumno
+3. Calcular la nota media de todos los alumnos
+4. Mostrar quién tiene la nota más alta
+
+**Pista:** usa `max(diccionario.values())` para la nota más alta y `sum(values()) / len(values())` para la media.
+
+## 8. Clase Coche
+
+Crea una clase `Coche` con atributos `marca`, `modelo` y `año`. Añade un método `descripcion()` que devuelva un string con todos los datos y un método `es_antiguo()` que devuelva `True` si el coche tiene más de 10 años.
+
+```python
+coche = Coche("Seat", "León", 2015)
+print(coche.descripcion())   # Seat León (2015)
+print(coche.es_antiguo())    # True
+```
+
+**Pista:** para calcular el año actual, puedes usar `from datetime import datetime` y `datetime.now().year`.

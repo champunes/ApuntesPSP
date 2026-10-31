@@ -1,260 +1,269 @@
 ﻿---
-title: Boletín UD 5 — Avanzado (Resuelto)
-description: Soluciones de los ejercicios avanzados de Sockets TCP y UDP
+title: Boletín UD 4 — Avanzado (Resuelto)
+description: Soluciones de los ejercicios avanzados de Sincronización
 ---
 
-# 💪 Boletín UD 5 — Avanzado (Resuelto)
+# 💪 Boletín UD 4 — Avanzado (Resuelto)
 
 ---
 
-## 1. Servidor que cuenta caracteres
+## 1. Condition con notify_all
 
 ```python
-import socket
-with socket.socket() as srv:
-    srv.setsockopt(socket.SOL_SOCKET, socket.SO_REUSEADDR, 1)
-    srv.bind(("127.0.0.1", 9000))
-    srv.listen()
-    conn, addr = srv.accept()
-    with conn:
-        texto = conn.recv(1024).decode()
-        conn.sendall(str(len(texto)).encode())
+import threading, time
+
+cola = []
+condition = threading.Condition()
+
+def consumidor(id):
+    for _ in range(1):
+        with condition:
+            while not cola:
+                condition.wait()
+            item = cola.pop(0)
+            print(f"  🍽️ Consumidor-{id} procesó: {item}")
+
+def productor():
+    for i in range(3):
+        with condition:
+            cola.append(f"item-{i}")
+            print(f"📦 Producido: item-{i}")
+            condition.notify_all()   # despierta a los 3 consumidores
+        time.sleep(0.5)
+
+hilos = [threading.Thread(target=consumidor, args=(i,)) for i in range(3)]
+hilos.append(threading.Thread(target=productor))
+for h in hilos: h.start()
+for h in hilos: h.join()
 ```
 
-`len(texto)` cuenta los caracteres del texto recibido y se devuelve como texto (`str`) convertido a bytes con `.encode()`. Si el cliente envía `"hola"`, recibe `"4"`.
+Con 3 consumidores esperando, `notify_all()` los despierta a **todos**; si usáramos `notify()` solo despertaría a uno y los demás podrían quedarse dormidos ([punto 6](/ApuntesPSP/04-sincronizacion/06-condition)).
 
-## 2. Cliente interactivo
+## 2. Deadlock entre dos hilos
 
 ```python
-import socket
-with socket.socket() as cli:
-    cli.connect(("127.0.0.1", 9000))
-    while True:
-        mensaje = input("Escribe (o 'salir'): ")
-        if mensaje == "salir":
-            break
-        cli.sendall(mensaje.encode())
-        respuesta = cli.recv(1024).decode()
-        print(f"Respuesta: {respuesta}")
+import threading, time
+
+lockA = threading.Lock()
+lockB = threading.Lock()
+
+def hilo_1():
+    with lockA:
+        time.sleep(0.1)
+        with lockB:   # espera a que el hilo 2 libere B
+            print("Hilo 1 trabajando")
+
+def hilo_2():
+    with lockB:
+        time.sleep(0.1)
+        with lockA:   # espera a que el hilo 1 libere A
+            print("Hilo 2 trabajando")
+
+h1 = threading.Thread(target=hilo_1)
+h2 = threading.Thread(target=hilo_2)
+h1.start(); h2.start()
+h1.join(); h2.join()  # ❌ nunca termina: deadlock
 ```
 
-El `while True` mantiene el diálogo abierto. Cuando el usuario escribe `"salir"`, el `break` rompe el bucle y el `with` cierra el socket.
+El hilo 1 tiene A y espera B; el hilo 2 tiene B y espera A. **Ningún `print` sale nunca** y el programa se queda colgado ([punto 8](/ApuntesPSP/04-sincronizacion/08-buenas-practicas)).
 
-## 3. Servidor de mayúsculas
-
-```python
-import socket
-with socket.socket() as srv:
-    srv.setsockopt(socket.SOL_SOCKET, socket.SO_REUSEADDR, 1)
-    srv.bind(("127.0.0.1", 9000))
-    srv.listen()
-    conn, addr = srv.accept()
-    with conn:
-        texto = conn.recv(1024).decode()
-        conn.sendall(texto.upper().encode())
-```
-
-`texto.upper()` convierte el texto recibido a MAYÚSCULAS y se devuelve como bytes con `.encode()`.
-
-## 4. Cliente con reconexión
+## 3. Semáforo con recursos limitados
 
 ```python
-import socket, time
+import threading, time
 
-host = "127.0.0.1"
-port = 9000
+impresoras = threading.Semaphore(3)
 
-for intento in range(3):
-    try:
-        with socket.socket() as cli:
-            cli.settimeout(2)
-            cli.connect((host, port))
-            cli.sendall(b"test")
-            print(f"Conectado en el intento {intento + 1}")
-            break
-    except (ConnectionRefusedError, socket.timeout):
-        print(f"Intento {intento + 1} fallido, esperando 2s...")
+def imprimir(id):
+    with impresoras:
+        print(f"🖨️ Imprimiendo documento-{id}...")
         time.sleep(2)
-else:
-    print("Servidor no disponible tras 3 intentos")
+        print(f"  ✅ Documento-{id} impreso")
+
+hilos = [threading.Thread(target=imprimir, args=(i,)) for i in range(6)]
+for h in hilos: h.start()
+for h in hilos: h.join()
 ```
 
-El `for` reintenta hasta 3 veces. Cada `except` captura el fallo (rechazo o timeout) y espera 2s con `time.sleep(2)`. El `break` sale si se conecta; el `else` del `for` se ejecuta solo si nunca hubo `break`.
+Con `Semaphore(3)` nunca hay más de **3 documentos imprimiendo a la vez**, aunque haya 6 hilos esperando ([punto 4](/ApuntesPSP/04-sincronizacion/04-semaphore)).
 
-## 5. Servidor que gestiona múltiples conexiones (sin hilos)
+## 4. 🎯 Banco con cuentas compartidas
 
 ```python
-import socket, select
+import threading, time, random
 
-servidor = socket.socket(socket.AF_INET, socket.SOCK_STREAM)
-servidor.setsockopt(socket.SOL_SOCKET, socket.SO_REUSEADDR, 1)
-servidor.bind(("127.0.0.1", 9000))
-servidor.listen()
-servidor.setblocking(False)  # no bloqueante
+saldo = 100
+lock = threading.Lock()
 
-clientes = []
-print("Servidor atendiendo hasta 3 clientes con select...")
+def ingresar():
+    global saldo
+    for _ in range(5):
+        with lock:
+            cantidad = random.randint(10, 50)
+            saldo += cantidad
+            print(f"➕ Ingreso {cantidad} € → saldo {saldo} €")
+        time.sleep(random.random())
 
-while True:
-    lectura, _, _ = select.select([servidor] + clientes, [], [], 1.0)
-
-    for sock in lectura:
-        if sock is servidor:
-            conn, addr = servidor.accept()
-            conn.setblocking(False)
-            clientes.append(conn)
-            print(f"Conectado {addr}, hay {len(clientes)} cliente(s)")
-        else:
-            datos = sock.recv(1024)
-            if datos:
-                sock.sendall(datos)  # eco
+def retirar():
+    global saldo
+    for _ in range(5):
+        with lock:
+            cantidad = random.randint(10, 50)
+            if saldo >= cantidad:
+                saldo -= cantidad
+                print(f"➖ Retiro {cantidad} € → saldo {saldo} €")
             else:
-                clientes.remove(sock)
-                sock.close()
+                print(f"❌ Saldo insuficiente ({saldo} €) para retirar {cantidad} €")
+        time.sleep(random.random())
+
+h1 = threading.Thread(target=ingresar)
+h2 = threading.Thread(target=retirar)
+h1.start(); h2.start()
+h1.join(); h2.join()
+print(f"Saldo final: {saldo} €")
 ```
 
-El servidor **no bloqueante** más `select.select()` permite esperar a la vez en el socket servidor y en los sockets de los clientes. Cuando el socket listo es el servidor, se acepta una conexión nueva; cuando es un cliente, se leen sus datos. Sin hilos: un solo hilo atiende a todos.
+El `Lock` global evita que ingreso y retiro se pisen; el retirador comprueba `saldo >= cantidad` **dentro** del lock antes de restar, así el saldo **nunca es negativo**.
 
-## 6. Timeout personalizado
+## 5. 🔍 Semáforo con timeout
 
 ```python
-import socket
-with socket.socket() as srv:
-    srv.setsockopt(socket.SOL_SOCKET, socket.SO_REUSEADDR, 1)
-    srv.bind(("127.0.0.1", 9000))
-    srv.listen()
-    conn, addr = srv.accept()
-    with conn:
-        conn.settimeout(10)
-        try:
-            datos = conn.recv(1024)
-            print(f"Recibido: {datos.decode()}")
-        except socket.timeout:
-            conn.sendall(b"Hasta luego")
-            print("Cliente inactivo, cerrando conexión")
+import threading, time
+
+semaforo = threading.Semaphore(2)
+
+def tarea(id):
+    if semaforo.acquire(blocking=True, timeout=2):
+        print(f"Hilo-{id}: entró")
+        time.sleep(3)
+        semaforo.release()
+    else:
+        print(f"Hilo-{id}: se rinde (timeout 2s)")
+
+hilos = [threading.Thread(target=tarea, args=(i,)) for i in range(4)]
+for h in hilos: h.start()
+for h in hilos: h.join()
 ```
 
-`conn.settimeout(10)` da al cliente 10 segundos para enviar datos. Si no lo hace, `recv()` lanza `socket.timeout` y el servidor se despide antes de cerrar.
+Con `timeout=2`, los hilos que no consiguen entrar en 2 segundos **se rinden** (devuelve `False`) en vez de bloquearse para siempre. Los primeros 2 entran; el resto abandona.
 
-## 7. Cliente NTP manual
+## 6. 🧩 Barrera con fases múltiples
 
 ```python
-import socket, struct, time
+import threading, time
 
-def hora_ntp():
-    with socket.socket(socket.AF_INET, socket.SOCK_DGRAM) as s:
-        s.settimeout(5)
-        paquete = b'\x1b' + 47 * b'\0'
-        s.sendto(paquete, ("pool.ntp.org", 123))
-        datos, _ = s.recvfrom(1024)
+barrera = threading.Barrier(3)
 
-    t = struct.unpack('!I', datos[40:44])[0]
-    return t - 2208988800
+def trabajador(id):
+    for fase in range(3):
+        print(f"  🧮 Hilo-{id}: trabajando en fase {fase+1}")
+        time.sleep(id * 0.3)   # cada hilo tarda distinto
+        barrera.wait()         # nadie pasa a la siguiente fase hasta que llegan los 3
+        print(f"  🏁 Hilo-{id}: fase {fase+1} completada")
 
-hora = hora_ntp()
-print(f"Hora NTP oficial: {time.ctime(hora)}")
+hilos = [threading.Thread(target=trabajador, args=(i,)) for i in range(3)]
+for h in hilos: h.start()
+for h in hilos: h.join()
 ```
 
-El `settimeout(5)` evita que el `recvfrom()` se quede bloqueado si el datagrama de respuesta se pierde (muy UDP). El timestamp se desempaqueta de los bytes 40-43 con `struct.unpack('!I', ...)` y se ajusta restando **2208988800** segundos de época.
+Los `barrera.wait()` después de cada fase garantizan que **ningún hilo empieza la fase N+1** hasta que los 3 terminaron la fase N ([punto 5](/ApuntesPSP/04-sincronizacion/05-barrier)).
 
-## 8. Servidor UDP multimensaje
+## 7. 🎭 Condition con timeout
 
 ```python
-import socket
-with socket.socket(socket.AF_INET, socket.SOCK_DGRAM) as srv:
-    srv.bind(("127.0.0.1", 9001))
-    for i in range(1, 4):
-        datos, direccion = srv.recvfrom(1024)
-        print(f"Mensaje {i} de {direccion}: {datos.decode()}")
-        srv.sendto(f"OK #{i}".encode(), direccion)
+import threading, time
+
+cola = []
+condition = threading.Condition()
+
+def productor():
+    for _ in range(2):
+        time.sleep(3)              # produce cada 3 segundos
+        with condition:
+            cola.append("producto")
+            print("📦 Producido (cada 3s)")
+            condition.notify()
+
+def consumidor():
+    for _ in range(2):
+        with condition:
+            if not condition.wait(timeout=2):   # espera máximo 2s
+                print("  ⏳ timeout: el consumidor se va")
+            elif cola:
+                print(f"  🍽️ Consumido: {cola.pop(0)}")
+
+h1 = threading.Thread(target=productor)
+h2 = threading.Thread(target=consumidor)
+h1.start(); h2.start()
+h1.join(); h2.join()
 ```
 
-Con `for i in range(1, 4)` el servidor responde a 3 mensajes y se cierra solo al salir del bucle (el `with` libera el socket). Cada respuesta lleva su número de orden.
+`wait(timeout=2)` devuelve `False` si expiran los 2 segundos sin notificación: el consumidor **se va** en lugar de esperar los 3 segundos del productor. Devuelve `True` si le avisan a tiempo.
 
-## 9. Ping UDP
+## 8. ⏱ Deadlock provocado y solución
+
+**Provocación (deadlock):**
 
 ```python
-import socket, time, threading
+import threading, time
 
-def servidor():
-    with socket.socket(socket.AF_INET, socket.SOCK_DGRAM) as srv:
-        srv.bind(("127.0.0.1", 9001))
-        datos, direccion = srv.recvfrom(1024)
-        srv.sendto(b"PONG", direccion)
+lock1 = threading.Lock()
+lock2 = threading.Lock()
 
-threading.Thread(target=servidor, daemon=True).start()
+def hilo_a():
+    with lock1:
+        time.sleep(0.1)
+        with lock2:
+            print("A: trabajando")
 
-with socket.socket(socket.AF_INET, socket.SOCK_DGRAM) as cli:
-    inicio = time.time()
-    cli.sendto(b"PING", ("127.0.0.1", 9001))
-    datos, _ = cli.recvfrom(1024)
-    fin = time.time()
+def hilo_b():
+    with lock2:          # ❌ orden invertido
+        time.sleep(0.1)
+        with lock1:
+            print("B: trabajando")
 
-print(f"PONG recibido en {fin - inicio:.4f} segundos")
+h1 = threading.Thread(target=hilo_a)
+h2 = threading.Thread(target=hilo_b)
+h1.start(); h2.start()
+h1.join(); h2.join()   # se queda colgado
 ```
 
-El servidor se ejecuta en un hilo `daemon` mientras el cliente mide el tiempo de ida y vuelta. Ese tiempo es el **RTT** (round-trip time), la métrica de latencia de las redes.
-
-## 10. Servidor en todas las interfaces
+**Solución (mismo orden de locks):**
 
 ```python
-import socket
-
-with socket.socket(socket.AF_INET, socket.SOCK_DGRAM) as servidor:
-    servidor.bind(("0.0.0.0", 9001))
-    print("Servidor escuchando en todas las interfaces...")
-    while True:
-        datos, direccion = servidor.recvfrom(1024)
-        print(f"Datagrama de {direccion}: {datos.decode()}")
-        servidor.sendto(b"Recibido!", direccion)
+def hilo_b():
+    with lock1:          # ✅ mismo orden que A: lock1 → lock2
+        time.sleep(0.1)
+        with lock2:
+            print("B: trabajando")
 ```
 
-`"0.0.0.0"` significa "cualquier interfaz": el servidor acepta datagramas de cualquier cliente. El bucle infinito atiende a todos los que lleguen, uno tras otro, respondiendo con la dirección de cada uno. No es *broadcast* (eso exigiría `SO_BROADCAST` + envío a `255.255.255.255`), sino un servidor en todas las interfaces.
+Adquiriendo los locks **siempre en el mismo orden** (`lock1 → lock2`), es imposible que un hilo tenga lock2 esperando lock1 mientras otro tiene lock1 esperando lock2. El programa termina correctamente ([punto 8](/ApuntesPSP/04-sincronizacion/08-buenas-practicas)).
 
-## 11. Compara TCP y UDP
+## 9. 🏗️ Productor-Consumidor múltiple
 
 ```python
-import socket, time
-def test_tcp():
-    t = time.time()
-    for _ in range(10):
-        with socket.socket() as s:
-            s.connect(("127.0.0.1", 9000))
-            s.send(b"x")
-            s.recv(1024)
-    return time.time() - t
-def test_udp():
-    t = time.time()
-    for _ in range(10):
-        with socket.socket(socket.AF_INET, socket.SOCK_DGRAM) as s:
-            s.sendto(b"x", ("127.0.0.1", 9001))
-            s.recvfrom(1024)
-    return time.time() - t
-print(f"TCP: {test_tcp():.3f}s")
-print(f"UDP: {test_udp():.3f}s")
+import threading, time, random, queue
+
+buffer = queue.Queue(maxsize=5)
+
+def productor(id):
+    for _ in range(4):
+        item = f"p{id}-{random.randint(1, 100)}"
+        buffer.put(item)            # thread-safe, no necesita Lock
+        print(f"📦 P{id} produjo: {item} (buffer {buffer.qsize()}/5)")
+        time.sleep(random.random())
+
+def consumidor(id):
+    for _ in range(2):
+        item = buffer.get()         # thread-safe
+        print(f"  🍽️ C{id} consumió: {item} (buffer {buffer.qsize()}/5)")
+        time.sleep(random.random())
+
+hilos = [threading.Thread(target=productor, args=(i,)) for i in range(2)]
+hilos += [threading.Thread(target=consumidor, args=(i,)) for i in range(3)]
+for h in hilos: h.start()
+for h in hilos: h.join()
 ```
 
-UDP suele ser más rápido porque no tiene handshake: cada intercambio TCP paga un `connect()` (three-way handshake) que UDP se ahorra.
-
-> ⚠️ Necesitas un servidor **TCP en el 9000** y un servidor **UDP en el 9001** en marcha (p. ej. los de los ejercicios anteriores). Sin ellos, TCP lanza `ConnectionRefusedError` y UDP se queda esperando una respuesta que nadie envía.
-
-## 12. Mini servidor web
-
-```python
-import socket
-with socket.socket() as srv:
-    srv.setsockopt(socket.SOL_SOCKET, socket.SO_REUSEADDR, 1)
-    srv.bind(("127.0.0.1", 8080))
-    srv.listen()
-    conn, addr = srv.accept()
-    with conn:
-        conn.recv(1024)  # Leer petición (la ignoramos)
-        respuesta = "HTTP/1.1 200 OK\r\nContent-Type: text/html\r\n\r\n<h1>Hola mundo</h1>"
-        conn.sendall(respuesta.encode())
-```
-
-Abre http://127.0.0.1:8080 en tu navegador y verás "Hola mundo". El `SO_REUSEADDR` te permite relanzar el servidor sin esperar a que el puerto se libere.
-
----
-
-📚 [Volver a la unidad](/ApuntesPSP/04-sockets-tcp-y-udp) · Por resolver: [💪 Boletín UD 5 — Avanzado](/ApuntesPSP/boletines/boletin-u04-avanzado)
+`queue.Queue(maxsize=5)` es **thread-safe**: `put()` y `get()` ya están sincronizadas internamente. Con `maxsize=5`, si el buffer se llena, los productores esperan; si se vacía, los consumidores esperan. Sin locks a mano ([punto 7](/ApuntesPSP/04-sincronizacion/07-productor-consumidor)).

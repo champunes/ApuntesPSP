@@ -1,60 +1,88 @@
 ﻿---
-title: Boletín UD 6 — Avanzado
-description: Ejercicios avanzados de Servidores Concurrentes
+title: Boletín UD 5 — Avanzado
+description: Ejercicios avanzados de Sockets TCP y UDP
 ---
 
-# 💪 Boletín UD 6 — Avanzado
+# 💪 Boletín UD 5 — Avanzado
 
-> Ejercicios que requieren aplicar la concurrencia de forma más profunda: timeouts, contadores sincronizados, límites de clientes, colas de espera, heartbeats y hasta un balanceador de carga.
+> Ejercicios que requieren aplicar los conceptos de sockets TCP y UDP de forma más profunda, con programas completos: clientes interactivos, `select()`, timeouts, NTP y comparativas de protocolo.
 
 ---
 
-## 1. Servidor con timeout
+## 1. Servidor que cuenta caracteres
 
-Implementa un servidor que cierre la conexión si el cliente no envía datos en 5 segundos (usa `socket.settimeout` o `select`).
+Crea un servidor que reciba un texto y devuelva el número de caracteres (ej: "hola" → "4").
 
-## 2. Cliente con timeout
+**Pista:** recibe con `recv(1024).decode()`, calcula `len(texto)` y envía el resultado con `str(...).encode()`.
 
-Crea un cliente que intente conectarse a `127.0.0.1:9999` con timeout de 2 segundos. Captura la excepción `socket.timeout` y muestra "Servidor no disponible".
+## 2. Cliente interactivo
 
-## 3. Contador de bytes totales
+Crea un cliente que pida texto por teclado con `input()`, lo envíe al servidor y muestre la respuesta. El bucle termina cuando el usuario escribe "salir".
 
-Añade un contador global de bytes recibidos (protegido con Lock) al servidor multihilo. Cada vez que un cliente envía datos, suma los bytes y muestra el total acumulado.
+**Pista:** envuelve el `input()` + `sendall()` + `recv()` en un `while True` y rompe el bucle con `break` cuando el texto sea `"salir"`.
 
-**Pista:** `total_bytes = 0` + `lock = threading.Lock()`. Dentro de `atender`, haz `with lock:` para hacer `total_bytes += len(datos)` y `print`. El `recv()` y `sendall()` no necesitan Lock (cada socket es independiente).
+## 3. Servidor de mayúsculas
 
-## 4. Servidor con límite de clientes
+El cliente envía texto, el servidor lo devuelve en MAYÚSCULAS.
 
-Crea un servidor que acepte máximo 3 clientes. El cuarto recibe "Servidor completo" y se cierra.
+**Pista:** recibe los datos con `recv(1024).decode()`, aplica `.upper()` y envía el resultado con `sendall(...)`.
 
-**Pista**: Usa una variable global `clientes_activos` protegida con `Lock`. Al aceptar un cliente, comprueba si ya se alcanzó el máximo; si es así, envía el mensaje y cierra sin incrementar el contador. Decrementa al terminar.
+## 4. Cliente con reconexión
 
-## 5. Prueba de carga
+Cliente que intenta conectar, y si falla, reintenta hasta 3 veces con 2s de espera.
 
-Lanza 20 clientes simultáneos contra tu servidor y mide cuánto tardan todos en recibir respuesta.
+**Pista:** envuelve `socket.connect()` en un bucle `for` con `try/except`. Captura `ConnectionRefusedError` y `socket.timeout`, espera 2s con `time.sleep(2)` y reintenta.
 
-**Pista**: Usa un diccionario `resultados` compartido para guardar el tiempo de cada cliente. Cada cliente mide `time.time()` antes y después de la conexión. Lanza 20 hilos, haz `join` a todos y calcula estadísticas (total, media, exitosos).
+## 5. Servidor que gestiona múltiples conexiones (sin hilos)
 
-## 6. Servidor con cola de espera
+Usa `select.select()` para atender a varios clientes en un solo hilo.
 
-Cuando el pool está lleno, los clientes entran en una cola. Cuando un hilo se libera, atiende al siguiente.
+**Pista:** configura el socket servidor como no bloqueante con `setblocking(False)`. `select.select()` te devuelve los sockets que tienen datos listos para leer. Si el socket listo es el servidor, acepta una nueva conexión; si es un cliente, recibe datos.
 
-**Pista**: Usa `queue.Queue` para encolar las conexiones aceptadas. Crea N hilos trabajadores (daemon) que saquen elementos de la cola con `cola.get()` y atiendan al cliente. El hilo principal solo acepta y encola.
+## 6. Timeout personalizado
 
-## 7. Estado del servidor
+Crea un servidor que cierre la conexión si el cliente no envía datos en 10 segundos.
 
-Añade un endpoint especial: si el cliente envía "STATUS", el servidor responde con número de conexiones activas.
+**Pista:** después de `accept()`, llama a `conn.settimeout(10)`. Captura `socket.timeout` y envía un mensaje de despedida antes de cerrar.
 
-**Pista**: Mantén un contador `activas` con Lock. En la función de atención, parsea el comando: si es `"STATUS"`, responde con el valor actual del contador; si no, responde `"OK"`. Incrementa al entrar, decrementa al salir.
+## 7. Cliente NTP manual
 
-## 8. Heartbeat en servidor
+Crea un cliente UDP que obtenga la hora actual desde `pool.ntp.org` usando el puerto 123. Envía un paquete de 48 bytes (el primero con valor `\x1b` y el resto `\0`). Extrae el timestamp de los bytes 40 a 43 con `struct.unpack('!I', ...)` y ajústalo restando 2208988800 para convertirlo a hora Unix.
 
-El servidor tiene un hilo heartbeat que imprime "💓 Servidor vivo — N conexiones" cada 5s.
+**Pista:** añade `s.settimeout(5)` antes del `recvfrom()`: si la respuesta se pierde (UDP), lanza una excepción en lugar de bloquearse para siempre.
 
-**Pista**: Crea un hilo `daemon=True` con un bucle infinito que haga `time.sleep(5)` y luego imprima el estado usando el Lock para leer el contador de conexiones activas.
+## 8. Servidor UDP multimensaje
 
-## 9. Balanceador de carga simple
+Crea un servidor UDP que reciba y responda a 3 mensajes consecutivos en un bucle antes de cerrarse. Cada respuesta debe incluir el número de orden: `"OK #1"`, `"OK #2"`, `"OK #3"`.
 
-Crea un "balanceador" que recibe peticiones y las distribuye entre 2 servidores workers.
+**Pista:** usa `for i in range(1, 4)` en lugar de `while True`: así el servidor se cierra solo tras la tercera respuesta. El `with` libera el socket al salir.
 
-**Pista**: Crea dos workers en los puertos 5001 y 5002 (cada uno en su hilo). El balanceador en el puerto 5000 acepta conexiones y las reenvía al worker actual haciendo de proxy: lee del cliente, envía al worker, recibe la respuesta y la reenvía al cliente. Alterna entre workers con un índice round-robin.
+## 9. Ping UDP
+
+Cliente manda "PING", servidor responde "PONG". Mide cuánto tarda.
+
+**Pista:** necesitas dos funciones (servidor y cliente) ejecutándose en paralelo. Usa `threading.Thread` con `daemon=True` para lanzar el servidor. Mide el tiempo con `time.time()` antes y después del intercambio de mensajes.
+
+## 10. Servidor en todas las interfaces
+
+El servidor escucha en todas las interfaces y responde a cualquiera.
+
+**Pista:** el servidor debe escuchar en `"0.0.0.0"` para aceptar conexiones de cualquier interfaz. Usa un bucle infinito con `recvfrom()` y responde con `sendto()` a la dirección de cada cliente.
+
+> Nota: no es *broadcast* (eso exigiría `SO_BROADCAST` y enviar a `255.255.255.255`); es un servidor que escucha en todas las interfaces.
+
+## 11. Compara TCP y UDP
+
+Escribe un programa que mida cuánto tarda en completar 10 intercambios de mensajes contra un servidor TCP y contra un servidor UDP en local. Compara los tiempos.
+
+**Pista:** en TCP cada intercambio exige `connect()` (handshake); en UDP basta un `sendto()` + `recvfrom()`. Mide con `time.time()` antes y después de cada bucle.
+
+## 12. Mini servidor web
+
+Crea un servidor TCP que escuche en `127.0.0.1:8080`, acepte una conexión, lea la petición (ignorándola) y responda con `HTTP/1.1 200 OK` y un HTML con `"<h1>Hola mundo</h1>"`.
+
+**Pista:** usa `SO_REUSEADDR` con `setsockopt()` para poder relanzar el servidor sin esperar. Abre `http://127.0.0.1:8080` en el navegador para verlo.
+
+---
+
+📚 [Volver a la unidad](/ApuntesPSP/05-sockets-tcp-y-udp) · Resuelto: [✅ Boletín UD 5 — Avanzado (Resuelto)](/ApuntesPSP/boletines/boletin-u05-avanzado-resuelto)

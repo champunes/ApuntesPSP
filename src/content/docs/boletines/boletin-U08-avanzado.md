@@ -1,86 +1,80 @@
 ﻿---
-title: Boletín UD 9 — Avanzado
-description: Ejercicios avanzados de Seguridad y cifrado
+title: Boletín UD 8 — Avanzado
+description: Ejercicios avanzados de APIs Comerciales
 ---
 
-# 💪 Boletín UD 9 — Avanzado
+# 💪 Boletín UD 8 — Avanzado
 
-> Ejercicios que requieren aplicar hash, César, AES, RSA y firmas de forma más profunda, con programas completos.
-
----
-
-## 1. Cifrado César con espacios
-
-Implementa una función `cifrar_cesar(texto, desplazamiento)` que cifre frases completas respetando espacios y signos de puntuación sin modificarlos. Pruébala con `"Hola mundo"` con desplazamiento 5.
-
-**Pista:** recorre carácter a carácter. Si `caracter.isalpha()` es verdadero, aplica la fórmula con `% 26`; si no, añade el carácter tal cual. La salida debe ser `"Mtqf rzsit"`.
-
-## 2. Fuerza bruta César
-
-Dado un texto cifrado con César (desplazamiento desconocido), prueba los 25 desplazamientos y muestra solo los que tengan palabras en español.
-
-**Pista:** para cada desplazamiento del 1 al 25, aplica el descifrado César. Usa un conjunto de palabras comunes en español (como `"hola"`, `"mundo"`, `"python"`) para filtrar resultados. Si el texto descifrado contiene alguna palabra conocida, es probable que sea el correcto.
-
-## 3. Hash con salt
-
-Añade un salt aleatorio al hash de una contraseña para evitar tablas rainbow.
-
-**Pista:** genera un salt de 16 bytes con `os.urandom(16)` y calcula `hashlib.sha256(salt + password.encode()).hexdigest()`. Guarda el resultado como `salt.hex() + hash` (string hex). Para verificar, extrae los primeros 32 caracteres (la sal en hex, 16 bytes) con `bytes.fromhex()` y repite el cálculo. Si dos usuarios tienen la misma contraseña, sus hashes serán distintos gracias al salt.
-
-## 4. Mini gestor de contraseñas
-
-Guarda contraseñas con hash + salt en un archivo JSON. Permite registro y login.
-
-**Pista:** almacena cada usuario en un JSON con el formato `salt.hex() + hashlib.sha256(salt + password.encode()).hexdigest()`. Para verificar, extrae el salt (primeros 32 caracteres hexadecimales), conviértelo a bytes con `bytes.fromhex()` y recalcula el hash con la contraseña proporcionada.
-
-## 5. Cifrado híbrido simplificado
-
-Genera una clave AES de 32 bytes y cifra `b"El cifrado hibrido funciona"`. Luego cifra esa clave AES con una clave RSA pública. Descifra en orden inverso y verifica el mensaje original.
-
-**Pista:** cifra el mensaje con `AES.new(clave_aes, AES.MODE_EAX)` y `encrypt_and_digest`; cifra la clave AES con `PKCS1_OAEP.new(clave.publickey()).encrypt(clave_aes)`. Para descifrar, invierte el orden: primero RSA (con la privada), luego AES (con el mismo nonce).
-
-## 6. Firma alterada
-
-Firma digitalmente el mensaje `"Transferencia de 500€".encode()`. Modifica UN byte de la firma y comprueba que la verificación falla con `pkcs1_15.new(...).verify(...)`.
-
-**Pista:** para modificar un byte de la firma, conviértela a `bytearray`, cambia un índice (`firma_mutada[0] ^= 0xFF`) y vuelve a bytes. La verificación debe lanzar `ValueError` o `TypeError`.
-
-## 7. RBAC con permisos cifrado
-
-Crea un sistema RBAC con 3 roles: `admin` (cifrar, descifrar, firmar), `usuario` (cifrar, firmar), `invitado` (solo cifrar). Implementa la función `puede(usuario, accion)` y pruébala con cada rol.
-
-**Pista:** un diccionario `permisos = {"admin": ["cifrar", "descifrar", "firmar"], ...}` y `return accion in permisos.get(usuario["rol"], [])`. Los roles desconocidos deben devolver `False`.
-
-## 8. Cifrar archivo completo
-
-Crea un archivo de texto `mensaje.txt` con algún contenido y cifra el archivo completo con AES, guardando el resultado. Luego descifralo y comprueba que coincide.
-
-**Pista:** primero crea `mensaje.txt` (p. ej. `open("mensaje.txt", "w").write("Contenido secreto")`). Abre el archivo en modo binario `"rb"` / `"wb"`. Usa `AES.MODE_EAX`, cifra con `encrypt_and_digest` y guarda `nonce + tag + cifrado`. Para descifrar, separa los tres componentes y usa `decrypt_and_verify`.
-
-## 9. RSA: cifrar mensajes largos
-
-RSA solo cifra ~190 bytes. Intenta cifrar un mensaje de 300 bytes. ¿Qué pasa? ¿Cómo lo arreglas?
-
-**Pista:** captura el `ValueError` para ver el mensaje de error. Piensa en combinar RSA con un cifrado simétrico como AES (cifrado híbrido).
-
-## 10. Firma con verificación de integridad
-
-Firma un mensaje, modifica el mensaje, y muestra que la verificación falla.
-
-**Pista:** usa `SHA256.new(mensaje)` y `pkcs1_15.new(clave).sign(h)`. Después de firmar el original, crea un segundo mensaje modificado y verifícalo con la misma firma. La verificación debe lanzar `ValueError` o `TypeError`.
-
-## 11. RSA vs AES benchmark
-
-Mide cuánto tarda cifrar el mismo mensaje con RSA y AES. La diferencia es abismal.
-
-**Pista:** usa `time.time()` antes y después de un bucle de 100 cifrados RSA y otro de 1000 cifrados AES. Con `time.time() - t` obtienes los segundos. Multiplica por 1000 para milisegundos.
-
-## 12. Sistema de cifrado de extremo a extremo
-
-Simula un chat cifrado: cada usuario tiene su par RSA, y los mensajes se cifran con AES + RSA híbrido.
-
-**Pista:** crea una clase `Usuario` con `nombre` y `clave_rsa`. Un método `cifrar_para(mensaje, destinatario)` que genera clave AES, cifra el mensaje y la clave. Otro método `descifrar(nonce, tag, clave_aes_cifrada, cifrado)` que hace el proceso inverso.
+> Ejercicios que requieren aplicar los conceptos de APIs comerciales, variables de entorno, rate limits y OpenAI de forma más profunda, con programas completos contra APIs reales.
 
 ---
 
-📚 [Volver a la unidad](/ApuntesPSP/08-seguridad-y-cifrado) · Resuelto: [✅ Boletín UD 9 — Avanzado (Resuelto)](/ApuntesPSP/boletines/boletin-u08-avanzado-resuelto)
+## 1. Clima con .env para dos ciudades
+
+Carga tu API key de OpenWeatherMap desde un archivo `.env` con `python-dotenv`. Obtén el clima de dos ciudades distintas y compara sus temperaturas.
+
+**Pista:** `load_dotenv()` + `os.getenv("OPENWEATHER_API_KEY")`. Escribe una función `clima(ciudad)` y llámala dos veces, guardando la temperatura de cada una para compararlas.
+
+## 2. GPT con temperatura creativa
+
+Usa la API de OpenAI para pedir una historia corta sobre Python. Ajusta el parámetro `temperature=0.9` para obtener una respuesta más creativa.
+
+**Pista:** en `cliente.chat.completions.create(...)`, además de `model` y `messages`, pasa `temperature=0.9` y un `max_tokens` razonable para que la historia no se corte.
+
+## 3. Capturar errores HTTP
+
+Haz una petición a `https://httpbin.org/status/404` y otra a `https://httpbin.org/status/500`. Captura los errores usando `raise_for_status()` dentro de un bloque try/except.
+
+**Pista:** dentro del `except requests.exceptions.HTTPError as e`, puedes leer `e.response.status_code` para saber qué código ha fallado.
+
+## 4. Comprobación de claves
+
+Carga el `.env` y comprueba que `OPENWEATHER_API_KEY` existe. Si no existe, lanza un error claro con `raise ValueError`.
+
+**Pista:** `os.getenv` devuelve `None` si la variable falta: esa es la condición para lanzar el error.
+
+## 5. Chat con GPT y rol system
+
+Pregunta a GPT-4o-mini "¿Qué es Python?" usando un mensaje `system` que diga "Eres un profesor de Python divertido" antes del mensaje `user`.
+
+## 6. Timeout
+
+Haz una petición a `https://192.0.2.1` con `timeout=3` y captura la excepción de timeout.
+
+**Pista:** `192.0.2.1` es una IP de test que nunca responde. La excepción es `requests.exceptions.Timeout`.
+
+## 7. 🎯 Pronóstico extendido
+
+Usa OpenWeatherMap para obtener el pronóstico de 5 días de tu ciudad.
+
+**Pista**: OpenWeatherMap tiene un endpoint `/forecast` que devuelve datos cada 3 horas. Usa `lang=es` para descripciones en español. Para obtener un dato por día, salta 8 elementos (24 horas ÷ 3 horas = 8 intervalos).
+
+## 8. 🔍 Múltiples ciudades
+
+Obtén el clima de 5 ciudades a la vez usando un solo bucle.
+
+**Pista**: Itera sobre una lista de ciudades y haz una petición a OpenWeatherMap por cada una. Añade `time.sleep(0.2)` entre peticiones para evitar el rate limit. Cada respuesta contiene `main.temp` y `weather[0].description`.
+
+## 9. 🧩 GPT: explicador automático
+
+Pregunta a GPT-4o-mini que explique 3 conceptos de Python: Lock, Semaphore, Barrier.
+
+**Pista**: La API de chat de OpenAI recibe una lista de mensajes. Puedes iterar sobre una lista de conceptos y pedir una explicación corta para cada uno, limitando la respuesta con `max_tokens`.
+
+## 10. 🎭 Conversación con contexto
+
+Chat con GPT que recuerda el historial de la conversación.
+
+**Pista**: Mantén una lista `mensajes` que acumule cada interacción. Empieza con un mensaje `{"role": "system"}` para definir el rol. En cada turno, añade el mensaje del usuario y la respuesta del asistente para mantener el contexto.
+
+## 11. ⏱ Monitor de uptime
+
+Comprueba cada 30s si una API responde. Si falla 3 veces seguidas, alerta.
+
+**Pista**: Un bucle infinito con `time.sleep(30)` dentro. Un contador de fallos consecutivos se incrementa en cada error y se reinicia al obtener una respuesta OK. Cuando supere el máximo, muestra una alerta.
+
+## 12. 🏗️ Agregador de APIs
+
+Llama a 3 APIs distintas y combina sus respuestas en un solo resumen.
+
+**Pista**: Define una función que llame a varias APIs y guarde los datos relevantes en un diccionario. Cada API aporta una clave diferente. Usa GitHub para datos de usuario, JSONPlaceholder para el conteo de posts y httpbin para la IP.

@@ -25,50 +25,50 @@ OUT = ROOT / "docx_out"
 PNGS = OUT / "pngs"
 
 UNIDADES = [
-    "00-python-basico",
-    "01-gestion-de-procesos",
-    "02-hilos-y-concurrencia",
-    "03-sincronizacion",
-    "04-sockets-tcp-y-udp",
-    "05-servidores-concurrentes",
-    "06-http-y-apis-rest",
-    "07-apis-comerciales",
-    "08-seguridad-y-cifrado",
-    "09-alta-disponibilidad",
-    "10-spring-boot",
+    "01-python-basico",
+    "02-gestion-de-procesos",
+    "03-hilos-y-concurrencia",
+    "04-sincronizacion",
+    "05-sockets-tcp-y-udp",
+    "06-servidores-concurrentes",
+    "07-http-y-apis-rest",
+    "08-apis-comerciales",
+    "09-seguridad-y-cifrado",
+    "10-alta-disponibilidad",
+    "11-spring-boot",
 ]
 
 # Etiqueta "UD n" de cada unidad.
 UD_NUM = {
-    "00-python-basico": "UD 1",
-    "01-gestion-de-procesos": "UD 2",
-    "02-hilos-y-concurrencia": "UD 3",
-    "03-sincronizacion": "UD 4",
-    "04-sockets-tcp-y-udp": "UD 5",
-    "05-servidores-concurrentes": "UD 6",
-    "06-http-y-apis-rest": "UD 7",
-    "07-apis-comerciales": "UD 8",
-    "08-seguridad-y-cifrado": "UD 9",
-    "09-alta-disponibilidad": "UD 10",
-    "10-spring-boot": "UD 11",
+    "01-python-basico": "UD 1",
+    "02-gestion-de-procesos": "UD 2",
+    "03-hilos-y-concurrencia": "UD 3",
+    "04-sincronizacion": "UD 4",
+    "05-sockets-tcp-y-udp": "UD 5",
+    "06-servidores-concurrentes": "UD 6",
+    "07-http-y-apis-rest": "UD 7",
+    "08-apis-comerciales": "UD 8",
+    "09-seguridad-y-cifrado": "UD 9",
+    "10-alta-disponibilidad": "UD 10",
+    "11-spring-boot": "UD 11",
 }
 
 # Nombre corto de carpeta por unidad (es-ES, sin tildes en disco).
 NOMBRES_UNIDAD = {
-    "00-python-basico": "Python 3 basico",
-    "01-gestion-de-procesos": "Gestion de procesos",
-    "02-hilos-y-concurrencia": "Hilos y concurrencia",
-    "03-sincronizacion": "Sincronizacion",
-    "04-sockets-tcp-y-udp": "Sockets TCP y UDP",
-    "05-servidores-concurrentes": "Servidores concurrentes",
-    "06-http-y-apis-rest": "HTTP y APIs REST",
-    "07-apis-comerciales": "APIs comerciales",
-    "08-seguridad-y-cifrado": "Seguridad y cifrado",
-    "09-alta-disponibilidad": "Alta disponibilidad",
-    "10-spring-boot": "Spring Boot",
+    "01-python-basico": "Python 3 basico",
+    "02-gestion-de-procesos": "Gestion de procesos",
+    "03-hilos-y-concurrencia": "Hilos y concurrencia",
+    "04-sincronizacion": "Sincronizacion",
+    "05-sockets-tcp-y-udp": "Sockets TCP y UDP",
+    "06-servidores-concurrentes": "Servidores concurrentes",
+    "07-http-y-apis-rest": "HTTP y APIs REST",
+    "08-apis-comerciales": "APIs comerciales",
+    "09-seguridad-y-cifrado": "Seguridad y cifrado",
+    "10-alta-disponibilidad": "Alta disponibilidad",
+    "11-spring-boot": "Spring Boot",
 }
 
-# Códigos U00..U10 que tienen boletines.
+# Códigos UD 0..UD 10 que tienen boletines.
 BOLETINES_CODIGOS = {"00", "01", "02", "03", "04", "05",
                      "06", "07", "08", "09", "10"}
 # Orden didáctico dentro del DOCX de boletines.

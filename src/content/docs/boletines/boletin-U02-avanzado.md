@@ -1,64 +1,64 @@
----
-title: Boletín UD 3 — Avanzado
-description: Ejercicios avanzados de Hilos Fundamentos
----
-
-# 💪 Boletín UD 3 — Avanzado
-
-> Ejercicios que requieren aplicar los conceptos de hilos de la unidad UD 3 de forma más profunda: esperas con timeout, introspección, banderas de parada y timers que se repiten.
-
+﻿---
+title: Boletín UD 2 — Avanzado
+description: Ejercicios avanzados de Gestión de procesos
 ---
 
-## 1. Join con timeout
+# 💪 Boletín UD 2 — Avanzado
 
-Crea un hilo que duerma 5 segundos. En el hilo principal, usa `join(timeout=2)` y comprueba con `is_alive()` si el hilo sigue ejecutándose después del timeout.
+> Ejercicios que requieren aplicar los conceptos de procesos, `subprocess` y comunicación entre procesos de forma más profunda, con programas completos.
 
-**Pista:** `h.join(2)` devuelve `None` cuando termina a tiempo y también cuando expira. Para saber si sigue vivo después del timeout, pregunta con `h.is_alive()` justo después del `join`.
+---
 
-## 2. Listar hilos activos
+## 1. Filtrar ipconfig
 
-Crea 3 hilos que hagan tareas distintas. Usa `threading.enumerate()` para listar todos los hilos activos y muestra sus nombres.
+Ejecuta `ipconfig` con `subprocess.run`, captura toda la salida y muestra solo las líneas que contengan "IPv4".
 
-**Pista:** `threading.enumerate()` devuelve una lista de objetos Thread. Itera sobre ella y muestra `.name`. Recuerda que el hilo principal (main) también aparece en la lista.
+**Pista:** divide el stdout con `split("\n")` y filtra cada línea con el operador `in` para buscar "IPv4".
 
-## 3. Identificar el hilo actual
+## 2. Comprobar si un programa existe
 
-Crea una función que muestre `threading.current_thread().name`, `threading.current_thread().ident` y `threading.current_thread().daemon`. Ejecútala desde el hilo principal y desde un hilo secundario.
+Usa `subprocess.run` con el comando `where python` (Windows) o `which python` (Linux) para comprobar si Python está accesible desde la terminal. Muestra el código de retorno.
 
-**Pista:** para ejecutar la función desde ambos sitios, llámala directamente en el principal y también como `target` de un `threading.Thread`.
+**Pista:** el código de retorno 0 indica que `where`/`which` encontró Python. Distinto de 0, no lo encontró.
 
-## 4. 🎯 Carrera de mensajes
+## 3. Abrir el navegador
 
-Crea 5 hilos, cada uno imprime su nombre 10 veces. Observa el orden impredecible.
+Usa `subprocess.Popen` para abrir el navegador predeterminado con la URL `http://localhost:4321`. En Windows usa `start http://localhost:4321` con `shell=True`, en Linux usa `xdg-open http://localhost:4321`.
 
-**Pista:** usa una lista por comprensión para crear los 5 hilos. Lanza todos con un bucle `for h in hilos: h.start()` y espera con `for h in hilos: h.join()`. El orden de salida cambiará en cada ejecución.
+**Pista:** `start` es un comando interno del shell de Windows: necesita `shell=True`. `xdg-open` es un ejecutable real en Linux.
 
-## 5. 🔍 Simular descarga con progreso
+## 4. Lanzador múltiple
 
-Crea un hilo que descargue (simulado con sleep) y muestre progreso cada 25%.
+Crea un programa que lance 3 programas distintos a la vez (notepad, calc, mspaint). Muestra sus PIDs y luego los mata todos a los 5 segundos.
 
-**Pista:** dentro de la función, itera con `range(0, 101, 25)`, usa `time.sleep(0.5)` para simular el tiempo de descarga e imprime el porcentaje en cada paso.
+**Pista:** guarda los objetos `Popen` en una lista o tupla junto con el nombre de cada programa. Recorre la lista para mostrar PIDs y más tarde para terminarlos con `terminate()`.
 
-## 6. 🧩 Detener hilo con bandera
+## 5. Captura de ping
 
-Crea un hilo infinito que se detenga cuando pulses Enter.
+Ejecuta `ping 8.8.8.8 -n 5`, captura stdout y extrae solo las líneas que contienen "tiempo" o "time".
 
-**Pista:** declara una variable booleana global `ejecutando = True`. El hilo comprueba la variable en un `while ejecutando:`. Desde el principal, usa `input()` para esperar Enter y luego cambia `ejecutando = False`.
+**Pista:** divide el stdout con `split("\n")` y filtra cada línea con el operador `in` para buscar las palabras clave.
 
-## 7. 🎭 Hilo que devuelve un valor
+## 6. PID del padre
 
-Usa una variable compartida para que un hilo devuelva un resultado al principal.
+Crea un programa que muestre su propio PID y el PID del proceso padre (PPID).
 
-**Pista:** los hilos no tienen `return`. Usa una lista compartida como contenedor: el hilo guarda el resultado con `lista.append(valor)` y el principal lo lee tras `hilo.join()`.
+**Pista:** usa `os.getpid()` para tu PID y `os.getppid()` para el PPID. Ejecuta desde la terminal y observa quién es el padre.
 
-## 8. ⏱ Timer con repetición
+## 7. Comunicación en dos direcciones
 
-El Timer normal solo se dispara una vez. Crea un timer que se repita cada 2 segundos usando recursividad.
+Crea un proceso hijo que reciba texto por stdin y devuelva el texto en mayúsculas.
 
-**Pista:** dentro de la función que ejecuta el Timer, crea otro `threading.Timer(2.0, funcion).start()` al final. Así la función se programa a sí misma de nuevo. Ojo: si el programa no termina, pon el Timer como daemon (`t.daemon = True` **antes** de `t.start()`) para que muera con el principal.
+**Pista:** usa `subprocess.Popen` con `stdin=subprocess.PIPE`, `stdout=subprocess.PIPE` y `text=True`. Luego llama a `communicate(input="tu texto")` para enviar datos y leer la respuesta.
 
-## 9. 🏗️ Pool de hilos manual
+## 8. Timeout con reintentos
 
-Crea un "pool" manual con una cola de tareas. 2 hilos cogen tareas de la cola y las ejecutan.
+Crea una función que ejecute un comando con timeout de 3s. Si falla, reintenta hasta 3 veces. Si al final no funciona, lanza una excepción.
 
-**Pista:** usa `queue.Queue` (thread-safe) para las tareas. Los trabajadores ejecutan un bucle llamando a `cola.get()`. Al terminar cada tarea llaman a `cola.task_done()`. El principal espera con `cola.join()`. Crea los workers como `daemon=True` para que no bloqueen la salida, o usa un valor centinela (`None`) en la cola para que terminen ordenadamente.
+**Pista:** envuelve `subprocess.run` con `timeout=3` y `check=False` dentro de un bucle `for`. Captura `subprocess.TimeoutExpired` en cada intento y rompe el bucle si el comando se ejecuta correctamente. Si se agotan los intentos, lanza una excepción personalizada.
+
+## 9. Mini monitor de procesos
+
+Crea un programa que lance un subprocess y verifique su estado cada segundo mientras está vivo.
+
+**Pista:** `proc.poll()` devuelve `None` si el proceso sigue ejecutándose, o el código de retorno si ya terminó. Úsalo en un bucle `while proc.poll() is None` con `time.sleep(1)` dentro.

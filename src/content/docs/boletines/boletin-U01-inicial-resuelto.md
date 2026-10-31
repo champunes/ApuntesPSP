@@ -1,99 +1,163 @@
-﻿---
-title: Boletín UD 2 — Inicial (Resuelto)
-description: Soluciones de los ejercicios básicos de Gestión de procesos
+---
+title: Boletín UD 1 — Inicial (Resuelto)
+description: Soluciones de los ejercicios básicos de Python 3
 ---
 
-# ✅ Boletín UD 2 — Inicial (Resuelto)
+# ✅ Boletín UD 1 — Inicial (Resuelto)
 
 ---
 
-## 1. Listar el directorio actual
+## 1. Hola mundo con f-string
 
 ```python
-import subprocess
-
-resultado = subprocess.run(["dir"], capture_output=True, text=True, shell=True)
-print(resultado.stdout)
+nombre = input("¿Cómo te llamas? ")
+print(f"Hola, {nombre}. ¡Bienvenido a Python!")
 ```
 
-En Linux: `subprocess.run(["ls"])`. En Windows, `dir` es un comando interno del shell, por eso `shell=True` ([punto 7](/ApuntesPSP/01-gestion-de-procesos/07-compatibilidad-windows-linux)).
-
-## 2. Saber el nombre del equipo
+## 2. Calculadora básica
 
 ```python
-import subprocess
+a = float(input("Dame un número: "))
+b = float(input("Dame otro número: "))
 
-resultado = subprocess.run(["hostname"], capture_output=True, text=True)
-print(f"El nombre del equipo es {resultado.stdout.strip()}")
+print(f"{a} + {b} = {a + b}")
+print(f"{a} - {b} = {a - b}")
+print(f"{a} x {b} = {a * b}")
+
+if b != 0:
+    print(f"{a} / {b} = {a / b}")
+else:
+    print("No se puede dividir por cero")
 ```
 
-`capture_output=True` captura la salida de `hostname` y `text=True` la devuelve como string.
-
-## 3. Abrir la calculadora
+## 3. Par o impar
 
 ```python
-import subprocess, time
+numero = int(input("Dame un número: "))
 
-calc = subprocess.Popen(["calc.exe"])
-print(f"Calculadora lanzada con PID {calc.pid}")
-time.sleep(2)
-calc.terminate()
-print("Calculadora cerrada")
+if numero % 2 == 0:
+    print(f"{numero} es par")
+else:
+    print(f"{numero} es impar")
 ```
 
-`Popen` no espera: el programa muestra el PID, espera 2 segundos y cierra con `terminate()`.
-
-## 4. Mi primer PID
+## 4. Tabla de multiplicar
 
 ```python
-import os
+numero = int(input("Dame un número: "))
 
-print(f"Mi PID es {os.getpid()}")
+for i in range(1, 11):
+    print(f"{numero} x {i} = {numero * i}")
 ```
 
-`os.getpid()` devuelve el identificador único del proceso actual: el **PID** ([punto 1](/ApuntesPSP/01-gestion-de-procesos/01-que-es-un-proceso)).
-
-## 5. Versión de Python
+## 5. Invertir una cadena
 
 ```python
-import subprocess
-
-resultado = subprocess.run(["python", "--version"], capture_output=True, text=True)
-print(resultado.stdout.strip())
+cadena = input("Dame una cadena: ")
+invertida = cadena[::-1]
+print(f"La cadena invertida es: {invertida}")
 ```
 
-`capture_output=True` captura la salida. `text=True` la devuelve como string. `.strip()` elimina el salto de línea final.
-
-## 6. Abrir el bloc de notas y esperar
+## 6. Lista de la compra
 
 ```python
-import subprocess, time
+compra = []
 
-notepad = subprocess.Popen(["notepad.exe"])
-print(f"PID: {notepad.pid}")
-time.sleep(3)
-notepad.terminate()
+while True:
+    print("\n1. Añadir producto")
+    print("2. Ver productos")
+    print("3. Eliminar producto")
+    print("4. Salir")
+    opcion = input("Elige una opción: ")
+
+    if opcion == "1":
+        producto = input("Nombre del producto: ")
+        compra.append(producto)
+        print(f"'{producto}' añadido.")
+    elif opcion == "2":
+        if compra:
+            for i, p in enumerate(compra, 1):
+                print(f"  {i}. {p}")
+        else:
+            print("La lista está vacía.")
+    elif opcion == "3":
+        producto = input("Nombre del producto a eliminar: ")
+        if producto in compra:
+            compra.remove(producto)
+            print(f"'{producto}' eliminado.")
+        else:
+            print("Producto no encontrado.")
+    elif opcion == "4":
+        break
 ```
 
-`Popen` no espera. `terminate()` envía señal de cierre.
-
-## 7. Ordena el ciclo de vida
-
-**NUEVO → LISTO → EJECUCIÓN → BLOQUEADO → TERMINADO**
-
-El orden correcto: el proceso **nace** (NUEVO), espera su turno de CPU (**LISTO**), la CPU lo ejecuta (**EJECUCIÓN**), puede quedarse esperando un recurso (**BLOQUEADO**) y finalmente **termina**. Repasa el [punto 2](/ApuntesPSP/01-gestion-de-procesos/02-estados-de-un-proceso).
-
-## 8. Ping con timeout
+## 7. Diccionario de alumnos
 
 ```python
-import subprocess
+alumnos = {}
 
-try:
-    resultado = subprocess.run(["ping", "8.8.8.8", "-n", "3"],
-                               capture_output=True, text=True, timeout=3)
-    print(resultado.stdout)
-except subprocess.TimeoutExpired:
-    print("El ping tardó demasiado")
+while True:
+    print("\n1. Añadir alumno")
+    print("2. Buscar nota")
+    print("3. Nota media")
+    print("4. Nota más alta")
+    print("5. Salir")
+    opcion = input("Elige una opción: ")
+
+    if opcion == "1":
+        nombre = input("Nombre del alumno: ")
+        nota = float(input("Nota: "))
+        alumnos[nombre] = nota
+        print(f"'{nombre}' añadido con nota {nota}.")
+    elif opcion == "2":
+        nombre = input("Nombre del alumno: ")
+        if nombre in alumnos:
+            print(f"Nota de {nombre}: {alumnos[nombre]}")
+        else:
+            print("Alumno no encontrado.")
+    elif opcion == "3":
+        if alumnos:
+            media = sum(alumnos.values()) / len(alumnos)
+            print(f"Nota media: {media:.2f}")
+        else:
+            print("No hay alumnos.")
+    elif opcion == "4":
+        if alumnos:
+            max_nota = max(alumnos.values())
+            mejor = [n for n, nota in alumnos.items() if nota == max_nota]
+            print(f"Nota más alta: {max_nota} ({', '.join(mejor)})")
+        else:
+            print("No hay alumnos.")
+    elif opcion == "5":
+        break
 ```
 
-En Linux usa `["ping", "-c", "3", "8.8.8.8"]`. `timeout` lanza `TimeoutExpired` si excede.
+## 8. Clase Coche
+
+```python
+from datetime import datetime
+
+
+class Coche:
+    def __init__(self, marca, modelo, año):
+        self.marca = marca
+        self.modelo = modelo
+        self.año = año
+
+    def descripcion(self):
+        return f"{self.marca} {self.modelo} ({self.año})"
+
+    def es_antiguo(self):
+        año_actual = datetime.now().year
+        return (año_actual - self.año) > 10
+
+
+# Pruebas
+coche = Coche("Seat", "León", 2015)
+print(coche.descripcion())   # Seat León (2015)
+print(coche.es_antiguo())    # True
+
+coche2 = Coche("Tesla", "Model 3", 2023)
+print(coche2.descripcion())  # Tesla Model 3 (2023)
+print(coche2.es_antiguo())   # False
+```

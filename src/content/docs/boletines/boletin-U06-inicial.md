@@ -1,64 +1,50 @@
----
-title: Boletín UD 7 — Inicial
-description: Ejercicios básicos de APIs REST y HTTP
----
-
-# 📝 Boletín UD 7 — Inicial
-
-> Ejercicios básicos para afianzar los conceptos de APIs REST, métodos HTTP, códigos de estado y JSON de la unidad UD 7.
-
+﻿---
+title: Boletín UD 6 — Inicial
+description: Ejercicios básicos de Servidores Concurrentes
 ---
 
-## 1. GET a JSONPlaceholder
+# 📝 Boletín UD 6 — Inicial
 
-Usa `requests.get` para obtener el post con ID 1 de `https://jsonplaceholder.typicode.com/posts/1`. Muestra el `status_code`.
+> Ejercicios básicos para afianzar los conceptos de servidores concurrentes: sockets TCP, el servidor secuencial y sus límites, y el salto a los hilos.
 
-## 2. Título del post
+---
 
-Del ejercicio anterior, muestra el campo `"title"` del post obtenido usando `resp.json()`.
+## 1. Servidor eco básico
 
-## 3. Contar usuarios
+Crea un servidor TCP que reciba datos de un cliente y los devuelva exactamente igual (eco). Sin bucle, atiende un solo cliente y termina.
 
-Haz GET a `https://jsonplaceholder.typicode.com/users` y muestra cuántos usuarios hay (la longitud de la lista).
+## 2. Servidor eco con bucle
 
-**Pista:** `resp.json()` devuelve una lista de diccionarios; su longitud es el número de usuarios.
+Modifica el servidor anterior para que acepte clientes en un bucle infinito, dando eco a cada uno.
 
-## 4. GET a GitHub
+## 3. Cliente eco
 
-Usa `requests.get` para obtener los datos del usuario `python` de `https://api.github.com/users/python`. Muestra el `status_code`.
+Crea un cliente TCP que se conecte al servidor, envíe `b"Hola eco"` y muestre la respuesta recibida.
 
-## 5. Mostrar JSON
+## 4. Servidor secuencial
 
-Del ejercicio anterior, muestra la respuesta completa con `print(resp.json())`.
+Crea un servidor TCP que atienda a **un solo cliente** y termine: `accept()`, recibe, responde `b"OK"` y cierra.
 
-## 6. Nombre real
+**Pista:** es la versión mínima del servidor secuencial: `with socket.socket() as srv:` → `bind(("127.0.0.1", 5000))` → `listen()` → `accept()` → `with conn:` → `recv()` y `sendall(b"OK")`.
 
-Del mismo usuario, muestra el campo `"name"` (su nombre real) accediendo al diccionario.
+## 5. Servidor multihilo
 
-## 7. Métodos HTTP
+Convierte el servidor anterior en uno **multihilo**: dentro de un `while True`, cada cliente que acepte se atiende en su propio `threading.Thread`.
 
-Relaciona cada método HTTP con su operación CRUD y su uso:
+**Pista:** define `def atender(conn, addr):` con el eco, y en el bucle lanza `threading.Thread(target=atender, args=(conn, addr)).start()`. El bucle vuelve al `accept()` al instante.
 
-| Método | Operación CRUD | Uso |
-|---|---|---|
-| GET | ___ | ___ |
-| POST | ___ | ___ |
-| PUT | ___ | ___ |
-| PATCH | ___ | ___ |
-| DELETE | ___ | ___ |
+## 6. Cliente con respuesta
 
-**Pista:** CRUD = Create, Read, Update, Delete. Recuerda que PUT reemplaza el recurso completo y PATCH solo una parte.
+Crea un cliente TCP que se conecte al servidor, envíe `b"Hola"` y muestre por pantalla la respuesta que reciba.
 
-## 8. Códigos de estado
+## 7. Servidor con ThreadPoolExecutor
 
-Completa el significado de estos códigos de estado HTTP:
+Implementa un servidor TCP que use `concurrent.futures.ThreadPoolExecutor` con **3 hilos** (`max_workers=3`). Responde `b"OK"` a cada cliente.
 
-a) 200 → ___
-b) 201 → ___
-c) 204 → ___
-d) 400 → ___
-e) 401 → ___
-f) 404 → ___
-g) 500 → ___
+**Pista:** `with socket.socket() as srv, ThreadPoolExecutor(max_workers=3) as pool:` y en el bucle `pool.submit(atender, conn, addr)`. Con 3 hilos, el 4º cliente espera en cola.
 
-**Pista:** 2xx es éxito, 4xx es error del cliente, 5xx es error del servidor.
+## 8. Lanzador de 5 clientes
+
+Crea un script que lance **5 clientes simultáneos** contra `127.0.0.1:5000`, cada uno enviando `f"Soy {id}"`, y muestre la respuesta de cada uno.
+
+**Pista:** haz una lista de hilos `[threading.Thread(target=cliente, args=(i,)) for i in range(5)]`, lánzalos con `h.start()` y espera a todos con `h.join()`. La función `cliente(id)` conecta, envía y muestra `s.recv(1024).decode()`.
