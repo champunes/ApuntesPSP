@@ -5,7 +5,7 @@ description: "Crea una API REST completa con Spring Boot, JPA y H2 🏗️"
 
 <p><small>Crea una API REST completa con Spring Boot, JPA y H2 🏗️</small></p>
 
-> 🗺️ **Estás en:** ☕ **Anexo · Spring Boot** → 06 · Ejemplo completo
+> 🗺️ **Estás en:** ☕ **UD 11 · Spring Boot** → 06 · Ejemplo completo
 
 ---
 
@@ -231,7 +231,7 @@ curl -X DELETE http://localhost:8080/api/tareas/1
 
 1. JPA necesita instanciar el objeto sin parámetros para mapearlo desde la BD. Los campos se rellenan con setters.
 2. Spring no lo detectaría como bean y el controller no podría inyectarlo: la app fallaría al arrancar.
-3. Separación de capas: el controller maneja HTTP, el service la lógica de negocio, el repository los datos. Mezclar rompe esa separación.
+3. Separación de capas: el controller gestiona HTTP, el service la lógica de negocio, el repository los datos. Mezclar rompe esa separación.
 </details>
 
 ---
@@ -253,4 +253,4 @@ curl -X DELETE http://localhost:8080/api/tareas/1
 
 ---
 
-📚 [Volver al índice del anexo](/ApuntesPSP/10-anexo-spring-boot) · **Anterior:** [05 · JPA y bases de datos](/ApuntesPSP/10-anexo-spring-boot/05-jpa-y-bases-de-datos) · **Siguiente:** [07 · Cierre](/ApuntesPSP/10-anexo-spring-boot/07-cierre)
+📚 [Volver al índice de la unidad](/ApuntesPSP/10-spring-boot) · **Anterior:** [05 · JPA y bases de datos](/ApuntesPSP/10-spring-boot/05-jpa-y-bases-de-datos) · **Siguiente:** [07 · Cierre](/ApuntesPSP/10-spring-boot/07-cierre)

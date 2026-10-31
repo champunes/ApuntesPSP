@@ -5,7 +5,7 @@ description: "@Entity, Repository, CRUD con Hibernate y H2 🗄️"
 
 <p><small>@Entity, Repository, CRUD con Hibernate y H2 🗄️</small></p>
 
-> 🗺️ **Estás en:** ☕ **Anexo · Spring Boot** → 05 · JPA y bases de datos
+> 🗺️ **Estás en:** ☕ **UD 11 · Spring Boot** → 05 · JPA y bases de datos
 
 ---
 
@@ -161,4 +161,4 @@ spring.h2.console.enabled=true
 
 ---
 
-📚 [Volver al índice del anexo](/ApuntesPSP/10-anexo-spring-boot) · **Anterior:** [04 · RESTController y APIs REST](/ApuntesPSP/10-anexo-spring-boot/04-restcontroller-y-apis) · **Siguiente:** [06 · Ejemplo completo](/ApuntesPSP/10-anexo-spring-boot/06-ejemplo-completo)
+📚 [Volver al índice de la unidad](/ApuntesPSP/10-spring-boot) · **Anterior:** [04 · RESTController y APIs REST](/ApuntesPSP/10-spring-boot/04-restcontroller-y-apis) · **Siguiente:** [06 · Ejemplo completo](/ApuntesPSP/10-spring-boot/06-ejemplo-completo)

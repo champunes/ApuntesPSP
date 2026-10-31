@@ -5,7 +5,7 @@ description: "Puente rápido entre Python y Java: tipos, clases, concurrencia �
 
 <p><small>Puente rápido entre Python y Java: tipos, clases, concurrencia ☕</small></p>
 
-> 🗺️ **Estás en:** ☕ **Anexo · Spring Boot** → 01 · Java para desarrolladores Python
+> 🗺️ **Estás en:** ☕ **UD 11 · Spring Boot** → 01 · Java para desarrolladores Python
 
 ---
 
@@ -188,4 +188,4 @@ hilo.join();
 
 ---
 
-📚 [Volver al índice del anexo](/ApuntesPSP/10-anexo-spring-boot) · **Siguiente:** [02 · Introducción a Spring Boot](/ApuntesPSP/10-anexo-spring-boot/02-introduccion-spring-boot)
+📚 [Volver al índice de la unidad](/ApuntesPSP/10-spring-boot) · **Siguiente:** [02 · Introducción a Spring Boot](/ApuntesPSP/10-spring-boot/02-introduccion-spring-boot)

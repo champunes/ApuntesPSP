@@ -5,7 +5,7 @@ description: "Crear endpoints REST con Spring Boot: GET, POST, PUT, DELETE 🌐"
 
 <p><small>Crear endpoints REST con Spring Boot: GET, POST, PUT, DELETE 🌐</small></p>
 
-> 🗺️ **Estás en:** ☕ **Anexo · Spring Boot** → 04 · RESTController y APIs REST
+> 🗺️ **Estás en:** ☕ **UD 11 · Spring Boot** → 04 · RESTController y APIs REST
 
 ---
 
@@ -180,4 +180,4 @@ public class Tarea {
 
 ---
 
-📚 [Volver al índice del anexo](/ApuntesPSP/10-anexo-spring-boot) · **Anterior:** [03 · Inyección de dependencias](/ApuntesPSP/10-anexo-spring-boot/03-inyeccion-de-dependencias) · **Siguiente:** [05 · JPA y bases de datos](/ApuntesPSP/10-anexo-spring-boot/05-jpa-y-bases-de-datos)
+📚 [Volver al índice de la unidad](/ApuntesPSP/10-spring-boot) · **Anterior:** [03 · Inyección de dependencias](/ApuntesPSP/10-spring-boot/03-inyeccion-de-dependencias) · **Siguiente:** [05 · JPA y bases de datos](/ApuntesPSP/10-spring-boot/05-jpa-y-bases-de-datos)

@@ -5,7 +5,7 @@ description: "El framework que domina el backend empresarial 🌱"
 
 <p><small>El framework que domina el backend empresarial 🌱</small></p>
 
-> 🗺️ **Estás en:** ☕ **Anexo · Spring Boot** → 02 · Introducción a Spring Boot
+> 🗺️ **Estás en:** ☕ **UD 11 · Spring Boot** → 02 · Introducción a Spring Boot
 
 ---
 
@@ -141,4 +141,4 @@ public class MiProyectoApplication {
 
 ---
 
-📚 [Volver al índice del anexo](/ApuntesPSP/10-anexo-spring-boot) · **Anterior:** [01 · Java para desarrolladores Python](/ApuntesPSP/10-anexo-spring-boot/01-java-para-python) · **Siguiente:** [03 · Inyección de dependencias](/ApuntesPSP/10-anexo-spring-boot/03-inyeccion-de-dependencias)
+📚 [Volver al índice de la unidad](/ApuntesPSP/10-spring-boot) · **Anterior:** [01 · Java para desarrolladores Python](/ApuntesPSP/10-spring-boot/01-java-para-python) · **Siguiente:** [03 · Inyección de dependencias](/ApuntesPSP/10-spring-boot/03-inyeccion-de-dependencias)

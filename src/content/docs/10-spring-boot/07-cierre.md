@@ -1,15 +1,15 @@
 ---
 title: "07 — Cierre: Python vs Java/Spring Boot"
-description: "Comparativa final, recursos y siguiente paso 🏁"
+description: "El final del viaje: comparativa final, recursos y cierre 🏁"
 ---
 
-<p><small>Comparativa final, recursos y siguiente paso 🏁</small></p>
+<p><small>El final del viaje: comparativa final, recursos y cierre 🏁</small></p>
 
-> 🗺️ **Estás en:** ☕ **Anexo · Spring Boot** → 07 · Cierre
+> 🗺️ **Estás en:** ☕ **UD 11 · Spring Boot** → 07 · Cierre
 
 ---
 
-Has recorrido el puente entre Python y Java/Spring Boot. Este cierre consolida lo aprendido con una comparativa final, los recursos para seguir y las preguntas que te harán en una entrevista.
+Has recorrido el puente entre Python y Java/Spring Boot y con él el viaje completo de PSP. Este cierre consolida lo aprendido con una comparativa final, los recursos para seguir y las preguntas que te harán en una entrevista.
 
 ---
 
@@ -122,7 +122,25 @@ Has recorrido el puente entre Python y Java/Spring Boot. Este cierre consolida l
 
 ---
 
-## ✅ Criterios del anexo
+## 🎬 Poscréditos
+
+> *El servidor secuencial hacía esperar a todos en la cola de la ventanilla única.*
+>
+> *Llegó el hilo por cliente y cada conexión tuvo su propia ventanilla.*
+>
+> *El ThreadPool puso límites al entusiasmo. El Lock protegió el contador. Los clientes responden a la vez.*
+>
+> *Y entonces llegó asyncio: un solo camarero, miles de mesas, ninguna espera quieta.*
+>
+> *El viaje cruzó el océano: de Python a Java, de Flask a Spring Boot. De un guion rápido a un framework con capas.*
+>
+> *El viaje ha recorrido once hitos: 🐍 Python, 🚀 Procesos, 🔀 Hilos, 🔒 Sincronización, 🔌 Sockets, 🏗️ Servidores, 🌐 API REST, 🧪 APIs comerciales, 🔐 Seguridad, ⏱️ Alta disponibilidad y ☕ Spring Boot.*
+
+**Y con esto... ¡el viaje ha terminado! 🏁**
+
+---
+
+## ✅ Criterios de la unidad
 
 | Criterio | Cubierto |
 |----------|----------|
@@ -135,4 +153,4 @@ Has recorrido el puente entre Python y Java/Spring Boot. Este cierre consolida l
 
 ---
 
-📚 [Volver al índice del anexo](/ApuntesPSP/10-anexo-spring-boot) · **Anterior:** [06 · Ejemplo completo](/ApuntesPSP/10-anexo-spring-boot/06-ejemplo-completo)
+📚 [Volver al índice de la unidad](/ApuntesPSP/10-spring-boot) · **Anterior:** [06 · Ejemplo completo](/ApuntesPSP/10-spring-boot/06-ejemplo-completo)

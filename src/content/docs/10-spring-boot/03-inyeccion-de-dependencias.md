@@ -5,7 +5,7 @@ description: "IoC, @Autowired, Bean y por qué no creas tus propias instancias �
 
 <p><small>IoC, @Autowired, Bean y por qué no creas tus propias instancias 🔧</small></p>
 
-> 🗺️ **Estás en:** ☕ **Anexo · Spring Boot** → 03 · Inyección de dependencias
+> 🗺️ **Estás en:** ☕ **UD 11 · Spring Boot** → 03 · Inyección de dependencias
 
 ---
 
@@ -129,4 +129,4 @@ public class TareaService {
 
 ---
 
-📚 [Volver al índice del anexo](/ApuntesPSP/10-anexo-spring-boot) · **Anterior:** [02 · Introducción a Spring Boot](/ApuntesPSP/10-anexo-spring-boot/02-introduccion-spring-boot) · **Siguiente:** [04 · RESTController y APIs REST](/ApuntesPSP/10-anexo-spring-boot/04-restcontroller-y-apis)
+📚 [Volver al índice de la unidad](/ApuntesPSP/10-spring-boot) · **Anterior:** [02 · Introducción a Spring Boot](/ApuntesPSP/10-spring-boot/02-introduccion-spring-boot) · **Siguiente:** [04 · RESTController y APIs REST](/ApuntesPSP/10-spring-boot/04-restcontroller-y-apis)
